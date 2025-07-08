@@ -10,6 +10,7 @@ const Header = () => {
     { name: 'Classes', href: '#classes' },
     { name: 'Studios', href: '#studios' },
     { name: 'About', href: '#about' },
+    { name: 'Blog', href: '/blog' },
     { name: 'FAQs', href: '#faqs' },
     { name: 'Contact', href: '#contact' },
   ];
@@ -39,7 +40,7 @@ const Header = () => {
           {/* Desktop CTAs */}
           <div className="hidden md:flex items-center space-x-4">
             <Button variant="outline" className="border-rose-300 text-rose-700 hover:bg-rose-50">
-              Find Your Style
+              Free Gifts 💝
             </Button>
             <Button className="bg-gradient-to-r from-rose-500 to-purple-600 hover:from-rose-600 hover:to-purple-700">
               Free Trial Class
@@ -73,7 +74,7 @@ const Header = () => {
               ))}
               <div className="flex flex-col space-y-2 px-3 pt-4">
                 <Button variant="outline" className="border-rose-300 text-rose-700 hover:bg-rose-50">
-                  Find Your Style
+                  Free Gifts 💝
                 </Button>
                 <Button className="bg-gradient-to-r from-rose-500 to-purple-600 hover:from-rose-600 hover:to-purple-700">
                   Free Trial Class

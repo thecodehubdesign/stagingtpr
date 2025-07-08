@@ -2,7 +2,7 @@
 import { useState } from 'react';
 import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
-import { Gift, Clock, Users } from 'lucide-react';
+import { Gift, Clock, Users, Video, FileText, BarChart3, Monitor } from 'lucide-react';
 
 const FlexibilityProgram = () => {
   const [email, setEmail] = useState('');
@@ -15,6 +15,13 @@ const FlexibilityProgram = () => {
     console.log('Form submitted:', { name, email });
   };
 
+  const features = [
+    { icon: Video, text: "High Quality Video Lessons" },
+    { icon: FileText, text: "Detailed Stretch Charts" },
+    { icon: BarChart3, text: "Progress Tracking" },
+    { icon: Monitor, text: "Online Access Anywhere" }
+  ];
+
   return (
     <section className="py-20 bg-white">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
@@ -24,17 +31,25 @@ const FlexibilityProgram = () => {
             <div className="relative h-64 lg:h-auto">
               <img
                 src="https://images.unsplash.com/photo-1506629905607-c60abee5af70?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1470&q=80"
-                alt="Woman stretching and doing splits"
+                alt="Woman stretching and doing splits - online flexibility program"
                 className="w-full h-full object-cover"
               />
               <div className="absolute inset-0 bg-gradient-to-r from-rose-500/20 to-purple-600/20"></div>
+              
+              {/* Online Program Badge */}
+              <div className="absolute top-4 left-4 bg-white/90 px-4 py-2 rounded-full">
+                <div className="flex items-center space-x-2">
+                  <Monitor className="w-4 h-4 text-rose-600" />
+                  <span className="text-sm font-semibold text-gray-900">Online Program</span>
+                </div>
+              </div>
             </div>
 
             {/* Content Side */}
             <div className="p-8 lg:p-12 text-white">
               <div className="flex items-center space-x-2 mb-4">
                 <Gift className="w-6 h-6" />
-                <span className="text-sm font-semibold uppercase tracking-wide">Free Program</span>
+                <span className="text-sm font-semibold uppercase tracking-wide">Free Online Program</span>
               </div>
               
               <h2 className="text-3xl lg:text-4xl font-bold mb-4">
@@ -46,7 +61,17 @@ const FlexibilityProgram = () => {
                 Perfect for beginners and a great foundation for your pole journey.
               </p>
 
-              {/* Features */}
+              {/* Program Features */}
+              <div className="grid grid-cols-2 gap-4 mb-8">
+                {features.map((feature, index) => (
+                  <div key={index} className="flex items-center space-x-2">
+                    <feature.icon className="w-4 h-4 text-rose-200" />
+                    <span className="text-sm">{feature.text}</span>
+                  </div>
+                ))}
+              </div>
+
+              {/* Additional Features */}
               <div className="flex flex-wrap gap-4 mb-8">
                 <div className="flex items-center space-x-2">
                   <Clock className="w-4 h-4" />

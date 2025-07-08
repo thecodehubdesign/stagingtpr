@@ -1,5 +1,5 @@
 
-import { Heart, Users, Award } from 'lucide-react';
+import { Heart, Users, Award, MapPin, GraduationCap, Clock, Building } from 'lucide-react';
 
 const FounderSection = () => {
   const benefits = [
@@ -20,9 +20,35 @@ const FounderSection = () => {
     }
   ];
 
+  const statistics = [
+    { icon: Users, number: "5000+", label: "Students Served" },
+    { icon: Clock, number: "100,000", label: "Classes Taught and Counting" },
+    { icon: Building, number: "6", label: "Studio Locations" },
+    { icon: GraduationCap, number: "40+", label: "Instructors" }
+  ];
+
   return (
     <section className="py-20 bg-gradient-to-br from-rose-50 via-purple-50 to-pink-50">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        {/* Statistics Section */}
+        <div className="grid grid-cols-2 lg:grid-cols-4 gap-6 mb-16">
+          {statistics.map((stat, index) => (
+            <div 
+              key={index} 
+              className="text-center p-6 bg-white/70 rounded-xl shadow-sm animate-fade-in"
+              style={{ animationDelay: `${index * 0.1}s` }}
+            >
+              <div className="flex justify-center mb-3">
+                <div className="w-12 h-12 bg-gradient-to-br from-rose-500 to-purple-600 rounded-lg flex items-center justify-center">
+                  <stat.icon className="w-6 h-6 text-white" />
+                </div>
+              </div>
+              <div className="text-2xl font-bold text-gray-900 mb-1">{stat.number}</div>
+              <div className="text-sm text-gray-600">{stat.label}</div>
+            </div>
+          ))}
+        </div>
+
         <div className="grid lg:grid-cols-2 gap-12 items-center">
           {/* Image Side */}
           <div className="relative animate-fade-in">
@@ -50,7 +76,7 @@ const FounderSection = () => {
             </h3>
             
             <h2 className="text-3xl sm:text-4xl font-bold text-gray-900 mb-6">
-              From a single studio to a movement empowering thousands across Melbourne
+              From 2 poles in her parents garage to a movement empowering thousands across Melbourne
             </h2>
             
             <p className="text-lg text-gray-600 mb-8 leading-relaxed">
