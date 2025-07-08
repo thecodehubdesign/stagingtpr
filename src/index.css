@@ -3,45 +3,46 @@
 @tailwind components;
 @tailwind utilities;
 
-@import url('https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700;900&family=Inter:wght@300;400;500;600;700&display=swap');
-
 @layer base {
   :root {
-    --background: 0 0% 5%;
+    --background: 8 8% 8%;
     --foreground: 280 100% 95%;
 
-    --card: 240 10% 8%;
+    --card: 12 12% 12%;
     --card-foreground: 280 100% 95%;
 
-    --popover: 240 10% 8%;
+    --popover: 12 12% 12%;
     --popover-foreground: 280 100% 95%;
 
-    --primary: 280 100% 75%;
-    --primary-foreground: 0 0% 5%;
+    --primary: 315 100% 65%;
+    --primary-foreground: 8 8% 8%;
 
-    --secondary: 240 15% 15%;
+    --secondary: 260 15% 20%;
     --secondary-foreground: 280 100% 95%;
 
-    --muted: 240 15% 15%;
+    --muted: 260 15% 20%;
     --muted-foreground: 280 30% 70%;
 
-    --accent: 240 15% 15%;
+    --accent: 260 15% 20%;
     --accent-foreground: 280 100% 95%;
 
     --destructive: 0 84.2% 60.2%;
     --destructive-foreground: 280 100% 95%;
 
-    --border: 240 15% 20%;
-    --input: 240 15% 20%;
-    --ring: 280 100% 75%;
+    --border: 260 15% 25%;
+    --input: 260 15% 25%;
+    --ring: 315 100% 65%;
 
-    --radius: 0.5rem;
+    --radius: 0.75rem;
 
-    /* Cyberpunk Colors */
-    --electric-purple: 187 100% 75%;
-    --neon-pink: 320 100% 50%;
-    --cyber-blue: 180 100% 50%;
-    --acid-green: 75 100% 50%;
+    --sidebar-background: 8 8% 8%;
+    --sidebar-foreground: 280 100% 95%;
+    --sidebar-primary: 315 100% 65%;
+    --sidebar-primary-foreground: 8 8% 8%;
+    --sidebar-accent: 260 15% 20%;
+    --sidebar-accent-foreground: 280 100% 95%;
+    --sidebar-border: 260 15% 25%;
+    --sidebar-ring: 315 100% 65%;
   }
 }
 
@@ -51,369 +52,82 @@
   }
 
   body {
-    @apply bg-black text-foreground font-inter;
-    background: 
-      radial-gradient(ellipse at top, rgba(187, 134, 252, 0.1) 0%, transparent 50%),
-      radial-gradient(ellipse at bottom, rgba(255, 0, 200, 0.08) 0%, transparent 50%),
-      linear-gradient(135deg, #000000 0%, #0a0a0a 50%, #000000 100%);
+    @apply bg-background text-foreground font-inter;
+    background: radial-gradient(ellipse at center, rgb(20, 20, 35) 0%, rgb(8, 8, 15) 100%);
     min-height: 100vh;
-    overflow-x: hidden;
   }
   
   h1, h2, h3, h4, h5, h6 {
-    @apply font-orbitron;
+    @apply font-playfair;
   }
 }
 
 @layer components {
-  .cyberpunk-bg {
+  .gradient-text {
+    @apply bg-gradient-to-r from-fuchsia-400 via-purple-400 to-cyan-400 bg-clip-text text-transparent;
+  }
+  
+  .neon-glow {
+    text-shadow: 0 0 5px currentColor, 0 0 10px currentColor, 0 0 15px currentColor;
+  }
+  
+  .cyber-border {
     position: relative;
-    background: linear-gradient(135deg, #000000 0%, #1a0033 25%, #000a1a 50%, #001a0a 75%, #000000 100%);
-    overflow: hidden;
+    border: 1px solid transparent;
+    background: linear-gradient(135deg, rgba(255, 0, 255, 0.1), rgba(0, 255, 255, 0.1)) padding-box,
+                linear-gradient(135deg, #ff00ff, #00ffff) border-box;
   }
   
-  .cyberpunk-bg::before {
-    content: '';
-    position: absolute;
-    top: 0;
-    left: 0;
-    right: 0;
-    bottom: 0;
+  .cyber-grid {
     background-image: 
-      linear-gradient(45deg, rgba(187, 134, 252, 0.03) 1px, transparent 1px),
-      linear-gradient(-45deg, rgba(255, 0, 200, 0.03) 1px, transparent 1px);
-    background-size: 50px 50px;
-    animation: grid-move 20s linear infinite;
-    pointer-events: none;
+      linear-gradient(rgba(255, 0, 255, 0.1) 1px, transparent 1px),
+      linear-gradient(90deg, rgba(255, 0, 255, 0.1) 1px, transparent 1px);
+    background-size: 20px 20px;
   }
   
-  .cyberpunk-bg::after {
-    content: '';
-    position: absolute;
-    top: 0;
-    left: 0;
-    right: 0;
-    bottom: 0;
-    background: 
-      radial-gradient(circle at 20% 80%, rgba(187, 134, 252, 0.1) 0%, transparent 50%),
-      radial-gradient(circle at 80% 20%, rgba(255, 0, 200, 0.1) 0%, transparent 50%),
-      radial-gradient(circle at 40% 40%, rgba(0, 255, 247, 0.08) 0%, transparent 50%);
-    animation: ambient-glow 8s ease-in-out infinite alternate;
-    pointer-events: none;
-  }
-
-  .neon-text {
-    color: hsl(var(--electric-purple));
-    text-shadow: 
-      0 0 5px currentColor,
-      0 0 10px currentColor,
-      0 0 15px currentColor,
-      0 0 20px currentColor;
-    animation: neon-flicker 3s ease-in-out infinite alternate;
-  }
-  
-  .neon-pink {
-    color: hsl(var(--neon-pink));
-    text-shadow: 
-      0 0 5px currentColor,
-      0 0 10px currentColor,
-      0 0 15px currentColor;
-  }
-  
-  .neon-blue {
-    color: hsl(var(--cyber-blue));
-    text-shadow: 
-      0 0 5px currentColor,
-      0 0 10px currentColor,
-      0 0 15px currentColor;
-  }
-  
-  .neon-green {
-    color: hsl(var(--acid-green));
-    text-shadow: 
-      0 0 5px currentColor,
-      0 0 10px currentColor,
-      0 0 15px currentColor;
-  }
-
-  .cyberpunk-gradient {
-    background: linear-gradient(135deg, 
-      hsl(var(--neon-pink)) 0%, 
-      hsl(var(--electric-purple)) 50%, 
-      hsl(var(--cyber-blue)) 100%);
-    background-size: 200% 200%;
-    animation: gradient-shift 4s ease infinite;
-  }
-  
-  .cyberpunk-button {
+  .neon-button {
     @apply relative overflow-hidden;
-    background: linear-gradient(135deg, 
-      hsl(var(--neon-pink)) 0%, 
-      hsl(var(--electric-purple)) 100%);
-    box-shadow: 
-      0 0 20px hsla(var(--neon-pink), 0.5),
-      inset 0 1px 0 rgba(255, 255, 255, 0.1);
-    border: 1px solid hsl(var(--electric-purple));
+    background: linear-gradient(45deg, #ff00ff, #00ffff);
+    box-shadow: 0 0 20px rgba(255, 0, 255, 0.3);
     transition: all 0.3s ease;
   }
   
-  .cyberpunk-button::before {
-    content: '';
-    position: absolute;
-    top: 0;
-    left: -100%;
-    width: 100%;
-    height: 100%;
-    background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.2), transparent);
-    transition: left 0.5s;
-  }
-  
-  .cyberpunk-button:hover {
-    box-shadow: 
-      0 0 30px hsla(var(--neon-pink), 0.7),
-      0 0 40px hsla(var(--electric-purple), 0.3),
-      inset 0 1px 0 rgba(255, 255, 255, 0.2);
+  .neon-button:hover {
+    box-shadow: 0 0 30px rgba(255, 0, 255, 0.5), 0 0 40px rgba(0, 255, 255, 0.3);
     transform: translateY(-2px);
   }
   
-  .cyberpunk-button:hover::before {
-    left: 100%;
-  }
-
-  .cyberpunk-card {
+  .cyber-card {
     @apply relative backdrop-blur-sm;
-    background: linear-gradient(135deg, 
-      rgba(187, 134, 252, 0.1) 0%, 
-      rgba(255, 0, 200, 0.05) 50%,
-      rgba(0, 255, 247, 0.1) 100%);
-    border: 1px solid rgba(187, 134, 252, 0.3);
-    box-shadow: 
-      0 8px 32px rgba(0, 0, 0, 0.5),
-      inset 0 1px 0 rgba(255, 255, 255, 0.1);
-    transition: all 0.3s ease;
+    background: rgba(20, 20, 35, 0.8);
+    border: 1px solid rgba(255, 0, 255, 0.3);
+    box-shadow: 0 8px 32px rgba(0, 0, 0, 0.3);
   }
   
-  .cyberpunk-card::before {
-    content: '';
-    position: absolute;
-    top: 0;
-    left: 0;
-    right: 0;
-    bottom: 0;
-    background: linear-gradient(135deg, 
-      rgba(187, 134, 252, 0.1) 0%, 
-      transparent 50%,
-      rgba(0, 255, 247, 0.1) 100%);
-    opacity: 0;
-    transition: opacity 0.3s ease;
-    pointer-events: none;
-  }
-  
-  .cyberpunk-card:hover {
-    border-color: rgba(0, 255, 247, 0.6);
-    box-shadow: 
-      0 12px 40px rgba(0, 0, 0, 0.6),
-      0 0 20px rgba(0, 255, 247, 0.3),
-      inset 0 1px 0 rgba(255, 255, 255, 0.2);
-    transform: translateY(-4px);
-  }
-  
-  .cyberpunk-card:hover::before {
-    opacity: 1;
-  }
-
-  .glitch-text {
-    position: relative;
-    animation: glitch 2s infinite;
-  }
-  
-  .glitch-text::before,
-  .glitch-text::after {
-    content: attr(data-text);
-    position: absolute;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-  }
-  
-  .glitch-text::before {
-    animation: glitch-1 0.5s infinite;
-    color: hsl(var(--neon-pink));
-    z-index: -1;
-  }
-  
-  .glitch-text::after {
-    animation: glitch-2 0.5s infinite;
-    color: hsl(var(--cyber-blue));
-    z-index: -2;
-  }
-
-  .scan-lines {
-    position: relative;
-    overflow: hidden;
-  }
-  
-  .scan-lines::after {
-    content: '';
-    position: absolute;
-    top: 0;
-    left: 0;
-    right: 0;
-    bottom: 0;
-    background: linear-gradient(
-      transparent 50%,
-      rgba(187, 134, 252, 0.03) 50%,
-      rgba(187, 134, 252, 0.03) 51%,
-      transparent 51%
-    );
-    background-size: 100% 4px;
-    animation: scan-lines 0.1s linear infinite;
-    pointer-events: none;
-  }
-
-  .hologram-border {
-    position: relative;
-    border: 2px solid transparent;
-    background: linear-gradient(45deg, 
-      hsl(var(--electric-purple)), 
-      hsl(var(--cyber-blue)), 
-      hsl(var(--neon-pink)), 
-      hsl(var(--electric-purple))) border-box;
-    -webkit-mask: linear-gradient(#fff 0 0) padding-box, linear-gradient(#fff 0 0);
-    -webkit-mask-composite: xor;
-    mask-composite: exclude;
-  }
-
-  .data-stream {
-    position: absolute;
-    width: 2px;
-    height: 100px;
-    background: linear-gradient(to bottom, 
-      transparent, 
-      hsl(var(--cyber-blue)), 
-      transparent);
-    animation: data-stream 3s linear infinite;
+  .cyber-card:hover {
+    border-color: rgba(0, 255, 255, 0.5);
+    box-shadow: 0 8px 32px rgba(255, 0, 255, 0.2);
   }
 }
 
-@keyframes grid-move {
-  0% { transform: translate(0, 0); }
-  100% { transform: translate(50px, 50px); }
-}
-
-@keyframes ambient-glow {
-  0% { opacity: 0.5; }
-  100% { opacity: 1; }
-}
-
-@keyframes neon-flicker {
+@keyframes pulse-neon {
   0%, 100% { 
-    text-shadow: 
-      0 0 5px currentColor,
-      0 0 10px currentColor,
-      0 0 15px currentColor,
-      0 0 20px currentColor;
+    text-shadow: 0 0 5px currentColor, 0 0 10px currentColor, 0 0 15px currentColor;
   }
   50% { 
-    text-shadow: 
-      0 0 2px currentColor,
-      0 0 5px currentColor,
-      0 0 8px currentColor,
-      0 0 12px currentColor;
+    text-shadow: 0 0 2px currentColor, 0 0 5px currentColor, 0 0 8px currentColor;
   }
 }
 
-@keyframes gradient-shift {
-  0% { background-position: 0% 50%; }
-  50% { background-position: 100% 50%; }
-  100% { background-position: 0% 50%; }
+@keyframes float {
+  0%, 100% { transform: translateY(0px); }
+  50% { transform: translateY(-10px); }
 }
 
-@keyframes glitch {
-  0% { transform: translate(0); }
-  20% { transform: translate(-2px, 2px); }
-  40% { transform: translate(-2px, -2px); }
-  60% { transform: translate(2px, 2px); }
-  80% { transform: translate(2px, -2px); }
-  100% { transform: translate(0); }
+.pulse-neon {
+  animation: pulse-neon 2s ease-in-out infinite;
 }
 
-@keyframes glitch-1 {
-  0% { transform: translate(0); }
-  10% { transform: translate(-2px, -2px); }
-  20% { transform: translate(-2px, -2px); }
-  30% { transform: translate(-2px, -2px); }
-  40% { transform: translate(-2px, -2px); }
-  50% { transform: translate(-2px, -2px); }
-  60% { transform: translate(-2px, -2px); }
-  70% { transform: translate(-2px, -2px); }
-  80% { transform: translate(-2px, -2px); }
-  90% { transform: translate(-2px, -2px); }
-  100% { transform: translate(0); }
-}
-
-@keyframes glitch-2 {
-  0% { transform: translate(0); }
-  10% { transform: translate(2px, 2px); }
-  20% { transform: translate(2px, 2px); }
-  30% { transform: translate(2px, 2px); }
-  40% { transform: translate(2px, 2px); }
-  50% { transform: translate(2px, 2px); }
-  60% { transform: translate(2px, 2px); }
-  70% { transform: translate(2px, 2px); }
-  80% { transform: translate(2px, 2px); }
-  90% { transform: translate(2px, 2px); }
-  100% { transform: translate(0); }
-}
-
-@keyframes scan-lines {
-  0% { transform: translateY(0); }
-  100% { transform: translateY(4px); }
-}
-
-@keyframes data-stream {
-  0% { 
-    transform: translateY(-100px);
-    opacity: 0;
-  }
-  10% { opacity: 1; }
-  90% { opacity: 1; }
-  100% { 
-    transform: translateY(100vh);
-    opacity: 0;
-  }
-}
-
-@keyframes pulse-glow {
-  0%, 100% { 
-    box-shadow: 0 0 20px hsla(var(--electric-purple), 0.5);
-  }
-  50% { 
-    box-shadow: 0 0 40px hsla(var(--electric-purple), 0.8);
-  }
-}
-
-.fade-in {
-  animation: fade-in 0.8s ease-out;
-}
-
-.float-up {
-  animation: float-up 2s ease-out infinite alternate;
-}
-
-@keyframes fade-in {
-  from {
-    opacity: 0;
-    transform: translateY(20px);
-  }
-  to {
-    opacity: 1;
-    transform: translateY(0);
-  }
-}
-
-@keyframes float-up {
-  from { transform: translateY(0px); }
-  to { transform: translateY(-10px); }
+.float {
+  animation: float 3s ease-in-out infinite;
 }
