@@ -1,5 +1,6 @@
+
 import { Button } from '@/components/ui/button';
-import { Star, Clock, Users, Heart } from 'lucide-react';
+import { Star, Clock, Users, Heart, Zap } from 'lucide-react';
 
 const FreeTrialOffer = () => {
   const benefits = [
@@ -11,28 +12,34 @@ const FreeTrialOffer = () => {
 
   return (
     <section className="py-20 relative overflow-hidden">
-      {/* Background Image */}
+      {/* Cyberpunk Background */}
       <div 
         className="absolute inset-0 bg-cover bg-center"
         style={{
-          backgroundImage: `linear-gradient(rgba(0,0,0,0.6), rgba(0,0,0,0.6)), url('https://images.unsplash.com/photo-1500673922987-e212871fec22?ixlib=rb-4.0.3&auto=format&fit=crop&w=2070&q=80')`
+          backgroundImage: `linear-gradient(rgba(8,8,15,0.9), rgba(20,20,35,0.9)), url('https://images.unsplash.com/photo-1500673922987-e212871fec22?ixlib=rb-4.0.3&auto=format&fit=crop&w=2070&q=80')`
         }}
       />
+      
+      {/* Neon Grid Overlay */}
+      <div className="absolute inset-0 cyber-grid opacity-30"></div>
       
       {/* Content */}
       <div className="relative z-10 max-w-4xl mx-auto text-center px-4 sm:px-6 lg:px-8">
         <div className="animate-fade-in">
-          <div className="inline-flex items-center space-x-2 text-rose-400 mb-4">
-            <Star className="w-5 h-5" />
-            <span className="text-sm font-semibold uppercase tracking-wide">Limited Time Offer</span>
+          <div className="inline-flex items-center space-x-2 text-fuchsia-400 mb-4">
+            <Zap className="w-5 h-5 neon-glow" />
+            <span className="text-sm font-semibold uppercase tracking-wide neon-glow">Limited Time Offer</span>
+            <Zap className="w-5 h-5 neon-glow" />
           </div>
           
-          <h2 className="text-3xl sm:text-4xl lg:text-5xl font-bold text-white mb-6">
+          <h2 className="text-3xl sm:text-4xl lg:text-5xl font-bold text-white mb-6 gradient-text pulse-neon">
             Experience It for Yourself – On Us!
           </h2>
           
-          <p className="text-xl text-gray-200 mb-8 max-w-2xl mx-auto">
-            Book a free trial and take your first step into a more confident, empowered version of you.
+          <p className="text-xl text-gray-300 mb-8 max-w-2xl mx-auto">
+            Book a free trial and take your first step into a more confident, 
+            <span className="text-fuchsia-400 neon-glow"> empowered </span>
+            version of you.
           </p>
 
           {/* Benefits Grid */}
@@ -40,10 +47,10 @@ const FreeTrialOffer = () => {
             {benefits.map((benefit, index) => (
               <div 
                 key={index} 
-                className="flex items-center space-x-3 bg-white/10 backdrop-blur-sm rounded-lg p-4 animate-fade-in"
+                className="flex items-center space-x-3 cyber-card rounded-lg p-4 animate-fade-in"
                 style={{ animationDelay: `${index * 0.1}s` }}
               >
-                <benefit.icon className="w-5 h-5 text-rose-400 flex-shrink-0" />
+                <benefit.icon className="w-5 h-5 text-cyan-400 flex-shrink-0 neon-glow" />
                 <span className="text-white text-sm font-medium">{benefit.text}</span>
               </div>
             ))}
@@ -52,21 +59,21 @@ const FreeTrialOffer = () => {
           <div className="space-y-4">
             <Button 
               size="lg" 
-              className="bg-gradient-to-r from-rose-500 to-purple-600 hover:from-rose-600 hover:to-purple-700 text-lg px-12 py-4 h-auto text-white shadow-2xl"
+              className="neon-button text-lg px-12 py-4 h-auto text-black font-bold shadow-2xl"
             >
               Book My Free Trial
             </Button>
             
-            <p className="text-gray-300 text-sm">
+            <p className="text-gray-400 text-sm">
               No credit card required • Available at all locations
             </p>
           </div>
         </div>
       </div>
 
-      {/* Floating Elements */}
-      <div className="absolute top-20 left-10 w-20 h-20 bg-rose-500/20 rounded-full blur-xl animate-pulse"></div>
-      <div className="absolute bottom-20 right-10 w-32 h-32 bg-purple-500/20 rounded-full blur-xl animate-pulse" style={{ animationDelay: '1s' }}></div>
+      {/* Floating Neon Elements */}
+      <div className="absolute top-20 left-10 w-20 h-20 bg-fuchsia-500/30 rounded-full blur-xl animate-pulse float"></div>
+      <div className="absolute bottom-20 right-10 w-32 h-32 bg-cyan-500/30 rounded-full blur-xl animate-pulse float" style={{ animationDelay: '1s' }}></div>
     </section>
   );
 };
