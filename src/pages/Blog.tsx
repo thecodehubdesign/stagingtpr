@@ -1,4 +1,3 @@
-
 import { ArrowLeft, Calendar, User, Tag } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 import { Card, CardContent } from '@/components/ui/card';
@@ -9,7 +8,7 @@ const Blog = () => {
       id: 1,
       title: "5 Benefits of Pole Dancing for Mental Health",
       excerpt: "Discover how pole dancing can boost your confidence, reduce stress, and improve your overall mental wellbeing.",
-      image: "https://images.unsplash.com/photo-1571019613454-1cb2f99b2d8b?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=2070&q=80",
+      image: "https://images.unsplash.com/photo-1469474968028-56623f02e42e?ixlib=rb-4.0.3&auto=format&fit=crop&w=2070&q=80",
       date: "March 15, 2024",
       author: "Jasmine Zapka",
       tags: ["Mental Health", "Pole Dancing", "Wellness"]
@@ -18,7 +17,7 @@ const Blog = () => {
       id: 2,
       title: "Getting Started: What to Expect in Your First Pole Class",
       excerpt: "Nervous about your first pole class? Here's everything you need to know to feel confident and prepared.",
-      image: "https://images.unsplash.com/photo-1518770660439-4636190af475?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1470&q=80",
+      image: "https://images.unsplash.com/photo-1518770660439-4636190af475?ixlib=rb-4.0.3&auto=format&fit=crop&w=1470&q=80",
       date: "March 10, 2024",
       author: "Sarah Mitchell",
       tags: ["Beginners", "Tips", "First Class"]
@@ -27,7 +26,7 @@ const Blog = () => {
       id: 3,
       title: "The Science Behind Flexibility Training",
       excerpt: "Understanding the biomechanics of stretching and how our flexibility program accelerates your progress.",
-      image: "https://images.unsplash.com/photo-1487058792275-0ad4aaf24ca7?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1470&q=80",
+      image: "https://images.unsplash.com/photo-1487058792275-0ad4aaf24ca7?ixlib=rb-4.0.3&auto=format&fit=crop&w=1470&q=80",
       date: "March 5, 2024",
       author: "Dr. Amanda Chen",
       tags: ["Flexibility", "Science", "Training"]
@@ -36,7 +35,7 @@ const Blog = () => {
       id: 4,
       title: "Aerial Silks vs Pole: Which is Right for You?",
       excerpt: "Explore the differences between aerial silks and pole dancing to find your perfect aerial art form.",
-      image: "https://images.unsplash.com/photo-1509316975850-ff9c5deb0cd9?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1472&q=80",
+      image: "https://images.unsplash.com/photo-1509316975850-ff9c5deb0cd9?ixlib=rb-4.0.3&auto=format&fit=crop&w=1472&q=80",
       date: "February 28, 2024",
       author: "Emma Rodriguez",
       tags: ["Aerial Silks", "Pole Dancing", "Comparison"]
@@ -45,7 +44,7 @@ const Blog = () => {
       id: 5,
       title: "Building Upper Body Strength for Aerial Arts",
       excerpt: "Essential exercises and techniques to develop the strength needed for pole and aerial performances.",
-      image: "https://images.unsplash.com/photo-1469474968028-56623f02e42e?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1470&q=80",
+      image: "https://images.unsplash.com/photo-1469041797191-50ace28483c3?ixlib=rb-4.0.3&auto=format&fit=crop&w=1470&q=80",
       date: "February 20, 2024",
       author: "Marcus Thompson",
       tags: ["Strength Training", "Upper Body", "Fitness"]
@@ -54,7 +53,7 @@ const Blog = () => {
       id: 6,
       title: "Creating a Home Practice Space",
       excerpt: "Tips for setting up a safe and inspiring practice area in your own home.",
-      image: "https://images.unsplash.com/photo-1513836279014-a89f7a76ae86?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1488&q=80",
+      image: "https://images.unsplash.com/photo-1513836279014-a89f7a76ae86?ixlib=rb-4.0.3&auto=format&fit=crop&w=1488&q=80",
       date: "February 15, 2024",
       author: "Lisa Park",
       tags: ["Home Practice", "Setup", "Safety"]

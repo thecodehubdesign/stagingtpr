@@ -1,4 +1,3 @@
-
 import { Button } from '@/components/ui/button';
 import { ArrowRight, Sparkles, Wind, Music } from 'lucide-react';
 
@@ -8,21 +7,21 @@ const ClassDiscovery = () => {
       title: "Pole Dancing",
       description: "Build strength, flexibility and confidence on the pole",
       icon: Sparkles,
-      image: "https://images.unsplash.com/photo-1571019613454-1cb2f99b2d8b?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1000&q=80",
+      image: "https://images.unsplash.com/photo-1469474968028-56623f02e42e?ixlib=rb-4.0.3&auto=format&fit=crop&w=1000&q=80",
       gradient: "from-rose-500 to-pink-500"
     },
     {
       title: "Aerial (Silks/Lyra)",
       description: "Graceful movements through the air on silks and hoop",
       icon: Wind,
-      image: "https://images.unsplash.com/photo-1594736797933-d0a9ba4cea88?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1000&q=80",
+      image: "https://images.unsplash.com/photo-1500375592092-40eb2168fd21?ixlib=rb-4.0.3&auto=format&fit=crop&w=1000&q=80",
       gradient: "from-purple-500 to-indigo-500"
     },
     {
       title: "Dance & Floorwork",
       description: "Sensual movement and choreography on the ground",
       icon: Music,
-      image: "https://images.unsplash.com/photo-1508700115892-45ecd05ae2ad?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1000&q=80",
+      image: "https://images.unsplash.com/photo-1465146344425-f00d5f5c8f07?ixlib=rb-4.0.3&auto=format&fit=crop&w=1000&q=80",
       gradient: "from-rose-400 to-purple-500"
     }
   ];

@@ -1,4 +1,3 @@
-
 import { useState } from 'react';
 import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
@@ -30,7 +29,7 @@ const FlexibilityProgram = () => {
             {/* Image Side */}
             <div className="relative h-64 lg:h-auto">
               <img
-                src="https://images.unsplash.com/photo-1506629905607-c60abee5af70?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1470&q=80"
+                src="https://images.unsplash.com/photo-1487058792275-0ad4aaf24ca7?ixlib=rb-4.0.3&auto=format&fit=crop&w=1470&q=80"
                 alt="Woman stretching and doing splits - online flexibility program"
                 className="w-full h-full object-cover"
               />
