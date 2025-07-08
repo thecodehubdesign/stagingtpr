@@ -1,40 +1,53 @@
+
 import { Button } from '@/components/ui/button';
-import { ArrowRight, Sparkles, Wind, Music } from 'lucide-react';
+import { ArrowRight, Sparkles, Wind, Music, Zap, Target, Cpu } from 'lucide-react';
 
 const ClassDiscovery = () => {
   const classTypes = [
     {
-      title: "Pole Dancing",
-      description: "Build strength, flexibility and confidence on the pole",
+      title: "Pole Mastery Protocol",
+      description: "Strength amplification through vertical combat training",
       icon: Sparkles,
       image: "https://images.unsplash.com/photo-1469474968028-56623f02e42e?ixlib=rb-4.0.3&auto=format&fit=crop&w=1000&q=80",
-      gradient: "from-rose-500 to-pink-500"
+      gradient: "from-neon-pink to-electric-purple"
     },
     {
-      title: "Aerial (Silks/Lyra)",
-      description: "Graceful movements through the air on silks and hoop",
+      title: "Aerial Neural Network",
+      description: "Gravity-defying movements through silk and hoop interfaces",
       icon: Wind,
       image: "https://images.unsplash.com/photo-1500375592092-40eb2168fd21?ixlib=rb-4.0.3&auto=format&fit=crop&w=1000&q=80",
-      gradient: "from-purple-500 to-indigo-500"
+      gradient: "from-electric-purple to-cyber-blue"
     },
     {
-      title: "Dance & Floorwork",
-      description: "Sensual movement and choreography on the ground",
+      title: "Floor Combat Sequence",
+      description: "Ground-based movement patterns and flow states",
       icon: Music,
       image: "https://images.unsplash.com/photo-1465146344425-f00d5f5c8f07?ixlib=rb-4.0.3&auto=format&fit=crop&w=1000&q=80",
-      gradient: "from-rose-400 to-purple-500"
+      gradient: "from-cyber-blue to-acid-green"
     }
   ];
 
   return (
-    <section className="py-20 bg-gray-50" id="classes">
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+    <section className="py-20 cyberpunk-bg relative overflow-hidden" id="classes">
+      {/* Scan lines */}
+      <div className="absolute inset-0 scan-lines opacity-30"></div>
+      
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative">
         <div className="text-center mb-16">
-          <h2 className="text-3xl sm:text-4xl font-bold text-gray-900 mb-4">
-            What Class Is Right for You?
+          <div className="inline-flex items-center space-x-3 neon-blue mb-6">
+            <Target className="w-6 h-6 animate-pulse" />
+            <span className="text-lg font-orbitron font-bold uppercase tracking-widest">
+              TRAINING PROTOCOLS
+            </span>
+            <Cpu className="w-6 h-6 animate-pulse" />
+          </div>
+          <h2 className="text-4xl sm:text-5xl font-orbitron font-black text-white mb-6">
+            <span className="neon-text">CHOOSE YOUR</span>
+            <br />
+            <span className="text-transparent bg-clip-text cyberpunk-gradient">SPECIALIZATION</span>
           </h2>
-          <p className="text-lg text-gray-600 max-w-2xl mx-auto">
-            Discover your perfect fitness journey with our three main pathways to strength and grace
+          <p className="text-lg text-gray-300 max-w-3xl mx-auto">
+            Three distinct pathways to unlock your hidden potential and transform into the warrior within
           </p>
         </div>
 
@@ -42,37 +55,44 @@ const ClassDiscovery = () => {
           {classTypes.map((classType, index) => (
             <div 
               key={index} 
-              className="group bg-white rounded-2xl overflow-hidden shadow-lg hover:shadow-2xl transition-all duration-300 animate-fade-in"
+              className="group cyberpunk-card rounded-2xl overflow-hidden shadow-2xl fade-in hover:shadow-[0_0_40px_rgba(187,134,252,0.3)]"
               style={{ animationDelay: `${index * 0.2}s` }}
             >
               {/* Image */}
-              <div className="relative h-48 overflow-hidden">
+              <div className="relative h-56 overflow-hidden">
                 <img
                   src={classType.image}
                   alt={classType.title}
                   className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500"
+                  style={{ filter: 'hue-rotate(270deg) saturate(1.3) contrast(1.2)' }}
                 />
                 <div className={`absolute inset-0 bg-gradient-to-t ${classType.gradient} opacity-60`}></div>
                 
+                {/* Holographic overlay */}
+                <div className="absolute inset-0 bg-gradient-to-br from-electric-purple/20 via-transparent to-neon-pink/20 opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
+                
                 {/* Icon */}
                 <div className="absolute top-4 right-4">
-                  <div className="w-12 h-12 bg-white/20 backdrop-blur-sm rounded-full flex items-center justify-center">
-                    <classType.icon className="w-6 h-6 text-white" />
+                  <div className="relative">
+                    <div className="w-12 h-12 hologram-border rounded-full flex items-center justify-center bg-black/50 backdrop-blur-sm">
+                      <classType.icon className="w-6 h-6 text-white" />
+                    </div>
+                    <div className="absolute inset-0 bg-electric-purple/30 rounded-full blur-md opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
                   </div>
                 </div>
               </div>
 
               {/* Content */}
               <div className="p-6">
-                <h3 className="text-xl font-bold text-gray-900 mb-2">{classType.title}</h3>
-                <p className="text-gray-600 mb-4">{classType.description}</p>
+                <h3 className="text-xl font-orbitron font-bold text-white mb-3">{classType.title}</h3>
+                <p className="text-gray-400 mb-6 font-inter">{classType.description}</p>
                 
                 <Button 
                   variant="outline" 
-                  className="w-full group-hover:bg-rose-50 group-hover:border-rose-300 group-hover:text-rose-700 transition-colors"
+                  className="w-full hologram-border bg-transparent text-electric-purple hover:bg-electric-purple/10 hover:text-white transition-all duration-300 group/btn"
                 >
-                  Explore Classes
-                  <ArrowRight className="w-4 h-4 ml-2 group-hover:translate-x-1 transition-transform" />
+                  <span className="font-orbitron">ACCESS PROTOCOL</span>
+                  <ArrowRight className="w-4 h-4 ml-2 group-hover/btn:translate-x-1 transition-transform" />
                 </Button>
               </div>
             </div>
@@ -81,13 +101,14 @@ const ClassDiscovery = () => {
 
         {/* Class Finder CTA */}
         <div className="text-center">
-          <div className="inline-flex items-center space-x-4 bg-white p-6 rounded-2xl shadow-lg">
-            <div>
-              <h3 className="text-lg font-semibold text-gray-900 mb-1">Still not sure?</h3>
-              <p className="text-gray-600 text-sm">Use our Class Finder Tool to get personalized recommendations</p>
+          <div className="inline-flex items-center space-x-6 cyberpunk-card p-8 rounded-2xl shadow-2xl">
+            <div className="text-left">
+              <h3 className="text-xl font-orbitron font-bold text-white mb-2">NEURAL COMPATIBILITY SCAN</h3>
+              <p className="text-gray-400 text-sm font-inter">Let our AI analyze your profile for optimal training protocol matching</p>
             </div>
-            <Button className="bg-gradient-to-r from-rose-500 to-purple-600 hover:from-rose-600 hover:to-purple-700 whitespace-nowrap">
-              Find My Class
+            <Button className="cyberpunk-button whitespace-nowrap font-orbitron font-bold">
+              <Zap className="w-5 h-5 mr-2" />
+              SCAN NOW
             </Button>
           </div>
         </div>
