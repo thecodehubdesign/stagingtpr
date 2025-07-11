@@ -8,7 +8,6 @@ import FlexibilityProgram from '@/components/FlexibilityProgram';
 import ClassDiscoverySection from '@/components/ClassDiscoverySection';
 import StyleQuiz from '@/components/StyleQuiz';
 import StudioLocations from '@/components/StudioLocations';
-import SocialProof from '@/components/SocialProof';
 import { PremiumTestimonials } from '@/components/ui/premium-testimonials';
 import Footer from '@/components/Footer';
 
@@ -25,7 +24,6 @@ const Index = () => {
       <StyleQuiz />
       <StudioLocations />
       <PremiumTestimonials />
-      <SocialProof />
       <Footer />
     </div>
   );
