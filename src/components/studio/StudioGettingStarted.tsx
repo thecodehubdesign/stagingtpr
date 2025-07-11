@@ -2,6 +2,7 @@
 import { Card } from '@/components/ui/card';
 import { Button } from '@/components/ui/button';
 import { UserPlus, Calendar, Sparkles, Trophy } from 'lucide-react';
+import FreeTrialBookingForm from '../FreeTrialBookingForm';
 
 const StudioGettingStarted = () => {
   const steps = [
@@ -53,9 +54,7 @@ const StudioGettingStarted = () => {
         </div>
 
         <div className="text-center">
-          <Button className="neon-button text-black font-bold text-lg px-8 py-3">
-            Book Your Free Trial Now
-          </Button>
+          <FreeTrialBookingForm />
         </div>
       </div>
     </section>

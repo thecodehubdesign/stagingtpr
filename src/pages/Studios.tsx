@@ -6,6 +6,7 @@ import StudioMap from '@/components/StudioMap';
 import { Button } from '@/components/ui/button';
 import { Card } from '@/components/ui/card';
 import { MapPin, Users, Wifi, Coffee, Car } from 'lucide-react';
+import FreeTrialBookingForm from '@/components/FreeTrialBookingForm';
 
 const Studios = () => {
   const studioFeatures = [
@@ -30,9 +31,7 @@ const Studios = () => {
               Six premium locations across Melbourne, each designed to provide 
               a safe, inspiring space for your transformation journey.
             </p>
-            <Button className="neon-button text-black font-bold text-lg px-8 py-3">
-              Find Your Nearest Studio
-            </Button>
+            <FreeTrialBookingForm />
           </div>
         </div>
       </section>

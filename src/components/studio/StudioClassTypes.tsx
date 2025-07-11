@@ -1,8 +1,8 @@
-
 import { Card } from '@/components/ui/card';
 import { Button } from '@/components/ui/button';
 import { Badge } from '@/components/ui/badge';
 import { Studio } from '@/data/studios';
+import FreeTrialBookingForm from '../FreeTrialBookingForm';
 
 interface StudioClassTypesProps {
   studio: Studio;
@@ -100,9 +100,7 @@ const StudioClassTypes = ({ studio }: StudioClassTypesProps) => {
         </div>
 
         <div className="text-center">
-          <Button className="neon-button text-black font-bold text-lg px-8 py-3">
-            View Full Class Schedule
-          </Button>
+          <FreeTrialBookingForm />
         </div>
       </div>
     </section>

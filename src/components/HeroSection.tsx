@@ -1,7 +1,9 @@
+
 import { Button } from '@/components/ui/button';
 import { Play, ArrowRight, Zap } from 'lucide-react';
 import StyleQuizModal from './StyleQuizModal';
-import FreeTrialSidebar from './FreeTrialSidebar';
+import FreeTrialBookingForm from './FreeTrialBookingForm';
+
 const HeroSection = () => {
   return <section className="relative min-h-screen flex items-center justify-center overflow-hidden cyber-grid">
       {/* Cyberpunk Background */}
@@ -37,7 +39,7 @@ const HeroSection = () => {
           </p>
 
           <div className="flex flex-col sm:flex-row gap-4 justify-center items-center">
-            <FreeTrialSidebar />
+            <FreeTrialBookingForm />
             <StyleQuizModal />
           </div>
 
@@ -58,4 +60,5 @@ const HeroSection = () => {
     }}></div>
     </section>;
 };
+
 export default HeroSection;

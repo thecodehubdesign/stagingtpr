@@ -3,6 +3,7 @@ import { Card } from '@/components/ui/card';
 import { Button } from '@/components/ui/button';
 import { MapPin, Phone, Mail, Clock } from 'lucide-react';
 import { Studio } from '@/data/studios';
+import FreeTrialBookingForm from '../FreeTrialBookingForm';
 
 interface StudioContactProps {
   studio: Studio;
@@ -51,9 +52,9 @@ const StudioContact = ({ studio }: StudioContactProps) => {
                 </div>
               ))}
             </div>
-            <Button className="w-full mt-6 bg-gradient-to-r from-fuchsia-500 to-purple-600 hover:from-fuchsia-600 hover:to-purple-700">
-              Book a Class
-            </Button>
+            <div className="mt-6">
+              <FreeTrialBookingForm />
+            </div>
           </Card>
         </div>
       </div>

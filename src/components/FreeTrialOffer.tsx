@@ -1,6 +1,7 @@
 
 import { Button } from '@/components/ui/button';
 import { Star, Clock, Users, Heart, Zap, LucideIcon } from 'lucide-react';
+import FreeTrialBookingForm from './FreeTrialBookingForm';
 
 interface Benefit {
   icon: LucideIcon;
@@ -80,12 +81,7 @@ const FreeTrialOffer = ({
           </div>
 
           <div className="space-y-4">
-            <Button 
-              size="lg" 
-              className="neon-button text-lg px-12 py-4 h-auto text-black font-bold shadow-2xl"
-            >
-              {buttonText}
-            </Button>
+            <FreeTrialBookingForm />
             
             <p className="text-gray-400 text-sm">
               {disclaimerText}

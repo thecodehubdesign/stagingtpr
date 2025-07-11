@@ -3,6 +3,7 @@ import { Card } from '@/components/ui/card';
 import { Button } from '@/components/ui/button';
 import { Badge } from '@/components/ui/badge';
 import { Studio } from '@/data/studios';
+import FreeTrialBookingForm from '../FreeTrialBookingForm';
 
 interface StudioAboutProps {
   studio: Studio;
@@ -51,9 +52,7 @@ const StudioAbout = ({ studio }: StudioAboutProps) => {
             </div>
           </div>
 
-          <Button className="neon-button text-black font-bold text-lg px-8 py-3">
-            Start Your Journey Today
-          </Button>
+          <FreeTrialBookingForm />
         </div>
         
         <div className="relative">

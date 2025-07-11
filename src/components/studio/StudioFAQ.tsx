@@ -1,4 +1,3 @@
-
 import { 
   Accordion, 
   AccordionContent, 
@@ -6,6 +5,7 @@ import {
   AccordionTrigger 
 } from '@/components/ui/accordion';
 import { Button } from '@/components/ui/button';
+import FreeTrialBookingForm from '../FreeTrialBookingForm';
 
 const StudioFAQ = () => {
   const faqs = [
@@ -66,9 +66,7 @@ const StudioFAQ = () => {
 
         <div className="text-center mt-12">
           <p className="text-gray-400 mb-4">Still have questions?</p>
-          <Button className="neon-button text-black font-bold text-lg px-8 py-3">
-            Contact Us
-          </Button>
+          <FreeTrialBookingForm />
         </div>
       </div>
     </section>

@@ -1,8 +1,8 @@
-
 import { Card } from '@/components/ui/card';
 import { Button } from '@/components/ui/button';
 import { Badge } from '@/components/ui/badge';
 import { Calendar, Clock, Users } from 'lucide-react';
+import FreeTrialBookingForm from '../FreeTrialBookingForm';
 
 interface StudioClassListProps {
   studioId: string;
@@ -97,9 +97,7 @@ const StudioClassList = ({ studioId }: StudioClassListProps) => {
         </div>
 
         <div className="text-center mt-12">
-          <Button className="neon-button text-black font-bold text-lg px-8 py-3">
-            View Full Schedule
-          </Button>
+          <FreeTrialBookingForm />
         </div>
       </div>
     </section>

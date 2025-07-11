@@ -11,7 +11,7 @@ import StudioReviews from '@/components/studio/StudioReviews';
 import StudioClassList from '@/components/studio/StudioClassList';
 import StudioFAQ from '@/components/studio/StudioFAQ';
 import StudioLocationMap from '@/components/studio/StudioLocationMap';
-import { Button } from '@/components/ui/button';
+import FreeTrialBookingForm from '@/components/FreeTrialBookingForm';
 import { studios } from '@/data/studios';
 
 const StudioDetail = () => {
@@ -44,9 +44,7 @@ const StudioDetail = () => {
             <p className="text-xl text-gray-300 max-w-3xl mx-auto leading-relaxed mb-8">
               {studio.address}
             </p>
-            <Button className="neon-button text-black font-bold text-lg px-8 py-3">
-              Book Your Free Trial
-            </Button>
+            <FreeTrialBookingForm />
           </div>
         </div>
       </section>

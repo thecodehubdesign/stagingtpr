@@ -3,6 +3,7 @@ import { useState } from 'react';
 import { Button } from '@/components/ui/button';
 import { Menu, X, Zap } from 'lucide-react';
 import { Link } from 'react-router-dom';
+import FreeTrialBookingForm from './FreeTrialBookingForm';
 
 const Header = () => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
@@ -47,9 +48,7 @@ const Header = () => {
             <Button variant="outline" className="cyber-border text-cyan-400 hover:bg-cyan-400/10 hover:text-cyan-300">
               Free Gifts 💝
             </Button>
-            <Button className="neon-button text-black font-bold">
-              Free Trial Class
-            </Button>
+            <FreeTrialBookingForm />
           </div>
 
           {/* Mobile menu button */}
@@ -81,9 +80,7 @@ const Header = () => {
                 <Button variant="outline" className="cyber-border text-cyan-400 hover:bg-cyan-400/10">
                   Free Gifts 💝
                 </Button>
-                <Button className="neon-button text-black font-bold">
-                  Free Trial Class
-                </Button>
+                <FreeTrialBookingForm />
               </div>
             </div>
           </div>
