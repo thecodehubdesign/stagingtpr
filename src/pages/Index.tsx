@@ -5,7 +5,7 @@ import StudioBrandsSlider from '@/components/StudioBrandsSlider';
 import FounderSection from '@/components/FounderSection';
 import LevelUpMethod from '@/components/LevelUpMethod';
 import FlexibilityProgram from '@/components/FlexibilityProgram';
-import ClassDiscovery from '@/components/ClassDiscovery';
+import ClassDiscoverySection from '@/components/ClassDiscoverySection';
 import StyleQuiz from '@/components/StyleQuiz';
 import StudioLocations from '@/components/StudioLocations';
 import SocialProof from '@/components/SocialProof';
@@ -21,7 +21,7 @@ const Index = () => {
       <FounderSection />
       <LevelUpMethod />
       <FlexibilityProgram />
-      <ClassDiscovery />
+      <ClassDiscoverySection />
       <StyleQuiz />
       <StudioLocations />
       <PremiumTestimonials />
