@@ -72,7 +72,7 @@ const LevelUpMethod = () => {
               </div>
               <div className="cyber-card p-4 rounded-xl">
                 <p className="text-gray-400 text-sm mb-1">No rhythm?</p>
-                <p className="text-fuchsia-400 font-semibold neon-glow">Doesn't matter.</p>
+                <p className="text-fuchsia-400 font-semibold">Doesn't matter.</p>
               </div>
               <div className="cyber-card p-4 rounded-xl">
                 <p className="text-gray-400 text-sm mb-1">No strength?</p>
