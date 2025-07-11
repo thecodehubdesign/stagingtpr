@@ -1,3 +1,4 @@
+
 import { useState } from 'react';
 import { Link } from 'react-router-dom';
 import { Card } from '@/components/ui/card';
@@ -26,7 +27,7 @@ const StudioSearch = () => {
       name: "The Pole Room Highett",
       address: "1/5 Graham Road, Highett VIC",
       phone: "(03) 9123 4567",
-      apparatus: ["Pole", "Aerials"],
+      apparatus: ["Pole", "Lyra", "Silks", "Hammocks"],
       features: ["Changing Rooms", "Studio Hire", "Hens Parties"],
       image: "https://images.unsplash.com/photo-1513836279014-a89f7a76ae86?ixlib=rb-4.0.3&auto=format&fit=crop&w=1000&q=80"
     },
@@ -35,7 +36,7 @@ const StudioSearch = () => {
       name: "The Pole Room Kilsyth",
       address: "1-3 Southfork Drive, Kilsyth VIC",
       phone: "(03) 9234 5678",
-      apparatus: ["Pole"],
+      apparatus: ["Pole", "Fly Pole"],
       features: ["Changing Rooms", "Studio Hire", "Hens Parties"],
       image: "https://images.unsplash.com/photo-1518005020951-eccb494ad742?ixlib=rb-4.0.3&auto=format&fit=crop&w=1000&q=80"
     },
@@ -44,7 +45,7 @@ const StudioSearch = () => {
       name: "The Pole Room Narre Warren",
       address: "Narre Warren VIC",
       phone: "(03) 9345 6789",
-      apparatus: ["Pole", "Aerials"],
+      apparatus: ["Pole", "Lyra", "Silks", "Cube"],
       features: ["Changing Rooms", "Studio Hire", "Hens Parties"],
       image: "https://images.unsplash.com/photo-1513836279014-a89f7a76ae86?ixlib=rb-4.0.3&auto=format&fit=crop&w=1000&q=80"
     },
@@ -53,7 +54,7 @@ const StudioSearch = () => {
       name: "The Pole Room Eltham",
       address: "2/38 Bridge Street, Eltham VIC",
       phone: "(03) 9456 7890",
-      apparatus: ["Pole"],
+      apparatus: ["Pole", "Hammocks", "Fly Pole"],
       features: ["Changing Rooms", "Studio Hire", "Hens Parties"],
       image: "https://images.unsplash.com/photo-1518005020951-eccb494ad742?ixlib=rb-4.0.3&auto=format&fit=crop&w=1000&q=80"
     },
@@ -62,7 +63,7 @@ const StudioSearch = () => {
       name: "The Pole Room Mitcham",
       address: "2e Cochrane Street, Mitcham VIC 3132",
       phone: "(03) 9567 8901",
-      apparatus: ["Pole", "Aerials"],
+      apparatus: ["Pole", "Lyra", "Silks", "Cube", "Hammocks"],
       features: ["Changing Rooms", "Studio Hire", "Hens Parties"],
       image: "https://images.unsplash.com/photo-1513836279014-a89f7a76ae86?ixlib=rb-4.0.3&auto=format&fit=crop&w=1000&q=80"
     },
@@ -71,13 +72,13 @@ const StudioSearch = () => {
       name: "The Pole Room CBD",
       address: "2/333 Flinders Lane, Melbourne VIC 3000",
       phone: "(03) 9678 9012",
-      apparatus: ["Pole"],
+      apparatus: ["Pole", "Fly Pole"],
       features: ["Changing Rooms", "Studio Hire", "Hens Parties", "No Parking"],
       image: "https://images.unsplash.com/photo-1518005020951-eccb494ad742?ixlib=rb-4.0.3&auto=format&fit=crop&w=1000&q=80"
     }
   ];
 
-  const apparatusOptions = ["Pole", "Aerials"];
+  const apparatusOptions = ["Pole", "Lyra", "Silks", "Hammocks", "Cube", "Fly Pole"];
 
   const toggleApparatus = (apparatus: string) => {
     setSelectedApparatus(prev => 
@@ -112,12 +113,12 @@ const StudioSearch = () => {
             />
           </div>
           
-          <div className="flex items-center space-x-4">
+          <div className="flex items-center space-x-4 flex-wrap">
             <div className="flex items-center space-x-2">
               <Filter className="w-4 h-4 text-gray-400" />
               <span className="text-sm text-gray-300">Filter by apparatus:</span>
             </div>
-            <div className="flex space-x-2">
+            <div className="flex space-x-2 flex-wrap gap-2">
               {apparatusOptions.map((apparatus) => (
                 <Button
                   key={apparatus}
@@ -162,7 +163,7 @@ const StudioSearch = () => {
                   {studio.apparatus.map((apparatus) => (
                     <Badge 
                       key={apparatus}
-                      className="bg-fuchsia-500/10 text-fuchsia-400 border-fuchsia-500/30"
+                      className="bg-fuchsia-500/10 text-fuchsia-400 border-fuchsia-500/30 text-xs"
                     >
                       {apparatus}
                     </Badge>

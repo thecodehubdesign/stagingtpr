@@ -1,6 +1,8 @@
 
 import Header from '@/components/Header';
 import Footer from '@/components/Footer';
+import ProgramsComparison from '@/components/ProgramsComparison';
+import StudioHistory from '@/components/StudioHistory';
 import { Button } from '@/components/ui/button';
 import { Card } from '@/components/ui/card';
 import { Heart, Zap, Users, Trophy, Star, Target } from 'lucide-react';
@@ -30,10 +32,10 @@ const About = () => {
   ];
 
   const stats = [
-    { number: "5+", label: "Years of Excellence" },
-    { number: "3", label: "Studio Locations" },
-    { number: "1000+", label: "Lives Transformed" },
-    { number: "50+", label: "Classes per Week" }
+    { number: "6+", label: "Years of Excellence" },
+    { number: "6", label: "Studio Locations" },
+    { number: "2000+", label: "Lives Transformed" },
+    { number: "100+", label: "Classes per Week" }
   ];
 
   return (
@@ -89,6 +91,9 @@ const About = () => {
         </div>
       </section>
 
+      {/* Programs Comparison Section */}
+      <ProgramsComparison />
+
       {/* Values Section */}
       <section className="py-20 bg-gray-800">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
@@ -116,6 +121,9 @@ const About = () => {
           </div>
         </div>
       </section>
+
+      {/* Studio History Timeline */}
+      <StudioHistory />
 
       {/* Stats Section */}
       <section className="py-20 bg-gradient-to-r from-fuchsia-600 to-purple-600">
@@ -154,7 +162,7 @@ const About = () => {
             Ready to <span className="gradient-text">Transform</span>?
           </h2>
           <p className="text-lg text-gray-300 mb-8 max-w-2xl mx-auto">
-            Join hundreds of people who have discovered their power through our proven method. 
+            Join thousands of people who have discovered their power through our proven method. 
             Your transformation starts with a single step.
           </p>
           <div className="flex flex-col sm:flex-row gap-4 justify-center">
