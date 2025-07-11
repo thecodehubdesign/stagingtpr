@@ -45,8 +45,14 @@ const Header = () => {
 
           {/* Desktop CTAs */}
           <div className="hidden md:flex items-center space-x-4">
-            <Button variant="outline" className="cyber-border text-cyan-400 hover:bg-cyan-400/10 hover:text-cyan-300">
-              Free Gifts 💝
+            <Button 
+              asChild
+              variant="outline" 
+              className="cyber-border text-cyan-400 hover:bg-cyan-400/10 hover:text-cyan-300"
+            >
+              <Link to="/free-gifts">
+                Free Gifts 💝
+              </Link>
             </Button>
             <VoucherClaimForm />
           </div>
@@ -77,8 +83,14 @@ const Header = () => {
                 </Link>
               ))}
               <div className="flex flex-col space-y-2 px-3 pt-4">
-                <Button variant="outline" className="cyber-border text-cyan-400 hover:bg-cyan-400/10">
-                  Free Gifts 💝
+                <Button 
+                  asChild
+                  variant="outline" 
+                  className="cyber-border text-cyan-400 hover:bg-cyan-400/10"
+                >
+                  <Link to="/free-gifts">
+                    Free Gifts 💝
+                  </Link>
                 </Button>
                 <VoucherClaimForm />
               </div>
