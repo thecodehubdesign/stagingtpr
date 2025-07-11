@@ -92,11 +92,7 @@ export function PremiumTestimonials() {
     hidden: { opacity: 0, y: 60 },
     visible: { 
       opacity: 1, 
-      y: 0,
-      transition: { 
-        duration: 0.8, 
-        ease: "easeOut"
-      }
+      y: 0
     }
   };
 
@@ -205,6 +201,7 @@ export function PremiumTestimonials() {
         <motion.div 
           className="text-center mb-20"
           variants={fadeInUp}
+          transition={{ duration: 0.8, ease: "easeOut" }}
         >
           <motion.div
             className="inline-flex items-center gap-3 px-4 py-2 rounded-full bg-white/[0.08] border border-white/[0.15] backdrop-blur-sm mb-6"
@@ -225,6 +222,7 @@ export function PremiumTestimonials() {
           <motion.h2 
             className="text-4xl sm:text-6xl md:text-7xl font-bold mb-8 tracking-tight"
             variants={fadeInUp}
+            transition={{ duration: 0.8, ease: "easeOut" }}
           >
             <span className="bg-clip-text text-transparent bg-gradient-to-r from-white to-white/80">
               Loved by
@@ -251,6 +249,7 @@ export function PremiumTestimonials() {
           <motion.p 
             className="text-xl sm:text-2xl text-white/60 max-w-4xl mx-auto leading-relaxed"
             variants={fadeInUp}
+            transition={{ duration: 0.8, ease: "easeOut" }}
           >
             Join thousands of women already discovering their strength, grace, and confidence through pole and aerial fitness.
           </motion.p>
@@ -450,6 +449,7 @@ export function PremiumTestimonials() {
               key={index}
               className="text-center group"
               variants={fadeInUp}
+              transition={{ duration: 0.8, ease: "easeOut" }}
               whileHover={{ scale: 1.05 }}
             >
               <motion.div
