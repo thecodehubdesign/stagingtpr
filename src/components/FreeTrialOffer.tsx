@@ -1,22 +1,45 @@
 
 import { Button } from '@/components/ui/button';
-import { Star, Clock, Users, Heart, Zap } from 'lucide-react';
+import { Star, Clock, Users, Heart, Zap, LucideIcon } from 'lucide-react';
 
-const FreeTrialOffer = () => {
-  const benefits = [
+interface Benefit {
+  icon: LucideIcon;
+  text: string;
+}
+
+interface FreeTrialOfferProps {
+  backgroundImage?: string;
+  limitedTimeText?: string;
+  mainHeading?: string;
+  description?: string;
+  highlightedWord?: string;
+  benefits?: Benefit[];
+  buttonText?: string;
+  disclaimerText?: string;
+}
+
+const FreeTrialOffer = ({
+  backgroundImage = 'https://images.unsplash.com/photo-1500673922987-e212871fec22?ixlib=rb-4.0.3&auto=format&fit=crop&w=2070&q=80',
+  limitedTimeText = 'Limited Time Offer',
+  mainHeading = 'Experience It for Yourself – On Us!',
+  description = 'Book a free trial and take your first step into a more confident,',
+  highlightedWord = 'empowered',
+  benefits = [
     { icon: Star, text: "No experience necessary" },
     { icon: Clock, text: "45-minute trial class" },
     { icon: Users, text: "Small, supportive groups" },
     { icon: Heart, text: "Welcoming community" }
-  ];
-
+  ],
+  buttonText = 'Book My Free Trial',
+  disclaimerText = 'No credit card required • Available at all locations'
+}: FreeTrialOfferProps) => {
   return (
     <section className="py-20 relative overflow-hidden">
       {/* Cyberpunk Background */}
       <div 
         className="absolute inset-0 bg-cover bg-center"
         style={{
-          backgroundImage: `linear-gradient(rgba(8,8,15,0.9), rgba(20,20,35,0.9)), url('https://images.unsplash.com/photo-1500673922987-e212871fec22?ixlib=rb-4.0.3&auto=format&fit=crop&w=2070&q=80')`
+          backgroundImage: `linear-gradient(rgba(8,8,15,0.9), rgba(20,20,35,0.9)), url('${backgroundImage}')`
         }}
       />
       
@@ -28,17 +51,17 @@ const FreeTrialOffer = () => {
         <div className="animate-fade-in">
           <div className="inline-flex items-center space-x-2 text-fuchsia-400 mb-4">
             <Zap className="w-5 h-5 neon-glow" />
-            <span className="text-sm font-semibold uppercase tracking-wide neon-glow">Limited Time Offer</span>
+            <span className="text-sm font-semibold uppercase tracking-wide neon-glow">{limitedTimeText}</span>
             <Zap className="w-5 h-5 neon-glow" />
           </div>
           
           <h2 className="text-3xl sm:text-4xl lg:text-5xl font-bold text-white mb-6 gradient-text pulse-neon">
-            Experience It for Yourself – On Us!
+            {mainHeading}
           </h2>
           
           <p className="text-xl text-gray-300 mb-8 max-w-2xl mx-auto">
-            Book a free trial and take your first step into a more confident, 
-            <span className="text-fuchsia-400 neon-glow"> empowered </span>
+            {description}
+            <span className="text-fuchsia-400 neon-glow"> {highlightedWord} </span>
             version of you.
           </p>
 
@@ -61,11 +84,11 @@ const FreeTrialOffer = () => {
               size="lg" 
               className="neon-button text-lg px-12 py-4 h-auto text-black font-bold shadow-2xl"
             >
-              Book My Free Trial
+              {buttonText}
             </Button>
             
             <p className="text-gray-400 text-sm">
-              No credit card required • Available at all locations
+              {disclaimerText}
             </p>
           </div>
         </div>

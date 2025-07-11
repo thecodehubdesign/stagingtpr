@@ -1,7 +1,7 @@
 
 import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
-import { Instagram, Facebook, Youtube, Mail, Phone, MapPin } from 'lucide-react';
+import { Instagram, Facebook, Youtube, Mail, Phone, MapPin, Star, Clock, Users, Heart } from 'lucide-react';
 import FreeTrialOffer from '@/components/FreeTrialOffer';
 
 const Footer = () => {
@@ -32,7 +32,21 @@ const Footer = () => {
   return (
     <footer className="bg-gray-900 text-white">
       {/* Free Trial Offer Section */}
-      <FreeTrialOffer />
+      <FreeTrialOffer 
+        backgroundImage="https://images.unsplash.com/photo-1500673922987-e212871fec22?ixlib=rb-4.0.3&auto=format&fit=crop&w=2070&q=80"
+        limitedTimeText="Limited Time Offer"
+        mainHeading="Experience It for Yourself – On Us!"
+        description="Book a free trial and take your first step into a more confident,"
+        highlightedWord="empowered"
+        benefits={[
+          { icon: Star, text: "No experience necessary" },
+          { icon: Clock, text: "45-minute trial class" },
+          { icon: Users, text: "Small, supportive groups" },
+          { icon: Heart, text: "Welcoming community" }
+        ]}
+        buttonText="Book My Free Trial"
+        disclaimerText="No credit card required • Available at all locations"
+      />
 
       {/* Main Footer */}
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-16">
