@@ -62,7 +62,7 @@ const LevelUpMethod = () => {
             <p className="text-xl text-gray-300 leading-relaxed">
               At The Pole Room, we don't just teach pole dancing — we guide everyday people to discover their power, 
               rewrite their identity, and step into a life of 
-              <span className="text-fuchsia-400 neon-glow"> unapologetic confidence</span>.
+              <span className="text-fuchsia-400"> unapologetic confidence</span>.
             </p>
             
             <div className="grid sm:grid-cols-3 gap-6 text-center">
