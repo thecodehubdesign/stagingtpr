@@ -51,7 +51,7 @@ const FounderSection = () => {
           {/* Image Side */}
           <div className="relative animate-fade-in">
             <div className="aspect-[4/5] rounded-2xl overflow-hidden shadow-2xl cyber-border">
-              <img src="https://images.unsplash.com/photo-1494790108755-2616c5e912e2?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=687&q=80" alt="Jasmine Zapka, Founder of The Pole Room" className="w-full h-full object-cover" />
+              <img alt="Jasmine Zapka, Founder of The Pole Room" className="w-full h-full object-cover" src="/lovable-uploads/1d83d83b-0057-4bd1-8052-79584b039a97.jpg" />
             </div>
             
             {/* Quote Bubble */}
@@ -74,9 +74,7 @@ const FounderSection = () => {
               </h3>
             </div>
             
-            <h2 className="text-3xl sm:text-4xl font-bold text-white mb-6 gradient-text">
-              From 2 poles in her parents garage to a movement empowering thousands across Melbourne
-            </h2>
+            <h2 className="text-3xl sm:text-4xl font-bold text-white mb-6 gradient-text">From 2 Poles In Her Parents Garage To A Movement Empowering Thousands Across Melbourne</h2>
             
             <p className="text-lg text-gray-300 mb-8 leading-relaxed">
               Jasmine created The Pole Room to unlock the untapped potential in every body. 
