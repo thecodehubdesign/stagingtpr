@@ -1,19 +1,10 @@
 
-import { useState } from 'react';
 import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
 import { Instagram, Facebook, Youtube, Mail, Phone, MapPin } from 'lucide-react';
+import FreeTrialOffer from '@/components/FreeTrialOffer';
 
 const Footer = () => {
-  const [email, setEmail] = useState('');
-  const [isSubscribed, setIsSubscribed] = useState(false);
-
-  const handleNewsletterSubmit = (e: React.FormEvent) => {
-    e.preventDefault();
-    setIsSubscribed(true);
-    console.log('Newsletter subscription:', email);
-  };
-
   const quickLinks = [
     { name: 'About Us', href: '#about' },
     { name: 'Classes', href: '#classes' },
@@ -40,37 +31,8 @@ const Footer = () => {
 
   return (
     <footer className="bg-gray-900 text-white">
-      {/* Newsletter Section */}
-      <div className="bg-gradient-to-r from-rose-500 to-purple-600">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
-          <div className="text-center">
-            <h3 className="text-2xl font-bold mb-2">Stay in the Loop</h3>
-            <p className="text-rose-100 mb-6">Get the latest news, tips, and exclusive offers delivered to your inbox</p>
-            
-            {!isSubscribed ? (
-              <form onSubmit={handleNewsletterSubmit} className="max-w-md mx-auto">
-                <div className="flex gap-3">
-                  <Input
-                    type="email"
-                    placeholder="Enter your email"
-                    value={email}
-                    onChange={(e) => setEmail(e.target.value)}
-                    required
-                    className="bg-white/10 border-white/20 text-white placeholder:text-rose-200"
-                  />
-                  <Button type="submit" className="bg-white text-rose-600 hover:bg-rose-50 font-semibold px-6">
-                    Subscribe
-                  </Button>
-                </div>
-              </form>
-            ) : (
-              <div className="bg-white/10 rounded-lg p-4 max-w-md mx-auto">
-                <p className="text-white font-medium">Thank you for subscribing! 💕</p>
-              </div>
-            )}
-          </div>
-        </div>
-      </div>
+      {/* Free Trial Offer Section */}
+      <FreeTrialOffer />
 
       {/* Main Footer */}
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-16">
