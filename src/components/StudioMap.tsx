@@ -8,6 +8,7 @@ interface StudioLocation {
   lat: number;
   lng: number;
   phone?: string;
+  apparatus: string[];
 }
 
 const StudioMap = () => {
@@ -17,18 +18,52 @@ const StudioMap = () => {
 
   const locations: StudioLocation[] = [
     {
+      name: "The Pole Room Highett",
+      address: "1/5 Graham Road, Highett VIC",
+      lat: -37.9398,
+      lng: 145.0432,
+      phone: "(03) 9123 4567",
+      apparatus: ["Pole", "Aerials"]
+    },
+    {
+      name: "The Pole Room Kilsyth",
+      address: "1-3 Southfork Drive, Kilsyth VIC",
+      lat: -37.8197,
+      lng: 145.3116,
+      phone: "(03) 9234 5678",
+      apparatus: ["Pole"]
+    },
+    {
+      name: "The Pole Room Narre Warren",
+      address: "Narre Warren VIC",
+      lat: -38.0267,
+      lng: 145.3028,
+      phone: "(03) 9345 6789",
+      apparatus: ["Pole", "Aerials"]
+    },
+    {
+      name: "The Pole Room Eltham",
+      address: "2/38 Bridge Street, Eltham VIC",
+      lat: -37.7137,
+      lng: 145.1440,
+      phone: "(03) 9456 7890",
+      apparatus: ["Pole"]
+    },
+    {
       name: "The Pole Room Mitcham",
       address: "2e Cochrane Street, Mitcham VIC 3132",
       lat: -37.8183,
       lng: 145.2044,
-      phone: "(03) 9123 4567"
+      phone: "(03) 9567 8901",
+      apparatus: ["Pole", "Aerials"]
     },
     {
-      name: "The Pole Room Melbourne CBD",
+      name: "The Pole Room CBD",
       address: "2/333 Flinders Lane, Melbourne VIC 3000",
       lat: -37.8162,
       lng: 144.9646,
-      phone: "(03) 9234 5678"
+      phone: "(03) 9678 9012",
+      apparatus: ["Pole"]
     }
   ];
 
@@ -48,10 +83,10 @@ const StudioMap = () => {
     loaderRef.current.load().then(() => {
       if (!mapRef.current) return;
 
-      // Initialize the map
+      // Initialize the map with a broader view to show all locations
       const map = new google.maps.Map(mapRef.current, {
-        zoom: 11,
-        center: { lat: -37.8136, lng: 145.0632 }, // Center between both locations
+        zoom: 10,
+        center: { lat: -37.8136, lng: 145.0632 }, // Center of Melbourne
         styles: [
           {
             featureType: "all",
@@ -144,13 +179,14 @@ const StudioMap = () => {
           }
         });
 
-        // Create info window
+        // Create info window with apparatus information
         const infoWindow = new google.maps.InfoWindow({
           content: `
             <div style="color: #000; padding: 8px; font-family: Inter, sans-serif;">
               <h3 style="margin: 0 0 8px 0; font-weight: bold; color: #1a1a1a;">${location.name}</h3>
               <p style="margin: 0 0 4px 0; color: #666;">${location.address}</p>
-              ${location.phone ? `<p style="margin: 0; color: #666;">${location.phone}</p>` : ''}
+              ${location.phone ? `<p style="margin: 0 0 4px 0; color: #666;">${location.phone}</p>` : ''}
+              <p style="margin: 0; color: #ec4899; font-weight: 500;">${location.apparatus.join(' & ')}</p>
             </div>
           `
         });

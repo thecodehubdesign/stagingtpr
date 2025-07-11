@@ -1,10 +1,9 @@
-
 import Header from '@/components/Header';
 import Footer from '@/components/Footer';
 import { Button } from '@/components/ui/button';
 import { Card } from '@/components/ui/card';
 import { Badge } from '@/components/ui/badge';
-import { Check, Heart, Users, Clock, Shield, Star, HelpCircle, Zap } from 'lucide-react';
+import { Check, Heart, Users, Clock, Shield, Star, HelpCircle, Zap, ArrowRight } from 'lucide-react';
 
 const FirstTimers = () => {
   const whatToExpect = [
@@ -32,6 +31,37 @@ const FirstTimers = () => {
       step: "5",
       title: "Cool Down & Chat",
       description: "Stretching, relaxation, and time to ask questions or book your next class"
+    }
+  ];
+
+  const progressionSteps = [
+    {
+      phase: "Week 1-2",
+      title: "Foundation & Safety",
+      description: "Learn basic safety, warm-up routines, and fundamental movements",
+      achievements: ["Basic pole holds", "Simple spins", "Floor work basics", "Studio etiquette"],
+      color: "from-green-500 to-emerald-500"
+    },
+    {
+      phase: "Week 3-6",
+      title: "Building Strength",
+      description: "Develop core strength and learn your first pole moves",
+      achievements: ["Fireman spin", "Basic climbs", "Static holds", "Flexibility gains"],
+      color: "from-blue-500 to-cyan-500"
+    },
+    {
+      phase: "Week 7-12",
+      title: "First Combinations",
+      description: "Start linking moves together and building confidence",
+      achievements: ["Spin combinations", "Simple routines", "Increased stamina", "New friendships"],
+      color: "from-purple-500 to-pink-500"
+    },
+    {
+      phase: "Month 4+",
+      title: "Advanced Journey",
+      description: "Explore specialized moves and develop your unique style",
+      achievements: ["Advanced spins", "Aerial work", "Performance skills", "Teaching others"],
+      color: "from-rose-500 to-orange-500"
     }
   ];
 
@@ -100,7 +130,7 @@ const FirstTimers = () => {
       <section className="pt-20 pb-16 bg-gradient-to-br from-gray-900 via-purple-900 to-gray-900 cyber-grid">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="text-center animate-fade-in">
-            <h1 className="text-4xl sm:text-6xl font-bold gradient-text neon-glow mb-6">
+            <h1 className="text-4xl sm:text-6xl font-bold gradient-text mb-6">
               Your First Class
             </h1>
             <p className="text-xl text-gray-300 max-w-3xl mx-auto leading-relaxed mb-8">
@@ -114,8 +144,59 @@ const FirstTimers = () => {
         </div>
       </section>
 
-      {/* What to Expect */}
+      {/* Your Journey Progression */}
       <section className="py-20 bg-gray-900">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+          <div className="text-center mb-16">
+            <h2 className="text-3xl sm:text-4xl font-bold text-white mb-6">
+              Your <span className="gradient-text">Journey</span> at The Pole Room
+            </h2>
+            <p className="text-lg text-gray-300 max-w-2xl mx-auto">
+              See how you'll progress from your very first class to becoming a confident pole dancer
+            </p>
+          </div>
+
+          <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-8">
+            {progressionSteps.map((step, index) => (
+              <Card 
+                key={index}
+                className="cyber-card p-6 animate-fade-in relative overflow-hidden"
+                style={{ animationDelay: `${index * 0.15}s` }}
+              >
+                <div className={`absolute top-0 left-0 w-full h-1 bg-gradient-to-r ${step.color}`}></div>
+                
+                <div className="mb-4">
+                  <Badge className={`bg-gradient-to-r ${step.color} text-white border-0 mb-2`}>
+                    {step.phase}
+                  </Badge>
+                  <h3 className="text-lg font-bold text-white">{step.title}</h3>
+                </div>
+
+                <p className="text-gray-300 text-sm mb-4 leading-relaxed">
+                  {step.description}
+                </p>
+
+                <div className="space-y-2">
+                  <h4 className="text-sm font-semibold text-white">You'll achieve:</h4>
+                  {step.achievements.map((achievement, achievementIndex) => (
+                    <div key={achievementIndex} className="flex items-center space-x-2">
+                      <Check className="w-3 h-3 text-green-400 flex-shrink-0" />
+                      <span className="text-xs text-gray-300">{achievement}</span>
+                    </div>
+                  ))}
+                </div>
+
+                {index < progressionSteps.length - 1 && (
+                  <ArrowRight className="hidden lg:block absolute -right-4 top-1/2 transform -translate-y-1/2 w-8 h-8 text-gray-600" />
+                )}
+              </Card>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      {/* What to Expect */}
+      <section className="py-20 bg-gray-800">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="text-center mb-16">
             <h2 className="text-3xl sm:text-4xl font-bold text-white mb-6">
@@ -145,7 +226,7 @@ const FirstTimers = () => {
       </section>
 
       {/* Perfect First Classes */}
-      <section className="py-20 bg-gray-800">
+      <section className="py-20 bg-gray-900">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="text-center mb-16">
             <h2 className="text-3xl sm:text-4xl font-bold text-white mb-6">
@@ -195,7 +276,7 @@ const FirstTimers = () => {
       </section>
 
       {/* What to Bring */}
-      <section className="py-20 bg-gray-900">
+      <section className="py-20 bg-gray-800">
         <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="text-center mb-12">
             <h2 className="text-3xl sm:text-4xl font-bold text-white mb-6">
@@ -229,7 +310,7 @@ const FirstTimers = () => {
       </section>
 
       {/* Frequently Asked Questions */}
-      <section className="py-20 bg-gray-800">
+      <section className="py-20 bg-gray-900">
         <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="text-center mb-12">
             <HelpCircle className="w-16 h-16 text-fuchsia-400 mx-auto mb-6 neon-glow" />
@@ -257,7 +338,7 @@ const FirstTimers = () => {
       </section>
 
       {/* Safety & Comfort */}
-      <section className="py-20 bg-gray-900">
+      <section className="py-20 bg-gray-800">
         <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="text-center mb-16">
             <Shield className="w-16 h-16 text-fuchsia-400 mx-auto mb-6 neon-glow" />
@@ -305,9 +386,6 @@ const FirstTimers = () => {
           <div className="flex flex-col sm:flex-row gap-4 justify-center">
             <Button className="neon-button text-black font-bold text-lg px-8 py-3">
               Book Free Trial Class
-            </Button>
-            <Button variant="outline" className="border-white text-white hover:bg-white/10 text-lg px-8 py-3">
-              Take Virtual Studio Tour
             </Button>
           </div>
         </div>
