@@ -43,7 +43,7 @@ const StudioLocations = () => {
   };
 
   return (
-    <section id="studios" className="py-20 bg-gradient-to-br from-gray-900 via-purple-900 to-gray-900 cyber-grid">
+    <section id="studios" className="py-20 bg-background">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <motion.div
           className="text-center mb-16"
@@ -65,7 +65,7 @@ const StudioLocations = () => {
             Find Your Nearest Studio
           </motion.h2>
           <motion.p 
-            className="text-lg text-gray-300 max-w-2xl mx-auto"
+            className="text-lg text-muted-foreground max-w-2xl mx-auto"
             variants={itemVariants}
             transition={{ duration: 0.6, ease: "easeOut" }}
           >
@@ -83,14 +83,14 @@ const StudioLocations = () => {
           transition={{ duration: 0.8, ease: "easeOut" }}
         >
           <div className="text-center mb-8">
-            <h3 className="text-2xl font-bold text-white mb-4">
+            <h3 className="text-2xl font-bold text-foreground mb-4">
               Explore Our <span className="gradient-text">Locations</span>
             </h3>
-            <p className="text-gray-300 max-w-xl mx-auto">
+            <p className="text-muted-foreground max-w-xl mx-auto">
               Click on the markers to see more details about each studio location
             </p>
           </div>
-          <div className="rounded-xl overflow-hidden border border-fuchsia-500/30 cyber-card">
+          <div className="rounded-xl overflow-hidden border border-border cyber-card">
             <StudioMap />
           </div>
         </motion.div>
@@ -110,7 +110,7 @@ const StudioLocations = () => {
               transition={{ duration: 0.6, ease: "easeOut" }}
               whileHover={{ scale: 1.02 }}
             >
-              <Card className="overflow-hidden cyber-card hover:shadow-2xl transition-all duration-300 bg-gray-800/50 border-gray-700">
+              <Card className="overflow-hidden cyber-card hover:shadow-2xl transition-all duration-300 bg-card border-border">
                 {/* Studio Image */}
                 <div className="relative h-48 overflow-hidden">
                   <img 
@@ -118,19 +118,19 @@ const StudioLocations = () => {
                     alt={studio.name} 
                     className="w-full h-full object-cover hover:scale-110 transition-transform duration-500" 
                   />
-                  <div className="absolute inset-0 bg-gradient-to-t from-black/70 to-transparent"></div>
+                  <div className="absolute inset-0 bg-gradient-to-t from-background/70 to-transparent"></div>
                 </div>
 
                 {/* Studio Info */}
                 <div className="p-6">
-                  <h3 className="text-xl font-bold text-white mb-3">{studio.name}</h3>
+                  <h3 className="text-xl font-bold text-foreground mb-3">{studio.name}</h3>
                   
                   <div className="space-y-2 mb-4">
-                    <div className="flex items-start space-x-2 text-gray-300">
+                    <div className="flex items-start space-x-2 text-muted-foreground">
                       <MapPin className="w-4 h-4 mt-1 flex-shrink-0 text-fuchsia-400" />
                       <span className="text-sm">{studio.address}</span>
                     </div>
-                    <div className="flex items-center space-x-2 text-gray-300">
+                    <div className="flex items-center space-x-2 text-muted-foreground">
                       <Phone className="w-4 h-4 flex-shrink-0 text-fuchsia-400" />
                       <span className="text-sm">{studio.phone}</span>
                     </div>
@@ -138,7 +138,7 @@ const StudioLocations = () => {
 
                   {/* Features */}
                   <div className="mb-6">
-                    <h4 className="text-sm font-semibold text-white mb-2">Studio Features:</h4>
+                    <h4 className="text-sm font-semibold text-foreground mb-2">Studio Features:</h4>
                     <div className="flex flex-wrap gap-1">
                       {studio.features.map((feature, featureIndex) => (
                         <Badge 
