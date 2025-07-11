@@ -8,6 +8,7 @@ import ClassDiscovery from '@/components/ClassDiscovery';
 import StyleQuiz from '@/components/StyleQuiz';
 import StudioLocations from '@/components/StudioLocations';
 import SocialProof from '@/components/SocialProof';
+import { PremiumTestimonials } from '@/components/ui/premium-testimonials';
 import Footer from '@/components/Footer';
 
 const Index = () => {
@@ -21,6 +22,7 @@ const Index = () => {
       <ClassDiscovery />
       <StyleQuiz />
       <StudioLocations />
+      <PremiumTestimonials />
       <SocialProof />
       <Footer />
     </div>
