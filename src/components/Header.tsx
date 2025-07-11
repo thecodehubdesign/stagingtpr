@@ -24,8 +24,8 @@ const Header = () => {
           {/* Logo */}
           <div className="flex-shrink-0 flex items-center space-x-2">
             <Link to="/" className="flex items-center space-x-2">
-              <Zap className="w-8 h-8 text-fuchsia-400 neon-glow" />
-              <h1 className="text-2xl font-bold gradient-text neon-glow">The Pole Room</h1>
+              <Zap className="w-8 h-8 text-fuchsia-400" />
+              <h1 className="text-2xl font-bold gradient-text">The Pole Room</h1>
             </Link>
           </div>
 
@@ -35,7 +35,7 @@ const Header = () => {
               <Link
                 key={item.name}
                 to={item.href}
-                className="text-gray-300 hover:text-fuchsia-400 px-3 py-2 text-sm font-medium transition-colors hover:neon-glow"
+                className="text-gray-300 hover:text-fuchsia-400 px-3 py-2 text-sm font-medium transition-colors"
               >
                 {item.name}
               </Link>
@@ -44,7 +44,7 @@ const Header = () => {
 
           {/* Desktop CTAs */}
           <div className="hidden md:flex items-center space-x-4">
-            <Button variant="outline" className="cyber-border text-cyan-400 hover:bg-cyan-400/10 hover:text-cyan-300 hover:neon-glow">
+            <Button variant="outline" className="cyber-border text-cyan-400 hover:bg-cyan-400/10 hover:text-cyan-300">
               Free Gifts 💝
             </Button>
             <Button className="neon-button text-black font-bold">
@@ -56,7 +56,7 @@ const Header = () => {
           <div className="md:hidden">
             <button
               onClick={() => setIsMenuOpen(!isMenuOpen)}
-              className="text-gray-300 hover:text-fuchsia-400 hover:neon-glow"
+              className="text-gray-300 hover:text-fuchsia-400"
             >
               {isMenuOpen ? <X size={24} /> : <Menu size={24} />}
             </button>
@@ -71,7 +71,7 @@ const Header = () => {
                 <Link
                   key={item.name}
                   to={item.href}
-                  className="text-gray-300 hover:text-fuchsia-400 block px-3 py-2 text-base font-medium hover:neon-glow"
+                  className="text-gray-300 hover:text-fuchsia-400 block px-3 py-2 text-base font-medium"
                   onClick={() => setIsMenuOpen(false)}
                 >
                   {item.name}

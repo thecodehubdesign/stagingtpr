@@ -67,10 +67,6 @@
     @apply bg-gradient-to-r from-fuchsia-400 via-purple-400 to-cyan-400 bg-clip-text text-transparent;
   }
   
-  .neon-glow {
-    text-shadow: 0 0 5px currentColor, 0 0 10px currentColor, 0 0 15px currentColor;
-  }
-  
   .cyber-border {
     position: relative;
     border: 1px solid transparent;
@@ -112,10 +108,10 @@
 
 @keyframes pulse-neon {
   0%, 100% { 
-    text-shadow: 0 0 5px currentColor, 0 0 10px currentColor, 0 0 15px currentColor;
+    opacity: 1;
   }
   50% { 
-    text-shadow: 0 0 2px currentColor, 0 0 5px currentColor, 0 0 8px currentColor;
+    opacity: 0.7;
   }
 }
 
