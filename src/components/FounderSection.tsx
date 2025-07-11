@@ -59,7 +59,7 @@ const FounderSection = () => {
               <p className="text-gray-300 italic text-sm">
                 "Every woman deserves to feel strong, graceful, and confident in her own body."
               </p>
-              <p className="text-fuchsia-400 font-semibold mt-2 neon-glow">- Jasmine Zapka</p>
+              <p className="text-fuchsia-400 font-semibold mt-2">- Jasmine Zapka</p>
             </div>
           </div>
 
