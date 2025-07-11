@@ -1,7 +1,7 @@
 
 import { Button } from '@/components/ui/button';
 import { Star, Clock, Users, Heart, Zap, LucideIcon } from 'lucide-react';
-import FreeTrialBookingForm from './FreeTrialBookingForm';
+import VoucherClaimForm from './VoucherClaimForm';
 
 interface Benefit {
   icon: LucideIcon;
@@ -21,18 +21,18 @@ interface FreeTrialOfferProps {
 
 const FreeTrialOffer = ({
   backgroundImage = 'https://images.unsplash.com/photo-1500673922987-e212871fec22?ixlib=rb-4.0.3&auto=format&fit=crop&w=2070&q=80',
-  limitedTimeText = 'Limited Time Offer',
-  mainHeading = 'Experience It for Yourself – On Us!',
-  description = 'Book a free trial and take your first step into a more confident,',
+  limitedTimeText = 'Limited Time Offers',
+  mainHeading = 'Get Started with Amazing Savings!',
+  description = 'Choose from our exclusive voucher offers and take your first step into a more confident,',
   highlightedWord = 'empowered',
   benefits = [
     { icon: Star, text: "No experience necessary" },
-    { icon: Clock, text: "45-minute trial class" },
+    { icon: Clock, text: "Flexible scheduling" },
     { icon: Users, text: "Small, supportive groups" },
     { icon: Heart, text: "Welcoming community" }
   ],
-  buttonText = 'Book My Free Trial',
-  disclaimerText = 'No credit card required • Available at all locations'
+  buttonText = 'Claim Special Offer',
+  disclaimerText = 'No credit card required • Multiple locations available'
 }: FreeTrialOfferProps) => {
   return (
     <section className="py-20 relative overflow-hidden">
@@ -81,7 +81,7 @@ const FreeTrialOffer = ({
           </div>
 
           <div className="space-y-4">
-            <FreeTrialBookingForm />
+            <VoucherClaimForm />
             
             <p className="text-gray-400 text-sm">
               {disclaimerText}

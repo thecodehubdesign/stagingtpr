@@ -2,14 +2,18 @@
 import { Button } from '@/components/ui/button';
 import { Play, ArrowRight, Zap } from 'lucide-react';
 import StyleQuizModal from './StyleQuizModal';
-import FreeTrialBookingForm from './FreeTrialBookingForm';
+import VoucherClaimForm from './VoucherClaimForm';
 
 const HeroSection = () => {
-  return <section className="relative min-h-screen flex items-center justify-center overflow-hidden cyber-grid">
+  return (
+    <section className="relative min-h-screen flex items-center justify-center overflow-hidden cyber-grid">
       {/* Cyberpunk Background */}
-      <div className="absolute inset-0 bg-cover bg-center" style={{
-      backgroundImage: `linear-gradient(rgba(8,8,15,0.8), rgba(20,20,35,0.8)), url('https://images.unsplash.com/photo-1518005020951-eccb494ad742?ixlib=rb-4.0.3&auto=format&fit=crop&w=2070&q=80')`
-    }} />
+      <div 
+        className="absolute inset-0 bg-cover bg-center" 
+        style={{
+          backgroundImage: `linear-gradient(rgba(8,8,15,0.8), rgba(20,20,35,0.8)), url('https://images.unsplash.com/photo-1518005020951-eccb494ad742?ixlib=rb-4.0.3&auto=format&fit=crop&w=2070&q=80')`
+        }} 
+      />
       
       {/* Neon Accent Lines */}
       <div className="absolute top-0 left-0 w-full h-1 bg-gradient-to-r from-fuchsia-500 via-purple-500 to-cyan-500"></div>
@@ -39,7 +43,7 @@ const HeroSection = () => {
           </p>
 
           <div className="flex flex-col sm:flex-row gap-4 justify-center items-center">
-            <FreeTrialBookingForm />
+            <VoucherClaimForm />
             <StyleQuizModal />
           </div>
 
@@ -52,13 +56,10 @@ const HeroSection = () => {
 
       {/* Floating Neon Elements */}
       <div className="absolute top-1/4 left-10 w-20 h-20 bg-fuchsia-500/30 rounded-full blur-xl animate-pulse float"></div>
-      <div className="absolute bottom-1/4 right-10 w-32 h-32 bg-cyan-500/30 rounded-full blur-xl animate-pulse float" style={{
-      animationDelay: '1s'
-    }}></div>
-      <div className="absolute top-1/2 left-1/4 w-16 h-16 bg-purple-500/30 rounded-full blur-xl animate-pulse float" style={{
-      animationDelay: '2s'
-    }}></div>
-    </section>;
+      <div className="absolute bottom-1/4 right-10 w-32 h-32 bg-cyan-500/30 rounded-full blur-xl animate-pulse float" style={{ animationDelay: '1s' }}></div>
+      <div className="absolute top-1/2 left-1/4 w-16 h-16 bg-purple-500/30 rounded-full blur-xl animate-pulse float" style={{ animationDelay: '2s' }}></div>
+    </section>
+  );
 };
 
 export default HeroSection;

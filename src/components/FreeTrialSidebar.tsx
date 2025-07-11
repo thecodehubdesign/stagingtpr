@@ -1,8 +1,8 @@
 
-import FreeTrialBookingForm from './FreeTrialBookingForm';
+import VoucherClaimForm from './VoucherClaimForm';
 
 const FreeTrialSidebar = () => {
-  return <FreeTrialBookingForm />;
+  return <VoucherClaimForm />;
 };
 
 export default FreeTrialSidebar;
