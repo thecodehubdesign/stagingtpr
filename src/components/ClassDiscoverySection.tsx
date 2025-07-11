@@ -70,8 +70,7 @@ const ClassDiscoverySection = () => {
     hidden: { opacity: 0, y: 30 },
     visible: { 
       opacity: 1, 
-      y: 0,
-      transition: { duration: 0.6, ease: "easeOut" }
+      y: 0
     }
   };
 
@@ -94,6 +93,7 @@ const ClassDiscoverySection = () => {
           <motion.div 
             className="flex gap-6 flex-col items-center text-center"
             variants={itemVariants}
+            transition={{ duration: 0.6, ease: "easeOut" }}
           >
             <Badge className="bg-fuchsia-500/20 text-fuchsia-300 border-fuchsia-500/30 hover:bg-fuchsia-500/30">
               Class Discovery
@@ -118,6 +118,7 @@ const ClassDiscoverySection = () => {
                 key={index}
                 className="group cyber-card rounded-xl overflow-hidden hover:scale-105 transition-all duration-300"
                 variants={itemVariants}
+                transition={{ duration: 0.6, ease: "easeOut" }}
                 whileHover={{ y: -10 }}
               >
                 {/* Image */}
@@ -159,6 +160,7 @@ const ClassDiscoverySection = () => {
           <motion.div 
             className="text-center"
             variants={itemVariants}
+            transition={{ duration: 0.6, ease: "easeOut" }}
           >
             <p className="text-white/60 mb-6 text-lg">
               Not sure which class is right for you?
