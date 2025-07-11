@@ -1,6 +1,7 @@
 
 import Header from '@/components/Header';
 import HeroSection from '@/components/HeroSection';
+import StudioBrandsSlider from '@/components/StudioBrandsSlider';
 import FounderSection from '@/components/FounderSection';
 import LevelUpMethod from '@/components/LevelUpMethod';
 import FlexibilityProgram from '@/components/FlexibilityProgram';
@@ -16,6 +17,7 @@ const Index = () => {
     <div className="min-h-screen">
       <Header />
       <HeroSection />
+      <StudioBrandsSlider />
       <FounderSection />
       <LevelUpMethod />
       <FlexibilityProgram />
