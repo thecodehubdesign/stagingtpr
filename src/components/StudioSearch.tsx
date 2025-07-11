@@ -1,5 +1,5 @@
-
 import { useState } from 'react';
+import { Link } from 'react-router-dom';
 import { Card } from '@/components/ui/card';
 import { Button } from '@/components/ui/button';
 import { Badge } from '@/components/ui/badge';
@@ -22,7 +22,7 @@ const StudioSearch = () => {
 
   const studios: Studio[] = [
     {
-      id: '1',
+      id: 'highett',
       name: "The Pole Room Highett",
       address: "1/5 Graham Road, Highett VIC",
       phone: "(03) 9123 4567",
@@ -31,7 +31,7 @@ const StudioSearch = () => {
       image: "https://images.unsplash.com/photo-1513836279014-a89f7a76ae86?ixlib=rb-4.0.3&auto=format&fit=crop&w=1000&q=80"
     },
     {
-      id: '2',
+      id: 'kilsyth',
       name: "The Pole Room Kilsyth",
       address: "1-3 Southfork Drive, Kilsyth VIC",
       phone: "(03) 9234 5678",
@@ -40,7 +40,7 @@ const StudioSearch = () => {
       image: "https://images.unsplash.com/photo-1518005020951-eccb494ad742?ixlib=rb-4.0.3&auto=format&fit=crop&w=1000&q=80"
     },
     {
-      id: '3',
+      id: 'narre-warren',
       name: "The Pole Room Narre Warren",
       address: "Narre Warren VIC",
       phone: "(03) 9345 6789",
@@ -49,7 +49,7 @@ const StudioSearch = () => {
       image: "https://images.unsplash.com/photo-1513836279014-a89f7a76ae86?ixlib=rb-4.0.3&auto=format&fit=crop&w=1000&q=80"
     },
     {
-      id: '4',
+      id: 'eltham',
       name: "The Pole Room Eltham",
       address: "2/38 Bridge Street, Eltham VIC",
       phone: "(03) 9456 7890",
@@ -58,7 +58,7 @@ const StudioSearch = () => {
       image: "https://images.unsplash.com/photo-1518005020951-eccb494ad742?ixlib=rb-4.0.3&auto=format&fit=crop&w=1000&q=80"
     },
     {
-      id: '5',
+      id: 'mitcham',
       name: "The Pole Room Mitcham",
       address: "2e Cochrane Street, Mitcham VIC 3132",
       phone: "(03) 9567 8901",
@@ -67,7 +67,7 @@ const StudioSearch = () => {
       image: "https://images.unsplash.com/photo-1513836279014-a89f7a76ae86?ixlib=rb-4.0.3&auto=format&fit=crop&w=1000&q=80"
     },
     {
-      id: '6',
+      id: 'cbd',
       name: "The Pole Room CBD",
       address: "2/333 Flinders Lane, Melbourne VIC 3000",
       phone: "(03) 9678 9012",
@@ -184,8 +184,11 @@ const StudioSearch = () => {
 
               <Button 
                 className="w-full bg-gradient-to-r from-fuchsia-500 to-purple-600 hover:from-fuchsia-600 hover:to-purple-700"
+                asChild
               >
-                View Studio
+                <Link to={`/studios/${studio.id}`}>
+                  View Studio
+                </Link>
               </Button>
             </div>
           </Card>
