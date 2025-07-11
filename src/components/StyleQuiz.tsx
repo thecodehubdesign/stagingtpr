@@ -1,55 +1,30 @@
-
 import { useState } from 'react';
 import { Button } from '@/components/ui/button';
 import { Card } from '@/components/ui/card';
 import { CheckCircle, ArrowRight, Sparkles } from 'lucide-react';
-
 const StyleQuiz = () => {
   const [currentQuestion, setCurrentQuestion] = useState(0);
   const [answers, setAnswers] = useState<string[]>([]);
   const [showResult, setShowResult] = useState(false);
-
-  const questions = [
-    {
-      question: "What's your primary fitness goal?",
-      options: [
-        "Build strength and muscle tone",
-        "Improve flexibility and grace",
-        "Learn choreography and dance",
-        "Try something completely new"
-      ]
-    },
-    {
-      question: "How would you describe your current fitness level?",
-      options: [
-        "Complete beginner",
-        "Some fitness experience",
-        "Regular gym-goer",
-        "Former dancer/athlete"
-      ]
-    },
-    {
-      question: "What appeals to you most?",
-      options: [
-        "Challenging strength moves",
-        "Flowing aerial sequences",
-        "Sensual floor choreography",
-        "A mix of everything"
-      ]
-    }
-  ];
-
+  const questions = [{
+    question: "What's your primary fitness goal?",
+    options: ["Build strength and muscle tone", "Improve flexibility and grace", "Learn choreography and dance", "Try something completely new"]
+  }, {
+    question: "How would you describe your current fitness level?",
+    options: ["Complete beginner", "Some fitness experience", "Regular gym-goer", "Former dancer/athlete"]
+  }, {
+    question: "What appeals to you most?",
+    options: ["Challenging strength moves", "Flowing aerial sequences", "Sensual floor choreography", "A mix of everything"]
+  }];
   const handleAnswer = (answer: string) => {
     const newAnswers = [...answers, answer];
     setAnswers(newAnswers);
-
     if (currentQuestion < questions.length - 1) {
       setCurrentQuestion(currentQuestion + 1);
     } else {
       setShowResult(true);
     }
   };
-
   const getRecommendation = () => {
     // Simple logic to determine recommendation based on answers
     if (answers.includes("Challenging strength moves") || answers.includes("Build strength and muscle tone")) {
@@ -72,22 +47,19 @@ const StyleQuiz = () => {
       };
     }
   };
-
   const resetQuiz = () => {
     setCurrentQuestion(0);
     setAnswers([]);
     setShowResult(false);
   };
-
-  return (
-    <section className="py-20 gradient-bg">
+  return <section className="py-20 gradient-bg">
       <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="text-center mb-12">
           <div className="inline-flex items-center space-x-2 text-rose-600 mb-4">
             <Sparkles className="w-5 h-5" />
             <span className="text-sm font-semibold uppercase tracking-wide">Discover Your Style</span>
           </div>
-          <h2 className="text-3xl sm:text-4xl font-bold text-gray-900 mb-4">
+          <h2 className="text-3xl sm:text-4xl font-bold mb-4 text-slate-100">
             Find Your Inner Dancer – Take Our Quiz!
           </h2>
           <p className="text-lg text-gray-600">
@@ -96,19 +68,17 @@ const StyleQuiz = () => {
         </div>
 
         <Card className="p-8 shadow-xl bg-white/80 backdrop-blur-sm">
-          {!showResult ? (
-            <div className="animate-fade-in">
+          {!showResult ? <div className="animate-fade-in">
               {/* Progress Bar */}
               <div className="mb-8">
                 <div className="flex justify-between text-sm text-gray-600 mb-2">
                   <span>Question {currentQuestion + 1} of {questions.length}</span>
-                  <span>{Math.round(((currentQuestion + 1) / questions.length) * 100)}%</span>
+                  <span>{Math.round((currentQuestion + 1) / questions.length * 100)}%</span>
                 </div>
                 <div className="w-full bg-gray-200 rounded-full h-2">
-                  <div 
-                    className="bg-gradient-to-r from-rose-500 to-purple-600 h-2 rounded-full transition-all duration-500"
-                    style={{ width: `${((currentQuestion + 1) / questions.length) * 100}%` }}
-                  ></div>
+                  <div className="bg-gradient-to-r from-rose-500 to-purple-600 h-2 rounded-full transition-all duration-500" style={{
+                width: `${(currentQuestion + 1) / questions.length * 100}%`
+              }}></div>
                 </div>
               </div>
 
@@ -118,37 +88,27 @@ const StyleQuiz = () => {
                   {questions[currentQuestion].question}
                 </h3>
                 <div className="space-y-3">
-                  {questions[currentQuestion].options.map((option, index) => (
-                    <button
-                      key={index}
-                      onClick={() => handleAnswer(option)}
-                      className="w-full p-4 text-left bg-white border border-gray-200 rounded-lg hover:border-rose-300 hover:bg-rose-50 transition-all duration-200 group"
-                    >
+                  {questions[currentQuestion].options.map((option, index) => <button key={index} onClick={() => handleAnswer(option)} className="w-full p-4 text-left bg-white border border-gray-200 rounded-lg hover:border-rose-300 hover:bg-rose-50 transition-all duration-200 group">
                       <div className="flex items-center justify-between">
                         <span className="text-gray-700 group-hover:text-rose-700">{option}</span>
                         <ArrowRight className="w-4 h-4 text-gray-400 group-hover:text-rose-500 opacity-0 group-hover:opacity-100 transition-all" />
                       </div>
-                    </button>
-                  ))}
+                    </button>)}
                 </div>
               </div>
-            </div>
-          ) : (
-            <div className="text-center animate-fade-in">
+            </div> : <div className="text-center animate-fade-in">
               <div className="mb-6">
                 <CheckCircle className="w-16 h-16 text-green-500 mx-auto mb-4" />
                 <h3 className="text-2xl font-bold text-gray-900 mb-2">Perfect Match Found!</h3>
               </div>
 
               {(() => {
-                const recommendation = getRecommendation();
-                return (
-                  <div className={`bg-gradient-to-r ${recommendation.color} p-6 rounded-2xl text-white mb-6`}>
+            const recommendation = getRecommendation();
+            return <div className={`bg-gradient-to-r ${recommendation.color} p-6 rounded-2xl text-white mb-6`}>
                     <h4 className="text-2xl font-bold mb-2">{recommendation.title}</h4>
                     <p className="text-lg opacity-90">{recommendation.description}</p>
-                  </div>
-                );
-              })()}
+                  </div>;
+          })()}
 
               <div className="flex flex-col sm:flex-row gap-4 justify-center">
                 <Button size="lg" className="bg-gradient-to-r from-rose-500 to-purple-600 hover:from-rose-600 hover:to-purple-700">
@@ -158,12 +118,9 @@ const StyleQuiz = () => {
                   Take Quiz Again
                 </Button>
               </div>
-            </div>
-          )}
+            </div>}
         </Card>
       </div>
-    </section>
-  );
+    </section>;
 };
-
 export default StyleQuiz;
