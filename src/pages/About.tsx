@@ -3,6 +3,7 @@ import Header from '@/components/Header';
 import Footer from '@/components/Footer';
 import ProgramsComparison from '@/components/ProgramsComparison';
 import StudioHistory from '@/components/StudioHistory';
+import FounderSection from '@/components/FounderSection';
 import { Button } from '@/components/ui/button';
 import { Card } from '@/components/ui/card';
 import { Heart, Zap, Users, Trophy, Star, Target } from 'lucide-react';
@@ -42,6 +43,9 @@ const About = () => {
     <div className="min-h-screen">
       <Header />
       
+      {/* Founder Section - Moved to top */}
+      <FounderSection />
+
       {/* Hero Section */}
       <section className="pt-20 pb-16 bg-gradient-to-br from-gray-900 via-purple-900 to-gray-900 cyber-grid">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">

@@ -4,7 +4,6 @@ import HeroSection from '@/components/HeroSection';
 import StudioBrandsSlider from '@/components/StudioBrandsSlider';
 import FounderSection from '@/components/FounderSection';
 import LevelUpMethod from '@/components/LevelUpMethod';
-import FlexibilityProgram from '@/components/FlexibilityProgram';
 import ClassDiscoverySection from '@/components/ClassDiscoverySection';
 import PoleTypeQuiz from '@/components/PoleTypeQuiz';
 import StudioLocations from '@/components/StudioLocations';
@@ -19,11 +18,10 @@ const Index = () => {
       <StudioBrandsSlider />
       <FounderSection />
       <LevelUpMethod />
-      <FlexibilityProgram />
       <ClassDiscoverySection />
       <PoleTypeQuiz />
-      <StudioLocations />
       <PremiumTestimonials />
+      <StudioLocations />
       <Footer />
     </div>
   );
