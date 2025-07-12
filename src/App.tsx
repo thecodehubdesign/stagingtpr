@@ -16,6 +16,7 @@ import Pricing from "./pages/Pricing";
 import FreeGifts from "./pages/FreeGifts";
 import Franchise from "./pages/Franchise";
 import Events from "./pages/Events";
+import ClassDetail from "./pages/ClassDetail";
 import NotFound from "./pages/NotFound";
 
 const queryClient = new QueryClient();
@@ -30,6 +31,7 @@ const App = () => (
           <Route path="/" element={<Index />} />
           <Route path="/about" element={<About />} />
           <Route path="/classes" element={<Classes />} />
+          <Route path="/classes/:classId" element={<ClassDetail />} />
           <Route path="/studios" element={<Studios />} />
           <Route path="/studios/:studioId" element={<StudioDetail />} />
           <Route path="/instructors" element={<Instructors />} />

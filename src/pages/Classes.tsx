@@ -1,10 +1,10 @@
-
 import Header from '@/components/Header';
 import Footer from '@/components/Footer';
 import { Button } from '@/components/ui/button';
 import { Card } from '@/components/ui/card';
 import { Badge } from '@/components/ui/badge';
 import { Clock, Users, Flame, Star, Zap, Heart } from 'lucide-react';
+import { Link } from 'react-router-dom';
 
 const Classes = () => {
   const classCategories = [
@@ -17,19 +17,22 @@ const Classes = () => {
           name: "Pole Foundations",
           level: "Beginner",
           duration: "60 min",
-          description: "Perfect first class - learn basic spins, poses and floorwork"
+          description: "Perfect first class - learn basic spins, poses and floorwork",
+          slug: "beginner-pole-foundations"
         },
         {
           name: "Pole Progression",
           level: "Intermediate", 
           duration: "60 min",
-          description: "Build on basics with inversions and intermediate combinations"
+          description: "Build on basics with inversions and intermediate combinations",
+          slug: "pole-progression"
         },
         {
           name: "Advanced Pole Flow",
           level: "Advanced",
           duration: "75 min", 
-          description: "Complex tricks, transitions and choreographed sequences"
+          description: "Complex tricks, transitions and choreographed sequences",
+          slug: "advanced-pole-flow"
         }
       ]
     },
@@ -42,19 +45,22 @@ const Classes = () => {
           name: "Aerial Silks Intro",
           level: "Beginner",
           duration: "60 min",
-          description: "Learn basic climbs, poses and sequences on aerial silks"
+          description: "Learn basic climbs, poses and sequences on aerial silks",
+          slug: "aerial-silks-intro"
         },
         {
           name: "Lyra Foundations", 
           level: "Beginner",
           duration: "60 min",
-          description: "Explore the aerial hoop with fundamental poses and spins"
+          description: "Explore the aerial hoop with fundamental poses and spins",
+          slug: "lyra-foundations"
         },
         {
           name: "Aerial Flow",
           level: "Intermediate",
           duration: "75 min",
-          description: "Combine silks and lyra skills into flowing sequences"
+          description: "Combine silks and lyra skills into flowing sequences",
+          slug: "aerial-flow"
         }
       ]
     },
@@ -67,19 +73,22 @@ const Classes = () => {
           name: "Floorwork Foundations",
           level: "All Levels",
           duration: "45 min", 
-          description: "Ground-based movement focusing on fluidity and expression"
+          description: "Ground-based movement focusing on fluidity and expression",
+          slug: "floorwork-foundations"
         },
         {
           name: "Exotic Dance",
           level: "All Levels",
           duration: "60 min",
-          description: "Confidence-building dance class focusing on sensual movement"
+          description: "Confidence-building dance class focusing on sensual movement",
+          slug: "exotic-dance"
         },
         {
           name: "Chair Dance",
           level: "All Levels", 
           duration: "45 min",
-          description: "Playful and empowering choreography using a chair as a prop"
+          description: "Playful and empowering choreography using a chair as a prop",
+          slug: "chair-dance"
         }
       ]
     },
@@ -92,19 +101,22 @@ const Classes = () => {
           name: "Flexibility Flow",
           level: "All Levels",
           duration: "60 min",
-          description: "Active and passive stretching to improve overall flexibility"
+          description: "Active and passive stretching to improve overall flexibility",
+          slug: "flexibility-flow"
         },
         {
           name: "Pole Conditioning",
           level: "All Levels", 
           duration: "45 min",
-          description: "Strength training specifically designed for pole and aerial arts"
+          description: "Strength training specifically designed for pole and aerial arts",
+          slug: "pole-conditioning"
         },
         {
           name: "Splits & Backbends",
           level: "Intermediate",
           duration: "60 min",
-          description: "Targeted training for advanced flexibility goals"
+          description: "Targeted training for advanced flexibility goals",
+          slug: "splits-backbends"
         }
       ]
     }
@@ -191,8 +203,10 @@ const Classes = () => {
                       <Button className="flex-1 bg-gradient-to-r from-fuchsia-500 to-purple-600 hover:from-fuchsia-600 hover:to-purple-700">
                         Book Class
                       </Button>
-                      <Button variant="outline" className="cyber-border text-cyan-400 hover:bg-cyan-400/10">
-                        Learn More
+                      <Button variant="outline" className="cyber-border text-cyan-400 hover:bg-cyan-400/10" asChild>
+                        <Link to={`/classes/${classItem.slug}`}>
+                          Learn More
+                        </Link>
                       </Button>
                     </div>
                   </Card>
