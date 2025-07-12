@@ -18,7 +18,7 @@ const StudioLocationMap = ({ studio }: StudioLocationMapProps) => {
     // Initialize the Google Maps API loader
     if (!loaderRef.current) {
       loaderRef.current = new Loader({
-        apiKey: "YOUR_GOOGLE_MAPS_API_KEY", // User needs to replace this
+        apiKey: "AIzaSyCB-aXCL1WEr0j9T0jaJTOc6SL7M-QzLM4",
         version: "weekly",
         libraries: ["places"]
       });
@@ -167,13 +167,6 @@ const StudioLocationMap = ({ studio }: StudioLocationMapProps) => {
 
         <div className="w-full h-96 rounded-lg overflow-hidden border border-fuchsia-500/30">
           <div ref={mapRef} className="w-full h-full" />
-        </div>
-        
-        <div className="mt-4 p-4 bg-yellow-100 border border-yellow-400 rounded-lg">
-          <p className="text-sm text-yellow-800">
-            <strong>Note:</strong> You need to replace "YOUR_GOOGLE_MAPS_API_KEY" with your actual Google Maps API key 
-            for the map to display properly. Get your API key from the Google Cloud Console.
-          </p>
         </div>
       </div>
     </section>
