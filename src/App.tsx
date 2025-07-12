@@ -15,6 +15,7 @@ import FirstTimers from "./pages/FirstTimers";
 import Pricing from "./pages/Pricing";
 import FreeGifts from "./pages/FreeGifts";
 import Franchise from "./pages/Franchise";
+import Events from "./pages/Events";
 import NotFound from "./pages/NotFound";
 
 const queryClient = new QueryClient();
@@ -36,6 +37,7 @@ const App = () => (
           <Route path="/pricing" element={<Pricing />} />
           <Route path="/free-gifts" element={<FreeGifts />} />
           <Route path="/franchise" element={<Franchise />} />
+          <Route path="/events" element={<Events />} />
           <Route path="/blog" element={<Blog />} />
           {/* ADD ALL CUSTOM ROUTES ABOVE THE CATCH-ALL "*" ROUTE */}
           <Route path="*" element={<NotFound />} />
