@@ -6,7 +6,7 @@ import FounderSection from '@/components/FounderSection';
 import LevelUpMethod from '@/components/LevelUpMethod';
 import FlexibilityProgram from '@/components/FlexibilityProgram';
 import ClassDiscoverySection from '@/components/ClassDiscoverySection';
-import StyleQuiz from '@/components/StyleQuiz';
+import PoleTypeQuiz from '@/components/PoleTypeQuiz';
 import StudioLocations from '@/components/StudioLocations';
 import { PremiumTestimonials } from '@/components/ui/premium-testimonials';
 import Footer from '@/components/Footer';
@@ -21,7 +21,7 @@ const Index = () => {
       <LevelUpMethod />
       <FlexibilityProgram />
       <ClassDiscoverySection />
-      <StyleQuiz />
+      <PoleTypeQuiz />
       <StudioLocations />
       <PremiumTestimonials />
       <Footer />
