@@ -3,6 +3,7 @@ import Header from '@/components/Header';
 import HeroSection from '@/components/HeroSection';
 import StudioBrandsSlider from '@/components/StudioBrandsSlider';
 import FounderSection from '@/components/FounderSection';
+import PoleDancerTypes from '@/components/PoleDancerTypes';
 import LevelUpMethod from '@/components/LevelUpMethod';
 import FlexibilityProgram from '@/components/FlexibilityProgram';
 import ClassDiscoverySection from '@/components/ClassDiscoverySection';
@@ -18,6 +19,7 @@ const Index = () => {
       <HeroSection />
       <StudioBrandsSlider />
       <FounderSection />
+      <PoleDancerTypes />
       <LevelUpMethod />
       <FlexibilityProgram />
       <ClassDiscoverySection />
