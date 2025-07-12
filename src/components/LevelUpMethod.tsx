@@ -97,7 +97,7 @@ const LevelUpMethod = () => {
       }}>
           <div className="inline-flex items-center space-x-3 cyber-card px-8 py-4 rounded-full">
             <Zap className="w-6 h-6 text-orange-400 neon-glow" />
-            <h3 className="text-2xl font-bold text-white">THE METHOD: 4 STAGES TO UNSTOPPABLE</h3>
+            <h3 className="text-2xl font-bold text-white">OUR UNSTOPPABLE METHOD IN 4 STAGES:</h3>
             <Zap className="w-6 h-6 text-orange-400 neon-glow" />
           </div>
         </div>
