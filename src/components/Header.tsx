@@ -2,7 +2,7 @@
 import React, { useState } from 'react';
 import { Button } from '@/components/ui/button';
 import { Menu, X, Zap } from 'lucide-react';
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import VoucherClaimForm from './VoucherClaimForm';
 import {
   NavigationMenu,
@@ -13,10 +13,17 @@ import {
   NavigationMenuTrigger,
   navigationMenuTriggerStyle,
 } from '@/components/ui/navigation-menu';
+import {
+  Accordion,
+  AccordionContent,
+  AccordionItem,
+  AccordionTrigger,
+} from '@/components/ui/accordion';
 import { cn } from '@/lib/utils';
 
 const Header = () => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
+  const navigate = useNavigate();
 
   const aboutUsItems = [
     { name: 'Instructors', href: '/instructors', description: 'Meet our amazing team of certified instructors' },
@@ -36,14 +43,25 @@ const Header = () => {
 
   const studiosItems = [
     { name: 'All Locations', href: '/studios', description: 'Find your perfect studio location' },
-    { name: 'South Yarra', href: '/studios/south-yarra', description: 'Our flagship location in the heart of Melbourne' },
-    { name: 'Richmond', href: '/studios/richmond', description: 'Industrial chic meets pole artistry' },
-    { name: 'Fitzroy', href: '/studios/fitzroy', description: 'Creative hub for the alternative crowd' },
+    { name: 'Eltham', href: '/studios/eltham', description: 'Our Eltham location in the heart of the community' },
+    { name: 'Kilsyth', href: '/studios/kilsyth', description: 'Modern facilities in beautiful Kilsyth' },
+    { name: 'Highett', href: '/studios/highett', description: 'Convenient Highett studio with ample parking' },
+    { name: 'Mitcham', href: '/studios/mitcham', description: 'Spacious Mitcham location with all amenities' },
+    { name: 'Melbourne CBD', href: '/studios/melbourne-cbd', description: 'Central city location for urban convenience' },
+    { name: 'Narre Warren', href: '/studios/narre-warren', description: 'Southeast Melbourne hub in Narre Warren' },
   ];
 
   const singleNavItems = [
     { name: 'First Timers', href: '/first-timers' }
   ];
+
+  const handleNavigation = (href: string) => {
+    navigate(href);
+    setTimeout(() => {
+      window.scrollTo(0, 0);
+    }, 0);
+    setIsMenuOpen(false);
+  };
 
   return (
     <header className="fixed top-0 left-0 right-0 z-50 bg-black/90 backdrop-blur-md border-b border-fuchsia-500/30 cyber-grid">
@@ -51,7 +69,7 @@ const Header = () => {
         <div className="flex justify-between items-center h-16">
           {/* Logo */}
           <div className="flex-shrink-0 flex items-center space-x-2">
-            <Link to="/" className="flex items-center space-x-2">
+            <Link to="/" className="flex items-center space-x-2" onClick={() => handleNavigation('/')}>
               <Zap className="w-8 h-8 text-fuchsia-400" />
               <h1 className="text-2xl font-bold gradient-text">The Pole Room</h1>
             </Link>
@@ -124,11 +142,11 @@ const Header = () => {
                 {/* Single Items */}
                 {singleNavItems.map((item) => (
                   <NavigationMenuItem key={item.name}>
-                    <Link to={item.href}>
+                    <button onClick={() => handleNavigation(item.href)}>
                       <NavigationMenuLink className={cn(navigationMenuTriggerStyle(), "text-gray-300 hover:text-fuchsia-400 bg-transparent hover:bg-gray-800/50")}>
                         {item.name}
                       </NavigationMenuLink>
-                    </Link>
+                    </button>
                   </NavigationMenuItem>
                 ))}
               </NavigationMenuList>
@@ -142,7 +160,7 @@ const Header = () => {
               variant="outline" 
               className="cyber-border text-cyan-400 hover:bg-cyan-400/10 hover:text-cyan-300"
             >
-              <Link to="/free-gifts">
+              <Link to="/free-gifts" onClick={() => handleNavigation('/free-gifts')}>
                 Free Gifts 💝
               </Link>
             </Button>
@@ -164,61 +182,77 @@ const Header = () => {
         {isMenuOpen && (
           <div className="md:hidden">
             <div className="px-2 pt-2 pb-3 space-y-1 sm:px-3 bg-black/95 border-t border-fuchsia-500/30 cyber-grid">
-              {/* Mobile About Us */}
-              <div className="space-y-2">
-                <div className="px-3 py-2 text-sm font-medium text-fuchsia-400">About Us</div>
-                {aboutUsItems.map((item) => (
-                  <Link
-                    key={item.name}
-                    to={item.href}
-                    className="text-gray-300 hover:text-fuchsia-400 block px-6 py-2 text-sm"
-                    onClick={() => setIsMenuOpen(false)}
-                  >
-                    {item.name}
-                  </Link>
-                ))}
-              </div>
+              <Accordion type="multiple" className="w-full">
+                {/* Mobile About Us Accordion */}
+                <AccordionItem value="about-us" className="border-fuchsia-500/30">
+                  <AccordionTrigger className="px-3 py-2 text-sm font-medium text-fuchsia-400 hover:text-fuchsia-300">
+                    About Us
+                  </AccordionTrigger>
+                  <AccordionContent>
+                    <div className="space-y-1">
+                      {aboutUsItems.map((item) => (
+                        <button
+                          key={item.name}
+                          onClick={() => handleNavigation(item.href)}
+                          className="text-gray-300 hover:text-fuchsia-400 block px-6 py-2 text-sm w-full text-left"
+                        >
+                          {item.name}
+                        </button>
+                      ))}
+                    </div>
+                  </AccordionContent>
+                </AccordionItem>
 
-              {/* Mobile Classes */}
-              <div className="space-y-2">
-                <div className="px-3 py-2 text-sm font-medium text-fuchsia-400">Classes</div>
-                {classesItems.map((item) => (
-                  <Link
-                    key={item.name}
-                    to={item.href}
-                    className="text-gray-300 hover:text-fuchsia-400 block px-6 py-2 text-sm"
-                    onClick={() => setIsMenuOpen(false)}
-                  >
-                    {item.name}
-                  </Link>
-                ))}
-              </div>
+                {/* Mobile Classes Accordion */}
+                <AccordionItem value="classes" className="border-fuchsia-500/30">
+                  <AccordionTrigger className="px-3 py-2 text-sm font-medium text-fuchsia-400 hover:text-fuchsia-300">
+                    Classes
+                  </AccordionTrigger>
+                  <AccordionContent>
+                    <div className="space-y-1">
+                      {classesItems.map((item) => (
+                        <button
+                          key={item.name}
+                          onClick={() => handleNavigation(item.href)}
+                          className="text-gray-300 hover:text-fuchsia-400 block px-6 py-2 text-sm w-full text-left"
+                        >
+                          {item.name}
+                        </button>
+                      ))}
+                    </div>
+                  </AccordionContent>
+                </AccordionItem>
 
-              {/* Mobile Studios */}
-              <div className="space-y-2">
-                <div className="px-3 py-2 text-sm font-medium text-fuchsia-400">Studios</div>
-                {studiosItems.map((item) => (
-                  <Link
-                    key={item.name}
-                    to={item.href}
-                    className="text-gray-300 hover:text-fuchsia-400 block px-6 py-2 text-sm"
-                    onClick={() => setIsMenuOpen(false)}
-                  >
-                    {item.name}
-                  </Link>
-                ))}
-              </div>
+                {/* Mobile Studios Accordion */}
+                <AccordionItem value="studios" className="border-fuchsia-500/30">
+                  <AccordionTrigger className="px-3 py-2 text-sm font-medium text-fuchsia-400 hover:text-fuchsia-300">
+                    Studios
+                  </AccordionTrigger>
+                  <AccordionContent>
+                    <div className="space-y-1">
+                      {studiosItems.map((item) => (
+                        <button
+                          key={item.name}
+                          onClick={() => handleNavigation(item.href)}
+                          className="text-gray-300 hover:text-fuchsia-400 block px-6 py-2 text-sm w-full text-left"
+                        >
+                          {item.name}
+                        </button>
+                      ))}
+                    </div>
+                  </AccordionContent>
+                </AccordionItem>
+              </Accordion>
 
               {/* Mobile Single Items */}
               {singleNavItems.map((item) => (
-                <Link
+                <button
                   key={item.name}
-                  to={item.href}
-                  className="text-gray-300 hover:text-fuchsia-400 block px-3 py-2 text-sm font-medium"
-                  onClick={() => setIsMenuOpen(false)}
+                  onClick={() => handleNavigation(item.href)}
+                  className="text-gray-300 hover:text-fuchsia-400 block px-3 py-2 text-sm font-medium w-full text-left"
                 >
                   {item.name}
-                </Link>
+                </button>
               ))}
 
               <div className="flex flex-col space-y-2 px-3 pt-4">
@@ -227,7 +261,7 @@ const Header = () => {
                   variant="outline" 
                   className="cyber-border text-cyan-400 hover:bg-cyan-400/10"
                 >
-                  <Link to="/free-gifts">
+                  <Link to="/free-gifts" onClick={() => handleNavigation('/free-gifts')}>
                     Free Gifts 💝
                   </Link>
                 </Button>
@@ -242,17 +276,26 @@ const Header = () => {
 };
 
 const ListItem = React.forwardRef<
-  React.ElementRef<"a">,
-  React.ComponentPropsWithoutRef<"a"> & { title: string }
+  React.ElementRef<"button">,
+  React.ComponentPropsWithoutRef<"button"> & { title: string; href: string }
 >(({ className, title, children, href, ...props }, ref) => {
+  const navigate = useNavigate();
+
+  const handleClick = () => {
+    navigate(href);
+    setTimeout(() => {
+      window.scrollTo(0, 0);
+    }, 0);
+  };
+
   return (
     <li>
       <NavigationMenuLink asChild>
-        <Link
-          to={href || '#'}
+        <button
           ref={ref}
+          onClick={handleClick}
           className={cn(
-            "block select-none space-y-1 rounded-md p-3 leading-none no-underline outline-none transition-colors hover:bg-gray-800/50 hover:text-fuchsia-400 focus:bg-gray-800/50 focus:text-fuchsia-400",
+            "block select-none space-y-1 rounded-md p-3 leading-none no-underline outline-none transition-colors hover:bg-gray-800/50 hover:text-fuchsia-400 focus:bg-gray-800/50 focus:text-fuchsia-400 w-full text-left",
             className
           )}
           {...props}
@@ -261,7 +304,7 @@ const ListItem = React.forwardRef<
           <p className="line-clamp-2 text-sm leading-snug text-gray-400">
             {children}
           </p>
-        </Link>
+        </button>
       </NavigationMenuLink>
     </li>
   )
