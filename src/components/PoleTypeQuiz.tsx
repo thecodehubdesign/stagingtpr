@@ -149,7 +149,7 @@ const PoleTypeQuiz = () => {
             <img alt="Pole dancing community" className="w-full h-full object-cover" src="/lovable-uploads/64db70f4-cca6-4e12-9fa1-d1180c4595ae.png" />
           </div>
           <div className="absolute top-4 left-1/2 transform -translate-x-1/2 w-28 h-28 rounded-full overflow-hidden border-3 border-purple-500/50 shadow-xl -rotate-6 z-20">
-            <img src="https://images.unsplash.com/photo-1524230572899-a752b3835840?ixlib=rb-4.0.3&auto=format&fit=crop&w=400&q=80" alt="Studio environment" className="w-full h-full object-cover" />
+            <img alt="Studio environment" className="w-full h-full object-cover" src="/lovable-uploads/4d4d16ef-17d9-47e3-a464-cfa3c9b9eef6.jpg" />
           </div>
           <div className="absolute top-2 right-8 w-20 h-20 rounded-full overflow-hidden border-3 border-cyan-500/50 shadow-xl rotate-45 z-10">
             <img alt="Fitness journey" className="w-full h-full object-cover" src="/lovable-uploads/8b589fd4-a71e-43de-823f-c2af97fef88d.jpg" />
