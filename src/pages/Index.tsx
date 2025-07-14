@@ -3,6 +3,7 @@ import Header from '@/components/Header';
 import HeroSection from '@/components/HeroSection';
 import StudioBrandsSlider from '@/components/StudioBrandsSlider';
 import FounderSection from '@/components/FounderSection';
+import VideoSection from '@/components/VideoSection';
 import LevelUpMethod from '@/components/LevelUpMethod';
 import ClassDiscoverySection from '@/components/ClassDiscoverySection';
 import PoleTypeQuiz from '@/components/PoleTypeQuiz';
@@ -17,6 +18,7 @@ const Index = () => {
       <HeroSection />
       <StudioBrandsSlider />
       <FounderSection />
+      <VideoSection />
       <LevelUpMethod />
       <ClassDiscoverySection />
       <PoleTypeQuiz />
