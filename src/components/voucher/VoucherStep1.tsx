@@ -26,7 +26,7 @@ const VoucherStep1 = ({
   const isFormValid = formData.name && formData.email && formData.phone && formData.studioLocation && formData.program && formData.agreeToTerms;
   return <form onSubmit={handleSubmit} className="space-y-6">
       <div>
-        <h3 className="text-lg font-semibold mb-4 text-fuchsia-500">
+        <h3 className="mb-4 text-3xl font-bold text-rose-600">
           Let's get to know you
         </h3>
         <p className="text-sm mb-6 text-slate-50">
