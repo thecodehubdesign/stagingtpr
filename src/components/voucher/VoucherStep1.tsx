@@ -104,7 +104,7 @@ const VoucherStep1 = ({
         </div>
       </div>
 
-      <Button type="submit" className="w-full bg-gradient-to-r from-rose-500 to-purple-600 hover:from-rose-600 hover:to-purple-700" disabled={!isFormValid}>
+      <Button type="submit" disabled={!isFormValid} className="w-full bg-gradient-to-r from-rose-500 to-purple-600 hover:from-rose-600 hover:to-purple-700 font-normal">
         Continue to Next Step
       </Button>
     </form>;
