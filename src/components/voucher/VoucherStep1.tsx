@@ -81,7 +81,7 @@ const VoucherStep1 = ({
         </div>
 
         <div>
-          <Label className="text-sm font-medium text-gray-700 mb-3 block">
+          <Label className="text-sm font-medium text-white-700 mb-3 block">
             Program Interest *
           </Label>
           <RadioGroup value={formData.program} onValueChange={value => updateFormData({
