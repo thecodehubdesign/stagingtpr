@@ -2,7 +2,6 @@
 import { Button } from '@/components/ui/button';
 import { Label } from '@/components/ui/label';
 import { Checkbox } from '@/components/ui/checkbox';
-import { RadioGroup, RadioGroupItem } from '@/components/ui/radio-group';
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '@/components/ui/select';
 import { ArrowLeft } from 'lucide-react';
 import { BookingFormData } from '../FreeTrialBookingForm';
@@ -128,54 +127,54 @@ const BookingStep2 = ({ formData, updateFormData, onNext, onPrev }: BookingStep2
           <Label className="text-sm font-medium text-gray-700 mb-3 block">
             When would you like to start? *
           </Label>
-          <RadioGroup
-            value={formData.whenToStart}
-            onValueChange={(value) => updateFormData({ whenToStart: value })}
-            className="space-y-2"
-          >
-            {startTimeOptions.map((option) => (
-              <div key={option} className="flex items-center space-x-2">
-                <RadioGroupItem value={option} id={option} />
-                <Label htmlFor={option} className="text-sm">{option}</Label>
-              </div>
-            ))}
-          </RadioGroup>
+          <Select value={formData.whenToStart} onValueChange={(value) => updateFormData({ whenToStart: value })}>
+            <SelectTrigger>
+              <SelectValue placeholder="Select when you'd like to start" />
+            </SelectTrigger>
+            <SelectContent>
+              {startTimeOptions.map((option) => (
+                <SelectItem key={option} value={option}>
+                  {option}
+                </SelectItem>
+              ))}
+            </SelectContent>
+          </Select>
         </div>
 
         <div>
           <Label className="text-sm font-medium text-gray-700 mb-3 block">
             What's your experience level? *
           </Label>
-          <RadioGroup
-            value={formData.priorExperience}
-            onValueChange={(value) => updateFormData({ priorExperience: value })}
-            className="space-y-2"
-          >
-            {experienceOptions.map((option) => (
-              <div key={option} className="flex items-center space-x-2">
-                <RadioGroupItem value={option} id={option} />
-                <Label htmlFor={option} className="text-sm">{option}</Label>
-              </div>
-            ))}
-          </RadioGroup>
+          <Select value={formData.priorExperience} onValueChange={(value) => updateFormData({ priorExperience: value })}>
+            <SelectTrigger>
+              <SelectValue placeholder="Select your experience level" />
+            </SelectTrigger>
+            <SelectContent>
+              {experienceOptions.map((option) => (
+                <SelectItem key={option} value={option}>
+                  {option}
+                </SelectItem>
+              ))}
+            </SelectContent>
+          </Select>
         </div>
 
         <div>
           <Label className="text-sm font-medium text-gray-700 mb-3 block">
             How would you describe your current fitness level? *
           </Label>
-          <RadioGroup
-            value={formData.fitnessLevel}
-            onValueChange={(value) => updateFormData({ fitnessLevel: value })}
-            className="space-y-2"
-          >
-            {fitnessLevels.map((level) => (
-              <div key={level} className="flex items-center space-x-2">
-                <RadioGroupItem value={level} id={level} />
-                <Label htmlFor={level} className="text-sm">{level}</Label>
-              </div>
-            ))}
-          </RadioGroup>
+          <Select value={formData.fitnessLevel} onValueChange={(value) => updateFormData({ fitnessLevel: value })}>
+            <SelectTrigger>
+              <SelectValue placeholder="Select your fitness level" />
+            </SelectTrigger>
+            <SelectContent>
+              {fitnessLevels.map((level) => (
+                <SelectItem key={level} value={level}>
+                  {level}
+                </SelectItem>
+              ))}
+            </SelectContent>
+          </Select>
         </div>
       </div>
 
