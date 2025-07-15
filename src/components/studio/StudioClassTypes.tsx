@@ -1,3 +1,4 @@
+
 import { Card } from '@/components/ui/card';
 import { Button } from '@/components/ui/button';
 import { Badge } from '@/components/ui/badge';
@@ -9,55 +10,29 @@ interface StudioClassTypesProps {
 }
 
 const StudioClassTypes = ({ studio }: StudioClassTypesProps) => {
-  const allClassTypes = [
+  const classTypes = [
     {
-      name: "Beginner Pole",
-      apparatus: "Pole",
-      description: "Perfect for first-timers! Learn basic spins, poses, and build foundational strength.",
-      duration: "60 minutes",
-      difficulty: "Beginner"
-    },
-    {
-      name: "Intermediate Pole",
-      apparatus: "Pole",
-      description: "Build on your basics with more challenging moves and fluid combinations.", 
-      duration: "60 minutes",
-      difficulty: "Intermediate"
-    },
-    {
-      name: "Advanced Pole",
-      apparatus: "Pole", 
-      description: "Master complex tricks, inversions, and advanced choreography.",
-      duration: "60 minutes",
-      difficulty: "Advanced"
-    },
-    {
-      name: "Aerial Silks",
-      apparatus: "Aerials",
-      description: "Graceful movements and poses using aerial fabric to build strength and flexibility.",
-      duration: "60 minutes", 
-      difficulty: "All Levels"
-    },
-    {
-      name: "Aerial Hoop",
-      apparatus: "Aerials", 
-      description: "Elegant poses and flows on the lyra hoop, perfect for building upper body strength.",
+      name: "Pole Tricks",
+      description: "Master impressive pole tricks and build strength with our comprehensive tricks program. Perfect for developing power and technique.",
+      heroImage: "https://images.unsplash.com/photo-1605810230434-7631ac76ec81?ixlib=rb-4.0.3&auto=format&fit=crop&w=2070&q=80",
       duration: "60 minutes",
       difficulty: "All Levels"
     },
     {
-      name: "Pole Flow",
-      apparatus: "Pole",
-      description: "Combine pole work with floor flow for a complete full-body workout.",
+      name: "Pole Dance",
+      description: "Express yourself through the art of pole dance. Learn flowing choreography and build confidence in a supportive environment.",
+      heroImage: "https://images.unsplash.com/photo-1518611012118-696072aa579a?ixlib=rb-4.0.3&auto=format&fit=crop&w=2070&q=80",
       duration: "60 minutes",
-      difficulty: "Intermediate"
+      difficulty: "All Levels"
+    },
+    {
+      name: "Flexibility & Conditioning",
+      description: "Enhance your flexibility and build functional strength. Essential foundation for all pole work and overall fitness.",
+      heroImage: "https://images.unsplash.com/photo-1571019613454-1cbffaa5b517?ixlib=rb-4.0.3&auto=format&fit=crop&w=2070&q=80",
+      duration: "45 minutes",
+      difficulty: "All Levels"
     }
   ];
-
-  // Filter classes based on studio apparatus
-  const availableClasses = allClassTypes.filter(classType => 
-    studio.apparatus.some(apparatus => classType.apparatus.includes(apparatus))
-  );
 
   return (
     <section className="py-16 bg-gray-800/50 rounded-2xl my-16">
@@ -71,29 +46,41 @@ const StudioClassTypes = ({ studio }: StudioClassTypesProps) => {
           </p>
         </div>
 
-        <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6 mb-12">
-          {availableClasses.map((classType, index) => (
-            <Card key={index} className="p-6 bg-gray-800 border-gray-700">
-              <div className="flex justify-between items-start mb-4">
-                <h3 className="text-lg font-bold text-white">{classType.name}</h3>
-                <Badge className="bg-fuchsia-500/10 text-fuchsia-400 border-fuchsia-500/30">
-                  {classType.apparatus}
-                </Badge>
+        <div className="grid md:grid-cols-1 lg:grid-cols-3 gap-8 mb-12">
+          {classTypes.map((classType, index) => (
+            <Card key={index} className="overflow-hidden bg-gray-800 border-gray-700">
+              {/* Hero Image */}
+              <div className="relative h-48 overflow-hidden">
+                <img 
+                  src={classType.heroImage} 
+                  alt={classType.name}
+                  className="w-full h-full object-cover"
+                />
+                <div className="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent"></div>
+                <div className="absolute bottom-4 left-4">
+                  <h3 className="text-xl font-bold text-white">{classType.name}</h3>
+                </div>
               </div>
               
-              <p className="text-gray-300 text-sm mb-4 leading-relaxed">
-                {classType.description}
-              </p>
-              
-              <div className="space-y-2 mb-4">
-                <div className="flex justify-between text-sm">
-                  <span className="text-gray-400">Duration:</span>
-                  <span className="text-white">{classType.duration}</span>
+              <div className="p-6">
+                <p className="text-gray-300 text-sm mb-4 leading-relaxed">
+                  {classType.description}
+                </p>
+                
+                <div className="space-y-2 mb-4">
+                  <div className="flex justify-between text-sm">
+                    <span className="text-gray-400">Duration:</span>
+                    <span className="text-white">{classType.duration}</span>
+                  </div>
+                  <div className="flex justify-between text-sm">
+                    <span className="text-gray-400">Level:</span>
+                    <span className="text-white">{classType.difficulty}</span>
+                  </div>
                 </div>
-                <div className="flex justify-between text-sm">
-                  <span className="text-gray-400">Level:</span>
-                  <span className="text-white">{classType.difficulty}</span>
-                </div>
+
+                <Badge className="bg-fuchsia-500/10 text-fuchsia-400 border-fuchsia-500/30">
+                  {classType.name}
+                </Badge>
               </div>
             </Card>
           ))}

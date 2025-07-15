@@ -2,6 +2,7 @@
 import { Card } from '@/components/ui/card';
 import { Button } from '@/components/ui/button';
 import { Badge } from '@/components/ui/badge';
+import { Carousel, CarouselContent, CarouselItem, CarouselNext, CarouselPrevious } from '@/components/ui/carousel';
 import { Studio } from '@/data/studios';
 import FreeTrialBookingForm from '../FreeTrialBookingForm';
 
@@ -10,6 +11,13 @@ interface StudioAboutProps {
 }
 
 const StudioAbout = ({ studio }: StudioAboutProps) => {
+  const studioImages = [
+    studio.image,
+    'https://images.unsplash.com/photo-1605810230434-7631ac76ec81?ixlib=rb-4.0.3&auto=format&fit=crop&w=2070&q=80',
+    'https://images.unsplash.com/photo-1518611012118-696072aa579a?ixlib=rb-4.0.3&auto=format&fit=crop&w=2070&q=80',
+    'https://images.unsplash.com/photo-1571019613454-1cbffaa5b517?ixlib=rb-4.0.3&auto=format&fit=crop&w=2070&q=80'
+  ];
+
   return (
     <section className="py-16">
       <div className="grid lg:grid-cols-2 gap-12 items-center">
@@ -56,12 +64,24 @@ const StudioAbout = ({ studio }: StudioAboutProps) => {
         </div>
         
         <div className="relative">
-          <img 
-            src={studio.image} 
-            alt={studio.name}
-            className="w-full h-96 object-cover rounded-lg shadow-2xl"
-          />
-          <div className="absolute inset-0 bg-gradient-to-t from-black/50 to-transparent rounded-lg"></div>
+          <Carousel className="w-full">
+            <CarouselContent>
+              {studioImages.map((image, index) => (
+                <CarouselItem key={index}>
+                  <div className="relative">
+                    <img 
+                      src={image} 
+                      alt={`${studio.name} - Image ${index + 1}`}
+                      className="w-full h-96 object-cover rounded-lg shadow-2xl"
+                    />
+                    <div className="absolute inset-0 bg-gradient-to-t from-black/50 to-transparent rounded-lg"></div>
+                  </div>
+                </CarouselItem>
+              ))}
+            </CarouselContent>
+            <CarouselPrevious className="left-4 bg-black/50 border-white/20 text-white hover:bg-black/70" />
+            <CarouselNext className="right-4 bg-black/50 border-white/20 text-white hover:bg-black/70" />
+          </Carousel>
         </div>
       </div>
     </section>
