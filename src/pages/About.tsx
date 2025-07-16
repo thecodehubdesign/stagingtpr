@@ -43,9 +43,6 @@ const About = () => {
     <div className="min-h-screen">
       <Header />
       
-      {/* Founder Section - Moved to top */}
-      <FounderSection />
-
       {/* Hero Section */}
       <section className="pt-20 pb-16 bg-gradient-to-br from-gray-900 via-purple-900 to-gray-900 cyber-grid">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
@@ -61,6 +58,9 @@ const About = () => {
           </div>
         </div>
       </section>
+
+      {/* Founder Section - Moved to top */}
+      <FounderSection />
 
       {/* Mission Section */}
       <section className="py-20 bg-gray-900">
