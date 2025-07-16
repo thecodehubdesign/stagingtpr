@@ -1,4 +1,3 @@
-
 import { useParams } from 'react-router-dom';
 import Header from '@/components/Header';
 import Footer from '@/components/Footer';
@@ -12,12 +11,25 @@ import StudioClassList from '@/components/studio/StudioClassList';
 import StudioFAQ from '@/components/studio/StudioFAQ';
 import StudioLocationMap from '@/components/studio/StudioLocationMap';
 import FreeTrialBookingForm from '@/components/FreeTrialBookingForm';
+import SectionNavigation from '@/components/SectionNavigation';
 import { studios } from '@/data/studios';
 
 const StudioDetail = () => {
   const { studioId } = useParams<{ studioId: string }>();
   
   const studio = studios.find(s => s.id === studioId);
+  
+  const sections = [
+    { id: 'hero', label: 'Overview' },
+    { id: 'about', label: 'About' },
+    { id: 'contact', label: 'Contact' },
+    { id: 'getting-started', label: 'Getting Started' },
+    { id: 'instructors', label: 'Instructors' },
+    { id: 'classes', label: 'Classes' },
+    { id: 'reviews', label: 'Reviews' },
+    { id: 'faq', label: 'FAQ' },
+    { id: 'map', label: 'Location' }
+  ];
   
   if (!studio) {
     return (
@@ -33,9 +45,10 @@ const StudioDetail = () => {
   return (
     <div className="min-h-screen bg-gray-900">
       <Header />
+      <SectionNavigation sections={sections} />
       
       {/* Hero Section */}
-      <section className="pt-20 pb-16 bg-gradient-to-br from-gray-900 via-purple-900 to-gray-900 cyber-grid">
+      <section className="pt-20 pb-16 bg-gradient-to-br from-gray-900 via-purple-900 to-gray-900 cyber-grid" id="hero">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="text-center animate-fade-in">
             <h1 className="text-4xl sm:text-6xl font-bold gradient-text mb-6">
@@ -51,15 +64,30 @@ const StudioDetail = () => {
 
       {/* Studio Content */}
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <StudioAbout studio={studio} />
-        <StudioContact studio={studio} />
-        <StudioGettingStarted />
-        <StudioInstructors studioId={studio.id} />
-        <StudioClassTypes studio={studio} />
-        <StudioReviews studioId={studio.id} />
-        <StudioClassList studioId={studio.id} />
-        <StudioFAQ />
-        <StudioLocationMap studio={studio} />
+        <div id="about">
+          <StudioAbout studio={studio} />
+        </div>
+        <div id="contact">
+          <StudioContact studio={studio} />
+        </div>
+        <div id="getting-started">
+          <StudioGettingStarted />
+        </div>
+        <div id="instructors">
+          <StudioInstructors studioId={studio.id} />
+        </div>
+        <div id="classes">
+          <StudioClassTypes studio={studio} />
+        </div>
+        <div id="reviews">
+          <StudioReviews studioId={studio.id} />
+        </div>
+        <div id="faq">
+          <StudioFAQ />
+        </div>
+        <div id="map">
+          <StudioLocationMap studio={studio} />
+        </div>
       </div>
 
       <Footer />

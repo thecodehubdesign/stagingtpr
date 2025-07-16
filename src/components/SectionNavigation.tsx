@@ -53,17 +53,17 @@ const SectionNavigation = ({ sections }: SectionNavigationProps) => {
   return (
     <nav className="fixed top-16 left-0 right-0 z-40 bg-black/95 backdrop-blur-md border-b border-fuchsia-500/30 cyber-grid animate-fade-in">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div className="flex items-center justify-center py-3">
-          <div className="flex space-x-6 overflow-x-auto">
+        <div className="flex items-center justify-center py-2">
+          <div className="flex space-x-4 overflow-x-auto">
             {sections.map((section) => (
               <button
                 key={section.id}
                 onClick={() => scrollToSection(section.id)}
                 className={cn(
-                  "px-4 py-2 text-sm font-medium rounded-md transition-all whitespace-nowrap",
+                  "px-2 py-1 text-sm font-medium transition-colors whitespace-nowrap",
                   activeSection === section.id
-                    ? "bg-fuchsia-500/20 text-fuchsia-400 cyber-border"
-                    : "text-gray-300 hover:text-fuchsia-400 hover:bg-gray-800/50"
+                    ? "text-fuchsia-400"
+                    : "text-gray-300 hover:text-fuchsia-400"
                 )}
               >
                 {section.label}
