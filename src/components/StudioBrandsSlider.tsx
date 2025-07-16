@@ -19,7 +19,7 @@ const StudioBrandsSlider = () => {
     name: "Soar Studios",
     logo: "https://images.unsplash.com/photo-1544947950-fa07a98d237f?w=200&h=100&fit=crop&crop=center"
   }];
-  return <section className="py-16 bg-gradient-to-r from-gray-900 via-purple-900/20 to-gray-900">
+  return <section className="bg-gradient-to-r from-gray-900 via-purple-900/20 to-gray-900 py-0">
       <div className="max-w-7xl mx-auto px-6">
         
         

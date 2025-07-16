@@ -16,7 +16,7 @@ const VideoSection = () => {
             <Sparkles className="w-5 h-5 text-cyan-400 neon-glow" />
           </div>
           
-          <h2 className="text-4xl md:text-6xl lg:text-7xl font-playfair font-bold gradient-text tracking-tight">Experience The Pole Room</h2>
+          <h2 className="text-4xl lg:text-7xl font-playfair font-bold gradient-text tracking-tight py-[8px] md:text-6xl">Experience The Pole Room</h2>
           
           <p className="text-lg text-gray-300 max-w-3xl mx-auto mb-8">
             Watch how we've transformed thousands of lives through the power of pole and aerial fitness. 
