@@ -26,7 +26,6 @@ const Header = () => {
   const navigate = useNavigate();
 
   const aboutUsItems = [
-    { name: 'About Us', href: '/about', description: 'Learn about our story, mission, and values' },
     { name: 'Instructors', href: '/instructors', description: 'Meet our amazing team of certified instructors' },
     { name: 'Pricing', href: '/pricing', description: 'Flexible packages and membership options' },
     { name: 'Events', href: '/events', description: 'Competitions, showcases, and community events' },

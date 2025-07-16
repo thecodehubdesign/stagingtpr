@@ -4,7 +4,6 @@ import Footer from '@/components/Footer';
 import ProgramsComparison from '@/components/ProgramsComparison';
 import StudioHistory from '@/components/StudioHistory';
 import FounderSection from '@/components/FounderSection';
-import JasmineStory from '@/components/JasmineStory';
 import { Button } from '@/components/ui/button';
 import { Card } from '@/components/ui/card';
 import { Heart, Zap, Users, Trophy, Star, Target } from 'lucide-react';
@@ -62,9 +61,6 @@ const About = () => {
           </div>
         </div>
       </section>
-
-      {/* Jasmine's Story Section */}
-      <JasmineStory />
 
       {/* Mission Section */}
       <section className="py-20 bg-gray-900">
