@@ -55,9 +55,8 @@ const StudioLocations = () => {
           <motion.h2 variants={itemVariants} transition={{
           duration: 0.6,
           ease: "easeOut"
-        }} className="bg-clip-text text-transparent bg-gradient-to-r from-indigo-300 via-purple-300 to-rose-300">
-            Find Your Nearest Studio
-          </motion.h2>
+        }} className="bg-clip-text text-transparent bg-gradient-to-r from-indigo-300 via-purple-300 to-rose-300 font-bold text-6xl">Find Your 
+Nearest Studio</motion.h2>
           <motion.p variants={itemVariants} transition={{
           duration: 0.6,
           ease: "easeOut"
