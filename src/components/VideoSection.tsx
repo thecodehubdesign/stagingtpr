@@ -1,15 +1,11 @@
-
 import { Play, Sparkles } from 'lucide-react';
 import { Button } from '@/components/ui/button';
-
 const VideoSection = () => {
   const handlePlayVideo = () => {
     // This would typically open a modal or navigate to a video player
     console.log('Play video clicked');
   };
-
-  return (
-    <section className="py-20 bg-gradient-to-br from-gray-900 via-purple-900/10 to-gray-900">
+  return <section className="py-20 bg-gradient-to-br from-gray-900 via-purple-900/10 to-gray-900">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="text-center mb-12 animate-fade-in">
           <div className="flex items-center justify-center space-x-2 mb-4">
@@ -20,9 +16,7 @@ const VideoSection = () => {
             <Sparkles className="w-5 h-5 text-cyan-400 neon-glow" />
           </div>
           
-          <h2 className="text-3xl sm:text-4xl lg:text-5xl font-bold text-white mb-6 gradient-text">
-            Experience The Pole Room Story
-          </h2>
+          <h2 className="text-4xl md:text-6xl lg:text-7xl font-playfair font-bold gradient-text tracking-tight">Experience The Pole Room</h2>
           
           <p className="text-lg text-gray-300 max-w-3xl mx-auto mb-8">
             Watch how we've transformed thousands of lives through the power of pole and aerial fitness. 
@@ -30,24 +24,19 @@ const VideoSection = () => {
           </p>
         </div>
 
-        <div className="relative max-w-4xl mx-auto animate-fade-in" style={{animationDelay: '0.3s'}}>
+        <div className="relative max-w-4xl mx-auto animate-fade-in" style={{
+        animationDelay: '0.3s'
+      }}>
           {/* Video Thumbnail Container */}
           <div className="relative aspect-video rounded-2xl overflow-hidden cyber-border bg-gradient-to-br from-gray-800 to-gray-900">
             {/* Placeholder Video Thumbnail */}
-            <div 
-              className="absolute inset-0 bg-cover bg-center"
-              style={{
-                backgroundImage: `linear-gradient(rgba(0,0,0,0.4), rgba(0,0,0,0.4)), url('https://images.unsplash.com/photo-1605810230434-7631ac76ec81?ixlib=rb-4.0.3&auto=format&fit=crop&w=2070&q=80')`
-              }}
-            />
+            <div className="absolute inset-0 bg-cover bg-center" style={{
+            backgroundImage: `linear-gradient(rgba(0,0,0,0.4), rgba(0,0,0,0.4)), url('https://images.unsplash.com/photo-1605810230434-7631ac76ec81?ixlib=rb-4.0.3&auto=format&fit=crop&w=2070&q=80')`
+          }} />
             
             {/* Play Button Overlay */}
             <div className="absolute inset-0 flex items-center justify-center">
-              <Button
-                onClick={handlePlayVideo}
-                className="w-20 h-20 rounded-full bg-white/20 backdrop-blur-sm border border-white/30 hover:bg-white/30 transition-all duration-300 hover:scale-110 neon-glow"
-                size="icon"
-              >
+              <Button onClick={handlePlayVideo} className="w-20 h-20 rounded-full bg-white/20 backdrop-blur-sm border border-white/30 hover:bg-white/30 transition-all duration-300 hover:scale-110 neon-glow" size="icon">
                 <Play className="w-8 h-8 text-white ml-1" fill="white" />
               </Button>
             </div>
@@ -77,8 +66,6 @@ const VideoSection = () => {
           </div>
         </div>
       </div>
-    </section>
-  );
+    </section>;
 };
-
 export default VideoSection;
