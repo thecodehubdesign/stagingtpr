@@ -10,6 +10,7 @@ export const SearchMenu = () => {
   const [query, setQuery] = useState('');
   const [results, setResults] = useState<SearchResult[]>([]);
   const [isOpen, setIsOpen] = useState(false);
+  const [isExpanded, setIsExpanded] = useState(false);
   const [selectedIndex, setSelectedIndex] = useState(-1);
   const navigate = useNavigate();
   const searchRef = useRef<HTMLDivElement>(null);
@@ -32,6 +33,8 @@ export const SearchMenu = () => {
     const handleClickOutside = (event: MouseEvent) => {
       if (searchRef.current && !searchRef.current.contains(event.target as Node)) {
         setIsOpen(false);
+        setIsExpanded(false);
+        setQuery('');
       }
     };
 
@@ -55,6 +58,7 @@ export const SearchMenu = () => {
     }
     setQuery('');
     setIsOpen(false);
+    setIsExpanded(false);
     inputRef.current?.blur();
   };
 
@@ -80,9 +84,18 @@ export const SearchMenu = () => {
         break;
       case 'Escape':
         setIsOpen(false);
+        setIsExpanded(false);
+        setQuery('');
         inputRef.current?.blur();
         break;
     }
+  };
+
+  const handleIconClick = () => {
+    setIsExpanded(true);
+    setTimeout(() => {
+      inputRef.current?.focus();
+    }, 100);
   };
 
   const getTypeIcon = (type: string) => {
@@ -113,18 +126,46 @@ export const SearchMenu = () => {
 
   return (
     <div ref={searchRef} className="relative">
-      <div className="relative">
-        <Search className="absolute left-3 top-1/2 transform -translate-y-1/2 text-muted-foreground w-4 h-4" />
-        <Input
-          ref={inputRef}
-          type="text"
-          placeholder="Search pages, sections, blog..."
-          value={query}
-          onChange={(e) => setQuery(e.target.value)}
-          onKeyDown={handleKeyDown}
-          onFocus={() => query && setIsOpen(results.length > 0)}
-          className="pl-10 w-64 bg-background/50 border-border/50 focus:bg-background focus:border-border"
-        />
+      {/* Desktop: Icon that expands to search input */}
+      <div className="hidden md:block">
+        {!isExpanded ? (
+          <button
+            onClick={handleIconClick}
+            className="p-2 text-muted-foreground hover:text-foreground transition-colors rounded-md hover:bg-muted/50"
+          >
+            <Search className="w-4 h-4" />
+          </button>
+        ) : (
+          <div className="relative">
+            <Search className="absolute left-3 top-1/2 transform -translate-y-1/2 text-muted-foreground w-4 h-4" />
+            <Input
+              ref={inputRef}
+              type="text"
+              placeholder="Search pages, sections, blog..."
+              value={query}
+              onChange={(e) => setQuery(e.target.value)}
+              onKeyDown={handleKeyDown}
+              className="pl-10 w-64 bg-background/50 border-border/50 focus:bg-background focus:border-border"
+            />
+          </div>
+        )}
+      </div>
+
+      {/* Mobile: Always show search input */}
+      <div className="md:hidden">
+        <div className="relative">
+          <Search className="absolute left-3 top-1/2 transform -translate-y-1/2 text-muted-foreground w-4 h-4" />
+          <Input
+            ref={inputRef}
+            type="text"
+            placeholder="Search pages, sections, blog..."
+            value={query}
+            onChange={(e) => setQuery(e.target.value)}
+            onKeyDown={handleKeyDown}
+            onFocus={() => query && setIsOpen(results.length > 0)}
+            className="pl-10 w-full bg-background/50 border-border/50 focus:bg-background focus:border-border"
+          />
+        </div>
       </div>
 
       {isOpen && results.length > 0 && (
