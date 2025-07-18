@@ -4,24 +4,11 @@ import Footer from '@/components/Footer';
 import ProgramsComparison from '@/components/ProgramsComparison';
 import StudioHistory from '@/components/StudioHistory';
 import FounderSection from '@/components/FounderSection';
-import SectionNavigation from '@/components/SectionNavigation';
 import { Button } from '@/components/ui/button';
 import { Card } from '@/components/ui/card';
 import { Heart, Zap, Users, Trophy, Star, Target } from 'lucide-react';
-import { useScrollToTop } from '@/hooks/useScrollToTop';
 
 const About = () => {
-  useScrollToTop();
-
-  const sections = [
-    { id: 'founder', label: 'Our Founder' },
-    { id: 'mission', label: 'Our Mission' },
-    { id: 'programs', label: 'Programs' },
-    { id: 'values', label: 'Our Values' },
-    { id: 'history', label: 'Our Story' },
-    { id: 'impact', label: 'Our Impact' }
-  ];
-
   const values = [
     {
       icon: Heart,
@@ -55,7 +42,6 @@ const About = () => {
   return (
     <div className="min-h-screen">
       <Header />
-      <SectionNavigation sections={sections} />
       
       {/* Hero Section */}
       <section className="pt-20 pb-16 bg-gradient-to-br from-gray-900 via-purple-900 to-gray-900 cyber-grid">
@@ -77,7 +63,7 @@ const About = () => {
       <FounderSection />
 
       {/* Mission Section */}
-      <section className="py-20 bg-gray-900" id="mission">
+      <section className="py-20 bg-gray-900">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="grid lg:grid-cols-2 gap-16 items-center">
             <div className="animate-fade-in">
@@ -110,12 +96,10 @@ const About = () => {
       </section>
 
       {/* Programs Comparison Section */}
-      <div id="programs">
-        <ProgramsComparison />
-      </div>
+      <ProgramsComparison />
 
       {/* Values Section */}
-      <section className="py-20 bg-gray-800" id="values">
+      <section className="py-20 bg-gray-800">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="text-center mb-16">
             <h2 className="text-3xl sm:text-4xl font-bold text-white mb-6">
@@ -143,12 +127,10 @@ const About = () => {
       </section>
 
       {/* Studio History Timeline */}
-      <div id="history">
-        <StudioHistory />
-      </div>
+      <StudioHistory />
 
       {/* Stats Section */}
-      <section className="py-20 bg-gradient-to-r from-fuchsia-600 to-purple-600" id="impact">
+      <section className="py-20 bg-gradient-to-r from-fuchsia-600 to-purple-600">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="text-center mb-12">
             <h2 className="text-3xl sm:text-4xl font-bold text-white mb-4">

@@ -10,49 +10,20 @@ import PoleTypeQuiz from '@/components/PoleTypeQuiz';
 import StudioLocations from '@/components/StudioLocations';
 import { PremiumTestimonials } from '@/components/ui/premium-testimonials';
 import Footer from '@/components/Footer';
-import SectionNavigation from '@/components/SectionNavigation';
 
 const Index = () => {
-  const sections = [
-    { id: 'hero', label: 'Home' },
-    { id: 'founder', label: 'Founder' },
-    { id: 'video', label: 'Video' },
-    { id: 'method', label: 'Method' },
-    { id: 'classes', label: 'Classes' },
-    { id: 'quiz', label: 'Quiz' },
-    { id: 'testimonials', label: 'Reviews' },
-    { id: 'locations', label: 'Locations' }
-  ];
-
   return (
     <div className="min-h-screen">
       <Header />
-      <SectionNavigation sections={sections} />
-      <div id="hero">
-        <HeroSection />
-      </div>
+      <HeroSection />
       <StudioBrandsSlider />
-      <div id="founder">
-        <FounderSection />
-      </div>
-      <div id="video">
-        <VideoSection />
-      </div>
-      <div id="method">
-        <LevelUpMethod />
-      </div>
-      <div id="classes">
-        <ClassDiscoverySection />
-      </div>
-      <div id="quiz">
-        <PoleTypeQuiz />
-      </div>
-      <div id="testimonials">
-        <PremiumTestimonials />
-      </div>
-      <div id="locations">
-        <StudioLocations />
-      </div>
+      <FounderSection />
+      <VideoSection />
+      <LevelUpMethod />
+      <ClassDiscoverySection />
+      <PoleTypeQuiz />
+      <PremiumTestimonials />
+      <StudioLocations />
       <Footer />
     </div>
   );

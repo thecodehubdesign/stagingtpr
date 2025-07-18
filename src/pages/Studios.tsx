@@ -1,21 +1,14 @@
+
 import Header from '@/components/Header';
 import Footer from '@/components/Footer';
 import StudioSearch from '@/components/StudioSearch';
 import StudioMap from '@/components/StudioMap';
-import SectionNavigation from '@/components/SectionNavigation';
 import { Button } from '@/components/ui/button';
 import { Card } from '@/components/ui/card';
 import { MapPin, Users, Wifi, Coffee, Car } from 'lucide-react';
 import FreeTrialBookingForm from '@/components/FreeTrialBookingForm';
 
 const Studios = () => {
-  const sections = [
-    { id: 'hero', label: 'Overview' },
-    { id: 'search', label: 'Find Studio' },
-    { id: 'map', label: 'Locations' },
-    { id: 'features', label: 'Features' }
-  ];
-
   const studioFeatures = [
     { icon: Users, title: "Small Class Sizes", description: "Maximum 8 students per class for personalized attention" },
     { icon: Wifi, title: "Premium Equipment", description: "Professional-grade poles, aerial points, and safety mats" },
@@ -26,10 +19,9 @@ const Studios = () => {
   return (
     <div className="min-h-screen">
       <Header />
-      <SectionNavigation sections={sections} />
       
       {/* Hero Section */}
-      <section className="pt-20 pb-16 bg-gradient-to-br from-gray-900 via-purple-900 to-gray-900 cyber-grid" id="hero">
+      <section className="pt-20 pb-16 bg-gradient-to-br from-gray-900 via-purple-900 to-gray-900 cyber-grid">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="text-center animate-fade-in">
             <h1 className="text-4xl sm:text-6xl font-bold gradient-text mb-6">
@@ -45,7 +37,7 @@ const Studios = () => {
       </section>
 
       {/* Studio Search Section */}
-      <section className="py-20 bg-gray-900" id="search">
+      <section className="py-20 bg-gray-900">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="text-center mb-12">
             <h2 className="text-3xl sm:text-4xl font-bold text-white mb-6">
@@ -60,7 +52,7 @@ const Studios = () => {
       </section>
 
       {/* Google Maps Section */}
-      <section className="py-20 bg-gray-800" id="map">
+      <section className="py-20 bg-gray-800">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="text-center mb-12">
             <h2 className="text-3xl sm:text-4xl font-bold text-white mb-6">
@@ -75,7 +67,7 @@ const Studios = () => {
       </section>
 
       {/* Studio Features */}
-      <section className="py-20 bg-gray-900" id="features">
+      <section className="py-20 bg-gray-900">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="text-center mb-16">
             <h2 className="text-3xl sm:text-4xl font-bold text-white mb-6">
