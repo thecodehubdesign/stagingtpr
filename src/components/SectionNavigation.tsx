@@ -1,6 +1,5 @@
 
 import { useState, useEffect } from 'react';
-import { Button } from '@/components/ui/button';
 
 interface Section {
   id: string;
@@ -48,21 +47,19 @@ const SectionNavigation = ({ sections }: SectionNavigationProps) => {
   return (
     <div className="sticky top-16 z-40 bg-background/95 backdrop-blur supports-[backdrop-filter]:bg-background/60 border-b border-border">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div className="flex items-center space-x-1 py-2 overflow-x-auto">
+        <div className="flex items-center justify-center space-x-6 py-2 overflow-x-auto">
           {sections.map((section) => (
-            <Button
+            <span
               key={section.id}
-              variant="ghost"
-              size="sm"
               onClick={() => scrollToSection(section.id)}
-              className={`text-sm whitespace-nowrap px-3 py-1 ${
+              className={`text-xs whitespace-nowrap cursor-pointer transition-colors duration-200 p-0 ${
                 activeSection === section.id
                   ? 'text-primary font-medium'
                   : 'text-muted-foreground hover:text-foreground'
               }`}
             >
               {section.label}
-            </Button>
+            </span>
           ))}
         </div>
       </div>
