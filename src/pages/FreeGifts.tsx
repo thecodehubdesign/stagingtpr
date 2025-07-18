@@ -1,18 +1,25 @@
-
 import Header from '@/components/Header';
 import Footer from '@/components/Footer';
+import SectionNavigation from '@/components/SectionNavigation';
 import { Button } from '@/components/ui/button';
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card';
 import { Badge } from '@/components/ui/badge';
 import { CheckCircle, Gift, Star, Clock, Users, Heart, Zap, ArrowRight, Play } from 'lucide-react';
 
 const FreeGifts = () => {
+  const sections = [
+    { id: 'hero', label: 'Free Gifts' },
+    { id: 'gifts', label: 'Your Gifts' },
+    { id: 'cta', label: 'Get Started' }
+  ];
+
   return (
     <div className="min-h-screen bg-background">
       <Header />
+      <SectionNavigation sections={sections} />
       
       {/* Hero Section */}
-      <section className="relative min-h-screen flex items-center justify-center overflow-hidden cyber-grid pt-16">
+      <section id="hero" className="relative min-h-screen flex items-center justify-center overflow-hidden cyber-grid pt-16">
         <div 
           className="absolute inset-0 bg-cover bg-center" 
           style={{
@@ -78,7 +85,7 @@ const FreeGifts = () => {
       </section>
 
       {/* Free Gifts Section */}
-      <section className="py-20 bg-gradient-to-b from-background to-muted/20">
+      <section id="gifts" className="py-20 bg-gradient-to-b from-background to-muted/20">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="text-center mb-16">
             <h2 className="text-3xl sm:text-4xl font-bold text-white mb-6 gradient-text">
@@ -190,7 +197,7 @@ const FreeGifts = () => {
       </section>
 
       {/* CTA Section */}
-      <section className="py-20 bg-gradient-to-r from-fuchsia-500/10 to-cyan-500/10">
+      <section id="cta" className="py-20 bg-gradient-to-r from-fuchsia-500/10 to-cyan-500/10">
         <div className="max-w-4xl mx-auto text-center px-4 sm:px-6 lg:px-8">
           <div className="cyber-card p-8 rounded-2xl border-fuchsia-500/30">
             <h3 className="text-3xl sm:text-4xl font-bold text-white mb-6 gradient-text">

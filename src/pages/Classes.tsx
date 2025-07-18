@@ -1,5 +1,6 @@
 import Header from '@/components/Header';
 import Footer from '@/components/Footer';
+import SectionNavigation from '@/components/SectionNavigation';
 import { Button } from '@/components/ui/button';
 import { Card } from '@/components/ui/card';
 import { Badge } from '@/components/ui/badge';
@@ -7,6 +8,16 @@ import { Clock, Users, Flame, Star, Zap, Heart } from 'lucide-react';
 import { Link } from 'react-router-dom';
 
 const Classes = () => {
+  const sections = [
+    { id: 'hero', label: 'Classes' },
+    { id: 'pole-dancing', label: 'Pole Dancing' },
+    { id: 'aerial-arts', label: 'Aerial Arts' },
+    { id: 'dance-movement', label: 'Dance & Movement' },
+    { id: 'flexibility', label: 'Flexibility' },
+    { id: 'special', label: 'New Student Special' },
+    { id: 'faq', label: 'FAQs' }
+  ];
+
   const classCategories = [
     {
       title: "Pole Dancing",
@@ -134,9 +145,10 @@ const Classes = () => {
   return (
     <div className="min-h-screen">
       <Header />
+      <SectionNavigation sections={sections} />
       
       {/* Hero Section */}
-      <section className="pt-20 pb-16 bg-gradient-to-br from-gray-900 via-purple-900 to-gray-900 cyber-grid">
+      <section id="hero" className="pt-20 pb-16 bg-gradient-to-br from-gray-900 via-purple-900 to-gray-900 cyber-grid">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="text-center animate-fade-in">
             <h1 className="text-4xl sm:text-6xl font-bold gradient-text neon-glow mb-6">
@@ -157,7 +169,7 @@ const Classes = () => {
       <section className="py-20 bg-gray-900">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           {classCategories.map((category, categoryIndex) => (
-            <div key={categoryIndex} className="mb-20 last:mb-0">
+            <div key={categoryIndex} className="mb-20 last:mb-0" id={category.title.toLowerCase().replace(/\s+/g, '-').replace('&', '')}>
               {/* Category Header */}
               <div className="text-center mb-12">
                 <category.icon className="w-16 h-16 text-fuchsia-400 mx-auto mb-4 neon-glow" />
@@ -218,7 +230,7 @@ const Classes = () => {
       </section>
 
       {/* New Student Special */}
-      <section className="py-20 bg-gradient-to-r from-fuchsia-600 to-purple-600">
+      <section id="special" className="py-20 bg-gradient-to-r from-fuchsia-600 to-purple-600">
         <div className="max-w-4xl mx-auto text-center px-4 sm:px-6 lg:px-8">
           <h2 className="text-3xl sm:text-4xl font-bold text-white mb-6">
             New Student Special
@@ -239,7 +251,7 @@ const Classes = () => {
       </section>
 
       {/* FAQ Section */}
-      <section className="py-20 bg-gray-800">
+      <section id="faq" className="py-20 bg-gray-800">
         <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
           <h2 className="text-3xl sm:text-4xl font-bold text-white text-center mb-12">
             Class <span className="gradient-text">FAQs</span>

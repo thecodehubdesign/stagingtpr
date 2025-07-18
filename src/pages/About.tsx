@@ -1,14 +1,24 @@
-
 import Header from '@/components/Header';
 import Footer from '@/components/Footer';
 import ProgramsComparison from '@/components/ProgramsComparison';
 import StudioHistory from '@/components/StudioHistory';
 import FounderSection from '@/components/FounderSection';
+import SectionNavigation from '@/components/SectionNavigation';
 import { Button } from '@/components/ui/button';
 import { Card } from '@/components/ui/card';
 import { Heart, Zap, Users, Trophy, Star, Target } from 'lucide-react';
 
 const About = () => {
+  const sections = [
+    { id: 'hero', label: 'About' },
+    { id: 'founder', label: 'Founder' },
+    { id: 'mission', label: 'Mission' },
+    { id: 'programs', label: 'Programs' },
+    { id: 'values', label: 'Values' },
+    { id: 'history', label: 'History' },
+    { id: 'stats', label: 'Impact' }
+  ];
+
   const values = [
     {
       icon: Heart,
@@ -42,9 +52,10 @@ const About = () => {
   return (
     <div className="min-h-screen">
       <Header />
+      <SectionNavigation sections={sections} />
       
       {/* Hero Section */}
-      <section className="pt-20 pb-16 bg-gradient-to-br from-gray-900 via-purple-900 to-gray-900 cyber-grid">
+      <section id="hero" className="pt-20 pb-16 bg-gradient-to-br from-gray-900 via-purple-900 to-gray-900 cyber-grid">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="text-center animate-fade-in">
             <h1 className="text-4xl sm:text-6xl font-bold gradient-text neon-glow mb-6">
@@ -60,10 +71,12 @@ const About = () => {
       </section>
 
       {/* Founder Section - Moved to top */}
-      <FounderSection />
+      <div id="founder">
+        <FounderSection />
+      </div>
 
       {/* Mission Section */}
-      <section className="py-20 bg-gray-900">
+      <section id="mission" className="py-20 bg-gray-900">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="grid lg:grid-cols-2 gap-16 items-center">
             <div className="animate-fade-in">
@@ -96,10 +109,12 @@ const About = () => {
       </section>
 
       {/* Programs Comparison Section */}
-      <ProgramsComparison />
+      <div id="programs">
+        <ProgramsComparison />
+      </div>
 
       {/* Values Section */}
-      <section className="py-20 bg-gray-800">
+      <section id="values" className="py-20 bg-gray-800">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="text-center mb-16">
             <h2 className="text-3xl sm:text-4xl font-bold text-white mb-6">
@@ -127,10 +142,12 @@ const About = () => {
       </section>
 
       {/* Studio History Timeline */}
-      <StudioHistory />
+      <div id="history">
+        <StudioHistory />
+      </div>
 
       {/* Stats Section */}
-      <section className="py-20 bg-gradient-to-r from-fuchsia-600 to-purple-600">
+      <section id="stats" className="py-20 bg-gradient-to-r from-fuchsia-600 to-purple-600">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="text-center mb-12">
             <h2 className="text-3xl sm:text-4xl font-bold text-white mb-4">
