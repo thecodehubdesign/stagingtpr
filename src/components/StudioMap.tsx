@@ -5,6 +5,7 @@ import { Card } from '@/components/ui/card';
 import { ScrollArea } from '@/components/ui/scroll-area';
 import { MapPin, Eye } from 'lucide-react';
 import { useNavigate } from 'react-router-dom';
+
 interface StudioLocation {
   id: string;
   name: string;
@@ -14,16 +15,20 @@ interface StudioLocation {
   phone?: string;
   apparatus: string[];
 }
-const StudioMap = () => {
+
+interface StudioMapProps {
+  onSearchClick?: () => void;
+}
+
+const StudioMap = ({ onSearchClick }: StudioMapProps) => {
   const mapRef = useRef<HTMLDivElement>(null);
   const mapInstanceRef = useRef<google.maps.Map | null>(null);
   const loaderRef = useRef<Loader | null>(null);
-  const markersRef = useRef<{
-    [key: string]: google.maps.Marker;
-  }>({});
+  const markersRef = useRef<{ [key: string]: google.maps.Marker }>({});
   const infoWindowRef = useRef<google.maps.InfoWindow | null>(null);
   const [selectedStudio, setSelectedStudio] = useState<string | null>(null);
   const navigate = useNavigate();
+
   const locations: StudioLocation[] = [{
     id: 'highett',
     name: "The Pole Room Highett",
@@ -73,6 +78,7 @@ const StudioMap = () => {
     phone: "(03) 9678 9012",
     apparatus: ["Pole"]
   }];
+
   const handleStudioSelect = (studioId: string) => {
     setSelectedStudio(studioId);
     const marker = markersRef.current[studioId];
@@ -138,9 +144,11 @@ const StudioMap = () => {
       }
     }
   };
+
   const handleViewStudio = (studioId: string) => {
     navigate(`/studios/${studioId}`);
   };
+
   useEffect(() => {
     // Add global function for the info window button
     (window as any).handleGoToStudio = handleViewStudio;
@@ -148,6 +156,7 @@ const StudioMap = () => {
       delete (window as any).handleGoToStudio;
     };
   }, []);
+
   useEffect(() => {
     if (!mapRef.current) return;
 
@@ -167,109 +176,81 @@ const StudioMap = () => {
       // Initialize the map with a broader view to show all locations
       const map = new google.maps.Map(mapRef.current, {
         zoom: 10,
-        center: {
-          lat: -37.8136,
-          lng: 145.0632
-        },
-        // Center of Melbourne
-        styles: [{
-          featureType: "all",
-          elementType: "geometry",
-          stylers: [{
-            color: "#1a1a2e"
-          }]
-        }, {
-          featureType: "all",
-          elementType: "labels.text.fill",
-          stylers: [{
-            color: "#ffffff"
-          }]
-        }, {
-          featureType: "all",
-          elementType: "labels.text.stroke",
-          stylers: [{
-            color: "#000000"
-          }, {
-            lightness: 13
-          }]
-        }, {
-          featureType: "administrative",
-          elementType: "geometry.fill",
-          stylers: [{
-            color: "#000000"
-          }]
-        }, {
-          featureType: "administrative",
-          elementType: "geometry.stroke",
-          stylers: [{
-            color: "#144b53"
-          }, {
-            lightness: 14
-          }, {
-            weight: 1.4
-          }]
-        }, {
-          featureType: "landscape",
-          elementType: "all",
-          stylers: [{
-            color: "#08304b"
-          }]
-        }, {
-          featureType: "poi",
-          elementType: "geometry",
-          stylers: [{
-            color: "#0c4152"
-          }, {
-            lightness: 5
-          }]
-        }, {
-          featureType: "road.highway",
-          elementType: "geometry.fill",
-          stylers: [{
-            color: "#000000"
-          }]
-        }, {
-          featureType: "road.highway",
-          elementType: "geometry.stroke",
-          stylers: [{
-            color: "#0b434f"
-          }, {
-            lightness: 25
-          }]
-        }, {
-          featureType: "road.arterial",
-          elementType: "geometry.fill",
-          stylers: [{
-            color: "#000000"
-          }]
-        }, {
-          featureType: "road.arterial",
-          elementType: "geometry.stroke",
-          stylers: [{
-            color: "#0b3d51"
-          }, {
-            lightness: 16
-          }]
-        }, {
-          featureType: "road.local",
-          elementType: "geometry",
-          stylers: [{
-            color: "#000000"
-          }]
-        }, {
-          featureType: "transit",
-          elementType: "all",
-          stylers: [{
-            color: "#146474"
-          }]
-        }, {
-          featureType: "water",
-          elementType: "all",
-          stylers: [{
-            color: "#021019"
-          }]
-        }]
+        center: { lat: -37.8136, lng: 145.0632 }, // Center of Melbourne
+        styles: [
+          {
+            featureType: "all",
+            elementType: "geometry",
+            stylers: [{ color: "#1a1a2e" }]
+          },
+          {
+            featureType: "all",
+            elementType: "labels.text.fill",
+            stylers: [{ color: "#ffffff" }]
+          },
+          {
+            featureType: "all",
+            elementType: "labels.text.stroke",
+            stylers: [{ color: "#000000" }, { lightness: 13 }]
+          },
+          {
+            featureType: "administrative",
+            elementType: "geometry.fill",
+            stylers: [{ color: "#000000" }]
+          },
+          {
+            featureType: "administrative",
+            elementType: "geometry.stroke",
+            stylers: [{ color: "#144b53" }, { lightness: 14 }, { weight: 1.4 }]
+          },
+          {
+            featureType: "landscape",
+            elementType: "all",
+            stylers: [{ color: "#08304b" }]
+          },
+          {
+            featureType: "poi",
+            elementType: "geometry",
+            stylers: [{ color: "#0c4152" }, { lightness: 5 }]
+          },
+          {
+            featureType: "road.highway",
+            elementType: "geometry.fill",
+            stylers: [{ color: "#000000" }]
+          },
+          {
+            featureType: "road.highway",
+            elementType: "geometry.stroke",
+            stylers: [{ color: "#0b434f" }, { lightness: 25 }]
+          },
+          {
+            featureType: "road.arterial",
+            elementType: "geometry.fill",
+            stylers: [{ color: "#000000" }]
+          },
+          {
+            featureType: "road.arterial",
+            elementType: "geometry.stroke",
+            stylers: [{ color: "#0b3d51" }, { lightness: 16 }]
+          },
+          {
+            featureType: "road.local",
+            elementType: "geometry",
+            stylers: [{ color: "#000000" }]
+          },
+          {
+            featureType: "transit",
+            elementType: "all",
+            stylers: [{ color: "#146474" }]
+          },
+          {
+            featureType: "water",
+            elementType: "all",
+            stylers: [{ color: "#021019" }]
+          }
+        ]
       });
+
       mapInstanceRef.current = map;
 
       // Create shared info window
@@ -278,10 +259,7 @@ const StudioMap = () => {
       // Add markers for each location
       locations.forEach(location => {
         const marker = new google.maps.Marker({
-          position: {
-            lat: location.lat,
-            lng: location.lng
-          },
+          position: { lat: location.lat, lng: location.lng },
           map: map,
           title: location.name,
           icon: {
@@ -293,6 +271,7 @@ const StudioMap = () => {
             strokeWeight: 2
           }
         });
+
         markersRef.current[location.id] = marker;
 
         // Add click listener to marker
@@ -300,9 +279,10 @@ const StudioMap = () => {
           handleStudioSelect(location.id);
         });
       });
-    }).catch(error => {
+    }).catch((error) => {
       console.error('Error loading Google Maps:', error);
     });
+
     return () => {
       if (mapInstanceRef.current) {
         mapInstanceRef.current = null;
@@ -323,7 +303,9 @@ const StudioMap = () => {
       });
     });
   }, [selectedStudio]);
-  return <div className="relative w-full">
+
+  return (
+    <div className="relative w-full">
       {/* Map Container */}
       <div className="w-full h-96 rounded-lg overflow-hidden border border-fuchsia-500/30 relative">
         <div ref={mapRef} className="w-full h-full" />
@@ -332,12 +314,26 @@ const StudioMap = () => {
         <div className="hidden lg:block absolute top-4 right-4 w-80 h-80 bg-gray-900/95 backdrop-blur-sm rounded-lg border border-fuchsia-500/30">
           <div className="p-4 border-b border-gray-700">
             <h3 className="text-white font-semibold text-sm">Studio Locations</h3>
-            <p className="text-gray-400 text-xs mt-1">Click to view details</p>
+            <p 
+              className="text-gray-400 text-xs mt-1 cursor-pointer hover:text-fuchsia-400 transition-colors"
+              onClick={onSearchClick}
+            >
+              Search by Postcode, Apparatus, Program.
+            </p>
           </div>
           
           <ScrollArea className="h-64">
             <div className="p-2">
-              {locations.map(location => <Card key={location.id} className={`p-3 mb-2 cursor-pointer transition-all hover:bg-gray-700/50 ${selectedStudio === location.id ? 'bg-fuchsia-500/20 border-fuchsia-500/50' : 'bg-gray-800/50 border-gray-700'}`} onClick={() => handleStudioSelect(location.id)}>
+              {locations.map(location => (
+                <Card 
+                  key={location.id} 
+                  className={`p-3 mb-2 cursor-pointer transition-all hover:bg-gray-700/50 ${
+                    selectedStudio === location.id 
+                      ? 'bg-fuchsia-500/20 border-fuchsia-500/50' 
+                      : 'bg-gray-800/50 border-gray-700'
+                  }`}
+                  onClick={() => handleStudioSelect(location.id)}
+                >
                   <div className="flex items-start justify-between">
                     <div className="flex-1 min-w-0">
                       <h4 className="text-white text-sm font-medium truncate">
@@ -350,19 +346,30 @@ const StudioMap = () => {
                         </p>
                       </div>
                       <div className="flex flex-wrap gap-1 mt-2">
-                        {location.apparatus.map((item, index) => <span key={index} className="text-xs px-2 py-0.5 bg-fuchsia-500/20 text-fuchsia-300 rounded">
+                        {location.apparatus.map((item, index) => (
+                          <span 
+                            key={index} 
+                            className="text-xs px-2 py-0.5 bg-fuchsia-500/20 text-fuchsia-300 rounded"
+                          >
                             {item}
-                          </span>)}
+                          </span>
+                        ))}
                       </div>
                     </div>
-                    <Button size="sm" variant="ghost" className="ml-2 h-8 w-8 p-0 text-fuchsia-400 hover:text-white hover:bg-fuchsia-500/20" onClick={e => {
-                  e.stopPropagation();
-                  handleViewStudio(location.id);
-                }}>
+                    <Button 
+                      size="sm" 
+                      variant="ghost" 
+                      className="ml-2 h-8 w-8 p-0 text-fuchsia-400 hover:text-white hover:bg-fuchsia-500/20"
+                      onClick={(e) => {
+                        e.stopPropagation();
+                        handleViewStudio(location.id);
+                      }}
+                    >
                       <Eye className="w-4 h-4" />
                     </Button>
                   </div>
-                </Card>)}
+                </Card>
+              ))}
             </div>
           </ScrollArea>
         </div>
@@ -373,12 +380,26 @@ const StudioMap = () => {
         <div className="bg-gray-900/95 backdrop-blur-sm rounded-lg border border-fuchsia-500/30">
           <div className="p-4 border-b border-gray-700">
             <h3 className="text-white font-semibold text-sm">Studio Locations</h3>
-            <p className="text-gray-400 text-xs mt-1">Search by Postcode, Aparatus, Program.</p>
+            <p 
+              className="text-gray-400 text-xs mt-1 cursor-pointer hover:text-fuchsia-400 transition-colors"
+              onClick={onSearchClick}
+            >
+              Search by Postcode, Apparatus, Program.
+            </p>
           </div>
           
           <div className="max-h-96 overflow-y-auto">
             <div className="p-2">
-              {locations.map(location => <Card key={location.id} className={`p-3 mb-2 cursor-pointer transition-all hover:bg-gray-700/50 ${selectedStudio === location.id ? 'bg-fuchsia-500/20 border-fuchsia-500/50' : 'bg-gray-800/50 border-gray-700'}`} onClick={() => handleStudioSelect(location.id)}>
+              {locations.map(location => (
+                <Card 
+                  key={location.id} 
+                  className={`p-3 mb-2 cursor-pointer transition-all hover:bg-gray-700/50 ${
+                    selectedStudio === location.id 
+                      ? 'bg-fuchsia-500/20 border-fuchsia-500/50' 
+                      : 'bg-gray-800/50 border-gray-700'
+                  }`}
+                  onClick={() => handleStudioSelect(location.id)}
+                >
                   <div className="flex items-start justify-between">
                     <div className="flex-1 min-w-0">
                       <h4 className="text-white text-sm font-medium truncate">
@@ -391,23 +412,36 @@ const StudioMap = () => {
                         </p>
                       </div>
                       <div className="flex flex-wrap gap-1 mt-2">
-                        {location.apparatus.map((item, index) => <span key={index} className="text-xs px-2 py-0.5 bg-fuchsia-500/20 text-fuchsia-300 rounded">
+                        {location.apparatus.map((item, index) => (
+                          <span 
+                            key={index} 
+                            className="text-xs px-2 py-0.5 bg-fuchsia-500/20 text-fuchsia-300 rounded"
+                          >
                             {item}
-                          </span>)}
+                          </span>
+                        ))}
                       </div>
                     </div>
-                    <Button size="sm" variant="ghost" className="ml-2 h-8 w-8 p-0 text-fuchsia-400 hover:text-white hover:bg-fuchsia-500/20" onClick={e => {
-                  e.stopPropagation();
-                  handleViewStudio(location.id);
-                }}>
+                    <Button 
+                      size="sm" 
+                      variant="ghost" 
+                      className="ml-2 h-8 w-8 p-0 text-fuchsia-400 hover:text-white hover:bg-fuchsia-500/20"
+                      onClick={(e) => {
+                        e.stopPropagation();
+                        handleViewStudio(location.id);
+                      }}
+                    >
                       <Eye className="w-4 h-4" />
                     </Button>
                   </div>
-                </Card>)}
+                </Card>
+              ))}
             </div>
           </div>
         </div>
       </div>
-    </div>;
+    </div>
+  );
 };
+
 export default StudioMap;
