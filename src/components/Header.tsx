@@ -1,9 +1,9 @@
-
 import React, { useState } from 'react';
 import { Button } from '@/components/ui/button';
 import { Menu, X, Zap } from 'lucide-react';
 import { Link, useNavigate } from 'react-router-dom';
 import VoucherClaimForm from './VoucherClaimForm';
+import { SearchMenu } from './SearchMenu';
 import {
   NavigationMenu,
   NavigationMenuContent,
@@ -154,8 +154,9 @@ const Header = () => {
             </NavigationMenu>
           </div>
 
-          {/* Desktop CTAs */}
+          {/* Desktop Search and CTAs */}
           <div className="hidden md:flex items-center space-x-4">
+            <SearchMenu />
             <Button 
               asChild
               variant="outline" 
@@ -183,6 +184,11 @@ const Header = () => {
         {isMenuOpen && (
           <div className="md:hidden">
             <div className="px-2 pt-2 pb-3 space-y-1 sm:px-3 bg-black/95 border-t border-fuchsia-500/30 cyber-grid">
+              {/* Mobile Search */}
+              <div className="px-3 py-2">
+                <SearchMenu />
+              </div>
+
               <Accordion type="multiple" className="w-full">
                 {/* Mobile About Us Accordion */}
                 <AccordionItem value="about-us" className="border-fuchsia-500/30">
