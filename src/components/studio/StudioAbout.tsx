@@ -13,6 +13,10 @@ interface StudioAboutProps {
 const StudioAbout = ({ studio }: StudioAboutProps) => {
   const studioImages = [
     studio.image,
+    '/lovable-uploads/5b3dd8e8-6bc4-4f4a-af01-655d55902167.png',
+    '/lovable-uploads/9f395d23-917c-4f57-aee6-3730701698b1.png',
+    '/lovable-uploads/29e3bddc-c99a-43e5-87df-ab4c0905e1a0.png',
+    '/lovable-uploads/14503a9b-f9c7-41ee-a0b5-131b4a9a6989.png',
     'https://images.unsplash.com/photo-1605810230434-7631ac76ec81?ixlib=rb-4.0.3&auto=format&fit=crop&w=2070&q=80',
     'https://images.unsplash.com/photo-1518611012118-696072aa579a?ixlib=rb-4.0.3&auto=format&fit=crop&w=2070&q=80',
     'https://images.unsplash.com/photo-1571019613454-1cbffaa5b517?ixlib=rb-4.0.3&auto=format&fit=crop&w=2070&q=80'
