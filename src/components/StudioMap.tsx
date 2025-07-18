@@ -1,8 +1,14 @@
 
-import { useEffect, useRef } from 'react';
+import { useEffect, useRef, useState } from 'react';
 import { Loader } from '@googlemaps/js-api-loader';
+import { Button } from '@/components/ui/button';
+import { Card } from '@/components/ui/card';
+import { ScrollArea } from '@/components/ui/scroll-area';
+import { MapPin, Eye } from 'lucide-react';
+import { useNavigate } from 'react-router-dom';
 
 interface StudioLocation {
+  id: string;
   name: string;
   address: string;
   lat: number;
@@ -15,9 +21,14 @@ const StudioMap = () => {
   const mapRef = useRef<HTMLDivElement>(null);
   const mapInstanceRef = useRef<google.maps.Map | null>(null);
   const loaderRef = useRef<Loader | null>(null);
+  const markersRef = useRef<{ [key: string]: google.maps.Marker }>({});
+  const infoWindowRef = useRef<google.maps.InfoWindow | null>(null);
+  const [selectedStudio, setSelectedStudio] = useState<string | null>(null);
+  const navigate = useNavigate();
 
   const locations: StudioLocation[] = [
     {
+      id: 'highett',
       name: "The Pole Room Highett",
       address: "1/5 Graham Road, Highett VIC",
       lat: -37.9398,
@@ -26,6 +37,7 @@ const StudioMap = () => {
       apparatus: ["Pole", "Aerials"]
     },
     {
+      id: 'kilsyth',
       name: "The Pole Room Kilsyth",
       address: "1-3 Southfork Drive, Kilsyth VIC",
       lat: -37.8197,
@@ -34,6 +46,7 @@ const StudioMap = () => {
       apparatus: ["Pole"]
     },
     {
+      id: 'narre-warren',
       name: "The Pole Room Narre Warren",
       address: "Narre Warren VIC",
       lat: -38.0267,
@@ -42,6 +55,7 @@ const StudioMap = () => {
       apparatus: ["Pole", "Aerials"]
     },
     {
+      id: 'eltham',
       name: "The Pole Room Eltham",
       address: "2/38 Bridge Street, Eltham VIC",
       lat: -37.7137,
@@ -50,6 +64,7 @@ const StudioMap = () => {
       apparatus: ["Pole"]
     },
     {
+      id: 'mitcham',
       name: "The Pole Room Mitcham",
       address: "2e Cochrane Street, Mitcham VIC 3132",
       lat: -37.8183,
@@ -58,6 +73,7 @@ const StudioMap = () => {
       apparatus: ["Pole", "Aerials"]
     },
     {
+      id: 'cbd',
       name: "The Pole Room CBD",
       address: "2/333 Flinders Lane, Melbourne VIC 3000",
       lat: -37.8162,
@@ -66,6 +82,36 @@ const StudioMap = () => {
       apparatus: ["Pole"]
     }
   ];
+
+  const handleStudioSelect = (studioId: string) => {
+    setSelectedStudio(studioId);
+    const marker = markersRef.current[studioId];
+    if (marker && mapInstanceRef.current) {
+      // Center map on selected studio
+      mapInstanceRef.current.panTo(marker.getPosition()!);
+      mapInstanceRef.current.setZoom(15);
+      
+      // Show info window
+      if (infoWindowRef.current) {
+        const studio = locations.find(l => l.id === studioId);
+        if (studio) {
+          infoWindowRef.current.setContent(`
+            <div style="color: #000; padding: 12px; font-family: Inter, sans-serif; max-width: 250px;">
+              <h3 style="margin: 0 0 8px 0; font-weight: bold; color: #1a1a1a;">${studio.name}</h3>
+              <p style="margin: 0 0 4px 0; color: #666;">${studio.address}</p>
+              ${studio.phone ? `<p style="margin: 0 0 4px 0; color: #666;">${studio.phone}</p>` : ''}
+              <p style="margin: 0; color: #ec4899; font-weight: 500;">${studio.apparatus.join(' & ')}</p>
+            </div>
+          `);
+          infoWindowRef.current.open(mapInstanceRef.current, marker);
+        }
+      }
+    }
+  };
+
+  const handleViewStudio = (studioId: string) => {
+    navigate(`/studios/${studioId}`);
+  };
 
   useEffect(() => {
     if (!mapRef.current) return;
@@ -163,6 +209,9 @@ const StudioMap = () => {
 
       mapInstanceRef.current = map;
 
+      // Create shared info window
+      infoWindowRef.current = new google.maps.InfoWindow();
+
       // Add markers for each location
       locations.forEach((location) => {
         const marker = new google.maps.Marker({
@@ -172,28 +221,18 @@ const StudioMap = () => {
           icon: {
             path: google.maps.SymbolPath.CIRCLE,
             scale: 12,
-            fillColor: '#ec4899',
+            fillColor: selectedStudio === location.id ? '#f97316' : '#ec4899',
             fillOpacity: 1,
             strokeColor: '#ffffff',
             strokeWeight: 2
           }
         });
 
-        // Create info window with apparatus information
-        const infoWindow = new google.maps.InfoWindow({
-          content: `
-            <div style="color: #000; padding: 8px; font-family: Inter, sans-serif;">
-              <h3 style="margin: 0 0 8px 0; font-weight: bold; color: #1a1a1a;">${location.name}</h3>
-              <p style="margin: 0 0 4px 0; color: #666;">${location.address}</p>
-              ${location.phone ? `<p style="margin: 0 0 4px 0; color: #666;">${location.phone}</p>` : ''}
-              <p style="margin: 0; color: #ec4899; font-weight: 500;">${location.apparatus.join(' & ')}</p>
-            </div>
-          `
-        });
+        markersRef.current[location.id] = marker;
 
         // Add click listener to marker
         marker.addListener('click', () => {
-          infoWindow.open(map, marker);
+          handleStudioSelect(location.id);
         });
       });
     }).catch((error) => {
@@ -207,9 +246,82 @@ const StudioMap = () => {
     };
   }, []);
 
+  // Update marker colors when selection changes
+  useEffect(() => {
+    Object.entries(markersRef.current).forEach(([studioId, marker]) => {
+      marker.setIcon({
+        path: google.maps.SymbolPath.CIRCLE,
+        scale: 12,
+        fillColor: selectedStudio === studioId ? '#f97316' : '#ec4899',
+        fillOpacity: 1,
+        strokeColor: '#ffffff',
+        strokeWeight: 2
+      });
+    });
+  }, [selectedStudio]);
+
   return (
-    <div className="w-full h-96 rounded-lg overflow-hidden border border-fuchsia-500/30">
+    <div className="relative w-full h-96 rounded-lg overflow-hidden border border-fuchsia-500/30">
       <div ref={mapRef} className="w-full h-full" />
+      
+      {/* Studio List Overlay */}
+      <div className="absolute top-4 right-4 w-80 h-80 bg-gray-900/95 backdrop-blur-sm rounded-lg border border-fuchsia-500/30">
+        <div className="p-4 border-b border-gray-700">
+          <h3 className="text-white font-semibold text-sm">Studio Locations</h3>
+          <p className="text-gray-400 text-xs mt-1">Click to view details</p>
+        </div>
+        
+        <ScrollArea className="h-64">
+          <div className="p-2">
+            {locations.map((location) => (
+              <Card 
+                key={location.id}
+                className={`p-3 mb-2 cursor-pointer transition-all hover:bg-gray-700/50 ${
+                  selectedStudio === location.id 
+                    ? 'bg-fuchsia-500/20 border-fuchsia-500/50' 
+                    : 'bg-gray-800/50 border-gray-700'
+                }`}
+                onClick={() => handleStudioSelect(location.id)}
+              >
+                <div className="flex items-start justify-between">
+                  <div className="flex-1 min-w-0">
+                    <h4 className="text-white text-sm font-medium truncate">
+                      {location.name}
+                    </h4>
+                    <div className="flex items-start mt-1">
+                      <MapPin className="w-3 h-3 text-fuchsia-400 mt-0.5 flex-shrink-0" />
+                      <p className="text-gray-300 text-xs ml-1 leading-tight">
+                        {location.address}
+                      </p>
+                    </div>
+                    <div className="flex flex-wrap gap-1 mt-2">
+                      {location.apparatus.map((item, index) => (
+                        <span 
+                          key={index}
+                          className="text-xs px-2 py-0.5 bg-fuchsia-500/20 text-fuchsia-300 rounded"
+                        >
+                          {item}
+                        </span>
+                      ))}
+                    </div>
+                  </div>
+                  <Button
+                    size="sm"
+                    variant="ghost"
+                    className="ml-2 h-8 w-8 p-0 text-fuchsia-400 hover:text-white hover:bg-fuchsia-500/20"
+                    onClick={(e) => {
+                      e.stopPropagation();
+                      handleViewStudio(location.id);
+                    }}
+                  >
+                    <Eye className="w-4 h-4" />
+                  </Button>
+                </div>
+              </Card>
+            ))}
+          </div>
+        </ScrollArea>
+      </div>
     </div>
   );
 };
