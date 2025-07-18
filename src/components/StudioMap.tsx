@@ -1,4 +1,3 @@
-
 import { useEffect, useRef, useState } from 'react';
 import { Loader } from '@googlemaps/js-api-loader';
 import { Button } from '@/components/ui/button';
@@ -91,16 +90,56 @@ const StudioMap = () => {
       mapInstanceRef.current.panTo(marker.getPosition()!);
       mapInstanceRef.current.setZoom(15);
       
-      // Show info window
+      // Show info window with improved styling and Go to Studio button
       if (infoWindowRef.current) {
         const studio = locations.find(l => l.id === studioId);
         if (studio) {
           infoWindowRef.current.setContent(`
-            <div style="color: #000; padding: 12px; font-family: Inter, sans-serif; max-width: 250px;">
-              <h3 style="margin: 0 0 8px 0; font-weight: bold; color: #1a1a1a;">${studio.name}</h3>
-              <p style="margin: 0 0 4px 0; color: #666;">${studio.address}</p>
-              ${studio.phone ? `<p style="margin: 0 0 4px 0; color: #666;">${studio.phone}</p>` : ''}
-              <p style="margin: 0; color: #ec4899; font-weight: 500;">${studio.apparatus.join(' & ')}</p>
+            <div style="color: #000; padding: 16px; font-family: Inter, sans-serif; max-width: 280px; min-width: 240px;">
+              <h3 style="margin: 0 0 12px 0; font-weight: 600; color: #1a1a1a; font-size: 16px; line-height: 1.4;">${studio.name}</h3>
+              <div style="margin-bottom: 8px;">
+                <p style="margin: 0; color: #666; font-size: 14px; line-height: 1.4; display: flex; align-items: flex-start;">
+                  <span style="margin-right: 6px; color: #ec4899;">📍</span>
+                  ${studio.address}
+                </p>
+              </div>
+              ${studio.phone ? `
+                <div style="margin-bottom: 8px;">
+                  <p style="margin: 0; color: #666; font-size: 14px; display: flex; align-items: center;">
+                    <span style="margin-right: 6px; color: #ec4899;">📞</span>
+                    ${studio.phone}
+                  </p>
+                </div>
+              ` : ''}
+              <div style="margin-bottom: 12px;">
+                <div style="display: flex; flex-wrap: wrap; gap: 4px;">
+                  ${studio.apparatus.map(item => `
+                    <span style="font-size: 12px; padding: 4px 8px; background: rgba(236, 72, 153, 0.1); color: #ec4899; border-radius: 12px; font-weight: 500;">
+                      ${item}
+                    </span>
+                  `).join('')}
+                </div>
+              </div>
+              <button 
+                onclick="window.handleGoToStudio('${studio.id}')"
+                style="
+                  width: 100%; 
+                  background: linear-gradient(135deg, #ec4899, #8b5cf6); 
+                  color: white; 
+                  border: none; 
+                  padding: 10px 16px; 
+                  border-radius: 8px; 
+                  font-weight: 600; 
+                  font-size: 14px; 
+                  cursor: pointer; 
+                  transition: all 0.2s ease;
+                  font-family: Inter, sans-serif;
+                "
+                onmouseover="this.style.transform='translateY(-1px)'; this.style.boxShadow='0 4px 12px rgba(236, 72, 153, 0.3)'"
+                onmouseout="this.style.transform='translateY(0)'; this.style.boxShadow='none'"
+              >
+                Go to Studio
+              </button>
             </div>
           `);
           infoWindowRef.current.open(mapInstanceRef.current, marker);
@@ -112,6 +151,15 @@ const StudioMap = () => {
   const handleViewStudio = (studioId: string) => {
     navigate(`/studios/${studioId}`);
   };
+
+  useEffect(() => {
+    // Add global function for the info window button
+    (window as any).handleGoToStudio = handleViewStudio;
+    
+    return () => {
+      delete (window as any).handleGoToStudio;
+    };
+  }, []);
 
   useEffect(() => {
     if (!mapRef.current) return;
@@ -261,66 +309,130 @@ const StudioMap = () => {
   }, [selectedStudio]);
 
   return (
-    <div className="relative w-full h-96 rounded-lg overflow-hidden border border-fuchsia-500/30">
-      <div ref={mapRef} className="w-full h-full" />
-      
-      {/* Studio List Overlay */}
-      <div className="absolute top-4 right-4 w-80 h-80 bg-gray-900/95 backdrop-blur-sm rounded-lg border border-fuchsia-500/30">
-        <div className="p-4 border-b border-gray-700">
-          <h3 className="text-white font-semibold text-sm">Studio Locations</h3>
-          <p className="text-gray-400 text-xs mt-1">Click to view details</p>
-        </div>
+    <div className="relative w-full">
+      {/* Map Container */}
+      <div className="w-full h-96 rounded-lg overflow-hidden border border-fuchsia-500/30 relative">
+        <div ref={mapRef} className="w-full h-full" />
         
-        <ScrollArea className="h-64">
-          <div className="p-2">
-            {locations.map((location) => (
-              <Card 
-                key={location.id}
-                className={`p-3 mb-2 cursor-pointer transition-all hover:bg-gray-700/50 ${
-                  selectedStudio === location.id 
-                    ? 'bg-fuchsia-500/20 border-fuchsia-500/50' 
-                    : 'bg-gray-800/50 border-gray-700'
-                }`}
-                onClick={() => handleStudioSelect(location.id)}
-              >
-                <div className="flex items-start justify-between">
-                  <div className="flex-1 min-w-0">
-                    <h4 className="text-white text-sm font-medium truncate">
-                      {location.name}
-                    </h4>
-                    <div className="flex items-start mt-1">
-                      <MapPin className="w-3 h-3 text-fuchsia-400 mt-0.5 flex-shrink-0" />
-                      <p className="text-gray-300 text-xs ml-1 leading-tight">
-                        {location.address}
-                      </p>
-                    </div>
-                    <div className="flex flex-wrap gap-1 mt-2">
-                      {location.apparatus.map((item, index) => (
-                        <span 
-                          key={index}
-                          className="text-xs px-2 py-0.5 bg-fuchsia-500/20 text-fuchsia-300 rounded"
-                        >
-                          {item}
-                        </span>
-                      ))}
-                    </div>
-                  </div>
-                  <Button
-                    size="sm"
-                    variant="ghost"
-                    className="ml-2 h-8 w-8 p-0 text-fuchsia-400 hover:text-white hover:bg-fuchsia-500/20"
-                    onClick={(e) => {
-                      e.stopPropagation();
-                      handleViewStudio(location.id);
-                    }}
-                  >
-                    <Eye className="w-4 h-4" />
-                  </Button>
-                </div>
-              </Card>
-            ))}
+        {/* Desktop Studio List Overlay - positioned on the right */}
+        <div className="hidden lg:block absolute top-4 right-4 w-80 h-80 bg-gray-900/95 backdrop-blur-sm rounded-lg border border-fuchsia-500/30">
+          <div className="p-4 border-b border-gray-700">
+            <h3 className="text-white font-semibold text-sm">Studio Locations</h3>
+            <p className="text-gray-400 text-xs mt-1">Click to view details</p>
           </div>
-        </ScrollArea>
+          
+          <ScrollArea className="h-64">
+            <div className="p-2">
+              {locations.map((location) => (
+                <Card 
+                  key={location.id}
+                  className={`p-3 mb-2 cursor-pointer transition-all hover:bg-gray-700/50 ${
+                    selectedStudio === location.id 
+                      ? 'bg-fuchsia-500/20 border-fuchsia-500/50' 
+                      : 'bg-gray-800/50 border-gray-700'
+                  }`}
+                  onClick={() => handleStudioSelect(location.id)}
+                >
+                  <div className="flex items-start justify-between">
+                    <div className="flex-1 min-w-0">
+                      <h4 className="text-white text-sm font-medium truncate">
+                        {location.name}
+                      </h4>
+                      <div className="flex items-start mt-1">
+                        <MapPin className="w-3 h-3 text-fuchsia-400 mt-0.5 flex-shrink-0" />
+                        <p className="text-gray-300 text-xs ml-1 leading-tight">
+                          {location.address}
+                        </p>
+                      </div>
+                      <div className="flex flex-wrap gap-1 mt-2">
+                        {location.apparatus.map((item, index) => (
+                          <span 
+                            key={index}
+                            className="text-xs px-2 py-0.5 bg-fuchsia-500/20 text-fuchsia-300 rounded"
+                          >
+                            {item}
+                          </span>
+                        ))}
+                      </div>
+                    </div>
+                    <Button
+                      size="sm"
+                      variant="ghost"
+                      className="ml-2 h-8 w-8 p-0 text-fuchsia-400 hover:text-white hover:bg-fuchsia-500/20"
+                      onClick={(e) => {
+                        e.stopPropagation();
+                        handleViewStudio(location.id);
+                      }}
+                    >
+                      <Eye className="w-4 h-4" />
+                    </Button>
+                  </div>
+                </Card>
+              ))}
+            </div>
+          </ScrollArea>
+        </div>
+      </div>
+
+      {/* Mobile Studio List - positioned below the map */}
+      <div className="lg:hidden mt-6">
+        <div className="bg-gray-900/95 backdrop-blur-sm rounded-lg border border-fuchsia-500/30">
+          <div className="p-4 border-b border-gray-700">
+            <h3 className="text-white font-semibold text-sm">Studio Locations</h3>
+            <p className="text-gray-400 text-xs mt-1">Click to view details</p>
+          </div>
+          
+          <div className="max-h-96 overflow-y-auto">
+            <div className="p-2">
+              {locations.map((location) => (
+                <Card 
+                  key={location.id}
+                  className={`p-3 mb-2 cursor-pointer transition-all hover:bg-gray-700/50 ${
+                    selectedStudio === location.id 
+                      ? 'bg-fuchsia-500/20 border-fuchsia-500/50' 
+                      : 'bg-gray-800/50 border-gray-700'
+                  }`}
+                  onClick={() => handleStudioSelect(location.id)}
+                >
+                  <div className="flex items-start justify-between">
+                    <div className="flex-1 min-w-0">
+                      <h4 className="text-white text-sm font-medium truncate">
+                        {location.name}
+                      </h4>
+                      <div className="flex items-start mt-1">
+                        <MapPin className="w-3 h-3 text-fuchsia-400 mt-0.5 flex-shrink-0" />
+                        <p className="text-gray-300 text-xs ml-1 leading-tight">
+                          {location.address}
+                        </p>
+                      </div>
+                      <div className="flex flex-wrap gap-1 mt-2">
+                        {location.apparatus.map((item, index) => (
+                          <span 
+                            key={index}
+                            className="text-xs px-2 py-0.5 bg-fuchsia-500/20 text-fuchsia-300 rounded"
+                          >
+                            {item}
+                          </span>
+                        ))}
+                      </div>
+                    </div>
+                    <Button
+                      size="sm"
+                      variant="ghost"
+                      className="ml-2 h-8 w-8 p-0 text-fuchsia-400 hover:text-white hover:bg-fuchsia-500/20"
+                      onClick={(e) => {
+                        e.stopPropagation();
+                        handleViewStudio(location.id);
+                      }}
+                    >
+                      <Eye className="w-4 h-4" />
+                    </Button>
+                  </div>
+                </Card>
+              ))}
+            </div>
+          </div>
+        </div>
       </div>
     </div>
   );
