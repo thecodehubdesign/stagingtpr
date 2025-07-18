@@ -1,5 +1,9 @@
 import Header from '@/components/Header';
 import Footer from '@/components/Footer';
+import SectionNavigation from '@/components/SectionNavigation';
+import TermCountdown from '@/components/TermCountdown';
+import StartAnytime from '@/components/StartAnytime';
+import FastTrackProgram from '@/components/FastTrackProgram';
 import { Button } from '@/components/ui/button';
 import { Card } from '@/components/ui/card';
 import { Badge } from '@/components/ui/badge';
@@ -109,7 +113,7 @@ const FirstTimers = () => {
       difficulty: "Beginner Friendly"
     },
     {
-      name: "Aerial Silks Intro", 
+      name: "Aerial Silks Intro",
       description: "Learn to climb and create beautiful shapes in the air",
       duration: "60 min",
       difficulty: "No Experience Needed"
@@ -117,14 +121,27 @@ const FirstTimers = () => {
     {
       name: "Floorwork Foundations",
       description: "Ground-based movement focusing on fluidity and confidence",
-      duration: "45 min", 
+      duration: "45 min",
       difficulty: "All Levels Welcome"
     }
+  ];
+
+  const sections = [
+    { id: 'countdown', label: 'Next Term' },
+    { id: 'start-anytime', label: 'Start Now' },
+    { id: 'fast-track', label: 'Fast Track' },
+    { id: 'what-to-expect', label: 'What to Expect' },
+    { id: 'journey', label: 'Your Journey' },
+    { id: 'first-classes', label: 'First Classes' },
+    { id: 'what-to-bring', label: 'What to Bring' },
+    { id: 'faqs', label: 'FAQs' },
+    { id: 'safety', label: 'Safety' }
   ];
 
   return (
     <div className="min-h-screen">
       <Header />
+      <SectionNavigation sections={sections} />
       
       {/* Hero Section */}
       <section className="pt-20 pb-16 bg-gradient-to-br from-gray-900 via-purple-900 to-gray-900 cyber-grid">
@@ -144,8 +161,23 @@ const FirstTimers = () => {
         </div>
       </section>
 
+      {/* Term Countdown Banner */}
+      <div id="countdown">
+        <TermCountdown />
+      </div>
+
+      {/* Start Anytime Section */}
+      <div id="start-anytime">
+        <StartAnytime />
+      </div>
+
+      {/* Fast Track Program */}
+      <div id="fast-track">
+        <FastTrackProgram />
+      </div>
+
       {/* Your Journey Progression */}
-      <section className="py-20 bg-gray-900">
+      <section id="journey" className="py-20 bg-gray-900">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="text-center mb-16">
             <h2 className="text-3xl sm:text-4xl font-bold text-white mb-6">
@@ -196,7 +228,7 @@ const FirstTimers = () => {
       </section>
 
       {/* What to Expect */}
-      <section className="py-20 bg-gray-800">
+      <section id="what-to-expect" className="py-20 bg-gray-800">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="text-center mb-16">
             <h2 className="text-3xl sm:text-4xl font-bold text-white mb-6">
@@ -226,7 +258,7 @@ const FirstTimers = () => {
       </section>
 
       {/* Perfect First Classes */}
-      <section className="py-20 bg-gray-900">
+      <section id="first-classes" className="py-20 bg-gray-900">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="text-center mb-16">
             <h2 className="text-3xl sm:text-4xl font-bold text-white mb-6">
@@ -276,7 +308,7 @@ const FirstTimers = () => {
       </section>
 
       {/* What to Bring */}
-      <section className="py-20 bg-gray-800">
+      <section id="what-to-bring" className="py-20 bg-gray-800">
         <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="text-center mb-12">
             <h2 className="text-3xl sm:text-4xl font-bold text-white mb-6">
@@ -310,7 +342,7 @@ const FirstTimers = () => {
       </section>
 
       {/* Frequently Asked Questions */}
-      <section className="py-20 bg-gray-900">
+      <section id="faqs" className="py-20 bg-gray-900">
         <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="text-center mb-12">
             <HelpCircle className="w-16 h-16 text-fuchsia-400 mx-auto mb-6 neon-glow" />
@@ -338,7 +370,7 @@ const FirstTimers = () => {
       </section>
 
       {/* Safety & Comfort */}
-      <section className="py-20 bg-gray-800">
+      <section id="safety" className="py-20 bg-gray-800">
         <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="text-center mb-16">
             <Shield className="w-16 h-16 text-fuchsia-400 mx-auto mb-6 neon-glow" />
