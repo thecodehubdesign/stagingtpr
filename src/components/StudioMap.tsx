@@ -306,12 +306,12 @@ const StudioMap = ({ onSearchClick }: StudioMapProps) => {
 
   return (
     <div className="relative w-full">
-      {/* Map Container */}
-      <div className="w-full h-96 rounded-lg overflow-hidden border border-fuchsia-500/30 relative">
+      {/* Map Container - Made larger */}
+      <div className="w-full h-full rounded-lg overflow-hidden border border-fuchsia-500/30 relative">
         <div ref={mapRef} className="w-full h-full" />
         
         {/* Desktop Studio List Overlay - positioned on the right */}
-        <div className="hidden lg:block absolute top-4 right-4 w-80 h-80 bg-gray-900/95 backdrop-blur-sm rounded-lg border border-fuchsia-500/30">
+        <div className="hidden lg:block absolute top-4 right-4 w-80 max-h-[calc(100%-2rem)] bg-gray-900/95 backdrop-blur-sm rounded-lg border border-fuchsia-500/30">
           <div className="p-4 border-b border-gray-700">
             <h3 className="text-white font-semibold text-sm">Studio Locations</h3>
             <p 
@@ -322,7 +322,7 @@ const StudioMap = ({ onSearchClick }: StudioMapProps) => {
             </p>
           </div>
           
-          <ScrollArea className="h-64">
+          <ScrollArea className="h-[calc(100%-5rem)]">
             <div className="p-2">
               {locations.map(location => (
                 <Card 
