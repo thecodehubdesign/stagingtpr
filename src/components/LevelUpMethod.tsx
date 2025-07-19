@@ -132,19 +132,20 @@ const LevelUpMethod = () => {
           </div>
         </div>
 
-        {/* Image Gallery Collage */}
+        {/* Image Gallery Collage - Matching Reference Layout */}
         <div className="mb-16 animate-fade-in" style={{ animationDelay: '0.2s' }}>
-          <div className="relative max-w-5xl mx-auto">
-            {/* 2:1 aspect ratio canvas container */}
-            <div className="relative w-full" style={{ paddingBottom: '50%' }}>
-              {/* Main center image - 400x480px, frontmost layer */}
-              <div className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 z-30">
+          <div className="relative max-w-6xl mx-auto px-4">
+            {/* Main container with responsive height */}
+            <div className="relative w-full h-[400px] md:h-[500px] lg:h-[600px]">
+              
+              {/* Top Left Image - Large */}
+              <div className="absolute top-0 left-0 z-20">
                 <div 
-                  className="rounded-2xl overflow-hidden cyber-border shadow-2xl animate-fade-in hover:scale-105 transition-transform duration-300"
+                  className="rounded-3xl overflow-hidden cyber-border shadow-2xl animate-fade-in hover:scale-105 transition-transform duration-300"
                   style={{ 
                     width: '280px', 
-                    height: '336px',
-                    animationDelay: '0.3s'
+                    height: '200px',
+                    animationDelay: '0.1s'
                   }}
                 >
                   <img
@@ -153,18 +154,18 @@ const LevelUpMethod = () => {
                     className="w-full h-full object-cover"
                     loading="lazy"
                   />
-                  <div className="absolute inset-0 bg-gradient-to-br from-fuchsia-500/20 to-cyan-500/20 opacity-0 hover:opacity-100 transition-opacity duration-300"></div>
+                  <div className="absolute inset-0 bg-gradient-to-br from-fuchsia-500/20 to-purple-500/20 opacity-0 hover:opacity-100 transition-opacity duration-300"></div>
                 </div>
               </div>
 
-              {/* Top left image - 330x400px, slightly behind */}
-              <div className="absolute top-4 left-8 z-20 hidden sm:block">
+              {/* Top Right Image - Medium */}
+              <div className="absolute top-0 right-0 z-20 hidden sm:block">
                 <div 
-                  className="rounded-2xl overflow-hidden cyber-border shadow-xl animate-fade-in hover:scale-105 transition-transform duration-300"
+                  className="rounded-3xl overflow-hidden cyber-border shadow-xl animate-fade-in hover:scale-105 transition-transform duration-300"
                   style={{ 
-                    width: '231px', 
-                    height: '280px',
-                    animationDelay: '0.1s'
+                    width: '240px', 
+                    height: '180px',
+                    animationDelay: '0.2s'
                   }}
                 >
                   <img
@@ -173,18 +174,18 @@ const LevelUpMethod = () => {
                     className="w-full h-full object-cover"
                     loading="lazy"
                   />
-                  <div className="absolute inset-0 bg-gradient-to-br from-purple-500/20 to-pink-500/20 opacity-0 hover:opacity-100 transition-opacity duration-300"></div>
+                  <div className="absolute inset-0 bg-gradient-to-br from-cyan-500/20 to-pink-500/20 opacity-0 hover:opacity-100 transition-opacity duration-300"></div>
                 </div>
               </div>
 
-              {/* Top right image - 330x400px, slightly behind */}
-              <div className="absolute top-4 right-8 z-20 hidden sm:block">
+              {/* Center Image - Hero/Main focal point */}
+              <div className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 z-30">
                 <div 
-                  className="rounded-2xl overflow-hidden cyber-border shadow-xl animate-fade-in hover:scale-105 transition-transform duration-300"
+                  className="rounded-3xl overflow-hidden cyber-border shadow-2xl animate-fade-in hover:scale-105 transition-transform duration-300"
                   style={{ 
-                    width: '231px', 
-                    height: '280px',
-                    animationDelay: '0.2s'
+                    width: '320px', 
+                    height: '240px',
+                    animationDelay: '0.3s'
                   }}
                 >
                   <img
@@ -193,17 +194,17 @@ const LevelUpMethod = () => {
                     className="w-full h-full object-cover"
                     loading="lazy"
                   />
-                  <div className="absolute inset-0 bg-gradient-to-br from-cyan-500/20 to-purple-500/20 opacity-0 hover:opacity-100 transition-opacity duration-300"></div>
+                  <div className="absolute inset-0 bg-gradient-to-br from-fuchsia-500/20 to-cyan-500/20 opacity-0 hover:opacity-100 transition-opacity duration-300"></div>
                 </div>
               </div>
 
-              {/* Bottom left image - 330x240px, tucked under center */}
-              <div className="absolute bottom-4 left-16 z-10 hidden md:block">
+              {/* Bottom Left Image - Medium */}
+              <div className="absolute bottom-0 left-8 z-20 hidden md:block">
                 <div 
-                  className="rounded-2xl overflow-hidden cyber-border shadow-lg animate-fade-in hover:scale-105 transition-transform duration-300"
+                  className="rounded-3xl overflow-hidden cyber-border shadow-xl animate-fade-in hover:scale-105 transition-transform duration-300"
                   style={{ 
-                    width: '231px', 
-                    height: '168px',
+                    width: '220px', 
+                    height: '160px',
                     animationDelay: '0.4s'
                   }}
                 >
@@ -213,17 +214,17 @@ const LevelUpMethod = () => {
                     className="w-full h-full object-cover"
                     loading="lazy"
                   />
-                  <div className="absolute inset-0 bg-gradient-to-br from-pink-500/20 to-fuchsia-500/20 opacity-0 hover:opacity-100 transition-opacity duration-300"></div>
+                  <div className="absolute inset-0 bg-gradient-to-br from-purple-500/20 to-fuchsia-500/20 opacity-0 hover:opacity-100 transition-opacity duration-300"></div>
                 </div>
               </div>
 
-              {/* Bottom right image - 330x240px, tucked under center */}
-              <div className="absolute bottom-4 right-16 z-10 hidden md:block">
+              {/* Bottom Right Image - Large */}
+              <div className="absolute bottom-0 right-0 z-20 hidden sm:block">
                 <div 
-                  className="rounded-2xl overflow-hidden cyber-border shadow-lg animate-fade-in hover:scale-105 transition-transform duration-300"
+                  className="rounded-3xl overflow-hidden cyber-border shadow-xl animate-fade-in hover:scale-105 transition-transform duration-300"
                   style={{ 
-                    width: '231px', 
-                    height: '168px',
+                    width: '260px', 
+                    height: '180px',
                     animationDelay: '0.5s'
                   }}
                 >
@@ -233,12 +234,31 @@ const LevelUpMethod = () => {
                     className="w-full h-full object-cover"
                     loading="lazy"
                   />
-                  <div className="absolute inset-0 bg-gradient-to-br from-fuchsia-500/20 to-cyan-500/20 opacity-0 hover:opacity-100 transition-opacity duration-300"></div>
+                  <div className="absolute inset-0 bg-gradient-to-br from-pink-500/20 to-cyan-500/20 opacity-0 hover:opacity-100 transition-opacity duration-300"></div>
+                </div>
+              </div>
+
+              {/* Responsive: Mobile shows only 2 key images */}
+              <div className="sm:hidden absolute top-4 right-4 z-20">
+                <div 
+                  className="rounded-3xl overflow-hidden cyber-border shadow-xl animate-fade-in"
+                  style={{ 
+                    width: '180px', 
+                    height: '140px',
+                    animationDelay: '0.2s'
+                  }}
+                >
+                  <img
+                    src={galleryImages[1].src}
+                    alt={galleryImages[1].alt}
+                    className="w-full h-full object-cover"
+                    loading="lazy"
+                  />
                 </div>
               </div>
 
               {/* Decorative background elements */}
-              <div className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 w-96 h-96 bg-gradient-to-br from-fuchsia-500/5 to-cyan-500/5 rounded-full blur-3xl -z-10"></div>
+              <div className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 w-[800px] h-[600px] bg-gradient-to-br from-fuchsia-500/5 to-cyan-500/5 rounded-full blur-3xl -z-10"></div>
               <div className="absolute top-1/4 left-1/4 w-32 h-32 bg-purple-500/10 rounded-full blur-xl -z-10 animate-pulse"></div>
               <div className="absolute bottom-1/4 right-1/4 w-24 h-24 bg-pink-500/10 rounded-full blur-xl -z-10 animate-pulse" style={{ animationDelay: '1s' }}></div>
             </div>
