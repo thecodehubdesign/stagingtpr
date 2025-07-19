@@ -19,6 +19,7 @@ import Blog from "./pages/Blog";
 import BlogPost from "./pages/BlogPost";
 import Products from "./pages/Products";
 import Checkout from "./pages/Checkout";
+import GetStarted from "./pages/GetStarted";
 import NotFound from "./pages/NotFound";
 
 const queryClient = new QueryClient();
@@ -45,6 +46,7 @@ const App = () => (
           <Route path="/blog/:id" element={<BlogPost />} />
           <Route path="/products" element={<Products />} />
           <Route path="/checkout" element={<Checkout />} />
+          <Route path="/get-started" element={<GetStarted />} />
           <Route path="*" element={<NotFound />} />
         </Routes>
       </BrowserRouter>
