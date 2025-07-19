@@ -1,5 +1,5 @@
 
-import { useState, useRef, useEffect } from 'react';
+import { useState, useRef, useEffect, useCallback } from 'react';
 import { Search, FileText, MapPin, BookOpen } from 'lucide-react';
 import { useNavigate } from 'react-router-dom';
 import { Input } from '@/components/ui/input';
@@ -42,7 +42,7 @@ export const SearchMenu = () => {
     return () => document.removeEventListener('mousedown', handleClickOutside);
   }, []);
 
-  const handleResultClick = (result: SearchResult) => {
+  const handleResultClick = useCallback((result: SearchResult) => {
     navigate(result.url);
     if (result.sectionId) {
       setTimeout(() => {
@@ -51,16 +51,12 @@ export const SearchMenu = () => {
           element.scrollIntoView({ behavior: 'smooth' });
         }
       }, 100);
-    } else {
-      setTimeout(() => {
-        window.scrollTo(0, 0);
-      }, 0);
     }
     setQuery('');
     setIsOpen(false);
     setIsExpanded(false);
     inputRef.current?.blur();
-  };
+  }, [navigate]);
 
   const handleKeyDown = (e: React.KeyboardEvent) => {
     if (!isOpen || results.length === 0) return;
@@ -91,12 +87,12 @@ export const SearchMenu = () => {
     }
   };
 
-  const handleIconClick = () => {
+  const handleIconClick = useCallback(() => {
     setIsExpanded(true);
     setTimeout(() => {
       inputRef.current?.focus();
     }, 100);
-  };
+  }, []);
 
   const getTypeIcon = (type: string) => {
     switch (type) {

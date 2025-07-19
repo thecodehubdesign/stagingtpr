@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useCallback } from 'react';
 import { Button } from '@/components/ui/button';
 import { Menu, X, Zap } from 'lucide-react';
 import { Link, useNavigate } from 'react-router-dom';
@@ -57,13 +57,10 @@ const Header = () => {
     { name: 'Shop', href: '/products' }
   ];
 
-  const handleNavigation = (href: string) => {
+  const handleNavigation = useCallback((href: string) => {
     navigate(href);
-    setTimeout(() => {
-      window.scrollTo(0, 0);
-    }, 0);
     setIsMenuOpen(false);
-  };
+  }, [navigate]);
 
   return (
     <header className="fixed top-0 left-0 right-0 z-50 bg-black/90 backdrop-blur-md border-b border-fuchsia-500/30 cyber-grid">
@@ -71,7 +68,7 @@ const Header = () => {
         <div className="flex justify-between items-center h-16">
           {/* Logo */}
           <div className="flex-shrink-0 flex items-center space-x-2">
-            <Link to="/" className="flex items-center space-x-2" onClick={() => handleNavigation('/')}>
+            <Link to="/" className="flex items-center space-x-2">
               <Zap className="w-8 h-8 text-fuchsia-400" />
               <h1 className="text-2xl font-bold gradient-text">The Pole Room</h1>
             </Link>
@@ -163,7 +160,7 @@ const Header = () => {
               variant="outline" 
               className="cyber-border text-cyan-400 hover:bg-cyan-400/10 hover:text-cyan-300"
             >
-              <Link to="/free-gifts" onClick={() => handleNavigation('/free-gifts')}>
+              <Link to="/free-gifts">
                 Free Gifts 💝
               </Link>
             </Button>
@@ -269,7 +266,7 @@ const Header = () => {
                   variant="outline" 
                   className="cyber-border text-cyan-400 hover:bg-cyan-400/10"
                 >
-                  <Link to="/free-gifts" onClick={() => handleNavigation('/free-gifts')}>
+                  <Link to="/free-gifts">
                     Free Gifts 💝
                   </Link>
                 </Button>
@@ -289,12 +286,9 @@ const ListItem = React.forwardRef<
 >(({ className, title, children, href, ...props }, ref) => {
   const navigate = useNavigate();
 
-  const handleClick = () => {
+  const handleClick = useCallback(() => {
     navigate(href);
-    setTimeout(() => {
-      window.scrollTo(0, 0);
-    }, 0);
-  };
+  }, [navigate, href]);
 
   return (
     <li>
