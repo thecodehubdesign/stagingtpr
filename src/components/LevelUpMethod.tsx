@@ -4,27 +4,27 @@ const LevelUpMethod = () => {
   // Image gallery data - easily customizable by admin/team
   const galleryImages = [
     {
-      src: "https://images.unsplash.com/photo-1571019613454-1cb2f99b2d8b?ixlib=rb-4.0.3&auto=format&fit=crop&w=400&q=60",
-      alt: "Pole fitness training session",
-      type: "main"
-    },
-    {
-      src: "https://images.unsplash.com/photo-1581090464777-f3220bbe1b8b?ixlib=rb-4.0.3&auto=format&fit=crop&w=400&q=60",
-      alt: "Strength and flexibility training",
+      src: "https://images.unsplash.com/photo-1571019613454-1cb2f99b2d8b?ixlib=rb-4.0.3&auto=format&fit=crop&w=600&q=80",
+      alt: "Pole fitness training session", 
       type: "top-left"
     },
     {
-      src: "https://images.unsplash.com/photo-1618160702438-9b02ab6515c9?ixlib=rb-4.0.3&auto=format&fit=crop&w=400&q=60",
-      alt: "Pole dance performance",
+      src: "https://images.unsplash.com/photo-1581090464777-f3220bbe1b8b?ixlib=rb-4.0.3&auto=format&fit=crop&w=500&q=80",
+      alt: "Strength and flexibility training",
       type: "top-right"
     },
     {
-      src: "https://images.unsplash.com/photo-1581091226825-a6a2a5aee158?ixlib=rb-4.0.3&auto=format&fit=crop&w=400&q=60",
+      src: "https://images.unsplash.com/photo-1618160702438-9b02ab6515c9?ixlib=rb-4.0.3&auto=format&fit=crop&w=700&q=80",
+      alt: "Pole dance performance",
+      type: "center-main"
+    },
+    {
+      src: "https://images.unsplash.com/photo-1581091226825-a6a2a5aee158?ixlib=rb-4.0.3&auto=format&fit=crop&w=400&q=80",
       alt: "Community and support",
       type: "bottom-left"
     },
     {
-      src: "https://images.unsplash.com/photo-1571019613454-1cb2f99b2d8b?ixlib=rb-4.0.3&auto=format&fit=crop&w=400&q=60",
+      src: "https://images.unsplash.com/photo-1571019613454-1cb2f99b2d8b?ixlib=rb-4.0.3&auto=format&fit=crop&w=500&q=80",
       alt: "Confidence building",
       type: "bottom-right"
     }
@@ -42,7 +42,7 @@ const LevelUpMethod = () => {
       image: "https://images.unsplash.com/photo-1581090464777-f3220bbe1b8b?ixlib=rb-4.0.3&auto=format&fit=crop&w=400&q=80"
     },
     {
-      number: "02",
+      number: "02", 
       title: "Integration",
       subtitle: "Strength Meets Identity",
       description: "With every class, you're doing more than learning tricks. You're creating a new narrative: \"I can do hard things.\" You start to carry yourself differently — at work, in social settings, and in the mirror.",
@@ -132,20 +132,19 @@ const LevelUpMethod = () => {
           </div>
         </div>
 
-        {/* Image Gallery Collage - Matching Reference Layout */}
+        {/* Image Gallery Collage - Exact Reference Layout */}
         <div className="mb-16 animate-fade-in" style={{ animationDelay: '0.2s' }}>
-          <div className="relative max-w-6xl mx-auto px-4">
-            {/* Main container with responsive height */}
-            <div className="relative w-full h-[400px] md:h-[500px] lg:h-[600px]">
+          <div className="relative max-w-6xl mx-auto">
+            {/* Desktop Layout - Overlapping Collage */}
+            <div className="hidden md:block relative w-full h-[500px]">
               
-              {/* Top Left Image - Large */}
-              <div className="absolute top-0 left-0 z-20">
+              {/* Top Left Image - Large rectangular */}
+              <div className="absolute top-0 left-0 z-10">
                 <div 
-                  className="rounded-3xl overflow-hidden cyber-border shadow-2xl animate-fade-in hover:scale-105 transition-transform duration-300"
+                  className="rounded-3xl overflow-hidden cyber-border shadow-2xl hover:scale-105 transition-transform duration-300"
                   style={{ 
-                    width: '280px', 
-                    height: '200px',
-                    animationDelay: '0.1s'
+                    width: '320px', 
+                    height: '200px'
                   }}
                 >
                   <img
@@ -158,14 +157,13 @@ const LevelUpMethod = () => {
                 </div>
               </div>
 
-              {/* Top Right Image - Medium */}
-              <div className="absolute top-0 right-0 z-20 hidden sm:block">
+              {/* Top Right Image - Medium rectangular */}
+              <div className="absolute top-0 right-0 z-10">
                 <div 
-                  className="rounded-3xl overflow-hidden cyber-border shadow-xl animate-fade-in hover:scale-105 transition-transform duration-300"
+                  className="rounded-3xl overflow-hidden cyber-border shadow-xl hover:scale-105 transition-transform duration-300"
                   style={{ 
-                    width: '240px', 
-                    height: '180px',
-                    animationDelay: '0.2s'
+                    width: '280px', 
+                    height: '180px'
                   }}
                 >
                   <img
@@ -178,14 +176,13 @@ const LevelUpMethod = () => {
                 </div>
               </div>
 
-              {/* Center Image - Hero/Main focal point */}
-              <div className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 z-30">
+              {/* Center Main Image - Overlapping hero */}
+              <div className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 z-20">
                 <div 
-                  className="rounded-3xl overflow-hidden cyber-border shadow-2xl animate-fade-in hover:scale-105 transition-transform duration-300"
+                  className="rounded-3xl overflow-hidden cyber-border shadow-2xl hover:scale-105 transition-transform duration-300"
                   style={{ 
-                    width: '320px', 
-                    height: '240px',
-                    animationDelay: '0.3s'
+                    width: '380px', 
+                    height: '240px'
                   }}
                 >
                   <img
@@ -198,14 +195,13 @@ const LevelUpMethod = () => {
                 </div>
               </div>
 
-              {/* Bottom Left Image - Medium */}
-              <div className="absolute bottom-0 left-8 z-20 hidden md:block">
+              {/* Bottom Left Image - Smaller rectangular */}
+              <div className="absolute bottom-0 left-16 z-10">
                 <div 
-                  className="rounded-3xl overflow-hidden cyber-border shadow-xl animate-fade-in hover:scale-105 transition-transform duration-300"
+                  className="rounded-3xl overflow-hidden cyber-border shadow-xl hover:scale-105 transition-transform duration-300"
                   style={{ 
-                    width: '220px', 
-                    height: '160px',
-                    animationDelay: '0.4s'
+                    width: '240px', 
+                    height: '150px'
                   }}
                 >
                   <img
@@ -218,14 +214,13 @@ const LevelUpMethod = () => {
                 </div>
               </div>
 
-              {/* Bottom Right Image - Large */}
-              <div className="absolute bottom-0 right-0 z-20 hidden sm:block">
+              {/* Bottom Right Image - Medium rectangular */}
+              <div className="absolute bottom-0 right-12 z-10">
                 <div 
-                  className="rounded-3xl overflow-hidden cyber-border shadow-xl animate-fade-in hover:scale-105 transition-transform duration-300"
+                  className="rounded-3xl overflow-hidden cyber-border shadow-xl hover:scale-105 transition-transform duration-300"
                   style={{ 
-                    width: '260px', 
-                    height: '180px',
-                    animationDelay: '0.5s'
+                    width: '300px', 
+                    height: '180px'
                   }}
                 >
                   <img
@@ -238,29 +233,25 @@ const LevelUpMethod = () => {
                 </div>
               </div>
 
-              {/* Responsive: Mobile shows only 2 key images */}
-              <div className="sm:hidden absolute top-4 right-4 z-20">
-                <div 
-                  className="rounded-3xl overflow-hidden cyber-border shadow-xl animate-fade-in"
-                  style={{ 
-                    width: '180px', 
-                    height: '140px',
-                    animationDelay: '0.2s'
-                  }}
-                >
-                  <img
-                    src={galleryImages[1].src}
-                    alt={galleryImages[1].alt}
-                    className="w-full h-full object-cover"
-                    loading="lazy"
-                  />
-                </div>
-              </div>
+              {/* Decorative background glow */}
+              <div className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 w-[600px] h-[400px] bg-gradient-to-br from-fuchsia-500/5 to-cyan-500/5 rounded-full blur-3xl -z-10"></div>
+            </div>
 
-              {/* Decorative background elements */}
-              <div className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 w-[800px] h-[600px] bg-gradient-to-br from-fuchsia-500/5 to-cyan-500/5 rounded-full blur-3xl -z-10"></div>
-              <div className="absolute top-1/4 left-1/4 w-32 h-32 bg-purple-500/10 rounded-full blur-xl -z-10 animate-pulse"></div>
-              <div className="absolute bottom-1/4 right-1/4 w-24 h-24 bg-pink-500/10 rounded-full blur-xl -z-10 animate-pulse" style={{ animationDelay: '1s' }}></div>
+            {/* Mobile Layout - Stacked Images */}
+            <div className="md:hidden space-y-6">
+              {galleryImages.map((image, index) => (
+                <div key={index} className="w-full">
+                  <div className="rounded-2xl overflow-hidden cyber-border shadow-xl mx-auto max-w-sm">
+                    <img
+                      src={image.src}
+                      alt={image.alt}
+                      className="w-full h-48 object-cover"
+                      loading="lazy"
+                    />
+                    <div className="absolute inset-0 bg-gradient-to-br from-fuchsia-500/20 to-cyan-500/20 opacity-0 hover:opacity-100 transition-opacity duration-300"></div>
+                  </div>
+                </div>
+              ))}
             </div>
           </div>
         </div>
