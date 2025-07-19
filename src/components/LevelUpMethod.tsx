@@ -4,27 +4,27 @@ const LevelUpMethod = () => {
   // Image gallery data - easily customizable by admin/team
   const galleryImages = [
     {
-      src: "https://images.unsplash.com/photo-1571019613454-1cb2f99b2d8b?ixlib=rb-4.0.3&auto=format&fit=crop&w=400&q=80",
+      src: "https://images.unsplash.com/photo-1571019613454-1cb2f99b2d8b?ixlib=rb-4.0.3&auto=format&fit=crop&w=400&q=60",
       alt: "Pole fitness training session",
       type: "main"
     },
     {
-      src: "https://images.unsplash.com/photo-1581090464777-f3220bbe1b8b?ixlib=rb-4.0.3&auto=format&fit=crop&w=400&q=80",
+      src: "https://images.unsplash.com/photo-1581090464777-f3220bbe1b8b?ixlib=rb-4.0.3&auto=format&fit=crop&w=400&q=60",
       alt: "Strength and flexibility training",
       type: "top-left"
     },
     {
-      src: "https://images.unsplash.com/photo-1618160702438-9b02ab6515c9?ixlib=rb-4.0.3&auto=format&fit=crop&w=400&q=80",
+      src: "https://images.unsplash.com/photo-1618160702438-9b02ab6515c9?ixlib=rb-4.0.3&auto=format&fit=crop&w=400&q=60",
       alt: "Pole dance performance",
       type: "top-right"
     },
     {
-      src: "https://images.unsplash.com/photo-1581091226825-a6a2a5aee158?ixlib=rb-4.0.3&auto=format&fit=crop&w=400&q=80",
+      src: "https://images.unsplash.com/photo-1581091226825-a6a2a5aee158?ixlib=rb-4.0.3&auto=format&fit=crop&w=400&q=60",
       alt: "Community and support",
       type: "bottom-left"
     },
     {
-      src: "https://images.unsplash.com/photo-1571019613454-1cb2f99b2d8b?ixlib=rb-4.0.3&auto=format&fit=crop&w=400&q=80",
+      src: "https://images.unsplash.com/photo-1571019613454-1cb2f99b2d8b?ixlib=rb-4.0.3&auto=format&fit=crop&w=400&q=60",
       alt: "Confidence building",
       type: "bottom-right"
     }
@@ -77,7 +77,7 @@ const LevelUpMethod = () => {
     <section className="py-20 relative overflow-hidden cyber-grid">
       {/* Cyberpunk Background */}
       <div className="absolute inset-0 bg-cover bg-center" style={{
-        backgroundImage: `linear-gradient(rgba(8,8,15,0.95), rgba(20,20,35,0.95)), url('https://images.unsplash.com/photo-1571019613454-1cb2f99b2d8b?ixlib=rb-4.0.3&auto=format&fit=crop&w=2070&q=80')`
+        backgroundImage: `linear-gradient(rgba(8,8,15,0.95), rgba(20,20,35,0.95)), url('https://images.unsplash.com/photo-1571019613454-1cb2f99b2d8b?ixlib=rb-4.0.3&auto=format&fit=crop&w=1200&q=60')`
       }} />
       
       {/* Neon Accent Lines */}
@@ -151,6 +151,7 @@ const LevelUpMethod = () => {
                     src={galleryImages[0].src}
                     alt={galleryImages[0].alt}
                     className="w-full h-full object-cover"
+                    loading="lazy"
                   />
                   <div className="absolute inset-0 bg-gradient-to-br from-fuchsia-500/20 to-cyan-500/20 opacity-0 hover:opacity-100 transition-opacity duration-300"></div>
                 </div>
@@ -170,6 +171,7 @@ const LevelUpMethod = () => {
                     src={galleryImages[1].src}
                     alt={galleryImages[1].alt}
                     className="w-full h-full object-cover"
+                    loading="lazy"
                   />
                   <div className="absolute inset-0 bg-gradient-to-br from-purple-500/20 to-pink-500/20 opacity-0 hover:opacity-100 transition-opacity duration-300"></div>
                 </div>
@@ -189,6 +191,7 @@ const LevelUpMethod = () => {
                     src={galleryImages[2].src}
                     alt={galleryImages[2].alt}
                     className="w-full h-full object-cover"
+                    loading="lazy"
                   />
                   <div className="absolute inset-0 bg-gradient-to-br from-cyan-500/20 to-purple-500/20 opacity-0 hover:opacity-100 transition-opacity duration-300"></div>
                 </div>
@@ -208,6 +211,7 @@ const LevelUpMethod = () => {
                     src={galleryImages[3].src}
                     alt={galleryImages[3].alt}
                     className="w-full h-full object-cover"
+                    loading="lazy"
                   />
                   <div className="absolute inset-0 bg-gradient-to-br from-pink-500/20 to-fuchsia-500/20 opacity-0 hover:opacity-100 transition-opacity duration-300"></div>
                 </div>
@@ -227,6 +231,7 @@ const LevelUpMethod = () => {
                     src={galleryImages[4].src}
                     alt={galleryImages[4].alt}
                     className="w-full h-full object-cover"
+                    loading="lazy"
                   />
                   <div className="absolute inset-0 bg-gradient-to-br from-fuchsia-500/20 to-cyan-500/20 opacity-0 hover:opacity-100 transition-opacity duration-300"></div>
                 </div>
@@ -283,6 +288,7 @@ const LevelUpMethod = () => {
                             src={stage.image} 
                             alt={stage.title}
                             className="w-full h-full object-cover"
+                            loading="lazy"
                           />
                         </div>
                         <div>
