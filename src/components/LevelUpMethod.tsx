@@ -1,4 +1,3 @@
-
 import { Zap, Users, Heart, Crown, Sparkles, ArrowRight } from 'lucide-react';
 
 const LevelUpMethod = () => {
@@ -7,27 +6,27 @@ const LevelUpMethod = () => {
     {
       src: "https://images.unsplash.com/photo-1571019613454-1cb2f99b2d8b?ixlib=rb-4.0.3&auto=format&fit=crop&w=400&q=80",
       alt: "Pole fitness training session",
-      position: "top-0 left-0 z-10"
+      type: "main"
     },
     {
       src: "https://images.unsplash.com/photo-1581090464777-f3220bbe1b8b?ixlib=rb-4.0.3&auto=format&fit=crop&w=400&q=80",
       alt: "Strength and flexibility training",
-      position: "top-4 left-1/3 z-20"
+      type: "top-left"
     },
     {
       src: "https://images.unsplash.com/photo-1618160702438-9b02ab6515c9?ixlib=rb-4.0.3&auto=format&fit=crop&w=400&q=80",
       alt: "Pole dance performance",
-      position: "top-0 right-0 z-10"
+      type: "top-right"
     },
     {
       src: "https://images.unsplash.com/photo-1581091226825-a6a2a5aee158?ixlib=rb-4.0.3&auto=format&fit=crop&w=400&q=80",
       alt: "Community and support",
-      position: "bottom-4 left-16 z-15"
+      type: "bottom-left"
     },
     {
       src: "https://images.unsplash.com/photo-1571019613454-1cb2f99b2d8b?ixlib=rb-4.0.3&auto=format&fit=crop&w=400&q=80",
       alt: "Confidence building",
-      position: "bottom-0 right-1/4 z-15"
+      type: "bottom-right"
     }
   ];
 
@@ -133,28 +132,111 @@ const LevelUpMethod = () => {
           </div>
         </div>
 
-        {/* Image Gallery */}
+        {/* Image Gallery Collage */}
         <div className="mb-16 animate-fade-in" style={{ animationDelay: '0.2s' }}>
-          <div className="relative max-w-4xl mx-auto h-80 sm:h-96">
-            {galleryImages.map((image, index) => (
-              <div
-                key={index}
-                className={`absolute w-48 h-48 sm:w-56 sm:h-56 rounded-3xl overflow-hidden cyber-border ${image.position} animate-fade-in hover:scale-105 transition-transform duration-300`}
-                style={{ animationDelay: `${0.1 * (index + 1)}s` }}
-              >
-                <img
-                  src={image.src}
-                  alt={image.alt}
-                  className="w-full h-full object-cover"
-                />
-                <div className="absolute inset-0 bg-gradient-to-br from-fuchsia-500/20 to-cyan-500/20 opacity-0 hover:opacity-100 transition-opacity duration-300"></div>
+          <div className="relative max-w-5xl mx-auto">
+            {/* 2:1 aspect ratio canvas container */}
+            <div className="relative w-full" style={{ paddingBottom: '50%' }}>
+              {/* Main center image - 400x480px, frontmost layer */}
+              <div className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 z-30">
+                <div 
+                  className="rounded-2xl overflow-hidden cyber-border shadow-2xl animate-fade-in hover:scale-105 transition-transform duration-300"
+                  style={{ 
+                    width: '280px', 
+                    height: '336px',
+                    animationDelay: '0.3s'
+                  }}
+                >
+                  <img
+                    src={galleryImages[0].src}
+                    alt={galleryImages[0].alt}
+                    className="w-full h-full object-cover"
+                  />
+                  <div className="absolute inset-0 bg-gradient-to-br from-fuchsia-500/20 to-cyan-500/20 opacity-0 hover:opacity-100 transition-opacity duration-300"></div>
+                </div>
               </div>
-            ))}
-            
-            {/* Decorative elements */}
-            <div className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 w-32 h-32 bg-gradient-to-br from-fuchsia-500/10 to-cyan-500/10 rounded-full blur-xl -z-10"></div>
-            <div className="absolute top-1/4 right-1/4 w-20 h-20 bg-purple-500/20 rounded-full blur-lg -z-10 animate-pulse"></div>
-            <div className="absolute bottom-1/4 left-1/4 w-24 h-24 bg-pink-500/20 rounded-full blur-lg -z-10 animate-pulse" style={{ animationDelay: '1s' }}></div>
+
+              {/* Top left image - 330x400px, slightly behind */}
+              <div className="absolute top-4 left-8 z-20 hidden sm:block">
+                <div 
+                  className="rounded-2xl overflow-hidden cyber-border shadow-xl animate-fade-in hover:scale-105 transition-transform duration-300"
+                  style={{ 
+                    width: '231px', 
+                    height: '280px',
+                    animationDelay: '0.1s'
+                  }}
+                >
+                  <img
+                    src={galleryImages[1].src}
+                    alt={galleryImages[1].alt}
+                    className="w-full h-full object-cover"
+                  />
+                  <div className="absolute inset-0 bg-gradient-to-br from-purple-500/20 to-pink-500/20 opacity-0 hover:opacity-100 transition-opacity duration-300"></div>
+                </div>
+              </div>
+
+              {/* Top right image - 330x400px, slightly behind */}
+              <div className="absolute top-4 right-8 z-20 hidden sm:block">
+                <div 
+                  className="rounded-2xl overflow-hidden cyber-border shadow-xl animate-fade-in hover:scale-105 transition-transform duration-300"
+                  style={{ 
+                    width: '231px', 
+                    height: '280px',
+                    animationDelay: '0.2s'
+                  }}
+                >
+                  <img
+                    src={galleryImages[2].src}
+                    alt={galleryImages[2].alt}
+                    className="w-full h-full object-cover"
+                  />
+                  <div className="absolute inset-0 bg-gradient-to-br from-cyan-500/20 to-purple-500/20 opacity-0 hover:opacity-100 transition-opacity duration-300"></div>
+                </div>
+              </div>
+
+              {/* Bottom left image - 330x240px, tucked under center */}
+              <div className="absolute bottom-4 left-16 z-10 hidden md:block">
+                <div 
+                  className="rounded-2xl overflow-hidden cyber-border shadow-lg animate-fade-in hover:scale-105 transition-transform duration-300"
+                  style={{ 
+                    width: '231px', 
+                    height: '168px',
+                    animationDelay: '0.4s'
+                  }}
+                >
+                  <img
+                    src={galleryImages[3].src}
+                    alt={galleryImages[3].alt}
+                    className="w-full h-full object-cover"
+                  />
+                  <div className="absolute inset-0 bg-gradient-to-br from-pink-500/20 to-fuchsia-500/20 opacity-0 hover:opacity-100 transition-opacity duration-300"></div>
+                </div>
+              </div>
+
+              {/* Bottom right image - 330x240px, tucked under center */}
+              <div className="absolute bottom-4 right-16 z-10 hidden md:block">
+                <div 
+                  className="rounded-2xl overflow-hidden cyber-border shadow-lg animate-fade-in hover:scale-105 transition-transform duration-300"
+                  style={{ 
+                    width: '231px', 
+                    height: '168px',
+                    animationDelay: '0.5s'
+                  }}
+                >
+                  <img
+                    src={galleryImages[4].src}
+                    alt={galleryImages[4].alt}
+                    className="w-full h-full object-cover"
+                  />
+                  <div className="absolute inset-0 bg-gradient-to-br from-fuchsia-500/20 to-cyan-500/20 opacity-0 hover:opacity-100 transition-opacity duration-300"></div>
+                </div>
+              </div>
+
+              {/* Decorative background elements */}
+              <div className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 w-96 h-96 bg-gradient-to-br from-fuchsia-500/5 to-cyan-500/5 rounded-full blur-3xl -z-10"></div>
+              <div className="absolute top-1/4 left-1/4 w-32 h-32 bg-purple-500/10 rounded-full blur-xl -z-10 animate-pulse"></div>
+              <div className="absolute bottom-1/4 right-1/4 w-24 h-24 bg-pink-500/10 rounded-full blur-xl -z-10 animate-pulse" style={{ animationDelay: '1s' }}></div>
+            </div>
           </div>
         </div>
 
