@@ -53,7 +53,8 @@ const Header = () => {
   ];
 
   const singleNavItems = [
-    { name: 'First Timers', href: '/first-timers' }
+    { name: 'First Timers', href: '/first-timers' },
+    { name: 'Shop', href: '/products' }
   ];
 
   const handleNavigation = (href: string) => {
