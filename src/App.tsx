@@ -17,6 +17,7 @@ import Franchise from "./pages/Franchise";
 import FreeGifts from "./pages/FreeGifts";
 import Blog from "./pages/Blog";
 import BlogPost from "./pages/BlogPost";
+import Checkout from "./pages/Checkout";
 import NotFound from "./pages/NotFound";
 
 const queryClient = new QueryClient();
@@ -41,6 +42,7 @@ const App = () => (
           <Route path="/free-gifts" element={<FreeGifts />} />
           <Route path="/blog" element={<Blog />} />
           <Route path="/blog/:id" element={<BlogPost />} />
+          <Route path="/checkout" element={<Checkout />} />
           <Route path="*" element={<NotFound />} />
         </Routes>
       </BrowserRouter>
