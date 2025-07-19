@@ -393,11 +393,12 @@ const Events = () => {
 
           <div className="space-y-4">
             {faqs.map((faq, index) => (
-              <Collapsible key={index} open={openFaq === index} onOpenChange={() => toggleFaq(index)}>
+              <Collapsible key={index} open={openFaq === index}>
                 <CollapsibleTrigger asChild>
                   <Button
                     variant="ghost"
                     className="w-full justify-between p-6 h-auto text-left hover:bg-gray-800/50 cyber-border"
+                    onClick={() => toggleFaq(index)}
                   >
                     <span className="text-lg font-semibold text-white">{faq.question}</span>
                     {openFaq === index ? (
