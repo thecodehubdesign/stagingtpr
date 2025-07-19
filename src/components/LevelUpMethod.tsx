@@ -1,10 +1,11 @@
+
 import { Zap, Users, Heart, Crown, Sparkles, ArrowRight } from 'lucide-react';
 
 const LevelUpMethod = () => {
   const stages = [
     {
       number: "01",
-      title: "Initiation", 
+      title: "Initiation",
       subtitle: "The First Step is Showing Up",
       description: "You arrive unsure. Maybe intimidated. Maybe even doubting if this is for you. That's the moment of transformation. We surround you with a community that believes in you before you believe in yourself.",
       builds: "trust in your body, comfort in movement, and a new sense of possibility.",
@@ -100,19 +101,6 @@ const LevelUpMethod = () => {
               and your 
               <span className="text-pink-400 neon-glow"> voice</span>.
             </p>
-          </div>
-        </div>
-
-        {/* Image Layout */}
-        <div className="mb-16 animate-fade-in" style={{
-          animationDelay: '0.2s'
-        }}>
-          <div className="max-w-5xl mx-auto">
-            <img 
-              src="/lovable-uploads/0a0bb8bf-f12a-4c5c-8173-84b027ee5979.png" 
-              alt="Community and Connection" 
-              className="w-full h-auto rounded-2xl cyber-border shadow-2xl"
-            />
           </div>
         </div>
 
