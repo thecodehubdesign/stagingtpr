@@ -27,6 +27,8 @@ const StudioMap = ({ onSearchClick }: StudioMapProps) => {
   const markersRef = useRef<{ [key: string]: google.maps.Marker }>({});
   const infoWindowRef = useRef<google.maps.InfoWindow | null>(null);
   const [selectedStudio, setSelectedStudio] = useState<string | null>(null);
+  const [mapLoaded, setMapLoaded] = useState(false);
+  const [mapError, setMapError] = useState<string | null>(null);
   const navigate = useNavigate();
 
   const locations: StudioLocation[] = [{
@@ -39,7 +41,7 @@ const StudioMap = ({ onSearchClick }: StudioMapProps) => {
     apparatus: ["Pole", "Aerials"]
   }, {
     id: 'kilsyth',
-    name: "The Pole Room Kilsyth",
+    name: "The Pole Room Kilsyth", 
     address: "1-3 Southfork Drive, Kilsyth VIC",
     lat: -37.8197,
     lng: 145.3116,
@@ -80,6 +82,7 @@ const StudioMap = ({ onSearchClick }: StudioMapProps) => {
   }];
 
   const handleStudioSelect = (studioId: string) => {
+    console.log('Studio selected:', studioId);
     setSelectedStudio(studioId);
     const marker = markersRef.current[studioId];
     if (marker && mapInstanceRef.current) {
@@ -158,10 +161,15 @@ const StudioMap = ({ onSearchClick }: StudioMapProps) => {
   }, []);
 
   useEffect(() => {
-    if (!mapRef.current) return;
+    console.log('StudioMap useEffect triggered');
+    if (!mapRef.current) {
+      console.log('Map ref not available');
+      return;
+    }
 
     // Initialize the Google Maps API loader
     if (!loaderRef.current) {
+      console.log('Initializing Google Maps loader');
       loaderRef.current = new Loader({
         apiKey: "AIzaSyCB-aXCL1WEr0j9T0jaJTOc6SL7M-QzLM4",
         version: "weekly",
@@ -171,7 +179,11 @@ const StudioMap = ({ onSearchClick }: StudioMapProps) => {
 
     // Load the Google Maps API and then initialize the map
     loaderRef.current.load().then(() => {
-      if (!mapRef.current) return;
+      console.log('Google Maps API loaded successfully');
+      if (!mapRef.current) {
+        console.log('Map ref not available after API load');
+        return;
+      }
 
       // Initialize the map with a broader view to show all locations
       const map = new google.maps.Map(mapRef.current, {
@@ -251,12 +263,15 @@ const StudioMap = ({ onSearchClick }: StudioMapProps) => {
         ]
       });
 
+      console.log('Map initialized successfully');
       mapInstanceRef.current = map;
+      setMapLoaded(true);
 
       // Create shared info window
       infoWindowRef.current = new google.maps.InfoWindow();
 
       // Add markers for each location
+      console.log('Adding markers for locations:', locations.length);
       locations.forEach(location => {
         const marker = new google.maps.Marker({
           position: { lat: location.lat, lng: location.lng },
@@ -279,8 +294,10 @@ const StudioMap = ({ onSearchClick }: StudioMapProps) => {
           handleStudioSelect(location.id);
         });
       });
+      console.log('All markers added successfully');
     }).catch((error) => {
       console.error('Error loading Google Maps:', error);
+      setMapError(error.message);
     });
 
     return () => {
@@ -292,23 +309,45 @@ const StudioMap = ({ onSearchClick }: StudioMapProps) => {
 
   // Update marker colors when selection changes
   useEffect(() => {
-    Object.entries(markersRef.current).forEach(([studioId, marker]) => {
-      marker.setIcon({
-        path: google.maps.SymbolPath.CIRCLE,
-        scale: 12,
-        fillColor: selectedStudio === studioId ? '#f97316' : '#ec4899',
-        fillOpacity: 1,
-        strokeColor: '#ffffff',
-        strokeWeight: 2
+    if (mapLoaded) {
+      Object.entries(markersRef.current).forEach(([studioId, marker]) => {
+        marker.setIcon({
+          path: google.maps.SymbolPath.CIRCLE,
+          scale: 12,
+          fillColor: selectedStudio === studioId ? '#f97316' : '#ec4899',
+          fillOpacity: 1,
+          strokeColor: '#ffffff',
+          strokeWeight: 2
+        });
       });
-    });
-  }, [selectedStudio]);
+    }
+  }, [selectedStudio, mapLoaded]);
+
+  if (mapError) {
+    return (
+      <div className="w-full h-full flex items-center justify-center bg-gray-800 rounded-lg border border-fuchsia-500/30">
+        <div className="text-center">
+          <p className="text-red-400 mb-2">Error loading map: {mapError}</p>
+          <p className="text-gray-300 text-sm">Please check your internet connection and try again.</p>
+        </div>
+      </div>
+    );
+  }
 
   return (
-    <div className="relative w-full">
+    <div className="relative w-full h-full">
       {/* Map Container - Made larger */}
-      <div className="w-full h-full rounded-lg overflow-hidden border border-fuchsia-500/30 relative">
-        <div ref={mapRef} className="w-full h-full" />
+      <div className="w-full h-full rounded-lg overflow-hidden border border-fuchsia-500/30 relative bg-gray-800">
+        <div ref={mapRef} className="w-full h-full min-h-[400px]" />
+        
+        {!mapLoaded && (
+          <div className="absolute inset-0 flex items-center justify-center bg-gray-800/90">
+            <div className="text-center">
+              <div className="animate-spin rounded-full h-8 w-8 border-b-2 border-fuchsia-400 mx-auto mb-4"></div>
+              <p className="text-white">Loading map...</p>
+            </div>
+          </div>
+        )}
         
         {/* Desktop Studio List Overlay - positioned on the right */}
         <div className="hidden lg:block absolute top-4 right-4 w-80 max-h-[calc(100%-2rem)] bg-gray-900/95 backdrop-blur-sm rounded-lg border border-fuchsia-500/30">
