@@ -93,13 +93,13 @@ const VoucherClaimForm = () => {
       case 3:
         return 'Claim Your Voucher';
       default:
-        return 'Claim Special Offer';
+        return 'Get Free Trial';
     }
   };
   return <Sheet>
       <SheetTrigger asChild>
         <Button className="bg-gradient-to-r from-rose-500 to-purple-600 hover:from-rose-600 hover:to-purple-700">
-          Claim Special Offer
+          Get Free Trial
         </Button>
       </SheetTrigger>
       <SheetContent className="w-full sm:max-w-2xl overflow-y-auto">
