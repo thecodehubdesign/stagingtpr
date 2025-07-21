@@ -1,58 +1,91 @@
 
 import { Badge } from "@/components/ui/badge";
+import { Button } from "@/components/ui/button";
 import { motion } from "framer-motion";
-import { Star, Users, Clock, Award, Heart, Zap } from "lucide-react";
+import { Star, Users, Clock, Award, Heart, Zap, Sparkles, Flame, Target, Music } from "lucide-react";
 import SectionHeader from '@/components/ui/section-header';
 
 const ClassDiscoverySection = () => {
   const classTypes = [
     {
-      title: "Beginner Pole",
-      description: "Perfect for those new to pole fitness. Build strength, flexibility, and confidence in a supportive environment.",
-      image: "https://images.unsplash.com/photo-1571019613454-1cb2f99b2d8b?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80",
+      title: "Pole Basics",
+      description: "Perfect introduction to pole fitness. Learn fundamental spins, poses, and build confidence in a supportive environment. Ideal for complete beginners.",
+      image: "/lovable-uploads/d97f60e6-9bb0-46b6-a9cc-aaa13ede7d4b.png",
       icon: Heart,
       level: "Beginner",
       duration: "60 min"
     },
     {
-      title: "Intermediate Flow",
-      description: "Take your pole skills to the next level with dynamic combinations and fluid transitions.",
-      image: "https://images.unsplash.com/photo-1518611012118-696072aa579a?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80",
+      title: "Front Splits Masterclass",
+      description: "Intensive flexibility training focused on achieving and perfecting your front splits. Includes warm-up routines and progressive stretching techniques.",
+      image: "/lovable-uploads/ecb5bd9c-6055-4d41-8797-bbb506648a5b.png",
+      icon: Target,
+      level: "All Levels",
+      duration: "75 min"
+    },
+    {
+      title: "Pole Jam",
+      description: "High-energy freestyle sessions where you can practice moves, experiment with combinations, and dance to your favorite beats in a fun, social environment.",
+      image: "/lovable-uploads/e72918ef-7386-4492-8d6e-6cf1cbeb62e4.png",
+      icon: Music,
+      level: "Intermediate",
+      duration: "90 min"
+    },
+    {
+      title: "Chair and Lap",
+      description: "Sensual dance class incorporating chair work and floor movements. Focus on fluidity, confidence, and connecting with your feminine energy.",
+      image: "/lovable-uploads/ff325961-11eb-4009-8f03-cb52bcfc97e0.png",
+      icon: Sparkles,
+      level: "All Levels",
+      duration: "60 min"
+    },
+    {
+      title: "Dance Filthy",
+      description: "Embrace your inner confidence with sultry choreography and expressive movement. Perfect for building self-esteem and body positivity.",
+      image: "/lovable-uploads/a3f3abdb-e872-4fb0-a921-052f1d92afec.png",
+      icon: Flame,
+      level: "Intermediate",
+      duration: "75 min"
+    },
+    {
+      title: "Pole Conditioning",
+      description: "Strength-focused class designed to build the muscle groups essential for pole dancing. Includes core work, flexibility training, and pole-specific conditioning.",
+      image: "/lovable-uploads/cc11c8dc-6872-48a7-9124-7e1c3602e410.png",
+      icon: Zap,
+      level: "All Levels",
+      duration: "45 min"
+    },
+    {
+      title: "Pole Foundations",
+      description: "Comprehensive beginner program covering safety, basic techniques, and fundamental movements. Perfect stepping stone to more advanced classes.",
+      image: "/lovable-uploads/8a7c62c9-86e6-4d10-a555-f79e5ed95001.png",
+      icon: Award,
+      level: "Beginner",
+      duration: "60 min"
+    },
+    {
+      title: "Pure Pole Dance",
+      description: "Artistic pole dancing focusing on flow, grace, and technical precision. Combines athletic skill with beautiful choreography and self-expression.",
+      image: "/lovable-uploads/119fcd15-3aac-4f1f-920c-a13497b0b348.png",
       icon: Star,
       level: "Intermediate",
       duration: "75 min"
     },
     {
-      title: "Aerial Silks",
-      description: "Experience the artistry of aerial fitness with graceful movements and strength-building exercises.",
-      image: "https://images.unsplash.com/photo-1506629905607-37f36637e4ee?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80",
-      icon: Zap,
-      level: "All Levels",
+      title: "Sexy Basics",
+      description: "Introduction to sensual movement and confidence building. Learn to embrace your sexuality through dance in a supportive, judgment-free environment.",
+      image: "/lovable-uploads/8be1e610-6a66-4ace-b02d-1945fd276001.png",
+      icon: Heart,
+      level: "Beginner",
       duration: "60 min"
     },
     {
-      title: "Advanced Pole",
-      description: "Master complex tricks, inversions, and advanced choreography with expert guidance.",
-      image: "https://images.unsplash.com/photo-1544367567-0f2fcb009e0b?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80",
-      icon: Award,
-      level: "Advanced",
-      duration: "90 min"
-    },
-    {
-      title: "Flexibility & Flow",
-      description: "Enhance your flexibility and create beautiful flowing movements on and off the pole.",
-      image: "https://images.unsplash.com/photo-1506629905607-37f36637e4ee?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80",
+      title: "Floor Play",
+      description: "Ground-based movements focusing on floorwork, transitions, and dance flow. Perfect complement to pole work or as a standalone class.",
+      image: "/lovable-uploads/32863f0f-165a-4abf-b73e-3eea2045dce5.png",
       icon: Users,
       level: "All Levels",
       duration: "45 min"
-    },
-    {
-      title: "Competition Prep",
-      description: "Intensive training for those ready to showcase their skills in competitions and performances.",
-      image: "https://images.unsplash.com/photo-1571019613454-1cb2f99b2d8b?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80",
-      icon: Clock,
-      level: "Advanced",
-      duration: "120 min"
     }
   ];
 
@@ -137,9 +170,15 @@ const ClassDiscoverySection = () => {
                   <h3 className="text-xl font-playfair font-semibold text-white mb-3 group-hover:text-fuchsia-300 transition-colors">
                     {classType.title}
                   </h3>
-                  <p className="text-white/70 leading-relaxed">
+                  <p className="text-white/70 leading-relaxed mb-4">
                     {classType.description}
                   </p>
+                  <Button 
+                    variant="outline" 
+                    className="w-full bg-transparent border-fuchsia-400/50 text-fuchsia-400 hover:bg-fuchsia-400/10 hover:border-fuchsia-400 transition-all duration-300"
+                  >
+                    View Class
+                  </Button>
                 </div>
               </motion.div>
             ))}

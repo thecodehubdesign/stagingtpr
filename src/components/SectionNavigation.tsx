@@ -29,18 +29,10 @@ const SectionNavigation = ({ sections }: SectionNavigationProps) => {
       const isScrollingUp = currentScrollY < lastScrollY;
       const isScrollingDown = currentScrollY > lastScrollY;
       
-      console.log('Scroll Debug:', {
-        scrollPercentage: scrollPercentage.toFixed(1),
-        pastThreshold,
-        isScrollingUp,
-        isScrollingDown,
-        currentVisible: isVisible
-      });
-      
-      // Simple logic: show when scrolling down past 15%, hide when scrolling up
-      if (isScrollingUp) {
+      // Update visibility based on scroll direction and threshold
+      if (isScrollingUp && isVisible) {
         setIsVisible(false);
-      } else if (isScrollingDown && pastThreshold) {
+      } else if (isScrollingDown && pastThreshold && !isVisible) {
         setIsVisible(true);
       }
       
