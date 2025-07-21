@@ -26,7 +26,10 @@ const Classes = () => {
       slug: "pole-basics",
       category: "Pole Dancing",
       style: "Pole",
-      instructors: ["Sarah Chen", "Maya Rodriguez"],
+      instructors: [
+        { name: "Sarah Chen", image: "/lovable-uploads/1d83d83b-0057-4bd1-8052-79584b039a97.jpg" },
+        { name: "Maya Rodriguez", image: "/lovable-uploads/3cc0b943-7d1c-4140-a59c-a60390d03154.jpg" }
+      ],
       location: "Mitcham",
       image: "/lovable-uploads/d97f60e6-9bb0-46b6-a9cc-aaa13ede7d4b.png",
       featured: true
@@ -39,7 +42,9 @@ const Classes = () => {
       slug: "front-splits-masterclass",
       category: "Flexibility & Conditioning",
       style: "Flexibility",
-      instructors: ["Zara Kim"],
+      instructors: [
+        { name: "Zara Kim", image: "/lovable-uploads/4d4d16ef-17d9-47e3-a464-cfa3c9b9eef6.jpg" }
+      ],
       location: "Kilsyth",
       image: "/lovable-uploads/ecb5bd9c-6055-4d41-8797-bbb506648a5b.png"
     },
@@ -51,7 +56,10 @@ const Classes = () => {
       slug: "pole-jam",
       category: "Pole Dancing",
       style: "Pole",
-      instructors: ["Maya Rodriguez", "Alex Turner"],
+      instructors: [
+        { name: "Maya Rodriguez", image: "/lovable-uploads/3cc0b943-7d1c-4140-a59c-a60390d03154.jpg" },
+        { name: "Alex Turner", image: "/lovable-uploads/8b589fd4-a71e-43de-823f-c2af97fef88d.jpg" }
+      ],
       location: "Melbourne",
       image: "/lovable-uploads/e72918ef-7386-4492-8d6e-6cf1cbeb62e4.png"
     },
@@ -63,7 +71,9 @@ const Classes = () => {
       slug: "chair-and-lap",
       category: "Dance & Movement",
       style: "Dance",
-      instructors: ["Ava Johnson"],
+      instructors: [
+        { name: "Ava Johnson", image: "/lovable-uploads/c7f8bec0-23c5-44db-871b-dccfbacb26a5.jpg" }
+      ],
       location: "Highett",
       image: "/lovable-uploads/ff325961-11eb-4009-8f03-cb52bcfc97e0.png"
     },
@@ -75,7 +85,13 @@ const Classes = () => {
       slug: "dance-filthy",
       category: "Dance & Movement",
       style: "Dance",
-      instructors: ["Maya Rodriguez", "Ava Johnson"],
+      instructors: [
+        { name: "Maya Rodriguez", image: "/lovable-uploads/3cc0b943-7d1c-4140-a59c-a60390d03154.jpg" },
+        { name: "Ava Johnson", image: "/lovable-uploads/c7f8bec0-23c5-44db-871b-dccfbacb26a5.jpg" },
+        { name: "Luna Park", image: "/lovable-uploads/1d83d83b-0057-4bd1-8052-79584b039a97.jpg" },
+        { name: "Zara Kim", image: "/lovable-uploads/4d4d16ef-17d9-47e3-a464-cfa3c9b9eef6.jpg" },
+        { name: "Sarah Chen", image: "/lovable-uploads/1d83d83b-0057-4bd1-8052-79584b039a97.jpg" }
+      ],
       location: "Narre Warren",
       image: "/lovable-uploads/a3f3abdb-e872-4fb0-a921-052f1d92afec.png"
     },
@@ -87,7 +103,10 @@ const Classes = () => {
       slug: "pole-conditioning",
       category: "Flexibility & Conditioning",
       style: "Conditioning",
-      instructors: ["Alex Turner", "Zara Kim"],
+      instructors: [
+        { name: "Alex Turner", image: "/lovable-uploads/8b589fd4-a71e-43de-823f-c2af97fef88d.jpg" },
+        { name: "Zara Kim", image: "/lovable-uploads/4d4d16ef-17d9-47e3-a464-cfa3c9b9eef6.jpg" }
+      ],
       location: "Mitcham",
       image: "/lovable-uploads/cc11c8dc-6872-48a7-9124-7e1c3602e410.png"
     },
@@ -99,7 +118,9 @@ const Classes = () => {
       slug: "pole-foundations",
       category: "Pole Dancing",
       style: "Pole",
-      instructors: ["Sarah Chen"],
+      instructors: [
+        { name: "Sarah Chen", image: "/lovable-uploads/1d83d83b-0057-4bd1-8052-79584b039a97.jpg" }
+      ],
       location: "Kilsyth",
       image: "/lovable-uploads/8a7c62c9-86e6-4d10-a555-f79e5ed95001.png",
       featured: true
@@ -112,7 +133,10 @@ const Classes = () => {
       slug: "pure-pole-dance",
       category: "Pole Dancing",
       style: "Pole",
-      instructors: ["Luna Park", "Alex Turner"],
+      instructors: [
+        { name: "Luna Park", image: "/lovable-uploads/1d83d83b-0057-4bd1-8052-79584b039a97.jpg" },
+        { name: "Alex Turner", image: "/lovable-uploads/8b589fd4-a71e-43de-823f-c2af97fef88d.jpg" }
+      ],
       location: "Melbourne",
       image: "/lovable-uploads/119fcd15-3aac-4f1f-920c-a13497b0b348.png"
     },
@@ -124,7 +148,10 @@ const Classes = () => {
       slug: "sexy-basics",
       category: "Dance & Movement",
       style: "Dance",
-      instructors: ["Ava Johnson", "Maya Rodriguez"],
+      instructors: [
+        { name: "Ava Johnson", image: "/lovable-uploads/c7f8bec0-23c5-44db-871b-dccfbacb26a5.jpg" },
+        { name: "Maya Rodriguez", image: "/lovable-uploads/3cc0b943-7d1c-4140-a59c-a60390d03154.jpg" }
+      ],
       location: "Highett",
       image: "/lovable-uploads/8be1e610-6a66-4ace-b02d-1945fd276001.png"
     },
@@ -136,7 +163,10 @@ const Classes = () => {
       slug: "floor-play",
       category: "Dance & Movement",
       style: "Dance",
-      instructors: ["Zara Kim", "Ava Johnson"],
+      instructors: [
+        { name: "Zara Kim", image: "/lovable-uploads/4d4d16ef-17d9-47e3-a464-cfa3c9b9eef6.jpg" },
+        { name: "Ava Johnson", image: "/lovable-uploads/c7f8bec0-23c5-44db-871b-dccfbacb26a5.jpg" }
+      ],
       location: "Narre Warren",
       image: "/lovable-uploads/32863f0f-165a-4abf-b73e-3eea2045dce5.png"
     }
@@ -155,7 +185,7 @@ const Classes = () => {
       const matchesLevel = !levelFilter || classItem.level === levelFilter;
       const matchesStyle = !styleFilter || classItem.style === styleFilter;
       const matchesLocation = !locationFilter || classItem.location === locationFilter;
-      const matchesInstructor = !instructorFilter || classItem.instructors.some(instructor => instructor === instructorFilter);
+      const matchesInstructor = !instructorFilter || classItem.instructors.some(instructor => instructor.name === instructorFilter);
       return matchesSearch && matchesLevel && matchesStyle && matchesLocation && matchesInstructor;
     });
   }, [searchQuery, levelFilter, styleFilter, locationFilter, instructorFilter]);
@@ -398,14 +428,41 @@ const Classes = () => {
                         {classItem.description}
                       </p>
 
-                      <div className="flex items-center justify-between">
-                        <span className="text-xs text-gray-500">
-                          with {classItem.instructors.join(', ')}
+                      {/* Instructors with profile pictures */}
+                      <div className="flex items-center mb-4">
+                        <div className="flex -space-x-2 mr-3">
+                          {classItem.instructors.slice(0, 3).map((instructor, idx) => (
+                            <img
+                              key={idx}
+                              src={instructor.image}
+                              alt={instructor.name}
+                              className="w-6 h-6 rounded-full border-2 border-gray-700 object-cover"
+                            />
+                          ))}
+                        </div>
+                        <span className="text-xs text-gray-400">
+                          {classItem.instructors[0].name}
+                          {classItem.instructors.length > 1 && (
+                            <span className="text-fuchsia-400 ml-1">
+                              +{classItem.instructors.length - 1}
+                            </span>
+                          )}
                         </span>
+                      </div>
+
+                      <div className="flex items-center justify-between mb-4">
                         <span className="text-xs px-2 py-1 bg-purple-500/20 text-purple-300 rounded-full">
                           {classItem.style}
                         </span>
                       </div>
+
+                      {/* View Class Button */}
+                      <Button 
+                        variant="outline" 
+                        className="w-full bg-transparent border-fuchsia-400/50 text-fuchsia-400 hover:bg-fuchsia-400/10 hover:border-fuchsia-400 transition-all duration-300"
+                      >
+                        View Class
+                      </Button>
                     </div>
                   </Link>
                 </Card>)}
