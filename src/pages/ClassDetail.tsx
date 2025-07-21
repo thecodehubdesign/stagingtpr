@@ -15,6 +15,22 @@ const ClassDetail = () => {
   // All classes data (same as Classes page)
   const allClasses = [
     {
+      name: "Pure Pole Dance",
+      level: "Intermediate",
+      duration: "75 min",
+      description: "Experience the artistry of pole dance with this flowing, dance-focused class. Perfect your technique while expressing yourself through beautiful combinations and choreography.",
+      slug: "pure-pole-dance",
+      category: "Pole Dancing",
+      style: "Pole",
+      instructors: [
+        { name: "Maya Rodriguez", image: "/lovable-uploads/3cc0b943-7d1c-4140-a59c-a60390d03154.jpg" },
+        { name: "Ava Johnson", image: "/lovable-uploads/c7f8bec0-23c5-44db-871b-dccfbacb26a5.jpg" }
+      ],
+      location: "Melbourne",
+      image: "/lovable-uploads/e72918ef-7386-4492-8d6e-6cf1cbeb62e4.png",
+      featured: true
+    },
+    {
       name: "Pole Basics",
       level: "Beginner",
       duration: "60 min",
@@ -87,6 +103,34 @@ const ClassDetail = () => {
         { name: "Maya Rodriguez", image: "/lovable-uploads/3cc0b943-7d1c-4140-a59c-a60390d03154.jpg" }
       ],
       location: "Highett",
+      image: "/lovable-uploads/8be1e610-6a66-4ace-b02d-1945fd276001.png"
+    },
+    {
+      name: "Intermediate Flow",
+      level: "Intermediate",
+      duration: "75 min",
+      description: "Flowing intermediate sequences combining spins, climbs, and inversions. Perfect for students ready to advance their pole skills.",
+      slug: "intermediate-flow",
+      category: "Pole Dancing",
+      style: "Pole",
+      instructors: [
+        { name: "Maya Rodriguez", image: "/lovable-uploads/3cc0b943-7d1c-4140-a59c-a60390d03154.jpg" }
+      ],
+      location: "Melbourne",
+      image: "/lovable-uploads/d97f60e6-9bb0-46b6-a9cc-aaa13ede7d4b.png"
+    },
+    {
+      name: "Exotic Intermediate",
+      level: "Intermediate",
+      duration: "60 min",
+      description: "Sensual intermediate moves with floor work and transitions. Develop your personal style and confidence.",
+      slug: "exotic-intermediate",
+      category: "Exotic Dancing",
+      style: "Exotic",
+      instructors: [
+        { name: "Ava Johnson", image: "/lovable-uploads/c7f8bec0-23c5-44db-871b-dccfbacb26a5.jpg" }
+      ],
+      location: "Melbourne",
       image: "/lovable-uploads/8be1e610-6a66-4ace-b02d-1945fd276001.png"
     }
   ];
