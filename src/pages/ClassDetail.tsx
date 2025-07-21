@@ -14,7 +14,7 @@ const ClassDetail = () => {
   // Mock class data - in a real app, this would be fetched based on classId
   const classData = {
     id: 'beginner-pole-foundations',
-    name: 'Beginner Pole Foundations',
+    name: 'Pole Foundations',
     level: 'Beginner',
     duration: '60 min',
     heroImage: 'https://images.unsplash.com/photo-1571019613454-1cb2f99b2d8b?ixlib=rb-4.0.3&auto=format&fit=crop&w=2070&q=80',
