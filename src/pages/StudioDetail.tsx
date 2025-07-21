@@ -16,9 +16,9 @@ import SectionNavigation from '@/components/SectionNavigation';
 import { studios } from '@/data/studios';
 
 const StudioDetail = () => {
-  const { studioId } = useParams<{ studioId: string }>();
+  const { slug } = useParams<{ slug: string }>();
   
-  const studio = studios.find(s => s.id === studioId);
+  const studio = studios.find(s => s.id === slug);
   
   if (!studio) {
     return (

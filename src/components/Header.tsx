@@ -49,7 +49,7 @@ const Header = () => {
     { name: 'Kilsyth', href: '/studios/kilsyth', description: 'Modern facilities in beautiful Kilsyth' },
     { name: 'Highett', href: '/studios/highett', description: 'Convenient Highett studio with ample parking' },
     { name: 'Mitcham', href: '/studios/mitcham', description: 'Spacious Mitcham location with all amenities' },
-    { name: 'Melbourne CBD', href: '/studios/melbourne-cbd', description: 'Central city location for urban convenience' },
+    { name: 'Melbourne CBD', href: '/studios/cbd', description: 'Central city location for urban convenience' },
     { name: 'Narre Warren', href: '/studios/narre-warren', description: 'Southeast Melbourne hub in Narre Warren' },
   ];
 
