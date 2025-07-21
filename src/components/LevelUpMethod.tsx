@@ -109,7 +109,6 @@ const LevelUpMethod = () => {
                 className="w-full h-[400px] sm:h-[500px] object-cover"
                 loading="lazy"
               />
-              <div className="absolute inset-0 bg-gradient-to-br from-fuchsia-500/20 to-cyan-500/20 opacity-0 hover:opacity-100 transition-opacity duration-300"></div>
             </div>
             {/* Decorative background glow */}
             <div className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 w-[600px] h-[400px] bg-gradient-to-br from-fuchsia-500/5 to-cyan-500/5 rounded-full blur-3xl -z-10"></div>
