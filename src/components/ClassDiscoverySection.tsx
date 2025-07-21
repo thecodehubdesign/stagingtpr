@@ -13,8 +13,7 @@ const ClassDiscoverySection = () => {
       image: "/lovable-uploads/d97f60e6-9bb0-46b6-a9cc-aaa13ede7d4b.png",
       icon: Heart,
       level: "Beginner",
-      duration: "60 min",
-      isIntroClass: false
+      duration: "60 min"
     },
     {
       title: "Front Splits Masterclass",
@@ -22,8 +21,7 @@ const ClassDiscoverySection = () => {
       image: "/lovable-uploads/ecb5bd9c-6055-4d41-8797-bbb506648a5b.png",
       icon: Target,
       level: "All Levels",
-      duration: "75 min",
-      isIntroClass: true
+      duration: "75 min"
     },
     {
       title: "Pole Jam",
@@ -31,8 +29,7 @@ const ClassDiscoverySection = () => {
       image: "/lovable-uploads/e72918ef-7386-4492-8d6e-6cf1cbeb62e4.png",
       icon: Music,
       level: "Intermediate",
-      duration: "90 min",
-      isIntroClass: true
+      duration: "90 min"
     },
     {
       title: "Chair and Lap",
@@ -40,8 +37,7 @@ const ClassDiscoverySection = () => {
       image: "/lovable-uploads/ff325961-11eb-4009-8f03-cb52bcfc97e0.png",
       icon: Sparkles,
       level: "All Levels",
-      duration: "60 min",
-      isIntroClass: false
+      duration: "60 min"
     },
     {
       title: "Dance Filthy",
@@ -49,8 +45,7 @@ const ClassDiscoverySection = () => {
       image: "/lovable-uploads/a3f3abdb-e872-4fb0-a921-052f1d92afec.png",
       icon: Flame,
       level: "Intermediate",
-      duration: "75 min",
-      isIntroClass: false
+      duration: "75 min"
     },
     {
       title: "Pole Conditioning",
@@ -58,8 +53,7 @@ const ClassDiscoverySection = () => {
       image: "/lovable-uploads/cc11c8dc-6872-48a7-9124-7e1c3602e410.png",
       icon: Zap,
       level: "All Levels",
-      duration: "45 min",
-      isIntroClass: true
+      duration: "45 min"
     },
     {
       title: "Pole Foundations",
@@ -67,8 +61,7 @@ const ClassDiscoverySection = () => {
       image: "/lovable-uploads/8a7c62c9-86e6-4d10-a555-f79e5ed95001.png",
       icon: Award,
       level: "Beginner",
-      duration: "60 min",
-      isIntroClass: true
+      duration: "60 min"
     },
     {
       title: "Pure Pole Dance",
@@ -76,8 +69,7 @@ const ClassDiscoverySection = () => {
       image: "/lovable-uploads/119fcd15-3aac-4f1f-920c-a13497b0b348.png",
       icon: Star,
       level: "Intermediate",
-      duration: "75 min",
-      isIntroClass: false
+      duration: "75 min"
     },
     {
       title: "Sexy Basics",
@@ -85,8 +77,7 @@ const ClassDiscoverySection = () => {
       image: "/lovable-uploads/8be1e610-6a66-4ace-b02d-1945fd276001.png",
       icon: Heart,
       level: "Beginner",
-      duration: "60 min",
-      isIntroClass: false
+      duration: "60 min"
     },
     {
       title: "Floor Play",
@@ -94,13 +85,9 @@ const ClassDiscoverySection = () => {
       image: "/lovable-uploads/32863f0f-165a-4abf-b73e-3eea2045dce5.png",
       icon: Users,
       level: "All Levels",
-      duration: "45 min",
-      isIntroClass: false
+      duration: "45 min"
     }
   ];
-
-  // Filter for intro classes and limit to 6 (2 rows on desktop)
-  const introClasses = classTypes.filter(classType => classType.isIntroClass).slice(0, 6);
 
   const containerVariants = {
     hidden: { opacity: 0 },
@@ -138,9 +125,9 @@ const ClassDiscoverySection = () => {
         >
           {/* Header Section */}
           <SectionHeader 
-            badgeText="Intro Classes"
-            title="Perfect Classes to Get Started"
-            subtitle="Carefully selected intro classes designed for beginners and those looking to build their foundation."
+            badgeText="Class Discovery"
+            title="Find Your Perfect Class"
+            subtitle="From complete beginner to advanced performer, discover the class that matches your journey and goals."
           />
 
           {/* Grid Section */}
@@ -148,7 +135,7 @@ const ClassDiscoverySection = () => {
             className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8"
             variants={containerVariants}
           >
-            {introClasses.map((classType, index) => (
+            {classTypes.map((classType, index) => (
               <motion.div 
                 key={index}
                 className="group cyber-card rounded-xl overflow-hidden hover:scale-105 transition-all duration-300"
@@ -197,23 +184,31 @@ const ClassDiscoverySection = () => {
             ))}
           </motion.div>
 
-          {/* View More Section */}
+          {/* CTA Section */}
           <motion.div 
             className="text-center"
             variants={itemVariants}
             transition={{ duration: 0.6, ease: "easeOut" }}
           >
             <p className="text-white/60 mb-6 text-lg">
-              Ready to explore more classes?
+              Not sure which class is right for you?
             </p>
-            <motion.a
-              href="/classes"
-              className="neon-button px-8 py-4 rounded-full text-black font-semibold text-lg hover:shadow-2xl transition-all duration-300 inline-block"
-              whileHover={{ scale: 1.05 }}
-              whileTap={{ scale: 0.95 }}
-            >
-              View All Classes
-            </motion.a>
+            <div className="flex flex-col sm:flex-row gap-4 justify-center items-center">
+              <motion.button 
+                className="neon-button px-8 py-4 rounded-full text-black font-semibold text-lg hover:shadow-2xl transition-all duration-300"
+                whileHover={{ scale: 1.05 }}
+                whileTap={{ scale: 0.95 }}
+              >
+                Take Our Style Quiz
+              </motion.button>
+              <motion.button 
+                className="cyber-border px-8 py-4 rounded-full text-cyan-400 hover:bg-cyan-400/10 font-semibold text-lg transition-all duration-300"
+                whileHover={{ scale: 1.05 }}
+                whileTap={{ scale: 0.95 }}
+              >
+                Book a Consultation
+              </motion.button>
+            </div>
           </motion.div>
         </motion.div>
       </div>
