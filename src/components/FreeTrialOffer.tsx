@@ -38,8 +38,13 @@ const FreeTrialOffer = ({
   buttonText = 'Claim Special Offer',
   disclaimerText = 'No credit card required • Multiple locations available'
 }: FreeTrialOfferProps) => {
-  return <section className="py-20 bg-gray-800">
-      <div className="max-w-4xl mx-auto text-center px-4 sm:px-6 lg:px-8">
+  return <section className="py-20 bg-gray-800 relative overflow-hidden">
+      {/* Floating Neon Elements */}
+      <div className="absolute top-1/4 left-10 w-20 h-20 bg-fuchsia-500/30 rounded-full blur-xl animate-pulse float"></div>
+      <div className="absolute bottom-1/4 right-10 w-32 h-32 bg-cyan-500/30 rounded-full blur-xl animate-pulse float" style={{ animationDelay: '1s' }}></div>
+      <div className="absolute top-1/2 left-1/4 w-16 h-16 bg-purple-500/30 rounded-full blur-xl animate-pulse float" style={{ animationDelay: '2s' }}></div>
+      
+      <div className="max-w-4xl mx-auto text-center px-4 sm:px-6 lg:px-8 relative z-10">
         <div className="animate-fade-in">
           <div className="inline-flex items-center space-x-2 text-fuchsia-400 mb-4">
             <Zap className="w-5 h-5 neon-glow" />
