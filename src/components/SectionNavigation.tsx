@@ -12,11 +12,30 @@ interface SectionNavigationProps {
 
 const SectionNavigation = ({ sections }: SectionNavigationProps) => {
   const [activeSection, setActiveSection] = useState<string>('');
+  const [isVisible, setIsVisible] = useState<boolean>(false);
+  const [lastScrollY, setLastScrollY] = useState<number>(0);
   const scrollContainerRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
     const handleScroll = () => {
-      const scrollPosition = window.scrollY + 100; // Offset for header
+      const currentScrollY = window.scrollY;
+      const documentHeight = document.documentElement.scrollHeight - window.innerHeight;
+      const scrollPercentage = (currentScrollY / documentHeight) * 100;
+      
+      // Show navigation after 15% scroll
+      const shouldShow = scrollPercentage >= 15;
+      
+      // Hide when scrolling up (except if at very top)
+      const isScrollingUp = currentScrollY < lastScrollY && currentScrollY > 100;
+      
+      // Update visibility: show if past 15% and not scrolling up, or if scrolling down
+      setIsVisible(shouldShow && !isScrollingUp);
+      
+      // Update last scroll position
+      setLastScrollY(currentScrollY);
+      
+      // Handle active section detection
+      const scrollPosition = currentScrollY + 100; // Offset for header
       
       for (let i = sections.length - 1; i >= 0; i--) {
         const section = document.getElementById(sections[i].id);
@@ -28,10 +47,10 @@ const SectionNavigation = ({ sections }: SectionNavigationProps) => {
     };
 
     window.addEventListener('scroll', handleScroll);
-    handleScroll(); // Set initial active section
+    handleScroll(); // Set initial state
     
     return () => window.removeEventListener('scroll', handleScroll);
-  }, [sections]);
+  }, [sections, lastScrollY]);
 
   // Auto-scroll active section into view on mobile
   useEffect(() => {
@@ -66,8 +85,17 @@ const SectionNavigation = ({ sections }: SectionNavigationProps) => {
     }
   };
 
+  // Don't render if not visible
+  if (!isVisible) {
+    return null;
+  }
+
   return (
-    <div className="sticky top-16 z-40 bg-background/95 backdrop-blur supports-[backdrop-filter]:bg-background/60 border-b border-border">
+    <div 
+      className={`sticky top-16 z-40 bg-background/95 backdrop-blur supports-[backdrop-filter]:bg-background/60 border-b border-border transition-all duration-300 ${
+        isVisible ? 'translate-y-0 opacity-100' : '-translate-y-full opacity-0'
+      }`}
+    >
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div 
           ref={scrollContainerRef}
