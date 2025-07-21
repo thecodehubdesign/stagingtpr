@@ -281,6 +281,72 @@ const Classes = () => {
         </div>
       </section>
 
+      {/* Class Pricing */}
+      <section className="py-16 bg-gray-900">
+        <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
+          <div className="text-center mb-12">
+            <h2 className="text-3xl font-bold text-white mb-4">
+              Class <span className="gradient-text">Pricing</span>
+            </h2>
+          </div>
+
+          <div className="grid md:grid-cols-3 gap-8">
+            {/* Introductory Offers */}
+            <Card className="cyber-card p-6">
+              <h3 className="text-lg font-bold text-white mb-4">Introductory Offers</h3>
+              <div className="space-y-3">
+                <div className="flex justify-between items-center py-2 border-b border-gray-700/50">
+                  <span className="text-gray-300">Free Trial Class</span>
+                  <span className="text-fuchsia-400 font-semibold">Free</span>
+                </div>
+                <div className="flex justify-between items-center py-2">
+                  <span className="text-gray-300">28 Day Intro Program</span>
+                  <span className="text-fuchsia-400 font-semibold">$99</span>
+                </div>
+              </div>
+            </Card>
+
+            {/* Session Packages */}
+            <Card className="cyber-card p-6">
+              <h3 className="text-lg font-bold text-white mb-4">Session Packages</h3>
+              <div className="space-y-3">
+                <div className="flex justify-between items-center py-2 border-b border-gray-700/50">
+                  <span className="text-gray-300">Drop in Session</span>
+                  <span className="text-fuchsia-400 font-semibold">$35</span>
+                </div>
+                <div className="flex justify-between items-center py-2 border-b border-gray-700/50">
+                  <span className="text-gray-300">8 Session Package</span>
+                  <span className="text-fuchsia-400 font-semibold">$240</span>
+                </div>
+                <div className="flex justify-between items-center py-2">
+                  <span className="text-gray-300">16 Session Package</span>
+                  <span className="text-fuchsia-400 font-semibold">$440</span>
+                </div>
+              </div>
+            </Card>
+
+            {/* Memberships */}
+            <Card className="cyber-card p-6">
+              <h3 className="text-lg font-bold text-white mb-4">Memberships</h3>
+              <div className="space-y-3">
+                <div className="flex justify-between items-center py-2 border-b border-gray-700/50">
+                  <span className="text-gray-300">2 Sessions/week</span>
+                  <span className="text-fuchsia-400 font-semibold">from $55</span>
+                </div>
+                <div className="flex justify-between items-center py-2 border-b border-gray-700/50">
+                  <span className="text-gray-300">3 Sessions/week</span>
+                  <span className="text-fuchsia-400 font-semibold">from $75</span>
+                </div>
+                <div className="flex justify-between items-center py-2">
+                  <span className="text-gray-300">5 Sessions/week</span>
+                  <span className="text-fuchsia-400 font-semibold">from $120</span>
+                </div>
+              </div>
+            </Card>
+          </div>
+        </div>
+      </section>
+
       {/* Find Your Perfect Class Heading */}
       <section className="pt-16 pb-8 bg-gray-800">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
