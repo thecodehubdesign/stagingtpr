@@ -35,19 +35,7 @@ const FounderSection = () => {
   return <section className="py-20 bg-gradient-to-br from-gray-900 via-purple-900/20 to-gray-900 cyber-grid">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         {/* Statistics Section */}
-        <div className="grid grid-cols-2 lg:grid-cols-4 gap-6 mb-16">
-          {statistics.map((stat, index) => <div key={index} className="text-center p-6 cyber-card rounded-xl animate-fade-in" style={{
-          animationDelay: `${index * 0.1}s`
-        }}>
-              <div className="flex justify-center mb-3">
-                <div className="w-12 h-12 bg-gradient-to-br from-fuchsia-500 to-cyan-500 rounded-lg flex items-center justify-center neon-glow">
-                  <stat.icon className="w-6 h-6 text-white" />
-                </div>
-              </div>
-              <div className="text-2xl font-bold text-white mb-1 gradient-text">{stat.number}</div>
-              <div className="text-sm text-gray-400">{stat.label}</div>
-            </div>)}
-        </div>
+        
 
         <div className="grid lg:grid-cols-2 gap-12 items-center">
           {/* Image Side */}
@@ -69,11 +57,7 @@ const FounderSection = () => {
           <div className="animate-fade-in" style={{
           animationDelay: '0.3s'
         }}>
-            <SectionHeader 
-              badgeText="Meet Jasmine, Our Founder & Visionary"
-              title="From 2 Poles In Her Parents Garage To A Movement Empowering Thousands Across Melbourne"
-              className="text-left mb-6"
-            />
+            <SectionHeader badgeText="Meet Jasmine, Our Founder & Visionary" title="From 2 Poles In Her Parents Garage To A Movement Empowering Thousands Across Melbourne" className="text-left mb-6" />
             
             <p className="text-lg text-gray-300 mb-8 leading-relaxed">
               Jasmine created The Pole Room to unlock the untapped potential in every body. 
