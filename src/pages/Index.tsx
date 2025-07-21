@@ -1,7 +1,6 @@
 
 import Header from '@/components/Header';
 import HeroSection from '@/components/HeroSection';
-import FounderSection from '@/components/FounderSection';
 import VideoSection from '@/components/VideoSection';
 import LevelUpMethod from '@/components/LevelUpMethod';
 import ClassDiscoverySection from '@/components/ClassDiscoverySection';
@@ -13,7 +12,6 @@ import SectionNavigation from '@/components/SectionNavigation';
 const Index = () => {
   const sections = [
     { id: 'hero', label: 'Home' },
-    { id: 'founder', label: 'Founder' },
     { id: 'video', label: 'Video' },
     { id: 'method', label: 'Method' },
     { id: 'classes', label: 'Classes' },
@@ -27,9 +25,6 @@ const Index = () => {
       <SectionNavigation sections={sections} />
       <div id="hero">
         <HeroSection />
-      </div>
-      <div id="founder">
-        <FounderSection />
       </div>
       <div id="video">
         <VideoSection />
