@@ -1,60 +1,51 @@
 import { Badge } from '@/components/ui/badge';
 import { Zap, Users, Heart, Crown, Sparkles, ArrowRight } from 'lucide-react';
 import SectionHeader from '@/components/ui/section-header';
-
 const LevelUpMethod = () => {
   // Single hero image replacing the gallery
   const heroImage = "/lovable-uploads/03a1a48e-d457-4306-ab51-8d7887fe981f.png";
-
-  const stages = [
-    {
-      number: "01",
-      title: "Initiation",
-      subtitle: "The First Step is Showing Up",
-      description: "You arrive unsure. Maybe intimidated. Maybe even doubting if this is for you. That's the moment of transformation. We surround you with a community that believes in you before you believe in yourself.",
-      builds: "trust in your body, comfort in movement, and a new sense of possibility.",
-      icon: Users,
-      color: "from-fuchsia-500 to-purple-500",
-      image: "https://images.unsplash.com/photo-1581090464777-f3220bbe1b8b?ixlib=rb-4.0.3&auto=format&fit=crop&w=400&q=80"
-    },
-    {
-      number: "02", 
-      title: "Integration",
-      subtitle: "Strength Meets Identity",
-      description: "With every class, you're doing more than learning tricks. You're creating a new narrative: \"I can do hard things.\" You start to carry yourself differently — at work, in social settings, and in the mirror.",
-      builds: "physical power, mental resilience and a sense of belonging.",
-      icon: Zap,
-      color: "from-purple-500 to-cyan-500",
-      image: "https://images.unsplash.com/photo-1581091226825-a6a2a5aee158?ixlib=rb-4.0.3&auto=format&fit=crop&w=400&q=80"
-    },
-    {
-      number: "03",
-      title: "Expression",
-      subtitle: "Find Your Voice Through Movement",
-      description: "You start to move with purpose. Style. Emotion. Pole becomes your outlet — a place where you explore the parts of yourself you've kept hidden.",
-      builds: "confidence in being seen, self-expression and emotional intelligence.",
-      icon: Heart,
-      color: "from-cyan-500 to-pink-500",
-      image: "https://images.unsplash.com/photo-1571019613454-1cb2f99b2d8b?ixlib=rb-4.0.3&auto=format&fit=crop&w=400&q=80"
-    },
-    {
-      number: "04",
-      title: "Expansion",
-      subtitle: "Step Into Every Room Like You Own It",
-      description: "By now, it's not about the pole anymore. Your posture has changed. Your tone of voice. Your decisions. You've become someone who takes up space — proudly, powerfully, and without apology.",
-      builds: "magnetism, courage and unstoppable momentum — in every part of your life.",
-      icon: Crown,
-      color: "from-pink-500 to-fuchsia-500",
-      image: "https://images.unsplash.com/photo-1618160702438-9b02ab6515c9?ixlib=rb-4.0.3&auto=format&fit=crop&w=400&q=80"
-    }
-  ];
-
-  return (
-    <section className="py-20 relative overflow-hidden cyber-grid">
+  const stages = [{
+    number: "01",
+    title: "Initiation",
+    subtitle: "The First Step is Showing Up",
+    description: "You arrive unsure. Maybe intimidated. Maybe even doubting if this is for you. That's the moment of transformation. We surround you with a community that believes in you before you believe in yourself.",
+    builds: "trust in your body, comfort in movement, and a new sense of possibility.",
+    icon: Users,
+    color: "from-fuchsia-500 to-purple-500",
+    image: "https://images.unsplash.com/photo-1581090464777-f3220bbe1b8b?ixlib=rb-4.0.3&auto=format&fit=crop&w=400&q=80"
+  }, {
+    number: "02",
+    title: "Integration",
+    subtitle: "Strength Meets Identity",
+    description: "With every class, you're doing more than learning tricks. You're creating a new narrative: \"I can do hard things.\" You start to carry yourself differently — at work, in social settings, and in the mirror.",
+    builds: "physical power, mental resilience and a sense of belonging.",
+    icon: Zap,
+    color: "from-purple-500 to-cyan-500",
+    image: "https://images.unsplash.com/photo-1581091226825-a6a2a5aee158?ixlib=rb-4.0.3&auto=format&fit=crop&w=400&q=80"
+  }, {
+    number: "03",
+    title: "Expression",
+    subtitle: "Find Your Voice Through Movement",
+    description: "You start to move with purpose. Style. Emotion. Pole becomes your outlet — a place where you explore the parts of yourself you've kept hidden.",
+    builds: "confidence in being seen, self-expression and emotional intelligence.",
+    icon: Heart,
+    color: "from-cyan-500 to-pink-500",
+    image: "https://images.unsplash.com/photo-1571019613454-1cb2f99b2d8b?ixlib=rb-4.0.3&auto=format&fit=crop&w=400&q=80"
+  }, {
+    number: "04",
+    title: "Expansion",
+    subtitle: "Step Into Every Room Like You Own It",
+    description: "By now, it's not about the pole anymore. Your posture has changed. Your tone of voice. Your decisions. You've become someone who takes up space — proudly, powerfully, and without apology.",
+    builds: "magnetism, courage and unstoppable momentum — in every part of your life.",
+    icon: Crown,
+    color: "from-pink-500 to-fuchsia-500",
+    image: "https://images.unsplash.com/photo-1618160702438-9b02ab6515c9?ixlib=rb-4.0.3&auto=format&fit=crop&w=400&q=80"
+  }];
+  return <section className="py-20 relative overflow-hidden cyber-grid">
       {/* Cyberpunk Background */}
       <div className="absolute inset-0 bg-cover bg-center" style={{
-        backgroundImage: `linear-gradient(rgba(8,8,15,0.95), rgba(20,20,35,0.95)), url('https://images.unsplash.com/photo-1571019613454-1cb2f99b2d8b?ixlib=rb-4.0.3&auto=format&fit=crop&w=1200&q=60')`
-      }} />
+      backgroundImage: `linear-gradient(rgba(8,8,15,0.95), rgba(20,20,35,0.95)), url('https://images.unsplash.com/photo-1571019613454-1cb2f99b2d8b?ixlib=rb-4.0.3&auto=format&fit=crop&w=1200&q=60')`
+    }} />
       
       {/* Neon Accent Lines */}
       <div className="absolute top-0 left-0 w-full h-1 bg-gradient-to-r from-transparent via-fuchsia-500 to-transparent"></div>
@@ -62,10 +53,7 @@ const LevelUpMethod = () => {
       
       <div className="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         {/* Header */}
-        <SectionHeader 
-          badgeText="Our Method"
-          title="Unlock Your Extraordinary"
-        />
+        <SectionHeader badgeText="Our Method" title="Unlock Your Extraordinary" />
         
         <div className="max-w-4xl mx-auto space-y-6">
           <p className="text-xl text-gray-300 leading-relaxed">
@@ -100,15 +88,12 @@ const LevelUpMethod = () => {
         </div>
 
         {/* Hero Image Section */}
-        <div className="mb-16 animate-fade-in" style={{ animationDelay: '0.2s' }}>
+        <div className="mb-16 animate-fade-in" style={{
+        animationDelay: '0.2s'
+      }}>
           <div className="relative max-w-6xl mx-auto">
-            <div className="rounded-3xl overflow-hidden cyber-border shadow-2xl hover:scale-105 transition-transform duration-300">
-              <img
-                src={heroImage}
-                alt="Pole fitness showcase - empowering transformations"
-                className="w-full h-[400px] sm:h-[500px] object-cover"
-                loading="lazy"
-              />
+            <div className="rounded-3xl overflow-hidden cyber-border shadow-2xl hover:scale-105 transition-transform duration-300 py-0 my-[40px]">
+              <img src={heroImage} alt="Pole fitness showcase - empowering transformations" className="w-full h-[400px] sm:h-[500px] object-cover" loading="lazy" />
             </div>
             {/* Decorative background glow */}
             <div className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 w-[600px] h-[400px] bg-gradient-to-br from-fuchsia-500/5 to-cyan-500/5 rounded-full blur-3xl -z-10"></div>
@@ -117,8 +102,8 @@ const LevelUpMethod = () => {
 
         {/* The Method Title */}
         <div className="text-center mb-12 animate-fade-in" style={{
-          animationDelay: '0.3s'
-        }}>
+        animationDelay: '0.3s'
+      }}>
           <div className="inline-flex items-center space-x-3 cyber-card px-8 py-4 rounded-full">
             <Zap className="w-6 h-6 text-orange-400 neon-glow" />
             <h3 className="text-2xl font-bold text-white">OUR UNSTOPPABLE METHOD IN 4 STAGES:</h3>
@@ -128,14 +113,11 @@ const LevelUpMethod = () => {
 
         {/* Stages */}
         <div className="space-y-12">
-          {stages.map((stage, index) => (
-            <div key={index} className="relative animate-fade-in" style={{
-              animationDelay: `${0.2 * (index + 1)}s`
-            }}>
+          {stages.map((stage, index) => <div key={index} className="relative animate-fade-in" style={{
+          animationDelay: `${0.2 * (index + 1)}s`
+        }}>
               {/* Connection Line */}
-              {index < stages.length - 1 && (
-                <div className="absolute left-1/2 top-full w-px h-12 bg-gradient-to-b from-fuchsia-500 to-transparent transform -translate-x-1/2 z-0"></div>
-              )}
+              {index < stages.length - 1 && <div className="absolute left-1/2 top-full w-px h-12 bg-gradient-to-b from-fuchsia-500 to-transparent transform -translate-x-1/2 z-0"></div>}
               
               <div className="grid lg:grid-cols-12 gap-8 items-center">
                 {/* Stage Number & Icon */}
@@ -154,12 +136,7 @@ const LevelUpMethod = () => {
                     <div className="mb-6">
                       <div className="flex items-center space-x-4 mb-4">
                         <div className="w-16 h-16 rounded-full overflow-hidden flex-shrink-0 border-2 border-fuchsia-500/30">
-                          <img 
-                            src={stage.image} 
-                            alt={stage.title}
-                            className="w-full h-full object-cover"
-                            loading="lazy"
-                          />
+                          <img src={stage.image} alt={stage.title} className="w-full h-full object-cover" loading="lazy" />
                         </div>
                         <div>
                           <h4 className="text-2xl font-bold text-white gradient-text">
@@ -186,14 +163,13 @@ const LevelUpMethod = () => {
                   </div>
                 </div>
               </div>
-            </div>
-          ))}
+            </div>)}
         </div>
 
         {/* Closing Message */}
         <div className="text-center mt-16 animate-fade-in" style={{
-          animationDelay: '1s'
-        }}>
+        animationDelay: '1s'
+      }}>
           <div className="cyber-card p-8 rounded-2xl max-w-4xl mx-auto">
             <div className="flex items-center justify-center space-x-2 mb-4">
               <Sparkles className="w-5 h-5 text-fuchsia-400 neon-glow" />
@@ -218,13 +194,11 @@ const LevelUpMethod = () => {
       {/* Floating Neon Elements */}
       <div className="absolute top-1/4 left-10 w-20 h-20 bg-fuchsia-500/30 rounded-full blur-xl animate-pulse float"></div>
       <div className="absolute bottom-1/4 right-10 w-32 h-32 bg-cyan-500/30 rounded-full blur-xl animate-pulse float" style={{
-        animationDelay: '1.5s'
-      }}></div>
+      animationDelay: '1.5s'
+    }}></div>
       <div className="absolute top-3/4 left-1/3 w-16 h-16 bg-purple-500/30 rounded-full blur-xl animate-pulse float" style={{
-        animationDelay: '2.5s'
-      }}></div>
-    </section>
-  );
+      animationDelay: '2.5s'
+    }}></div>
+    </section>;
 };
-
 export default LevelUpMethod;
