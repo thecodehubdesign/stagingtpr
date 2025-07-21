@@ -6,7 +6,6 @@ import FounderSection from '@/components/FounderSection';
 import VideoSection from '@/components/VideoSection';
 import LevelUpMethod from '@/components/LevelUpMethod';
 import ClassDiscoverySection from '@/components/ClassDiscoverySection';
-import PoleTypeQuiz from '@/components/PoleTypeQuiz';
 import StudioLocations from '@/components/StudioLocations';
 import { PremiumTestimonials } from '@/components/ui/premium-testimonials';
 import Footer from '@/components/Footer';
@@ -19,7 +18,6 @@ const Index = () => {
     { id: 'video', label: 'Video' },
     { id: 'method', label: 'Method' },
     { id: 'classes', label: 'Classes' },
-    { id: 'quiz', label: 'Quiz' },
     { id: 'testimonials', label: 'Testimonials' },
     { id: 'locations', label: 'Locations' }
   ];
@@ -43,9 +41,6 @@ const Index = () => {
       </div>
       <div id="classes">
         <ClassDiscoverySection />
-      </div>
-      <div id="quiz">
-        <PoleTypeQuiz />
       </div>
       <div id="testimonials">
         <PremiumTestimonials />
