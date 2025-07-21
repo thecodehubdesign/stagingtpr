@@ -5,13 +5,6 @@ import { Card } from '@/components/ui/card';
 import { Input } from '@/components/ui/input';
 import { Label } from '@/components/ui/label';
 import { CheckCircle, ArrowRight, Sparkles, Users, Zap, Star, Trophy } from 'lucide-react';
-import {
-  Carousel,
-  CarouselContent,
-  CarouselItem,
-  CarouselNext,
-  CarouselPrevious,
-} from '@/components/ui/carousel';
 
 interface QuizAnswer {
   questionIndex: number;
@@ -38,25 +31,6 @@ const PoleTypeQuiz = () => {
     name: '',
     email: ''
   });
-
-  const quizImages = [
-    {
-      src: "/lovable-uploads/62c85b2c-a16e-4a03-ab52-224dae2b446b.png",
-      alt: "The Social Butterfly - Community focused pole dancing"
-    },
-    {
-      src: "/lovable-uploads/7935ee95-b0f2-4393-9a65-5426a48942c3.png", 
-      alt: "The Fitspo Queen - Fitness focused pole dancing"
-    },
-    {
-      src: "/lovable-uploads/2eedcd47-29dd-40c7-8263-7fcf920d041c.png",
-      alt: "The Spotlight Seeker - Performance focused pole dancing"
-    },
-    {
-      src: "/lovable-uploads/930cee8a-33f0-430b-8ef4-34c83d23d2d3.png",
-      alt: "The Overachiever - Competition focused pole dancing"
-    }
-  ];
 
   const questions = [
     {
@@ -188,29 +162,6 @@ const PoleTypeQuiz = () => {
           <p className="text-lg text-gray-300">
             Not sure where to begin? Take our quick quiz to discover what kind of pole dancer you'll become and the best way to start your journey!
           </p>
-        </div>
-
-        {/* Image Carousel */}
-        <div className="mb-8">
-          <Carousel className="w-full max-w-md mx-auto">
-            <CarouselContent>
-              {quizImages.map((image, index) => (
-                <CarouselItem key={index}>
-                  <div className="p-1">
-                    <div className="aspect-[3/4] rounded-2xl overflow-hidden shadow-2xl cyber-border">
-                      <img 
-                        src={image.src} 
-                        alt={image.alt}
-                        className="w-full h-full object-cover"
-                      />
-                    </div>
-                  </div>
-                </CarouselItem>
-              ))}
-            </CarouselContent>
-            <CarouselPrevious className="left-2" />
-            <CarouselNext className="right-2" />
-          </Carousel>
         </div>
 
         <Card className="p-8 shadow-2xl cyber-card">
