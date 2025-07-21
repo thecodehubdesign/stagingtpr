@@ -6,7 +6,7 @@ import FreeTrialOffer from '@/components/FreeTrialOffer';
 
 const Footer = () => {
   const quickLinks = [
-    { name: 'About Us', href: '#about' },
+    { name: 'About Us', href: '/about-us' },
     { name: 'Classes', href: '#classes' },
     { name: 'Studios', href: '#studios' },
     { name: 'Pricing', href: '#pricing' },
@@ -40,12 +40,12 @@ const Footer = () => {
         highlightedWord="empowered"
         benefits={[
           { icon: Star, text: "No experience necessary" },
-          { icon: Clock, text: "60-minute trial class" },
+          { icon: Clock, text: "45-minute trial class" },
           { icon: Users, text: "Small, supportive groups" },
           { icon: Heart, text: "Welcoming community" }
         ]}
         buttonText="Book My Free Trial"
-        disclaimerText="Secure Your Spot • Available at all locations"
+        disclaimerText="No credit card required • Available at all locations"
       />
 
       {/* Main Footer */}
