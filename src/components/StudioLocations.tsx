@@ -30,7 +30,7 @@ const StudioLocations = () => {
   const handleSearchClick = () => {
     navigate('/studios');
   };
-  return <section id="studios" className="py-20 bg-background">
+  return <section id="studios" className="py-20 bg-background cyber-grid">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <SectionHeader 
           badgeText="Studio Locations"
