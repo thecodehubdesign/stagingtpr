@@ -1,6 +1,8 @@
 import { Badge } from '@/components/ui/badge';
 import { Zap, Users, Heart, Crown, Sparkles, ArrowRight } from 'lucide-react';
 import SectionHeader from '@/components/ui/section-header';
+import { useEffect, useState } from 'react';
+import { removeBackground } from '@/utils/backgroundRemoval';
 import {
   Accordion,
   AccordionContent,
@@ -10,6 +12,47 @@ import {
 const LevelUpMethod = () => {
   // Single hero image replacing the gallery
   const heroImage = "/lovable-uploads/03a1a48e-d457-4306-ab51-8d7887fe981f.png";
+  const [processedImageUrl, setProcessedImageUrl] = useState<string>('');
+  const [isProcessing, setIsProcessing] = useState(false);
+
+  useEffect(() => {
+    const processHeroImage = async () => {
+      try {
+        setIsProcessing(true);
+        
+        // Create image element and load the image
+        const img = new Image();
+        img.crossOrigin = 'anonymous';
+        
+        await new Promise((resolve, reject) => {
+          img.onload = resolve;
+          img.onerror = reject;
+          img.src = heroImage;
+        });
+
+        // Remove background
+        const transparentBlob = await removeBackground(img);
+        const transparentUrl = URL.createObjectURL(transparentBlob);
+        setProcessedImageUrl(transparentUrl);
+      } catch (error) {
+        console.error('Failed to remove background:', error);
+        // Fallback to original image
+        setProcessedImageUrl(heroImage);
+      } finally {
+        setIsProcessing(false);
+      }
+    };
+
+    processHeroImage();
+
+    // Cleanup function to revoke object URL
+    return () => {
+      if (processedImageUrl && processedImageUrl.startsWith('blob:')) {
+        URL.revokeObjectURL(processedImageUrl);
+      }
+    };
+  }, [heroImage]);
+
   const stages = [{
     number: "01",
     title: "Initiation",
@@ -98,8 +141,19 @@ const LevelUpMethod = () => {
         animationDelay: '0.2s'
       }}>
           <div className="relative max-w-6xl mx-auto">
-            <div className="rounded-3xl overflow-hidden cyber-border shadow-2xl hover:scale-105 transition-transform duration-300 py-0 my-[40px]">
-              <img src={heroImage} alt="Pole fitness showcase - empowering transformations" className="w-full h-[400px] sm:h-[500px] object-cover" loading="lazy" />
+            <div className="rounded-3xl overflow-hidden cyber-border shadow-2xl hover:scale-105 transition-transform duration-300 py-0 my-[40px] bg-gradient-to-br from-fuchsia-500/20 to-cyan-500/20">
+              {isProcessing ? (
+                <div className="w-full h-[400px] sm:h-[500px] flex items-center justify-center">
+                  <div className="text-white">Processing image...</div>
+                </div>
+              ) : (
+                <img 
+                  src={processedImageUrl || heroImage} 
+                  alt="Pole fitness showcase - empowering transformations" 
+                  className="w-full h-[400px] sm:h-[500px] object-cover opacity-90" 
+                  loading="lazy" 
+                />
+              )}
             </div>
             {/* Decorative background glow */}
             <div className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 w-[600px] h-[400px] bg-gradient-to-br from-fuchsia-500/5 to-cyan-500/5 rounded-full blur-3xl -z-10"></div>
