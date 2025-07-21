@@ -10,15 +10,23 @@ const HeroSection = () => {
   return (
     <section className="relative min-h-screen flex items-center justify-center overflow-hidden cyber-grid">
       {/* Video Background */}
-      <div className="absolute inset-0 w-full h-full">
+      <div className="absolute inset-0 w-full h-full overflow-hidden">
         <iframe
           src="https://player.vimeo.com/video/374290944?autoplay=1&loop=1&muted=1&controls=0&background=1"
-          className="absolute top-1/2 left-1/2 min-w-full min-h-full w-auto h-auto transform -translate-x-1/2 -translate-y-1/2"
+          className="absolute inset-0 w-full h-full object-cover"
+          style={{
+            width: '100vw',
+            height: '100vh',
+            minWidth: '100%',
+            minHeight: '100%',
+            transform: 'scale(1.2)',
+            transformOrigin: 'center center'
+          }}
           allow="autoplay; fullscreen"
           allowFullScreen
         ></iframe>
-        {/* Dark overlay to ensure text readability */}
-        <div className="absolute inset-0 bg-gradient-to-b from-black/60 via-black/40 to-black/60"></div>
+        {/* Dark transparent overlay */}
+        <div className="absolute inset-0 bg-black/50 backdrop-blur-[1px]"></div>
       </div>
       
       {/* Neon Accent Lines */}
