@@ -17,140 +17,130 @@ const Classes = () => {
   const [instructorFilter, setInstructorFilter] = useState('');
 
   // Enhanced class data with additional properties for filtering
-  const allClasses = [{
-    name: "Pole Foundations",
-    level: "Beginner",
-    duration: "60 min",
-    description: "Perfect first class - learn basic spins, poses and floorwork in a supportive environment",
-    slug: "beginner-pole-foundations",
-    category: "Pole Dancing",
-    style: "Pole",
-    instructor: "Sarah Chen",
-    location: "Downtown Studio",
-    image: "/lovable-uploads/1d83d83b-0057-4bd1-8052-79584b039a97.jpg",
-    featured: true
-  }, {
-    name: "Pole Progression",
-    level: "Intermediate",
-    duration: "60 min",
-    description: "Build on basics with inversions and intermediate combinations for confident movement",
-    slug: "pole-progression",
-    category: "Pole Dancing",
-    style: "Pole",
-    instructor: "Maya Rodriguez",
-    location: "Downtown Studio",
-    image: "/lovable-uploads/3cc0b943-7d1c-4140-a59c-a60390d03154.jpg"
-  }, {
-    name: "Advanced Pole Flow",
-    level: "Advanced",
-    duration: "75 min",
-    description: "Complex tricks, transitions and choreographed sequences for experienced dancers",
-    slug: "advanced-pole-flow",
-    category: "Pole Dancing",
-    style: "Pole",
-    instructor: "Alex Turner",
-    location: "Midtown Studio",
-    image: "/lovable-uploads/4d4d16ef-17d9-47e3-a464-cfa3c9b9eef6.jpg"
-  }, {
-    name: "Aerial Silks Intro",
-    level: "Beginner",
-    duration: "60 min",
-    description: "Learn basic climbs, poses and sequences on aerial silks in this beginner-friendly class",
-    slug: "aerial-silks-intro",
-    category: "Aerial Arts",
-    style: "Aerial",
-    instructor: "Luna Park",
-    location: "Downtown Studio",
-    image: "/lovable-uploads/8b589fd4-a71e-43de-823f-c2af97fef88d.jpg"
-  }, {
-    name: "Lyra Foundations",
-    level: "Beginner",
-    duration: "60 min",
-    description: "Explore the aerial hoop with fundamental poses and spins perfect for newcomers",
-    slug: "lyra-foundations",
-    category: "Aerial Arts",
-    style: "Aerial",
-    instructor: "Zara Kim",
-    location: "Uptown Studio",
-    image: "/lovable-uploads/c7f8bec0-23c5-44db-871b-dccfbacb26a5.jpg"
-  }, {
-    name: "Aerial Flow",
-    level: "Intermediate",
-    duration: "75 min",
-    description: "Combine silks and lyra skills into flowing sequences that tell a story",
-    slug: "aerial-flow",
-    category: "Aerial Arts",
-    style: "Aerial",
-    instructor: "Luna Park",
-    location: "Midtown Studio",
-    image: "/lovable-uploads/1d83d83b-0057-4bd1-8052-79584b039a97.jpg"
-  }, {
-    name: "Floorwork Foundations",
-    level: "All Levels",
-    duration: "45 min",
-    description: "Ground-based movement focusing on fluidity and expression through dance",
-    slug: "floorwork-foundations",
-    category: "Dance & Movement",
-    style: "Dance",
-    instructor: "Ava Johnson",
-    location: "Downtown Studio",
-    image: "/lovable-uploads/3cc0b943-7d1c-4140-a59c-a60390d03154.jpg"
-  }, {
-    name: "Exotic Dance",
-    level: "All Levels",
-    duration: "60 min",
-    description: "Confidence-building dance class focusing on sensual movement and self-expression",
-    slug: "exotic-dance",
-    category: "Dance & Movement",
-    style: "Dance",
-    instructor: "Ava Johnson",
-    location: "Uptown Studio",
-    image: "/lovable-uploads/4d4d16ef-17d9-47e3-a464-cfa3c9b9eef6.jpg"
-  }, {
-    name: "Chair Dance",
-    level: "All Levels",
-    duration: "45 min",
-    description: "Playful and empowering choreography using a chair as a prop for creative expression",
-    slug: "chair-dance",
-    category: "Dance & Movement",
-    style: "Dance",
-    instructor: "Maya Rodriguez",
-    location: "Midtown Studio",
-    image: "/lovable-uploads/8b589fd4-a71e-43de-823f-c2af97fef88d.jpg"
-  }, {
-    name: "Flexibility Flow",
-    level: "All Levels",
-    duration: "60 min",
-    description: "Active and passive stretching to improve overall flexibility and mobility",
-    slug: "flexibility-flow",
-    category: "Flexibility & Conditioning",
-    style: "Conditioning",
-    instructor: "Zara Kim",
-    location: "Downtown Studio",
-    image: "/lovable-uploads/c7f8bec0-23c5-44db-871b-dccfbacb26a5.jpg"
-  }, {
-    name: "Pole Conditioning",
-    level: "All Levels",
-    duration: "45 min",
-    description: "Strength training specifically designed for pole and aerial arts performance",
-    slug: "pole-conditioning",
-    category: "Flexibility & Conditioning",
-    style: "Conditioning",
-    instructor: "Alex Turner",
-    location: "Uptown Studio",
-    image: "/lovable-uploads/1d83d83b-0057-4bd1-8052-79584b039a97.jpg"
-  }, {
-    name: "Splits & Backbends",
-    level: "Intermediate",
-    duration: "60 min",
-    description: "Targeted training for advanced flexibility goals including splits and backbends",
-    slug: "splits-backbends",
-    category: "Flexibility & Conditioning",
-    style: "Conditioning",
-    instructor: "Sarah Chen",
-    location: "Midtown Studio",
-    image: "/lovable-uploads/3cc0b943-7d1c-4140-a59c-a60390d03154.jpg"
-  }];
+  const allClasses = [
+    {
+      name: "Pole Basics",
+      level: "Beginner",
+      duration: "60 min",
+      description: "Perfect introduction to pole fitness. Learn fundamental spins, poses, and build confidence in a supportive environment. Ideal for complete beginners.",
+      slug: "pole-basics",
+      category: "Pole Dancing",
+      style: "Pole",
+      instructor: "Sarah Chen",
+      location: "Downtown Studio",
+      image: "/lovable-uploads/d97f60e6-9bb0-46b6-a9cc-aaa13ede7d4b.png",
+      featured: true
+    },
+    {
+      name: "Front Splits Masterclass",
+      level: "All Levels",
+      duration: "75 min",
+      description: "Intensive flexibility training focused on achieving and perfecting your front splits. Includes warm-up routines and progressive stretching techniques.",
+      slug: "front-splits-masterclass",
+      category: "Flexibility & Conditioning",
+      style: "Conditioning",
+      instructor: "Zara Kim",
+      location: "Midtown Studio",
+      image: "/lovable-uploads/ecb5bd9c-6055-4d41-8797-bbb506648a5b.png"
+    },
+    {
+      name: "Pole Jam",
+      level: "Intermediate",
+      duration: "90 min",
+      description: "High-energy freestyle sessions where you can practice moves, experiment with combinations, and dance to your favorite beats in a fun, social environment.",
+      slug: "pole-jam",
+      category: "Pole Dancing",
+      style: "Pole",
+      instructor: "Maya Rodriguez",
+      location: "Uptown Studio",
+      image: "/lovable-uploads/e72918ef-7386-4492-8d6e-6cf1cbeb62e4.png"
+    },
+    {
+      name: "Chair and Lap",
+      level: "All Levels",
+      duration: "60 min",
+      description: "Sensual dance class incorporating chair work and floor movements. Focus on fluidity, confidence, and connecting with your feminine energy.",
+      slug: "chair-and-lap",
+      category: "Dance & Movement",
+      style: "Dance",
+      instructor: "Ava Johnson",
+      location: "Downtown Studio",
+      image: "/lovable-uploads/ff325961-11eb-4009-8f03-cb52bcfc97e0.png"
+    },
+    {
+      name: "Dance Filthy",
+      level: "Intermediate",
+      duration: "75 min",
+      description: "Embrace your inner confidence with sultry choreography and expressive movement. Perfect for building self-esteem and body positivity.",
+      slug: "dance-filthy",
+      category: "Dance & Movement",
+      style: "Dance",
+      instructor: "Maya Rodriguez",
+      location: "Midtown Studio",
+      image: "/lovable-uploads/a3f3abdb-e872-4fb0-a921-052f1d92afec.png"
+    },
+    {
+      name: "Pole Conditioning",
+      level: "All Levels",
+      duration: "45 min",
+      description: "Strength-focused class designed to build the muscle groups essential for pole dancing. Includes core work, flexibility training, and pole-specific conditioning.",
+      slug: "pole-conditioning",
+      category: "Flexibility & Conditioning",
+      style: "Conditioning",
+      instructor: "Alex Turner",
+      location: "Uptown Studio",
+      image: "/lovable-uploads/cc11c8dc-6872-48a7-9124-7e1c3602e410.png"
+    },
+    {
+      name: "Pole Foundations",
+      level: "Beginner",
+      duration: "60 min",
+      description: "Comprehensive beginner program covering safety, basic techniques, and fundamental movements. Perfect stepping stone to more advanced classes.",
+      slug: "pole-foundations",
+      category: "Pole Dancing",
+      style: "Pole",
+      instructor: "Sarah Chen",
+      location: "Downtown Studio",
+      image: "/lovable-uploads/8a7c62c9-86e6-4d10-a555-f79e5ed95001.png",
+      featured: true
+    },
+    {
+      name: "Pure Pole Dance",
+      level: "Intermediate",
+      duration: "75 min",
+      description: "Artistic pole dancing focusing on flow, grace, and technical precision. Combines athletic skill with beautiful choreography and self-expression.",
+      slug: "pure-pole-dance",
+      category: "Pole Dancing",
+      style: "Pole",
+      instructor: "Luna Park",
+      location: "Midtown Studio",
+      image: "/lovable-uploads/119fcd15-3aac-4f1f-920c-a13497b0b348.png"
+    },
+    {
+      name: "Sexy Basics",
+      level: "Beginner",
+      duration: "60 min",
+      description: "Introduction to sensual movement and confidence building. Learn to embrace your sexuality through dance in a supportive, judgment-free environment.",
+      slug: "sexy-basics",
+      category: "Dance & Movement",
+      style: "Dance",
+      instructor: "Ava Johnson",
+      location: "Uptown Studio",
+      image: "/lovable-uploads/8be1e610-6a66-4ace-b02d-1945fd276001.png"
+    },
+    {
+      name: "Floor Play",
+      level: "All Levels",
+      duration: "45 min",
+      description: "Ground-based movements focusing on floorwork, transitions, and dance flow. Perfect complement to pole work or as a standalone class.",
+      slug: "floor-play",
+      category: "Dance & Movement",
+      style: "Dance",
+      instructor: "Zara Kim",
+      location: "Downtown Studio",
+      image: "/lovable-uploads/32863f0f-165a-4abf-b73e-3eea2045dce5.png"
+    }
+  ];
 
   // Filter options
   const levels = ['All Levels', 'Beginner', 'Intermediate', 'Advanced'];
