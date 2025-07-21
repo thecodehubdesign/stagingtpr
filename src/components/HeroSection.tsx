@@ -1,5 +1,6 @@
 
 import { Button } from '@/components/ui/button';
+import { Badge } from '@/components/ui/badge';
 import { Play, ArrowRight, Zap } from 'lucide-react';
 import StyleQuizModal from './StyleQuizModal';
 import VoucherClaimForm from './VoucherClaimForm';
@@ -22,13 +23,9 @@ const HeroSection = () => {
       {/* Content */}
       <div className="relative z-10 max-w-4xl mx-auto text-center px-4 sm:px-6 lg:px-8">
         <div className="animate-fade-in">
-          <div className="flex items-center justify-center space-x-2 mb-4">
-            <Zap className="w-6 h-6 text-fuchsia-400 neon-glow" />
-            <span className="text-sm font-semibold uppercase tracking-wider text-cyan-400 neon-glow">
-              Enter the Future of Fitness
-            </span>
-            <Zap className="w-6 h-6 text-cyan-400 neon-glow" />
-          </div>
+          <Badge className="inline-flex items-center gap-3 px-4 py-2 rounded-full bg-white/[0.08] border border-white/[0.15] backdrop-blur-sm mb-6">
+            Enter the Future of Fitness
+          </Badge>
           
           <h1 className="text-4xl sm:text-5xl lg:text-6xl font-bold text-white mb-6 gradient-text pulse-neon">
             Discover the Strength, Grace and Confidence Within You

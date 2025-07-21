@@ -1,3 +1,4 @@
+import { Badge } from '@/components/ui/badge';
 import { Heart, Users, Award, MapPin, GraduationCap, Clock, Building, Zap } from 'lucide-react';
 const FounderSection = () => {
   const benefits = [{
@@ -67,12 +68,9 @@ const FounderSection = () => {
           <div className="animate-fade-in" style={{
           animationDelay: '0.3s'
         }}>
-            <div className="flex items-center space-x-2 mb-2">
-              <Zap className="w-4 h-4 text-cyan-400 neon-glow" />
-              <h3 className="text-sm font-semibold text-cyan-400 uppercase">
-                Meet Jasmine, Our Founder & Visionary
-              </h3>
-            </div>
+            <Badge className="inline-flex items-center gap-3 px-4 py-2 rounded-full bg-white/[0.08] border border-white/[0.15] backdrop-blur-sm mb-4">
+              Meet Jasmine, Our Founder & Visionary
+            </Badge>
             
             <h2 className="text-3xl sm:text-4xl font-bold text-white mb-6 gradient-text">From 2 Poles In Her Parents Garage To A Movement Empowering Thousands Across Melbourne</h2>
             
