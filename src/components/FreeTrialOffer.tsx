@@ -1,3 +1,4 @@
+
 import { Button } from '@/components/ui/button';
 import { Star, Clock, Users, Heart, Zap, LucideIcon } from 'lucide-react';
 import VoucherClaimForm from './VoucherClaimForm';
@@ -37,17 +38,8 @@ const FreeTrialOffer = ({
   buttonText = 'Claim Special Offer',
   disclaimerText = 'No credit card required • Multiple locations available'
 }: FreeTrialOfferProps) => {
-  return <section className="py-20 relative overflow-hidden">
-      {/* Cyberpunk Background */}
-      <div className="absolute inset-0 bg-cover bg-center" style={{
-      backgroundImage: `linear-gradient(rgba(8,8,15,0.9), rgba(20,20,35,0.9)), url('${backgroundImage}')`
-    }} />
-      
-      {/* Neon Grid Overlay */}
-      <div className="absolute inset-0 cyber-grid opacity-30"></div>
-      
-      {/* Content */}
-      <div className="relative z-10 max-w-4xl mx-auto text-center px-4 sm:px-6 lg:px-8">
+  return <section className="py-20 bg-gray-800">
+      <div className="max-w-4xl mx-auto text-center px-4 sm:px-6 lg:px-8">
         <div className="animate-fade-in">
           <div className="inline-flex items-center space-x-2 text-fuchsia-400 mb-4">
             <Zap className="w-5 h-5 neon-glow" />
@@ -84,12 +76,6 @@ const FreeTrialOffer = ({
           </div>
         </div>
       </div>
-
-      {/* Floating Neon Elements */}
-      <div className="absolute top-20 left-10 w-20 h-20 bg-fuchsia-500/30 rounded-full blur-xl animate-pulse float"></div>
-      <div className="absolute bottom-20 right-10 w-32 h-32 bg-cyan-500/30 rounded-full blur-xl animate-pulse float" style={{
-      animationDelay: '1s'
-    }}></div>
     </section>;
 };
 export default FreeTrialOffer;
