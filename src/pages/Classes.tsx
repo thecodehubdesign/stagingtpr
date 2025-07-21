@@ -26,8 +26,8 @@ const Classes = () => {
       slug: "pole-basics",
       category: "Pole Dancing",
       style: "Pole",
-      instructor: "Sarah Chen",
-      location: "Downtown Studio",
+      instructors: ["Sarah Chen", "Maya Rodriguez"],
+      location: "Mitcham",
       image: "/lovable-uploads/d97f60e6-9bb0-46b6-a9cc-aaa13ede7d4b.png",
       featured: true
     },
@@ -38,9 +38,9 @@ const Classes = () => {
       description: "Intensive flexibility training focused on achieving and perfecting your front splits. Includes warm-up routines and progressive stretching techniques.",
       slug: "front-splits-masterclass",
       category: "Flexibility & Conditioning",
-      style: "Conditioning",
-      instructor: "Zara Kim",
-      location: "Midtown Studio",
+      style: "Flexibility",
+      instructors: ["Zara Kim"],
+      location: "Kilsyth",
       image: "/lovable-uploads/ecb5bd9c-6055-4d41-8797-bbb506648a5b.png"
     },
     {
@@ -51,8 +51,8 @@ const Classes = () => {
       slug: "pole-jam",
       category: "Pole Dancing",
       style: "Pole",
-      instructor: "Maya Rodriguez",
-      location: "Uptown Studio",
+      instructors: ["Maya Rodriguez", "Alex Turner"],
+      location: "Melbourne",
       image: "/lovable-uploads/e72918ef-7386-4492-8d6e-6cf1cbeb62e4.png"
     },
     {
@@ -63,8 +63,8 @@ const Classes = () => {
       slug: "chair-and-lap",
       category: "Dance & Movement",
       style: "Dance",
-      instructor: "Ava Johnson",
-      location: "Downtown Studio",
+      instructors: ["Ava Johnson"],
+      location: "Highett",
       image: "/lovable-uploads/ff325961-11eb-4009-8f03-cb52bcfc97e0.png"
     },
     {
@@ -75,8 +75,8 @@ const Classes = () => {
       slug: "dance-filthy",
       category: "Dance & Movement",
       style: "Dance",
-      instructor: "Maya Rodriguez",
-      location: "Midtown Studio",
+      instructors: ["Maya Rodriguez", "Ava Johnson"],
+      location: "Narre Warren",
       image: "/lovable-uploads/a3f3abdb-e872-4fb0-a921-052f1d92afec.png"
     },
     {
@@ -87,8 +87,8 @@ const Classes = () => {
       slug: "pole-conditioning",
       category: "Flexibility & Conditioning",
       style: "Conditioning",
-      instructor: "Alex Turner",
-      location: "Uptown Studio",
+      instructors: ["Alex Turner", "Zara Kim"],
+      location: "Mitcham",
       image: "/lovable-uploads/cc11c8dc-6872-48a7-9124-7e1c3602e410.png"
     },
     {
@@ -99,21 +99,21 @@ const Classes = () => {
       slug: "pole-foundations",
       category: "Pole Dancing",
       style: "Pole",
-      instructor: "Sarah Chen",
-      location: "Downtown Studio",
+      instructors: ["Sarah Chen"],
+      location: "Kilsyth",
       image: "/lovable-uploads/8a7c62c9-86e6-4d10-a555-f79e5ed95001.png",
       featured: true
     },
     {
       name: "Pure Pole Dance",
-      level: "Intermediate",
+      level: "Advanced",
       duration: "75 min",
       description: "Artistic pole dancing focusing on flow, grace, and technical precision. Combines athletic skill with beautiful choreography and self-expression.",
       slug: "pure-pole-dance",
       category: "Pole Dancing",
       style: "Pole",
-      instructor: "Luna Park",
-      location: "Midtown Studio",
+      instructors: ["Luna Park", "Alex Turner"],
+      location: "Melbourne",
       image: "/lovable-uploads/119fcd15-3aac-4f1f-920c-a13497b0b348.png"
     },
     {
@@ -124,8 +124,8 @@ const Classes = () => {
       slug: "sexy-basics",
       category: "Dance & Movement",
       style: "Dance",
-      instructor: "Ava Johnson",
-      location: "Uptown Studio",
+      instructors: ["Ava Johnson", "Maya Rodriguez"],
+      location: "Highett",
       image: "/lovable-uploads/8be1e610-6a66-4ace-b02d-1945fd276001.png"
     },
     {
@@ -136,16 +136,16 @@ const Classes = () => {
       slug: "floor-play",
       category: "Dance & Movement",
       style: "Dance",
-      instructor: "Zara Kim",
-      location: "Downtown Studio",
+      instructors: ["Zara Kim", "Ava Johnson"],
+      location: "Narre Warren",
       image: "/lovable-uploads/32863f0f-165a-4abf-b73e-3eea2045dce5.png"
     }
   ];
 
   // Filter options
-  const levels = ['All Levels', 'Beginner', 'Intermediate', 'Advanced'];
-  const styles = ['Pole', 'Aerial', 'Dance', 'Conditioning'];
-  const locations = ['Downtown Studio', 'Midtown Studio', 'Uptown Studio'];
+  const levels = ['All Levels', 'Beginner', 'Intermediate', 'Advanced', 'Elite'];
+  const styles = ['Pole', 'Aerial', 'Dance', 'Conditioning', 'Flexibility'];
+  const locations = ['Mitcham', 'Kilsyth', 'Melbourne', 'Highett', 'Narre Warren'];
   const instructors = ['Sarah Chen', 'Maya Rodriguez', 'Alex Turner', 'Luna Park', 'Zara Kim', 'Ava Johnson'];
 
   // Filtered classes based on search and filters
@@ -155,7 +155,7 @@ const Classes = () => {
       const matchesLevel = !levelFilter || classItem.level === levelFilter;
       const matchesStyle = !styleFilter || classItem.style === styleFilter;
       const matchesLocation = !locationFilter || classItem.location === locationFilter;
-      const matchesInstructor = !instructorFilter || classItem.instructor === instructorFilter;
+      const matchesInstructor = !instructorFilter || classItem.instructors.some(instructor => instructor === instructorFilter);
       return matchesSearch && matchesLevel && matchesStyle && matchesLocation && matchesInstructor;
     });
   }, [searchQuery, levelFilter, styleFilter, locationFilter, instructorFilter]);
@@ -174,6 +174,8 @@ const Classes = () => {
         return 'bg-yellow-500/10 text-yellow-400 border-yellow-500/30';
       case 'Advanced':
         return 'bg-red-500/10 text-red-400 border-red-500/30';
+      case 'Elite':
+        return 'bg-purple-500/10 text-purple-400 border-purple-500/30';
       default:
         return 'bg-blue-500/10 text-blue-400 border-blue-500/30';
     }
@@ -388,7 +390,7 @@ const Classes = () => {
                         </div>
                         <div className="flex items-center">
                           <MapPin className="w-4 h-4 mr-1" />
-                          {classItem.location.split(' ')[0]}
+                          {classItem.location}
                         </div>
                       </div>
 
@@ -398,7 +400,7 @@ const Classes = () => {
 
                       <div className="flex items-center justify-between">
                         <span className="text-xs text-gray-500">
-                          with {classItem.instructor}
+                          with {classItem.instructors.join(', ')}
                         </span>
                         <span className="text-xs px-2 py-1 bg-purple-500/20 text-purple-300 rounded-full">
                           {classItem.style}
