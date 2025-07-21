@@ -38,7 +38,7 @@ const StudioLocations = () => {
           duration: 0.6,
           ease: "easeOut"
         }}>
-            <Badge className="inline-flex items-center gap-3 px-4 py-2 rounded-full border border-white/[0.15] backdrop-blur-sm mb-6 bg-slate-50">
+            <Badge className="inline-flex items-center gap-3 px-4 py-2 rounded-full bg-white/[0.08] border border-white/[0.15] backdrop-blur-sm mb-6">
               Studio Locations
             </Badge>
           </motion.div>
