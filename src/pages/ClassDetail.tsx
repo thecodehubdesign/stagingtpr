@@ -161,7 +161,7 @@ const ClassDetail = () => {
           </div>
 
           <Card className="cyber-card p-8">
-            <div className="bg-white rounded-lg p-4 min-h-[400px]">
+            <div className="min-h-[400px]">
               <div className="mindbody-widget" data-widget-type="Schedules" data-widget-id="d98131628e"></div>
             </div>
           </Card>
