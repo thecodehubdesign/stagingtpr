@@ -47,7 +47,7 @@ const FounderSection = () => {
             {/* Quote Bubble */}
             <div className="absolute -bottom-6 -right-6 cyber-card p-6 rounded-2xl max-w-sm">
               <p className="text-gray-300 italic text-sm">
-                "Every woman deserves to feel strong, graceful, and confident in her own body."
+                "Every body deserves to feel strong, graceful, and confident."
               </p>
               <p className="text-fuchsia-400 font-semibold mt-2">- Jasmine Zapka</p>
             </div>
@@ -57,7 +57,7 @@ const FounderSection = () => {
           <div className="animate-fade-in" style={{
           animationDelay: '0.3s'
         }}>
-            <SectionHeader badgeText="Meet Jasmine, Our Founder & Visionary" title="From 2 Poles In Her Parents Garage To A Movement Empowering Thousands Across Melbourne" className="text-left mb-6" />
+            <SectionHeader badgeText="Meet Jasmine, Our Founder & Visionary" title="From 2 Poles To A Movement Empowering Thousands" className="text-left mb-6" />
             
             <p className="text-lg text-gray-300 mb-8 leading-relaxed">
               Jasmine created The Pole Room to unlock the untapped potential in every body. 
