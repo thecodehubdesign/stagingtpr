@@ -9,13 +9,17 @@ import SectionHeader from '@/components/ui/section-header';
 const HeroSection = () => {
   return (
     <section className="relative min-h-screen flex items-center justify-center overflow-hidden cyber-grid">
-      {/* Cyberpunk Background */}
-      <div 
-        className="absolute inset-0 bg-cover bg-center" 
-        style={{
-          backgroundImage: `linear-gradient(rgba(8,8,15,0.8), rgba(20,20,35,0.8)), url('https://images.unsplash.com/photo-1518005020951-eccb494ad742?ixlib=rb-4.0.3&auto=format&fit=crop&w=1200&q=60')`
-        }} 
-      />
+      {/* Video Background */}
+      <div className="absolute inset-0 w-full h-full">
+        <iframe
+          src="https://player.vimeo.com/video/374290944?autoplay=1&loop=1&muted=1&controls=0&background=1"
+          className="absolute top-1/2 left-1/2 min-w-full min-h-full w-auto h-auto transform -translate-x-1/2 -translate-y-1/2"
+          allow="autoplay; fullscreen"
+          allowFullScreen
+        ></iframe>
+        {/* Dark overlay to ensure text readability */}
+        <div className="absolute inset-0 bg-gradient-to-b from-black/60 via-black/40 to-black/60"></div>
+      </div>
       
       {/* Neon Accent Lines */}
       <div className="absolute top-0 left-0 w-full h-1 bg-gradient-to-r from-fuchsia-500 via-purple-500 to-cyan-500"></div>
