@@ -25,8 +25,8 @@ const SectionNavigation = ({ sections }: SectionNavigationProps) => {
       // Show navigation after 15% scroll
       const shouldShow = scrollPercentage >= 15;
       
-      // Hide when scrolling up (except if at very top)
-      const isScrollingUp = currentScrollY < lastScrollY && currentScrollY > 100;
+      // Hide when scrolling up at any point
+      const isScrollingUp = currentScrollY < lastScrollY;
       
       // Update visibility: show if past 15% and not scrolling up, or if scrolling down
       setIsVisible(shouldShow && !isScrollingUp);
