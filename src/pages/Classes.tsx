@@ -250,7 +250,7 @@ const Classes = () => {
       </section>
 
       {/* Find Your Perfect Class Heading */}
-      <section className="py-16 bg-gray-800">
+      <section className="pt-16 pb-8 bg-gray-800">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="text-center">
             <h2 className="text-3xl sm:text-4xl font-bold text-white mb-6">
