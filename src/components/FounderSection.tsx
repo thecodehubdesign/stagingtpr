@@ -1,5 +1,6 @@
 import { Badge } from '@/components/ui/badge';
 import { Heart, Users, Award, MapPin, GraduationCap, Clock, Building, Zap } from 'lucide-react';
+import SectionHeader from '@/components/ui/section-header';
 const FounderSection = () => {
   const benefits = [{
     icon: Heart,
@@ -68,11 +69,11 @@ const FounderSection = () => {
           <div className="animate-fade-in" style={{
           animationDelay: '0.3s'
         }}>
-            <Badge className="inline-flex items-center gap-3 px-4 py-2 rounded-full bg-white/[0.08] border border-white/[0.15] backdrop-blur-sm mb-4">
-              Meet Jasmine, Our Founder & Visionary
-            </Badge>
-            
-            <h2 className="text-3xl sm:text-4xl font-bold text-white mb-6 gradient-text">From 2 Poles In Her Parents Garage To A Movement Empowering Thousands Across Melbourne</h2>
+            <SectionHeader 
+              badgeText="Meet Jasmine, Our Founder & Visionary"
+              title="From 2 Poles In Her Parents Garage To A Movement Empowering Thousands Across Melbourne"
+              className="text-left mb-6"
+            />
             
             <p className="text-lg text-gray-300 mb-8 leading-relaxed">
               Jasmine created The Pole Room to unlock the untapped potential in every body. 

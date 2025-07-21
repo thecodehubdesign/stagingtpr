@@ -2,6 +2,7 @@
 import { Badge } from "@/components/ui/badge";
 import { motion } from "framer-motion";
 import { Star, Users, Clock, Award, Heart, Zap } from "lucide-react";
+import SectionHeader from '@/components/ui/section-header';
 
 const ClassDiscoverySection = () => {
   const classTypes = [
@@ -90,23 +91,11 @@ const ClassDiscoverySection = () => {
           viewport={{ once: true, margin: "-100px" }}
         >
           {/* Header Section */}
-          <motion.div 
-            className="flex gap-6 flex-col items-center text-center"
-            variants={itemVariants}
-            transition={{ duration: 0.6, ease: "easeOut" }}
-          >
-            <Badge className="bg-fuchsia-500/20 text-fuchsia-300 border-fuchsia-500/30 hover:bg-fuchsia-500/30">
-              Class Discovery
-            </Badge>
-            <div className="flex gap-4 flex-col max-w-4xl">
-              <h2 className="text-4xl md:text-6xl lg:text-7xl font-playfair font-bold gradient-text tracking-tight">
-                Find Your Perfect Class
-              </h2>
-              <p className="text-lg md:text-xl lg:text-2xl leading-relaxed text-white/70 max-w-3xl mx-auto">
-                From complete beginner to advanced performer, discover the class that matches your journey and goals.
-              </p>
-            </div>
-          </motion.div>
+          <SectionHeader 
+            badgeText="Class Discovery"
+            title="Find Your Perfect Class"
+            subtitle="From complete beginner to advanced performer, discover the class that matches your journey and goals."
+          />
 
           {/* Grid Section */}
           <motion.div 

@@ -3,6 +3,7 @@ import { useState, useEffect } from 'react';
 import { Card } from '@/components/ui/card';
 import { Badge } from '@/components/ui/badge';
 import { Star, Heart, Zap, Crown, ChevronLeft, ChevronRight } from 'lucide-react';
+import SectionHeader from '@/components/ui/section-header';
 
 const SocialProofCarousel = () => {
   const [currentIndex, setCurrentIndex] = useState(0);
@@ -74,17 +75,11 @@ const SocialProofCarousel = () => {
   return (
     <section className="py-20 bg-gray-800">
       <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div className="text-center mb-16">
-          <Badge className="inline-flex items-center gap-3 px-4 py-2 rounded-full bg-white/[0.08] border border-white/[0.15] backdrop-blur-sm mb-6">
-            Studio Success Stories
-          </Badge>
-          <h2 className="text-3xl sm:text-4xl font-bold text-white mb-6">
-            <span className="gradient-text">Real Stories</span> from Real People
-          </h2>
-          <p className="text-lg text-gray-300 max-w-2xl mx-auto">
-            Every pathway leads to transformation. Here's what our students have to say about their journey.
-          </p>
-        </div>
+        <SectionHeader 
+          badgeText="Studio Success Stories"
+          title="Real Stories from Real People"
+          subtitle="Every pathway leads to transformation. Here's what our students have to say about their journey."
+        />
 
         <div className="relative">
           {/* Main Carousel */}
