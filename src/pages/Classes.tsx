@@ -8,7 +8,6 @@ import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '@
 import { Clock, Users, Search, Filter, MapPin, GraduationCap, X } from 'lucide-react';
 import { Link } from 'react-router-dom';
 import { useState, useMemo } from 'react';
-
 const Classes = () => {
   // State for search and filters
   const [searchQuery, setSearchQuery] = useState('');
@@ -18,153 +17,140 @@ const Classes = () => {
   const [instructorFilter, setInstructorFilter] = useState('');
 
   // Enhanced class data with additional properties for filtering
-  const allClasses = [
-    {
-      name: "Pole Foundations",
-      level: "Beginner",
-      duration: "60 min",
-      description: "Perfect first class - learn basic spins, poses and floorwork in a supportive environment",
-      slug: "beginner-pole-foundations",
-      category: "Pole Dancing",
-      style: "Pole",
-      instructor: "Sarah Chen",
-      location: "Downtown Studio",
-      image: "/lovable-uploads/1d83d83b-0057-4bd1-8052-79584b039a97.jpg",
-      featured: true
-    },
-    {
-      name: "Pole Progression",
-      level: "Intermediate", 
-      duration: "60 min",
-      description: "Build on basics with inversions and intermediate combinations for confident movement",
-      slug: "pole-progression",
-      category: "Pole Dancing",
-      style: "Pole",
-      instructor: "Maya Rodriguez",
-      location: "Downtown Studio",
-      image: "/lovable-uploads/3cc0b943-7d1c-4140-a59c-a60390d03154.jpg"
-    },
-    {
-      name: "Advanced Pole Flow",
-      level: "Advanced",
-      duration: "75 min", 
-      description: "Complex tricks, transitions and choreographed sequences for experienced dancers",
-      slug: "advanced-pole-flow",
-      category: "Pole Dancing",
-      style: "Pole",
-      instructor: "Alex Turner",
-      location: "Midtown Studio",
-      image: "/lovable-uploads/4d4d16ef-17d9-47e3-a464-cfa3c9b9eef6.jpg"
-    },
-    {
-      name: "Aerial Silks Intro",
-      level: "Beginner",
-      duration: "60 min",
-      description: "Learn basic climbs, poses and sequences on aerial silks in this beginner-friendly class",
-      slug: "aerial-silks-intro",
-      category: "Aerial Arts",
-      style: "Aerial",
-      instructor: "Luna Park",
-      location: "Downtown Studio",
-      image: "/lovable-uploads/8b589fd4-a71e-43de-823f-c2af97fef88d.jpg"
-    },
-    {
-      name: "Lyra Foundations", 
-      level: "Beginner",
-      duration: "60 min",
-      description: "Explore the aerial hoop with fundamental poses and spins perfect for newcomers",
-      slug: "lyra-foundations",
-      category: "Aerial Arts",
-      style: "Aerial",
-      instructor: "Zara Kim",
-      location: "Uptown Studio",
-      image: "/lovable-uploads/c7f8bec0-23c5-44db-871b-dccfbacb26a5.jpg"
-    },
-    {
-      name: "Aerial Flow",
-      level: "Intermediate",
-      duration: "75 min",
-      description: "Combine silks and lyra skills into flowing sequences that tell a story",
-      slug: "aerial-flow",
-      category: "Aerial Arts",
-      style: "Aerial",
-      instructor: "Luna Park",
-      location: "Midtown Studio",
-      image: "/lovable-uploads/1d83d83b-0057-4bd1-8052-79584b039a97.jpg"
-    },
-    {
-      name: "Floorwork Foundations",
-      level: "All Levels",
-      duration: "45 min", 
-      description: "Ground-based movement focusing on fluidity and expression through dance",
-      slug: "floorwork-foundations",
-      category: "Dance & Movement",
-      style: "Dance",
-      instructor: "Ava Johnson",
-      location: "Downtown Studio",
-      image: "/lovable-uploads/3cc0b943-7d1c-4140-a59c-a60390d03154.jpg"
-    },
-    {
-      name: "Exotic Dance",
-      level: "All Levels",
-      duration: "60 min",
-      description: "Confidence-building dance class focusing on sensual movement and self-expression",
-      slug: "exotic-dance",
-      category: "Dance & Movement",
-      style: "Dance",
-      instructor: "Ava Johnson",
-      location: "Uptown Studio",
-      image: "/lovable-uploads/4d4d16ef-17d9-47e3-a464-cfa3c9b9eef6.jpg"
-    },
-    {
-      name: "Chair Dance",
-      level: "All Levels", 
-      duration: "45 min",
-      description: "Playful and empowering choreography using a chair as a prop for creative expression",
-      slug: "chair-dance",
-      category: "Dance & Movement",
-      style: "Dance",
-      instructor: "Maya Rodriguez",
-      location: "Midtown Studio",
-      image: "/lovable-uploads/8b589fd4-a71e-43de-823f-c2af97fef88d.jpg"
-    },
-    {
-      name: "Flexibility Flow",
-      level: "All Levels",
-      duration: "60 min",
-      description: "Active and passive stretching to improve overall flexibility and mobility",
-      slug: "flexibility-flow",
-      category: "Flexibility & Conditioning",
-      style: "Conditioning",
-      instructor: "Zara Kim",
-      location: "Downtown Studio",
-      image: "/lovable-uploads/c7f8bec0-23c5-44db-871b-dccfbacb26a5.jpg"
-    },
-    {
-      name: "Pole Conditioning",
-      level: "All Levels", 
-      duration: "45 min",
-      description: "Strength training specifically designed for pole and aerial arts performance",
-      slug: "pole-conditioning",
-      category: "Flexibility & Conditioning",
-      style: "Conditioning",
-      instructor: "Alex Turner",
-      location: "Uptown Studio",
-      image: "/lovable-uploads/1d83d83b-0057-4bd1-8052-79584b039a97.jpg"
-    },
-    {
-      name: "Splits & Backbends",
-      level: "Intermediate",
-      duration: "60 min",
-      description: "Targeted training for advanced flexibility goals including splits and backbends",
-      slug: "splits-backbends",
-      category: "Flexibility & Conditioning",
-      style: "Conditioning",
-      instructor: "Sarah Chen",
-      location: "Midtown Studio",
-      image: "/lovable-uploads/3cc0b943-7d1c-4140-a59c-a60390d03154.jpg"
-    }
-  ];
+  const allClasses = [{
+    name: "Pole Foundations",
+    level: "Beginner",
+    duration: "60 min",
+    description: "Perfect first class - learn basic spins, poses and floorwork in a supportive environment",
+    slug: "beginner-pole-foundations",
+    category: "Pole Dancing",
+    style: "Pole",
+    instructor: "Sarah Chen",
+    location: "Downtown Studio",
+    image: "/lovable-uploads/1d83d83b-0057-4bd1-8052-79584b039a97.jpg",
+    featured: true
+  }, {
+    name: "Pole Progression",
+    level: "Intermediate",
+    duration: "60 min",
+    description: "Build on basics with inversions and intermediate combinations for confident movement",
+    slug: "pole-progression",
+    category: "Pole Dancing",
+    style: "Pole",
+    instructor: "Maya Rodriguez",
+    location: "Downtown Studio",
+    image: "/lovable-uploads/3cc0b943-7d1c-4140-a59c-a60390d03154.jpg"
+  }, {
+    name: "Advanced Pole Flow",
+    level: "Advanced",
+    duration: "75 min",
+    description: "Complex tricks, transitions and choreographed sequences for experienced dancers",
+    slug: "advanced-pole-flow",
+    category: "Pole Dancing",
+    style: "Pole",
+    instructor: "Alex Turner",
+    location: "Midtown Studio",
+    image: "/lovable-uploads/4d4d16ef-17d9-47e3-a464-cfa3c9b9eef6.jpg"
+  }, {
+    name: "Aerial Silks Intro",
+    level: "Beginner",
+    duration: "60 min",
+    description: "Learn basic climbs, poses and sequences on aerial silks in this beginner-friendly class",
+    slug: "aerial-silks-intro",
+    category: "Aerial Arts",
+    style: "Aerial",
+    instructor: "Luna Park",
+    location: "Downtown Studio",
+    image: "/lovable-uploads/8b589fd4-a71e-43de-823f-c2af97fef88d.jpg"
+  }, {
+    name: "Lyra Foundations",
+    level: "Beginner",
+    duration: "60 min",
+    description: "Explore the aerial hoop with fundamental poses and spins perfect for newcomers",
+    slug: "lyra-foundations",
+    category: "Aerial Arts",
+    style: "Aerial",
+    instructor: "Zara Kim",
+    location: "Uptown Studio",
+    image: "/lovable-uploads/c7f8bec0-23c5-44db-871b-dccfbacb26a5.jpg"
+  }, {
+    name: "Aerial Flow",
+    level: "Intermediate",
+    duration: "75 min",
+    description: "Combine silks and lyra skills into flowing sequences that tell a story",
+    slug: "aerial-flow",
+    category: "Aerial Arts",
+    style: "Aerial",
+    instructor: "Luna Park",
+    location: "Midtown Studio",
+    image: "/lovable-uploads/1d83d83b-0057-4bd1-8052-79584b039a97.jpg"
+  }, {
+    name: "Floorwork Foundations",
+    level: "All Levels",
+    duration: "45 min",
+    description: "Ground-based movement focusing on fluidity and expression through dance",
+    slug: "floorwork-foundations",
+    category: "Dance & Movement",
+    style: "Dance",
+    instructor: "Ava Johnson",
+    location: "Downtown Studio",
+    image: "/lovable-uploads/3cc0b943-7d1c-4140-a59c-a60390d03154.jpg"
+  }, {
+    name: "Exotic Dance",
+    level: "All Levels",
+    duration: "60 min",
+    description: "Confidence-building dance class focusing on sensual movement and self-expression",
+    slug: "exotic-dance",
+    category: "Dance & Movement",
+    style: "Dance",
+    instructor: "Ava Johnson",
+    location: "Uptown Studio",
+    image: "/lovable-uploads/4d4d16ef-17d9-47e3-a464-cfa3c9b9eef6.jpg"
+  }, {
+    name: "Chair Dance",
+    level: "All Levels",
+    duration: "45 min",
+    description: "Playful and empowering choreography using a chair as a prop for creative expression",
+    slug: "chair-dance",
+    category: "Dance & Movement",
+    style: "Dance",
+    instructor: "Maya Rodriguez",
+    location: "Midtown Studio",
+    image: "/lovable-uploads/8b589fd4-a71e-43de-823f-c2af97fef88d.jpg"
+  }, {
+    name: "Flexibility Flow",
+    level: "All Levels",
+    duration: "60 min",
+    description: "Active and passive stretching to improve overall flexibility and mobility",
+    slug: "flexibility-flow",
+    category: "Flexibility & Conditioning",
+    style: "Conditioning",
+    instructor: "Zara Kim",
+    location: "Downtown Studio",
+    image: "/lovable-uploads/c7f8bec0-23c5-44db-871b-dccfbacb26a5.jpg"
+  }, {
+    name: "Pole Conditioning",
+    level: "All Levels",
+    duration: "45 min",
+    description: "Strength training specifically designed for pole and aerial arts performance",
+    slug: "pole-conditioning",
+    category: "Flexibility & Conditioning",
+    style: "Conditioning",
+    instructor: "Alex Turner",
+    location: "Uptown Studio",
+    image: "/lovable-uploads/1d83d83b-0057-4bd1-8052-79584b039a97.jpg"
+  }, {
+    name: "Splits & Backbends",
+    level: "Intermediate",
+    duration: "60 min",
+    description: "Targeted training for advanced flexibility goals including splits and backbends",
+    slug: "splits-backbends",
+    category: "Flexibility & Conditioning",
+    style: "Conditioning",
+    instructor: "Sarah Chen",
+    location: "Midtown Studio",
+    image: "/lovable-uploads/3cc0b943-7d1c-4140-a59c-a60390d03154.jpg"
+  }];
 
   // Filter options
   const levels = ['All Levels', 'Beginner', 'Intermediate', 'Advanced'];
@@ -175,19 +161,14 @@ const Classes = () => {
   // Filtered classes based on search and filters
   const filteredClasses = useMemo(() => {
     return allClasses.filter(classItem => {
-      const matchesSearch = classItem.name.toLowerCase().includes(searchQuery.toLowerCase()) ||
-                           classItem.description.toLowerCase().includes(searchQuery.toLowerCase()) ||
-                           classItem.category.toLowerCase().includes(searchQuery.toLowerCase());
-      
+      const matchesSearch = classItem.name.toLowerCase().includes(searchQuery.toLowerCase()) || classItem.description.toLowerCase().includes(searchQuery.toLowerCase()) || classItem.category.toLowerCase().includes(searchQuery.toLowerCase());
       const matchesLevel = !levelFilter || classItem.level === levelFilter;
       const matchesStyle = !styleFilter || classItem.style === styleFilter;
       const matchesLocation = !locationFilter || classItem.location === locationFilter;
       const matchesInstructor = !instructorFilter || classItem.instructor === instructorFilter;
-      
       return matchesSearch && matchesLevel && matchesStyle && matchesLocation && matchesInstructor;
     });
   }, [searchQuery, levelFilter, styleFilter, locationFilter, instructorFilter]);
-
   const clearFilters = () => {
     setSearchQuery('');
     setLevelFilter('');
@@ -195,20 +176,20 @@ const Classes = () => {
     setLocationFilter('');
     setInstructorFilter('');
   };
-
   const getLevelColor = (level: string) => {
     switch (level) {
-      case 'Beginner': return 'bg-green-500/10 text-green-400 border-green-500/30';
-      case 'Intermediate': return 'bg-yellow-500/10 text-yellow-400 border-yellow-500/30';
-      case 'Advanced': return 'bg-red-500/10 text-red-400 border-red-500/30';
-      default: return 'bg-blue-500/10 text-blue-400 border-blue-500/30';
+      case 'Beginner':
+        return 'bg-green-500/10 text-green-400 border-green-500/30';
+      case 'Intermediate':
+        return 'bg-yellow-500/10 text-yellow-400 border-yellow-500/30';
+      case 'Advanced':
+        return 'bg-red-500/10 text-red-400 border-red-500/30';
+      default:
+        return 'bg-blue-500/10 text-blue-400 border-blue-500/30';
     }
   };
-
   const hasActiveFilters = searchQuery || levelFilter || styleFilter || locationFilter || instructorFilter;
-
-  return (
-    <div className="min-h-screen">
+  return <div className="min-h-screen">
       <Header />
       
       {/* Hero Section with About */}
@@ -227,11 +208,7 @@ const Classes = () => {
                 Whether you're a complete beginner or an experienced performer, we have classes designed to meet you 
                 where you are and help you grow.
               </p>
-              <p className="text-lg text-gray-400 leading-relaxed">
-                Our expert instructors create a supportive, empowering environment where you can build strength, 
-                flexibility, and confidence while expressing your unique style. Join our community and transform 
-                how you move through the world.
-              </p>
+              
             </div>
           </div>
         </div>
@@ -244,13 +221,7 @@ const Classes = () => {
           <div className="relative mb-8">
             <div className="relative max-w-2xl mx-auto">
               <Search className="absolute left-4 top-1/2 transform -translate-y-1/2 text-gray-400 w-5 h-5" />
-              <Input
-                type="text"
-                placeholder="Search classes by name, description, or category..."
-                value={searchQuery}
-                onChange={(e) => setSearchQuery(e.target.value)}
-                className="pl-12 pr-4 py-4 bg-gray-900/50 border-2 border-fuchsia-500/30 rounded-lg text-white placeholder-gray-400 text-lg focus:border-fuchsia-400 focus:ring-fuchsia-400/20"
-              />
+              <Input type="text" placeholder="Search classes by name, description, or category..." value={searchQuery} onChange={e => setSearchQuery(e.target.value)} className="pl-12 pr-4 py-4 bg-gray-900/50 border-2 border-fuchsia-500/30 rounded-lg text-white placeholder-gray-400 text-lg focus:border-fuchsia-400 focus:ring-fuchsia-400/20" />
             </div>
           </div>
 
@@ -267,11 +238,9 @@ const Classes = () => {
                 <SelectValue placeholder="Level" />
               </SelectTrigger>
               <SelectContent className="bg-gray-900 border-cyan-500/30">
-                {levels.map((level) => (
-                  <SelectItem key={level} value={level} className="text-white hover:bg-gray-800">
+                {levels.map(level => <SelectItem key={level} value={level} className="text-white hover:bg-gray-800">
                     {level}
-                  </SelectItem>
-                ))}
+                  </SelectItem>)}
               </SelectContent>
             </Select>
 
@@ -280,11 +249,9 @@ const Classes = () => {
                 <SelectValue placeholder="Style" />
               </SelectTrigger>
               <SelectContent className="bg-gray-900 border-purple-500/30">
-                {styles.map((style) => (
-                  <SelectItem key={style} value={style} className="text-white hover:bg-gray-800">
+                {styles.map(style => <SelectItem key={style} value={style} className="text-white hover:bg-gray-800">
                     {style}
-                  </SelectItem>
-                ))}
+                  </SelectItem>)}
               </SelectContent>
             </Select>
 
@@ -294,11 +261,9 @@ const Classes = () => {
                 <SelectValue placeholder="Location" />
               </SelectTrigger>
               <SelectContent className="bg-gray-900 border-green-500/30">
-                {locations.map((location) => (
-                  <SelectItem key={location} value={location} className="text-white hover:bg-gray-800">
+                {locations.map(location => <SelectItem key={location} value={location} className="text-white hover:bg-gray-800">
                     {location}
-                  </SelectItem>
-                ))}
+                  </SelectItem>)}
               </SelectContent>
             </Select>
 
@@ -308,24 +273,16 @@ const Classes = () => {
                 <SelectValue placeholder="Instructor" />
               </SelectTrigger>
               <SelectContent className="bg-gray-900 border-yellow-500/30">
-                {instructors.map((instructor) => (
-                  <SelectItem key={instructor} value={instructor} className="text-white hover:bg-gray-800">
+                {instructors.map(instructor => <SelectItem key={instructor} value={instructor} className="text-white hover:bg-gray-800">
                     {instructor}
-                  </SelectItem>
-                ))}
+                  </SelectItem>)}
               </SelectContent>
             </Select>
 
-            {hasActiveFilters && (
-              <Button
-                onClick={clearFilters}
-                variant="outline"
-                className="cyber-border text-red-400 hover:bg-red-400/10 hover:text-red-300"
-              >
+            {hasActiveFilters && <Button onClick={clearFilters} variant="outline" className="cyber-border text-red-400 hover:bg-red-400/10 hover:text-red-300">
                 <X className="w-4 h-4 mr-2" />
                 Clear All
-              </Button>
-            )}
+              </Button>}
           </div>
 
           {/* Results Count */}
@@ -341,47 +298,32 @@ const Classes = () => {
       {/* Classes Grid */}
       <section className="py-20 bg-gray-900">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          {filteredClasses.length === 0 ? (
-            <div className="text-center py-16">
+          {filteredClasses.length === 0 ? <div className="text-center py-16">
               <div className="text-6xl mb-6">🔍</div>
               <h3 className="text-2xl font-bold text-white mb-4">No classes found</h3>
               <p className="text-gray-400 mb-8">Try adjusting your search or filters to find more classes.</p>
-              <Button
-                onClick={clearFilters}
-                className="bg-gradient-to-r from-fuchsia-500 to-purple-600 hover:from-fuchsia-600 hover:to-purple-700"
-              >
+              <Button onClick={clearFilters} className="bg-gradient-to-r from-fuchsia-500 to-purple-600 hover:from-fuchsia-600 hover:to-purple-700">
                 Clear Filters
               </Button>
-            </div>
-          ) : (
-            <div className="grid md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-8">
-              {filteredClasses.map((classItem, index) => (
-                <Card 
-                  key={classItem.slug}
-                  className="cyber-card group cursor-pointer overflow-hidden animate-fade-in hover:scale-105 transition-all duration-300 hover:shadow-2xl hover:shadow-fuchsia-500/20"
-                  style={{ animationDelay: `${index * 0.1}s` }}
-                >
+            </div> : <div className="grid md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-8">
+              {filteredClasses.map((classItem, index) => <Card key={classItem.slug} className="cyber-card group cursor-pointer overflow-hidden animate-fade-in hover:scale-105 transition-all duration-300 hover:shadow-2xl hover:shadow-fuchsia-500/20" style={{
+            animationDelay: `${index * 0.1}s`
+          }}>
                   <Link to={`/classes/${classItem.slug}`} className="block">
                     {/* Class Image */}
                     <div className="relative h-48 overflow-hidden">
-                      <img
-                        src={classItem.image}
-                        alt={classItem.name}
-                        className="w-full h-full object-cover transition-transform duration-300 group-hover:scale-110"
-                      />
+                      <img src={classItem.image} alt={classItem.name} className="w-full h-full object-cover transition-transform duration-300 group-hover:scale-110" />
                       <div className="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent" />
                       <div className="absolute top-4 right-4">
                         <Badge className={`${getLevelColor(classItem.level)} border font-medium`}>
                           {classItem.level}
                         </Badge>
                       </div>
-                      {classItem.featured && (
-                        <div className="absolute top-4 left-4">
+                      {classItem.featured && <div className="absolute top-4 left-4">
                           <Badge className="bg-gradient-to-r from-fuchsia-500 to-purple-600 text-white border-0">
                             Featured
                           </Badge>
-                        </div>
-                      )}
+                        </div>}
                     </div>
 
                     {/* Class Content */}
@@ -415,10 +357,8 @@ const Classes = () => {
                       </div>
                     </div>
                   </Link>
-                </Card>
-              ))}
-            </div>
-          )}
+                </Card>)}
+            </div>}
         </div>
       </section>
 
@@ -444,8 +384,6 @@ const Classes = () => {
       </section>
 
       <Footer />
-    </div>
-  );
+    </div>;
 };
-
 export default Classes;
