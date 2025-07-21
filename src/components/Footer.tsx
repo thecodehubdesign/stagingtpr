@@ -40,12 +40,12 @@ const Footer = () => {
         highlightedWord="empowered"
         benefits={[
           { icon: Star, text: "No experience necessary" },
-          { icon: Clock, text: "45-minute trial class" },
+          { icon: Clock, text: "60-minute trial class" },
           { icon: Users, text: "Small, supportive groups" },
           { icon: Heart, text: "Welcoming community" }
         ]}
         buttonText="Book My Free Trial"
-        disclaimerText="No credit card required • Available at all locations"
+        disclaimerText="Secure Your Spot • Available at all locations"
       />
 
       {/* Main Footer */}
