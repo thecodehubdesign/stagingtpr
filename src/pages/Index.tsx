@@ -1,7 +1,6 @@
 
 import Header from '@/components/Header';
 import HeroSection from '@/components/HeroSection';
-import StudioBrandsSlider from '@/components/StudioBrandsSlider';
 import FounderSection from '@/components/FounderSection';
 import VideoSection from '@/components/VideoSection';
 import LevelUpMethod from '@/components/LevelUpMethod';
@@ -29,7 +28,6 @@ const Index = () => {
       <div id="hero">
         <HeroSection />
       </div>
-      <StudioBrandsSlider />
       <div id="founder">
         <FounderSection />
       </div>

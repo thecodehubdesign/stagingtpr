@@ -35,7 +35,7 @@ const FreeTrialOffer = ({
     icon: Heart,
     text: "Welcoming community"
   }],
-  buttonText = 'Claim Special Offer',
+  buttonText = 'Get Free Trial',
   disclaimerText = 'No credit card required • Multiple locations available'
 }: FreeTrialOfferProps) => {
   return <section className="py-20 bg-gray-800 relative overflow-hidden">
