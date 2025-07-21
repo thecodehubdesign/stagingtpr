@@ -36,10 +36,11 @@ const Header = () => {
 
   const classesItems = [
     { name: 'All Classes', href: '/classes', description: 'Explore our full range of classes' },
-    { name: 'Beginner Pole', href: '/classes/beginner-pole', description: 'Perfect starting point for newcomers' },
-    { name: 'Aerial Silks', href: '/classes/aerial-silks', description: 'Grace and strength in the air' },
-    { name: 'Lyra Hoop', href: '/classes/lyra-hoop', description: 'Elegant moves on the aerial hoop' },
-    { name: 'Flexibility', href: '/classes/flexibility', description: 'Improve your range of motion' },
+    { name: 'Pole Classes', href: '/classes/beginner-pole', description: 'Perfect starting point for newcomers' },
+    { name: 'Aerial Silks Classes', href: '/classes/aerial-silks', description: 'Grace and strength in the air' },
+    { name: 'Lyra Hoop Classes', href: '/classes/lyra-hoop', description: 'Elegant moves on the aerial hoop' },
+    { name: 'Stretch Classes', href: '/classes/flexibility', description: 'Improve your range of motion' }
+    { name: 'Dance Classes', href: '/classes/dance', description: 'Improve your range of motion' },
   ];
 
   const studiosItems = [
