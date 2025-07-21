@@ -39,10 +39,36 @@ const FreeTrialOffer = ({
   disclaimerText = 'No credit card required • Multiple locations available'
 }: FreeTrialOfferProps) => {
   return <section className="py-20 bg-gray-800 relative overflow-hidden">
-      {/* Floating Neon Elements */}
-      <div className="absolute top-1/4 left-10 w-20 h-20 bg-fuchsia-500/30 rounded-full blur-xl animate-pulse float"></div>
-      <div className="absolute bottom-1/4 right-10 w-32 h-32 bg-cyan-500/30 rounded-full blur-xl animate-pulse float" style={{ animationDelay: '1s' }}></div>
-      <div className="absolute top-1/2 left-1/4 w-16 h-16 bg-purple-500/30 rounded-full blur-xl animate-pulse float" style={{ animationDelay: '2s' }}></div>
+      {/* Enhanced Background Effects */}
+      <div className="absolute inset-0">
+        {/* Moving light orbs */}
+        <div
+          className="absolute top-1/3 left-1/5 w-72 h-72 bg-fuchsia-400/15 rounded-full blur-3xl"
+          style={{
+            animation: 'float-orb 20s ease-in-out infinite'
+          }}
+        />
+        <div
+          className="absolute bottom-1/3 right-1/5 w-80 h-80 bg-cyan-400/15 rounded-full blur-3xl"
+          style={{
+            animation: 'float-orb-reverse 22s ease-in-out infinite'
+          }}
+        />
+
+        {/* Floating particles */}
+        {[...Array(12)].map((_, i) => (
+          <div
+            key={i}
+            className="absolute w-1 h-1 bg-white/30 rounded-full"
+            style={{
+              left: `${15 + (i * 7)}%`,
+              top: `${25 + (i * 5)}%`,
+              animation: `float-particle ${3 + i * 0.5}s ease-in-out infinite`,
+              animationDelay: `${i * 0.3}s`
+            }}
+          />
+        ))}
+      </div>
       
       <div className="max-w-4xl mx-auto text-center px-4 sm:px-6 lg:px-8 relative z-10">
         <div className="animate-fade-in">
