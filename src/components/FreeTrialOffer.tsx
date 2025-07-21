@@ -59,10 +59,10 @@ const FreeTrialOffer = ({
 
           {/* Benefits Grid */}
           <div className="grid sm:grid-cols-2 lg:grid-cols-4 gap-4 mb-10">
-            {benefits.map((benefit, index) => <div key={index} className="flex items-center space-x-3 cyber-card rounded-lg p-4 animate-fade-in" style={{
+            {benefits.map((benefit, index) => <div key={index} className="flex items-center space-x-3 cyber-card rounded-lg p-4 animate-fade-in transition-transform duration-500 ease-in-out hover:scale-105" style={{
             animationDelay: `${index * 0.1}s`
           }}>
-                <benefit.icon className="w-5 h-5 text-cyan-400 flex-shrink-0 neon-glow" />
+                <benefit.icon className="w-5 h-5 text-cyan-400 flex-shrink-0" />
                 <span className="text-white text-sm font-medium">{benefit.text}</span>
               </div>)}
           </div>
