@@ -1,6 +1,12 @@
 import { Badge } from '@/components/ui/badge';
 import { Zap, Users, Heart, Crown, Sparkles, ArrowRight } from 'lucide-react';
 import SectionHeader from '@/components/ui/section-header';
+import {
+  Accordion,
+  AccordionContent,
+  AccordionItem,
+  AccordionTrigger,
+} from '@/components/ui/accordion';
 const LevelUpMethod = () => {
   // Single hero image replacing the gallery
   const heroImage = "/lovable-uploads/03a1a48e-d457-4306-ab51-8d7887fe981f.png";
@@ -111,43 +117,40 @@ const LevelUpMethod = () => {
           </div>
         </div>
 
-        {/* Stages */}
-        <div className="space-y-12">
-          {stages.map((stage, index) => <div key={index} className="relative animate-fade-in" style={{
-          animationDelay: `${0.2 * (index + 1)}s`
-        }}>
-              {/* Connection Line */}
-              {index < stages.length - 1 && <div className="absolute left-1/2 top-full w-px h-12 bg-gradient-to-b from-fuchsia-500 to-transparent transform -translate-x-1/2 z-0"></div>}
-              
-              <div className="grid lg:grid-cols-12 gap-8 items-center">
-                {/* Stage Number & Icon */}
-                <div className="lg:col-span-2 flex flex-col items-center text-center">
-                  <div className={`w-20 h-20 rounded-full bg-gradient-to-br ${stage.color} flex items-center justify-center mb-4 neon-glow cyber-border`}>
-                    <stage.icon className="w-8 h-8 text-white" />
-                  </div>
-                  <div className="text-4xl font-bold text-transparent bg-gradient-to-br bg-clip-text from-white to-gray-400">
-                    {stage.number}
-                  </div>
-                </div>
-
-                {/* Stage Content */}
-                <div className="lg:col-span-10">
-                  <div className="cyber-card p-8 rounded-2xl">
-                    <div className="mb-6">
-                      <div className="flex items-center space-x-4 mb-4">
-                        <div className="w-16 h-16 rounded-full overflow-hidden flex-shrink-0 border-2 border-fuchsia-500/30">
-                          <img src={stage.image} alt={stage.title} className="w-full h-full object-cover" loading="lazy" />
-                        </div>
-                        <div>
-                          <h4 className="text-2xl font-bold text-white gradient-text">
-                            {stage.title}
-                          </h4>
-                          <h5 className="text-lg text-gray-400">{stage.subtitle}</h5>
-                        </div>
+        {/* Stages Accordion */}
+        <div className="max-w-4xl mx-auto">
+          <Accordion type="single" collapsible className="space-y-4">
+            {stages.map((stage, index) => (
+              <AccordionItem key={index} value={`stage-${index}`} className="cyber-card rounded-2xl border-none">
+                <AccordionTrigger className="px-6 py-4 hover:no-underline [&[data-state=open]>div]:text-fuchsia-400">
+                  <div className="flex items-center space-x-4 w-full">
+                    <div className={`w-12 h-12 rounded-full bg-gradient-to-br ${stage.color} flex items-center justify-center neon-glow cyber-border flex-shrink-0`}>
+                      <stage.icon className="w-6 h-6 text-white" />
+                    </div>
+                    <div className="text-left">
+                      <div className="flex items-center space-x-3">
+                        <span className="text-2xl font-bold text-transparent bg-gradient-to-br bg-clip-text from-white to-gray-400">
+                          {stage.number}
+                        </span>
+                        <h4 className="text-xl font-bold text-white gradient-text">
+                          {stage.title}
+                        </h4>
                       </div>
-                      <p className="text-gray-300 leading-relaxed mb-6">
-                        {stage.description}
-                      </p>
+                      <h5 className="text-sm text-gray-400">{stage.subtitle}</h5>
+                    </div>
+                  </div>
+                </AccordionTrigger>
+                <AccordionContent className="px-6 pb-6">
+                  <div className="space-y-4 pt-4 border-t border-fuchsia-500/20">
+                    <div className="flex items-center space-x-4 mb-4">
+                      <div className="w-16 h-16 rounded-full overflow-hidden flex-shrink-0 border-2 border-fuchsia-500/30">
+                        <img src={stage.image} alt={stage.title} className="w-full h-full object-cover" loading="lazy" />
+                      </div>
+                      <div className="flex-1">
+                        <p className="text-gray-300 leading-relaxed">
+                          {stage.description}
+                        </p>
+                      </div>
                     </div>
                     
                     {/* What You Build */}
@@ -161,9 +164,10 @@ const LevelUpMethod = () => {
                       </div>
                     </div>
                   </div>
-                </div>
-              </div>
-            </div>)}
+                </AccordionContent>
+              </AccordionItem>
+            ))}
+          </Accordion>
         </div>
 
         {/* Closing Message */}
