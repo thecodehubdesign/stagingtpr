@@ -140,8 +140,7 @@ const ClassDetail = () => {
   const currentClass = allClasses.find(cls => cls.slug === slug);
   const similarClasses = allClasses.filter(cls => 
     cls.slug !== slug && 
-    cls.level === currentClass?.level && 
-    cls.location === currentClass?.location
+    cls.style === currentClass?.style
   );
 
   // Mock class data - in a real app, this would be fetched based on classId
@@ -150,6 +149,8 @@ const ClassDetail = () => {
     name: currentClass?.name || 'Pole Foundations',
     level: currentClass?.level || 'Beginner',
     duration: currentClass?.duration || '60 min',
+    style: currentClass?.style || 'Pole',
+    location: currentClass?.location || 'Melbourne',
     heroImage: 'https://images.unsplash.com/photo-1571019613454-1cb2f99b2d8b?ixlib=rb-4.0.3&auto=format&fit=crop&w=2070&q=80',
     description: currentClass?.description || "Unlock your inner strength and confidence with our most popular beginner class! Designed for absolute first-timers and those looking to build a solid foundation, Beginner Pole Foundations covers the basics of pole dance in a welcoming, supportive environment. You'll learn spins, transitions, and simple tricks while making friends and having a laugh. No fitness or dance experience required—just bring your curiosity and a sense of fun. All ages and abilities welcome!",
     features: [
@@ -244,21 +245,19 @@ const ClassDetail = () => {
     <div className="min-h-screen bg-gray-900">
       <Header />
       
-      {/* Back to Classes Link */}
-      <section className="pt-20 pb-4 bg-gray-900">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <Link 
-            to="/classes" 
-            className="inline-flex items-center text-fuchsia-400 hover:text-fuchsia-300 transition-colors group"
-          >
-            <ArrowLeft className="w-4 h-4 mr-2 group-hover:-translate-x-1 transition-transform" />
-            Back to Class Search
-          </Link>
-        </div>
-      </section>
+      {/* Back to Classes Link - Fixed position with menu */}
+      <div className="fixed top-20 left-4 z-50 lg:left-8">
+        <Link 
+          to="/classes" 
+          className="inline-flex items-center text-fuchsia-400 hover:text-fuchsia-300 transition-colors group bg-gray-900/90 backdrop-blur-sm px-3 py-2 rounded-lg border border-fuchsia-400/20"
+        >
+          <ArrowLeft className="w-4 h-4 mr-2 group-hover:-translate-x-1 transition-transform" />
+          Back to Class Search
+        </Link>
+      </div>
       
-      {/* Hero Section - Reduced top padding since we added back link */}
-      <section className="pt-8 pb-20 relative overflow-hidden">
+      {/* Hero Section */}
+      <section className="pt-20 pb-20 relative overflow-hidden">
         <div 
           className="absolute inset-0 bg-cover bg-center"
           style={{
@@ -267,25 +266,25 @@ const ClassDetail = () => {
         />
         <div className="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="text-center animate-fade-in">
-            <Badge className="mb-4 bg-fuchsia-500/20 text-fuchsia-400 border-fuchsia-500/30">
-              {classData.level} • {classData.duration}
-            </Badge>
+            {/* Tags matching class search */}
+            <div className="flex flex-wrap justify-center gap-2 mb-6">
+              <Badge className="bg-purple-500/20 text-purple-300 border-purple-500/30">
+                {classData.style}
+              </Badge>
+              <Badge className={`${getLevelColor(classData.level)} border font-medium`}>
+                {classData.level}
+              </Badge>
+              <Badge className="bg-fuchsia-500/20 text-fuchsia-400 border-fuchsia-500/30">
+                {classData.duration}
+              </Badge>
+              <Badge className="bg-cyan-500/20 text-cyan-400 border-cyan-500/30">
+                <MapPin className="w-3 h-3 mr-1" />
+                {classData.location}
+              </Badge>
+            </div>
             <h1 className="text-4xl sm:text-6xl font-bold gradient-text neon-glow mb-6">
               {classData.name}
             </h1>
-            <div className="flex flex-col sm:flex-row gap-4 justify-center items-center">
-              <Button className="neon-button text-black font-bold text-lg px-8 py-3">
-                Book Your First Class Free
-              </Button>
-              <Button 
-                variant="outline" 
-                className="cyber-border text-cyan-400 hover:bg-cyan-400/10"
-                onClick={shareClass}
-              >
-                <Share2 className="w-4 h-4 mr-2" />
-                Share Class
-              </Button>
-            </div>
           </div>
         </div>
       </section>
@@ -419,10 +418,10 @@ const ClassDetail = () => {
           <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
             <div className="text-center mb-12">
               <h2 className="text-3xl font-bold text-white mb-4">
-                Similar <span className="gradient-text">Classes</span>
+                More <span className="gradient-text">{currentClass?.style} Classes</span>
               </h2>
               <p className="text-lg text-gray-300">
-                Other {classData.level.toLowerCase()} classes available at {currentClass?.location}
+                Explore other {currentClass?.style.toLowerCase()} classes to continue your journey
               </p>
             </div>
 
