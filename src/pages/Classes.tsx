@@ -17,160 +17,179 @@ const Classes = () => {
   const [instructorFilter, setInstructorFilter] = useState('');
 
   // Enhanced class data with additional properties for filtering
-  const allClasses = [
-    {
-      name: "Pole Basics",
-      level: "Beginner",
-      duration: "60 min",
-      description: "Perfect introduction to pole fitness. Learn fundamental spins, poses, and build confidence in a supportive environment. Ideal for complete beginners.",
-      slug: "pole-basics",
-      category: "Pole Dancing",
-      style: "Pole",
-      instructors: [
-        { name: "Sarah Chen", image: "/lovable-uploads/1d83d83b-0057-4bd1-8052-79584b039a97.jpg" },
-        { name: "Maya Rodriguez", image: "/lovable-uploads/3cc0b943-7d1c-4140-a59c-a60390d03154.jpg" }
-      ],
-      location: "Mitcham",
-      image: "/lovable-uploads/d97f60e6-9bb0-46b6-a9cc-aaa13ede7d4b.png",
-      featured: true
-    },
-    {
-      name: "Front Splits Masterclass",
-      level: "All Levels",
-      duration: "75 min",
-      description: "Intensive flexibility training focused on achieving and perfecting your front splits. Includes warm-up routines and progressive stretching techniques.",
-      slug: "front-splits-masterclass",
-      category: "Flexibility & Conditioning",
-      style: "Flexibility",
-      instructors: [
-        { name: "Zara Kim", image: "/lovable-uploads/4d4d16ef-17d9-47e3-a464-cfa3c9b9eef6.jpg" }
-      ],
-      location: "Kilsyth",
-      image: "/lovable-uploads/ecb5bd9c-6055-4d41-8797-bbb506648a5b.png"
-    },
-    {
-      name: "Pole Jam",
-      level: "Intermediate",
-      duration: "90 min",
-      description: "High-energy freestyle sessions where you can practice moves, experiment with combinations, and dance to your favorite beats in a fun, social environment.",
-      slug: "pole-jam",
-      category: "Pole Dancing",
-      style: "Pole",
-      instructors: [
-        { name: "Maya Rodriguez", image: "/lovable-uploads/3cc0b943-7d1c-4140-a59c-a60390d03154.jpg" },
-        { name: "Alex Turner", image: "/lovable-uploads/8b589fd4-a71e-43de-823f-c2af97fef88d.jpg" }
-      ],
-      location: "Melbourne",
-      image: "/lovable-uploads/e72918ef-7386-4492-8d6e-6cf1cbeb62e4.png"
-    },
-    {
-      name: "Chair and Lap",
-      level: "All Levels",
-      duration: "60 min",
-      description: "Sensual dance class incorporating chair work and floor movements. Focus on fluidity, confidence, and connecting with your feminine energy.",
-      slug: "chair-and-lap",
-      category: "Dance & Movement",
-      style: "Dance",
-      instructors: [
-        { name: "Ava Johnson", image: "/lovable-uploads/c7f8bec0-23c5-44db-871b-dccfbacb26a5.jpg" }
-      ],
-      location: "Highett",
-      image: "/lovable-uploads/ff325961-11eb-4009-8f03-cb52bcfc97e0.png"
-    },
-    {
-      name: "Dance Filthy",
-      level: "Intermediate",
-      duration: "75 min",
-      description: "Embrace your inner confidence with sultry choreography and expressive movement. Perfect for building self-esteem and body positivity.",
-      slug: "dance-filthy",
-      category: "Dance & Movement",
-      style: "Dance",
-      instructors: [
-        { name: "Maya Rodriguez", image: "/lovable-uploads/3cc0b943-7d1c-4140-a59c-a60390d03154.jpg" },
-        { name: "Ava Johnson", image: "/lovable-uploads/c7f8bec0-23c5-44db-871b-dccfbacb26a5.jpg" },
-        { name: "Luna Park", image: "/lovable-uploads/1d83d83b-0057-4bd1-8052-79584b039a97.jpg" },
-        { name: "Zara Kim", image: "/lovable-uploads/4d4d16ef-17d9-47e3-a464-cfa3c9b9eef6.jpg" },
-        { name: "Sarah Chen", image: "/lovable-uploads/1d83d83b-0057-4bd1-8052-79584b039a97.jpg" }
-      ],
-      location: "Narre Warren",
-      image: "/lovable-uploads/a3f3abdb-e872-4fb0-a921-052f1d92afec.png"
-    },
-    {
-      name: "Pole Conditioning",
-      level: "All Levels",
-      duration: "45 min",
-      description: "Strength-focused class designed to build the muscle groups essential for pole dancing. Includes core work, flexibility training, and pole-specific conditioning.",
-      slug: "pole-conditioning",
-      category: "Flexibility & Conditioning",
-      style: "Conditioning",
-      instructors: [
-        { name: "Alex Turner", image: "/lovable-uploads/8b589fd4-a71e-43de-823f-c2af97fef88d.jpg" },
-        { name: "Zara Kim", image: "/lovable-uploads/4d4d16ef-17d9-47e3-a464-cfa3c9b9eef6.jpg" }
-      ],
-      location: "Mitcham",
-      image: "/lovable-uploads/cc11c8dc-6872-48a7-9124-7e1c3602e410.png"
-    },
-    {
-      name: "Pole Foundations",
-      level: "Beginner",
-      duration: "60 min",
-      description: "Comprehensive beginner program covering safety, basic techniques, and fundamental movements. Perfect stepping stone to more advanced classes.",
-      slug: "pole-foundations",
-      category: "Pole Dancing",
-      style: "Pole",
-      instructors: [
-        { name: "Sarah Chen", image: "/lovable-uploads/1d83d83b-0057-4bd1-8052-79584b039a97.jpg" }
-      ],
-      location: "Kilsyth",
-      image: "/lovable-uploads/8a7c62c9-86e6-4d10-a555-f79e5ed95001.png",
-      featured: true
-    },
-    {
-      name: "Pure Pole Dance",
-      level: "Advanced",
-      duration: "75 min",
-      description: "Artistic pole dancing focusing on flow, grace, and technical precision. Combines athletic skill with beautiful choreography and self-expression.",
-      slug: "pure-pole-dance",
-      category: "Pole Dancing",
-      style: "Pole",
-      instructors: [
-        { name: "Luna Park", image: "/lovable-uploads/1d83d83b-0057-4bd1-8052-79584b039a97.jpg" },
-        { name: "Alex Turner", image: "/lovable-uploads/8b589fd4-a71e-43de-823f-c2af97fef88d.jpg" }
-      ],
-      location: "Melbourne",
-      image: "/lovable-uploads/119fcd15-3aac-4f1f-920c-a13497b0b348.png"
-    },
-    {
-      name: "Sexy Basics",
-      level: "Beginner",
-      duration: "60 min",
-      description: "Introduction to sensual movement and confidence building. Learn to embrace your sexuality through dance in a supportive, judgment-free environment.",
-      slug: "sexy-basics",
-      category: "Dance & Movement",
-      style: "Dance",
-      instructors: [
-        { name: "Ava Johnson", image: "/lovable-uploads/c7f8bec0-23c5-44db-871b-dccfbacb26a5.jpg" },
-        { name: "Maya Rodriguez", image: "/lovable-uploads/3cc0b943-7d1c-4140-a59c-a60390d03154.jpg" }
-      ],
-      location: "Highett",
-      image: "/lovable-uploads/8be1e610-6a66-4ace-b02d-1945fd276001.png"
-    },
-    {
-      name: "Floor Play",
-      level: "All Levels",
-      duration: "45 min",
-      description: "Ground-based movements focusing on floorwork, transitions, and dance flow. Perfect complement to pole work or as a standalone class.",
-      slug: "floor-play",
-      category: "Dance & Movement",
-      style: "Dance",
-      instructors: [
-        { name: "Zara Kim", image: "/lovable-uploads/4d4d16ef-17d9-47e3-a464-cfa3c9b9eef6.jpg" },
-        { name: "Ava Johnson", image: "/lovable-uploads/c7f8bec0-23c5-44db-871b-dccfbacb26a5.jpg" }
-      ],
-      location: "Narre Warren",
-      image: "/lovable-uploads/32863f0f-165a-4abf-b73e-3eea2045dce5.png"
-    }
-  ];
+  const allClasses = [{
+    name: "Pole Basics",
+    level: "Beginner",
+    duration: "60 min",
+    description: "Perfect introduction to pole fitness. Learn fundamental spins, poses, and build confidence in a supportive environment. Ideal for complete beginners.",
+    slug: "pole-basics",
+    category: "Pole Dancing",
+    style: "Pole",
+    instructors: [{
+      name: "Sarah Chen",
+      image: "/lovable-uploads/1d83d83b-0057-4bd1-8052-79584b039a97.jpg"
+    }, {
+      name: "Maya Rodriguez",
+      image: "/lovable-uploads/3cc0b943-7d1c-4140-a59c-a60390d03154.jpg"
+    }],
+    location: "Mitcham",
+    image: "/lovable-uploads/d97f60e6-9bb0-46b6-a9cc-aaa13ede7d4b.png",
+    featured: true
+  }, {
+    name: "Front Splits Masterclass",
+    level: "All Levels",
+    duration: "75 min",
+    description: "Intensive flexibility training focused on achieving and perfecting your front splits. Includes warm-up routines and progressive stretching techniques.",
+    slug: "front-splits-masterclass",
+    category: "Flexibility & Conditioning",
+    style: "Flexibility",
+    instructors: [{
+      name: "Zara Kim",
+      image: "/lovable-uploads/4d4d16ef-17d9-47e3-a464-cfa3c9b9eef6.jpg"
+    }],
+    location: "Kilsyth",
+    image: "/lovable-uploads/ecb5bd9c-6055-4d41-8797-bbb506648a5b.png"
+  }, {
+    name: "Pole Jam",
+    level: "Intermediate",
+    duration: "90 min",
+    description: "High-energy freestyle sessions where you can practice moves, experiment with combinations, and dance to your favorite beats in a fun, social environment.",
+    slug: "pole-jam",
+    category: "Pole Dancing",
+    style: "Pole",
+    instructors: [{
+      name: "Maya Rodriguez",
+      image: "/lovable-uploads/3cc0b943-7d1c-4140-a59c-a60390d03154.jpg"
+    }, {
+      name: "Alex Turner",
+      image: "/lovable-uploads/8b589fd4-a71e-43de-823f-c2af97fef88d.jpg"
+    }],
+    location: "Melbourne",
+    image: "/lovable-uploads/e72918ef-7386-4492-8d6e-6cf1cbeb62e4.png"
+  }, {
+    name: "Chair and Lap",
+    level: "All Levels",
+    duration: "60 min",
+    description: "Sensual dance class incorporating chair work and floor movements. Focus on fluidity, confidence, and connecting with your feminine energy.",
+    slug: "chair-and-lap",
+    category: "Dance & Movement",
+    style: "Dance",
+    instructors: [{
+      name: "Ava Johnson",
+      image: "/lovable-uploads/c7f8bec0-23c5-44db-871b-dccfbacb26a5.jpg"
+    }],
+    location: "Highett",
+    image: "/lovable-uploads/ff325961-11eb-4009-8f03-cb52bcfc97e0.png"
+  }, {
+    name: "Dance Filthy",
+    level: "Intermediate",
+    duration: "75 min",
+    description: "Embrace your inner confidence with sultry choreography and expressive movement. Perfect for building self-esteem and body positivity.",
+    slug: "dance-filthy",
+    category: "Dance & Movement",
+    style: "Dance",
+    instructors: [{
+      name: "Maya Rodriguez",
+      image: "/lovable-uploads/3cc0b943-7d1c-4140-a59c-a60390d03154.jpg"
+    }, {
+      name: "Ava Johnson",
+      image: "/lovable-uploads/c7f8bec0-23c5-44db-871b-dccfbacb26a5.jpg"
+    }, {
+      name: "Luna Park",
+      image: "/lovable-uploads/1d83d83b-0057-4bd1-8052-79584b039a97.jpg"
+    }, {
+      name: "Zara Kim",
+      image: "/lovable-uploads/4d4d16ef-17d9-47e3-a464-cfa3c9b9eef6.jpg"
+    }, {
+      name: "Sarah Chen",
+      image: "/lovable-uploads/1d83d83b-0057-4bd1-8052-79584b039a97.jpg"
+    }],
+    location: "Narre Warren",
+    image: "/lovable-uploads/a3f3abdb-e872-4fb0-a921-052f1d92afec.png"
+  }, {
+    name: "Pole Conditioning",
+    level: "All Levels",
+    duration: "45 min",
+    description: "Strength-focused class designed to build the muscle groups essential for pole dancing. Includes core work, flexibility training, and pole-specific conditioning.",
+    slug: "pole-conditioning",
+    category: "Flexibility & Conditioning",
+    style: "Conditioning",
+    instructors: [{
+      name: "Alex Turner",
+      image: "/lovable-uploads/8b589fd4-a71e-43de-823f-c2af97fef88d.jpg"
+    }, {
+      name: "Zara Kim",
+      image: "/lovable-uploads/4d4d16ef-17d9-47e3-a464-cfa3c9b9eef6.jpg"
+    }],
+    location: "Mitcham",
+    image: "/lovable-uploads/cc11c8dc-6872-48a7-9124-7e1c3602e410.png"
+  }, {
+    name: "Pole Foundations",
+    level: "Beginner",
+    duration: "60 min",
+    description: "Comprehensive beginner program covering safety, basic techniques, and fundamental movements. Perfect stepping stone to more advanced classes.",
+    slug: "pole-foundations",
+    category: "Pole Dancing",
+    style: "Pole",
+    instructors: [{
+      name: "Sarah Chen",
+      image: "/lovable-uploads/1d83d83b-0057-4bd1-8052-79584b039a97.jpg"
+    }],
+    location: "Kilsyth",
+    image: "/lovable-uploads/8a7c62c9-86e6-4d10-a555-f79e5ed95001.png",
+    featured: true
+  }, {
+    name: "Pure Pole Dance",
+    level: "Advanced",
+    duration: "75 min",
+    description: "Artistic pole dancing focusing on flow, grace, and technical precision. Combines athletic skill with beautiful choreography and self-expression.",
+    slug: "pure-pole-dance",
+    category: "Pole Dancing",
+    style: "Pole",
+    instructors: [{
+      name: "Luna Park",
+      image: "/lovable-uploads/1d83d83b-0057-4bd1-8052-79584b039a97.jpg"
+    }, {
+      name: "Alex Turner",
+      image: "/lovable-uploads/8b589fd4-a71e-43de-823f-c2af97fef88d.jpg"
+    }],
+    location: "Melbourne",
+    image: "/lovable-uploads/119fcd15-3aac-4f1f-920c-a13497b0b348.png"
+  }, {
+    name: "Sexy Basics",
+    level: "Beginner",
+    duration: "60 min",
+    description: "Introduction to sensual movement and confidence building. Learn to embrace your sexuality through dance in a supportive, judgment-free environment.",
+    slug: "sexy-basics",
+    category: "Dance & Movement",
+    style: "Dance",
+    instructors: [{
+      name: "Ava Johnson",
+      image: "/lovable-uploads/c7f8bec0-23c5-44db-871b-dccfbacb26a5.jpg"
+    }, {
+      name: "Maya Rodriguez",
+      image: "/lovable-uploads/3cc0b943-7d1c-4140-a59c-a60390d03154.jpg"
+    }],
+    location: "Highett",
+    image: "/lovable-uploads/8be1e610-6a66-4ace-b02d-1945fd276001.png"
+  }, {
+    name: "Floor Play",
+    level: "All Levels",
+    duration: "45 min",
+    description: "Ground-based movements focusing on floorwork, transitions, and dance flow. Perfect complement to pole work or as a standalone class.",
+    slug: "floor-play",
+    category: "Dance & Movement",
+    style: "Dance",
+    instructors: [{
+      name: "Zara Kim",
+      image: "/lovable-uploads/4d4d16ef-17d9-47e3-a464-cfa3c9b9eef6.jpg"
+    }, {
+      name: "Ava Johnson",
+      image: "/lovable-uploads/c7f8bec0-23c5-44db-871b-dccfbacb26a5.jpg"
+    }],
+    location: "Narre Warren",
+    image: "/lovable-uploads/32863f0f-165a-4abf-b73e-3eea2045dce5.png"
+  }];
 
   // Filter options
   const levels = ['All Levels', 'Beginner', 'Intermediate', 'Advanced', 'Elite'];
@@ -211,7 +230,6 @@ const Classes = () => {
     }
   };
   const hasActiveFilters = searchQuery || levelFilter || styleFilter || locationFilter || instructorFilter;
-
   const studioFeatures = [{
     icon: Users,
     title: "Small Class Sizes",
@@ -268,15 +286,13 @@ const Classes = () => {
           </div>
 
           <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-8">
-            {studioFeatures.map((feature, index) => (
-              <Card key={index} className="cyber-card p-6 text-center animate-fade-in" style={{
-                animationDelay: `${index * 0.15}s`
-              }}>
+            {studioFeatures.map((feature, index) => <Card key={index} className="cyber-card p-6 text-center animate-fade-in" style={{
+            animationDelay: `${index * 0.15}s`
+          }}>
                 <feature.icon className="w-12 h-12 text-fuchsia-400 mx-auto mb-4" />
                 <h3 className="text-lg font-bold text-white mb-3">{feature.title}</h3>
                 <p className="text-gray-300 text-sm leading-relaxed">{feature.description}</p>
-              </Card>
-            ))}
+              </Card>)}
           </div>
         </div>
       </section>
@@ -497,22 +513,13 @@ const Classes = () => {
                       {/* Instructors with profile pictures */}
                       <div className="flex items-center mb-4">
                         <div className="flex -space-x-2 mr-3">
-                          {classItem.instructors.slice(0, 3).map((instructor, idx) => (
-                            <img
-                              key={idx}
-                              src={instructor.image}
-                              alt={instructor.name}
-                              className="w-6 h-6 rounded-full border-2 border-gray-700 object-cover"
-                            />
-                          ))}
+                          {classItem.instructors.slice(0, 3).map((instructor, idx) => <img key={idx} src={instructor.image} alt={instructor.name} className="w-6 h-6 rounded-full border-2 border-gray-700 object-cover" />)}
                         </div>
                         <span className="text-xs text-gray-400">
                           {classItem.instructors[0].name}
-                          {classItem.instructors.length > 1 && (
-                            <span className="text-fuchsia-400 ml-1">
+                          {classItem.instructors.length > 1 && <span className="text-fuchsia-400 ml-1">
                               +{classItem.instructors.length - 1}
-                            </span>
-                          )}
+                            </span>}
                         </span>
                       </div>
 
@@ -523,12 +530,7 @@ const Classes = () => {
                       </div>
 
                       {/* View Class Button */}
-                      <Button 
-                        variant="outline" 
-                        className="w-full bg-transparent border-fuchsia-400/50 text-fuchsia-400 hover:bg-fuchsia-400/10 hover:border-fuchsia-400 transition-all duration-300"
-                      >
-                        View Class
-                      </Button>
+                      <Button variant="outline" className="w-full bg-transparent border-fuchsia-400/50 text-fuchsia-400 hover:bg-fuchsia-400/10 hover:border-fuchsia-400 transition-all duration-300">View Class Details</Button>
                     </div>
                   </Link>
                 </Card>)}
