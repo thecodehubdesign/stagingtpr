@@ -110,7 +110,7 @@ const VoucherStep3 = ({
       {!showCreditCardForm && <div className="space-y-4">
           <div className="cyber-border bg-primary/10 rounded-lg p-4 mb-4">
             <p className="text-sm text-primary font-semibold">
-              <strong>Regular classes are normally $42, now FREE for newbies - for a limited time only!</strong>
+              <strong className="bg-white rounded">Regular classes are normally $42, now FREE for newbies - for a limited time only!</strong>
             </p>
           </div>
 
