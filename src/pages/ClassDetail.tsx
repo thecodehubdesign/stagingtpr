@@ -10,7 +10,7 @@ import { CheckCircle, Share2, Star, ArrowLeft, Clock, MapPin, ChevronLeft, Chevr
 import { useEffect, useState } from 'react';
 
 const ClassDetail = () => {
-  const { classId } = useParams<{ classId: string }>();
+  const { slug } = useParams<{ slug: string }>();
   const [currentSlide, setCurrentSlide] = useState(0);
 
   // All classes data (same as Classes page)
@@ -137,9 +137,9 @@ const ClassDetail = () => {
   ];
 
   // Find current class and similar classes
-  const currentClass = allClasses.find(cls => cls.slug === classId);
+  const currentClass = allClasses.find(cls => cls.slug === slug);
   const similarClasses = allClasses.filter(cls => 
-    cls.slug !== classId && 
+    cls.slug !== slug && 
     cls.level === currentClass?.level && 
     cls.location === currentClass?.location
   );
