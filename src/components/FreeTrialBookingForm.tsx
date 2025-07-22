@@ -21,7 +21,7 @@ export interface BookingFormData {
   phone: string;
   email: string;
   studioLocation: string;
-  program: string;
+  programs: string[];
   agreeToTerms: boolean;
   
   // Step 2 - About You
@@ -47,7 +47,7 @@ const FreeTrialBookingForm = () => {
     phone: '',
     email: '',
     studioLocation: '',
-    program: '',
+    programs: [],
     agreeToTerms: false,
     goals: [],
     howHeardAboutUs: '',
@@ -90,7 +90,7 @@ const FreeTrialBookingForm = () => {
       phone: '',
       email: '',
       studioLocation: '',
-      program: '',
+      programs: [],
       agreeToTerms: false,
       goals: [],
       howHeardAboutUs: '',
@@ -123,9 +123,12 @@ const FreeTrialBookingForm = () => {
       </SheetTrigger>
       <SheetContent className="w-full sm:max-w-2xl overflow-y-auto">
         <SheetHeader>
-          <SheetTitle className="text-xl font-bold text-gray-900">
-            {isComplete ? 'Thank You!' : getStepTitle()}
+          <SheetTitle className="text-2xl font-bold text-gray-900">
+            {isComplete ? 'Thank You!' : 'Book Your Free Trial Class'}
           </SheetTitle>
+          {!isComplete && (
+            <p className="text-lg text-gray-600 mt-2">{getStepTitle()}</p>
+          )}
         </SheetHeader>
 
         <div className="py-6">
