@@ -10,6 +10,7 @@ import StyleQuizModal from '@/components/StyleQuizModal';
 import CoursesVsCasualComparison from '@/components/CoursesVsCasualComparison';
 import IntroOfferBlocks from '@/components/IntroOfferBlocks';
 import SocialProofCarousel from '@/components/SocialProofCarousel';
+import PoleTypeQuizModal from '@/components/PoleTypeQuizModal';
 import { Button } from '@/components/ui/button';
 import { Card } from '@/components/ui/card';
 import { Sparkles, MessageCircle, ArrowRight, Play } from 'lucide-react';
@@ -65,10 +66,12 @@ const FirstTimers = () => {
             </div>
 
             <div className="flex flex-col sm:flex-row gap-4 justify-center">
-              <Button className="neon-button text-black font-bold text-lg px-8 py-3">
-                Take Our 1-Minute Quiz
-                <ArrowRight className="w-5 h-5 ml-2" />
-              </Button>
+              <PoleTypeQuizModal>
+                <Button className="neon-button text-black font-bold text-lg px-8 py-3">
+                  Take Our 1-Minute Quiz
+                  <ArrowRight className="w-5 h-5 ml-2" />
+                </Button>
+              </PoleTypeQuizModal>
               <Button variant="outline" className="border-gray-600 text-gray-300 hover:bg-gray-700 text-lg px-8 py-3">
                 Chat With Our Team
                 <MessageCircle className="w-5 h-5 ml-2" />

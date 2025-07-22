@@ -3,6 +3,7 @@ import { Card } from '@/components/ui/card';
 import { Button } from '@/components/ui/button';
 import { Badge } from '@/components/ui/badge';
 import { Star, Heart, Zap, Crown, ArrowRight, Calendar, Users } from 'lucide-react';
+import PoleTypeQuizModal from '@/components/PoleTypeQuizModal';
 
 const IntroOfferBlocks = () => {
   const offers = [
@@ -148,9 +149,11 @@ const IntroOfferBlocks = () => {
           <p className="text-gray-400 mb-4">
             Not sure which offer suits you best?
           </p>
-          <Button variant="outline" className="border-gray-600 text-gray-300 hover:bg-gray-700">
-            Take Our 1-Minute Quiz
-          </Button>
+          <PoleTypeQuizModal>
+            <Button variant="outline" className="border-gray-600 text-gray-300 hover:bg-gray-700">
+              Take Our 1-Minute Quiz
+            </Button>
+          </PoleTypeQuizModal>
         </div>
       </div>
     </section>

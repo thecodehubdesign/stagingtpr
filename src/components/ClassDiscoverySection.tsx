@@ -4,6 +4,7 @@ import { Button } from "@/components/ui/button";
 import { motion } from "framer-motion";
 import { Star, Users, Clock, Award, Heart, Zap, Sparkles, Flame, Target, Music } from "lucide-react";
 import SectionHeader from '@/components/ui/section-header';
+import PoleTypeQuizModal from '@/components/PoleTypeQuizModal';
 
 const ClassDiscoverySection = () => {
   const classTypes = [
@@ -194,13 +195,15 @@ const ClassDiscoverySection = () => {
               Not sure which class is right for you?
             </p>
             <div className="flex flex-col sm:flex-row gap-4 justify-center items-center">
-              <motion.button 
-                className="neon-button px-8 py-4 rounded-full text-black font-semibold text-lg hover:shadow-2xl transition-all duration-300"
-                whileHover={{ scale: 1.05 }}
-                whileTap={{ scale: 0.95 }}
-              >
-                Take Our Style Quiz
-              </motion.button>
+              <PoleTypeQuizModal>
+                <motion.button 
+                  className="neon-button px-8 py-4 rounded-full text-black font-semibold text-lg hover:shadow-2xl transition-all duration-300"
+                  whileHover={{ scale: 1.05 }}
+                  whileTap={{ scale: 0.95 }}
+                >
+                  Take Our Style Quiz
+                </motion.button>
+              </PoleTypeQuizModal>
               <motion.button 
                 className="cyber-border px-8 py-4 rounded-full text-cyan-400 hover:bg-cyan-400/10 font-semibold text-lg transition-all duration-300"
                 whileHover={{ scale: 1.05 }}
