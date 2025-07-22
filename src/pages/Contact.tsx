@@ -5,6 +5,7 @@ import { Card } from '@/components/ui/card';
 import { Input } from '@/components/ui/input';
 import { Textarea } from '@/components/ui/textarea';
 import { Label } from '@/components/ui/label';
+import { Accordion, AccordionContent, AccordionItem, AccordionTrigger } from '@/components/ui/accordion';
 import { MapPin, Phone, Mail, Clock } from 'lucide-react';
 
 const Contact = () => {
@@ -240,47 +241,52 @@ const Contact = () => {
       {/* FAQ Section */}
       <section className="py-16 bg-gray-900">
         <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="text-center mb-12">
-            <h2 className="text-3xl font-bold text-white mb-4">
-              Frequently Asked <span className="gradient-text">Questions</span>
+          <div className="cyber-card p-8">
+            <h2 className="text-3xl font-bold gradient-text mb-6 text-center">
+              Frequently Asked Questions
             </h2>
-            <p className="text-lg text-gray-300">
-              Quick answers to common questions
-            </p>
-          </div>
+            
+            <Accordion type="single" collapsible className="space-y-4">
+              <AccordionItem value="item-0" className="border border-primary/20 rounded-lg px-4">
+                <AccordionTrigger className="text-left font-medium hover:text-primary">
+                  How do I book my first class?
+                </AccordionTrigger>
+                <AccordionContent className="text-muted-foreground">
+                  New students get their first class free! Simply choose your preferred studio 
+                  and book online through our website or give us a call.
+                </AccordionContent>
+              </AccordionItem>
 
-          <div className="grid md:grid-cols-2 gap-6">
-            <Card className="cyber-card p-6">
-              <h3 className="text-lg font-bold text-white mb-3">How do I book my first class?</h3>
-              <p className="text-gray-300">
-                New students get their first class free! Simply choose your preferred studio 
-                and book online through our website or give us a call.
-              </p>
-            </Card>
+              <AccordionItem value="item-1" className="border border-primary/20 rounded-lg px-4">
+                <AccordionTrigger className="text-left font-medium hover:text-primary">
+                  What should I wear to class?
+                </AccordionTrigger>
+                <AccordionContent className="text-muted-foreground">
+                  Wear shorts and a tank top or sports bra for better grip on the pole. 
+                  Bring a water bottle and avoid lotions before class.
+                </AccordionContent>
+              </AccordionItem>
 
-            <Card className="cyber-card p-6">
-              <h3 className="text-lg font-bold text-white mb-3">What should I wear to class?</h3>
-              <p className="text-gray-300">
-                Wear shorts and a tank top or sports bra for better grip on the pole. 
-                Bring a water bottle and avoid lotions before class.
-              </p>
-            </Card>
+              <AccordionItem value="item-2" className="border border-primary/20 rounded-lg px-4">
+                <AccordionTrigger className="text-left font-medium hover:text-primary">
+                  Do you offer private lessons?
+                </AccordionTrigger>
+                <AccordionContent className="text-muted-foreground">
+                  Yes! We offer one-on-one and small group private sessions. 
+                  Contact us to discuss your goals and schedule.
+                </AccordionContent>
+              </AccordionItem>
 
-            <Card className="cyber-card p-6">
-              <h3 className="text-lg font-bold text-white mb-3">Do you offer private lessons?</h3>
-              <p className="text-gray-300">
-                Yes! We offer one-on-one and small group private sessions. 
-                Contact us to discuss your goals and schedule.
-              </p>
-            </Card>
-
-            <Card className="cyber-card p-6">
-              <h3 className="text-lg font-bold text-white mb-3">Can I try different studios?</h3>
-              <p className="text-gray-300">
-                Absolutely! Your membership gives you access to all our studio locations. 
-                Each studio has its own unique vibe and class offerings.
-              </p>
-            </Card>
+              <AccordionItem value="item-3" className="border border-primary/20 rounded-lg px-4">
+                <AccordionTrigger className="text-left font-medium hover:text-primary">
+                  Can I try different studios?
+                </AccordionTrigger>
+                <AccordionContent className="text-muted-foreground">
+                  Absolutely! Your membership gives you access to all our studio locations. 
+                  Each studio has its own unique vibe and class offerings.
+                </AccordionContent>
+              </AccordionItem>
+            </Accordion>
           </div>
         </div>
       </section>
