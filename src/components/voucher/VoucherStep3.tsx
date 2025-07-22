@@ -108,7 +108,7 @@ const VoucherStep3 = ({
       </div>
 
       {!showCreditCardForm && <div className="space-y-4">
-          <div className="cyber-border bg-primary/10 rounded-lg p-4 mb-4">
+          <div className="cyber-border rounded-lg p-4 mb-4 bg-[#4fe709]/0">
             <p className="text-sm text-primary font-semibold">
               <strong className="bg-white rounded">Regular classes are normally $42, now FREE for newbies - for a limited time only!</strong>
             </p>
@@ -118,7 +118,7 @@ const VoucherStep3 = ({
               <CardContent className="p-4">
                 <div className="flex justify-between items-start">
                   <div className="flex-1">
-                    <h4 className="font-semibold text-lg text-foreground mb-1">{classItem.title}</h4>
+                    <h4 className="font-semibold text-lg mb-1 text-slate-50">{classItem.title}</h4>
                     <div className="flex items-center space-x-4 text-sm text-muted-foreground mb-2">
                       <div className="flex items-center space-x-1">
                         <Calendar className="w-4 h-4 text-white" />
@@ -130,7 +130,7 @@ const VoucherStep3 = ({
                       </div>
                     </div>
                     <div className="flex items-center space-x-4 text-sm">
-                      <span className="bg-primary/20 text-white px-2 py-1 rounded-full border border-primary/30">
+                      <span className="bg-primary/20 px-2 py-1 rounded-full border border-primary/30 text-green-500">
                         {classItem.level}
                       </span>
                       <span className="text-white">
