@@ -4,7 +4,7 @@ import { Label } from '@/components/ui/label';
 import { RadioGroup, RadioGroupItem } from '@/components/ui/radio-group';
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 import { Input } from '@/components/ui/input';
-import { ArrowLeft, Clock, Calendar, Users, CreditCard, Phone, Eye } from 'lucide-react';
+import { ArrowLeft, Clock, Calendar, Users, CreditCard, Phone, Eye, MapPin } from 'lucide-react';
 import { VoucherFormData } from '../VoucherClaimForm';
 import CountdownTimer from '../CountdownTimer';
 interface VoucherStep3Props {
@@ -169,22 +169,23 @@ const VoucherStep3 = ({
                     </div>
                   </div>
 
-                  {/* Tags and location */}
-                  <div className="flex flex-col sm:flex-row sm:items-center gap-2 sm:gap-4">
-                    <div className="flex flex-wrap gap-2">
-                      <span className="bg-primary/20 px-3 py-1 rounded-full border border-primary/30 text-green-500 text-sm">
-                        {classItem.level}
-                      </span>
-                      <span className="bg-purple-500/20 px-3 py-1 rounded-full border border-purple-500/30 text-purple-300 text-sm">
-                        {classItem.apparatus}
-                      </span>
-                    </div>
+                  {/* Tags */}
+                  <div className="flex flex-wrap gap-2">
+                    <span className="bg-primary/20 px-3 py-1 rounded-full border border-primary/30 text-green-500 text-sm">
+                      {classItem.level}
+                    </span>
+                    <span className="bg-purple-500/20 px-3 py-1 rounded-full border border-purple-500/30 text-purple-300 text-sm">
+                      {classItem.apparatus}
+                    </span>
+                    <span className="bg-blue-500/20 px-3 py-1 rounded-full border border-blue-500/30 text-blue-300 text-sm">
+                      {formData.studioLocation} Studio
+                    </span>
                   </div>
 
-                  {/* Studio location with address */}
-                  <div className="text-sm text-white">
-                    <div className="font-medium">{formData.studioLocation}</div>
-                    <div className="text-white/70">{classItem.address}</div>
+                  {/* Address with location icon */}
+                  <div className="flex items-center space-x-2 text-sm text-white/70">
+                    <MapPin className="w-4 h-4" />
+                    <span>{classItem.address}</span>
                   </div>
 
                   {/* Countdown or days info */}
