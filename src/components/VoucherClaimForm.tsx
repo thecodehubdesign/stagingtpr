@@ -98,13 +98,13 @@ const VoucherClaimForm = () => {
   };
   return <Sheet>
       <SheetTrigger asChild>
-        <Button className="bg-gradient-to-r from-rose-500 to-purple-600 hover:from-rose-600 hover:to-purple-700">
-          Get Free Trial
+        <Button className="neon-button text-primary-foreground font-normal">
+          Book Your Free Trial Class
         </Button>
       </SheetTrigger>
-      <SheetContent className="w-full sm:max-w-2xl overflow-y-auto">
+      <SheetContent className="w-full sm:max-w-2xl overflow-y-auto bg-background cyber-grid">
         <SheetHeader>
-          <SheetTitle className="text-xl font-bold text-fuchsia-600">
+          <SheetTitle className="text-xl font-bold gradient-text">
             {isComplete ? 'Voucher Claimed!' : getStepTitle()}
           </SheetTitle>
         </SheetHeader>
@@ -113,15 +113,15 @@ const VoucherClaimForm = () => {
           {!isComplete && <div className="mb-8">
               <div className="flex items-center justify-between mb-4">
                 {[1, 2, 3].map(stepNum => <div key={stepNum} className={`flex items-center ${stepNum < 3 ? 'flex-1' : ''}`}>
-                    <div className={`w-8 h-8 rounded-full flex items-center justify-center text-sm font-medium ${stepNum <= step ? 'bg-rose-500 text-white' : 'bg-gray-200 text-gray-600'}`}>
+                    <div className={`w-8 h-8 rounded-full flex items-center justify-center text-sm font-medium border-2 ${stepNum <= step ? 'bg-primary text-primary-foreground border-primary' : 'bg-muted text-muted-foreground border-border'}`}>
                       {stepNum}
                     </div>
-                    {stepNum < 3 && <div className={`flex-1 h-0.5 mx-2 ${stepNum < step ? 'bg-rose-500' : 'bg-gray-200'}`} />}
+                    {stepNum < 3 && <div className={`flex-1 h-0.5 mx-2 ${stepNum < step ? 'bg-primary' : 'bg-border'}`} />}
                   </div>)}
               </div>
             </div>}
 
-          {isComplete ? <VoucherThankYou formData={formData} onReset={resetForm} /> : <Card>
+          {isComplete ? <VoucherThankYou formData={formData} onReset={resetForm} /> : <Card className="cyber-card border-border/50">
               <CardContent className="p-6">
                 {step === 1 && <VoucherStep1 formData={formData} updateFormData={updateFormData} onNext={nextStep} />}
                 {step === 2 && <VoucherStep2 formData={formData} updateFormData={updateFormData} onNext={nextStep} onPrev={prevStep} />}
