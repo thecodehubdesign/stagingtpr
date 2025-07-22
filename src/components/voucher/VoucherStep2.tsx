@@ -54,8 +54,8 @@ const VoucherStep2 = ({
           </Label>
           <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
             {goals.map(goal => <div key={goal} className="flex items-start space-x-3 p-3 rounded-lg cyber-border bg-card/30 hover:bg-card/50 transition-all">
-                <Checkbox id={goal} checked={formData.goals.includes(goal)} onCheckedChange={checked => handleGoalChange(goal, checked as boolean)} className="border-primary data-[state=checked]:bg-primary" />
-                <Label htmlFor={goal} className="text-sm leading-tight text-foreground">{goal}</Label>
+                <Checkbox id={goal} checked={formData.goals.includes(goal)} onCheckedChange={checked => handleGoalChange(goal, checked as boolean)} className="border-white data-[state=checked]:bg-white data-[state=checked]:text-black" />
+                <Label htmlFor={goal} className="text-sm leading-tight text-white">{goal}</Label>
               </div>)}
           </div>
         </div>

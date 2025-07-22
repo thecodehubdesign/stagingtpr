@@ -94,9 +94,9 @@ const VoucherStep1 = ({
                       updateFormData({ programs: formData.programs.filter(p => p !== program) });
                     }
                   }}
-                  className="border-primary data-[state=checked]:bg-primary"
+                  className="border-white data-[state=checked]:bg-white data-[state=checked]:text-black"
                 />
-                <Label htmlFor={program} className="text-sm text-foreground">{program}</Label>
+                <Label htmlFor={program} className="text-sm text-white">{program}</Label>
               </div>
             ))}
           </div>
@@ -105,8 +105,8 @@ const VoucherStep1 = ({
         <div className="flex items-start space-x-3 pt-4 p-3 rounded-lg cyber-border bg-card/30">
           <Checkbox id="terms" checked={formData.agreeToTerms} onCheckedChange={checked => updateFormData({
           agreeToTerms: checked as boolean
-        })} className="border-primary data-[state=checked]:bg-primary mt-1" />
-          <Label htmlFor="terms" className="text-sm text-muted-foreground leading-tight">
+        })} className="border-white data-[state=checked]:bg-white data-[state=checked]:text-black mt-1" />
+          <Label htmlFor="terms" className="text-sm text-white leading-tight">
             I agree to the Terms of Service and Privacy Policy. I understand this is a special offer voucher and consent to being contacted about my offer.
           </Label>
         </div>

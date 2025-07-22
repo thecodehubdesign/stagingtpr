@@ -121,30 +121,30 @@ const VoucherStep3 = ({
                     <h4 className="font-semibold text-lg text-foreground mb-1">{classItem.title}</h4>
                     <div className="flex items-center space-x-4 text-sm text-muted-foreground mb-2">
                       <div className="flex items-center space-x-1">
-                        <Calendar className="w-4 h-4 text-primary" />
-                        <span>{classItem.date}</span>
+                        <Calendar className="w-4 h-4 text-white" />
+                        <span className="text-white">{classItem.date}</span>
                       </div>
                       <div className="flex items-center space-x-1">
-                        <Clock className="w-4 h-4 text-primary" />
-                        <span>{classItem.time} ({classItem.duration})</span>
+                        <Clock className="w-4 h-4 text-white" />
+                        <span className="text-white">{classItem.time} ({classItem.duration})</span>
                       </div>
                     </div>
                     <div className="flex items-center space-x-4 text-sm">
-                      <span className="bg-primary/20 text-primary px-2 py-1 rounded-full border border-primary/30">
+                      <span className="bg-primary/20 text-white px-2 py-1 rounded-full border border-primary/30">
                         {classItem.level}
                       </span>
-                      <span className="text-muted-foreground">
+                      <span className="text-white">
                         {formData.studioLocation}
                       </span>
                     </div>
-                    <p className="text-sm text-muted-foreground mt-2">
+                    <p className="text-sm text-white mt-2">
                       Starts in {classItem.daysFromNow === 0 ? 'today' : `${classItem.daysFromNow} days`}
                     </p>
                   </div>
                   <div className="text-right">
                     <div className="flex items-center space-x-1 text-sm text-emerald-400">
-                      <Users className="w-4 h-4" />
-                      <span>{classItem.spotsRemaining} spots remaining</span>
+                      <Users className="w-4 h-4 text-white" />
+                      <span className="text-white">{classItem.spotsRemaining} spots remaining</span>
                     </div>
                   </div>
                 </div>
