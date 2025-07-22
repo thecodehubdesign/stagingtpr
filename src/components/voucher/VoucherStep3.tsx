@@ -114,14 +114,9 @@ const VoucherStep3 = ({
   const canProceed = selectedClassId && showCreditCardForm && creditCardData.cardNumber && creditCardData.expiryDate && creditCardData.cvv && creditCardData.nameOnCard;
   return <form onSubmit={handleSubmit} className="space-y-6">
       <div>
-        <div className="flex items-center gap-2 mb-2">
-          <h3 className="text-4xl font-semibold gradient-text">
-            Upcoming Free Trial Classes at
-          </h3>
-          <span className="bg-primary/20 px-3 py-1 rounded-full border border-primary/30 text-primary text-sm font-medium">
-            {formData.studioLocation} Studio
-          </span>
-        </div>
+        <h3 className="text-4xl font-semibold gradient-text mb-2">
+          Upcoming Free Trial Classes at {formData.studioLocation} Studio
+        </h3>
         <p className="text-sm mb-4 text-muted-foreground">
           These classes are based on your preferences in Step 1. 
           <button 
