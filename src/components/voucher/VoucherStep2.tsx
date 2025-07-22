@@ -23,9 +23,7 @@ const VoucherStep2 = ({
   const fitnessLevels = ['Low - I\'m just starting my fitness journey', 'Moderate - I exercise occasionally', 'Good - I exercise regularly', 'High - I\'m very active/athletic'];
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
-    if (formData.goals.length > 0 && formData.howHeardAboutUs && formData.whenToStart && formData.priorExperience && formData.fitnessLevel) {
-      onNext();
-    }
+    onNext();
   };
   const handleGoalChange = (goal: string, checked: boolean) => {
     if (checked) {
@@ -38,7 +36,7 @@ const VoucherStep2 = ({
       });
     }
   };
-  const isFormValid = formData.goals.length > 0 && formData.howHeardAboutUs && formData.whenToStart && formData.priorExperience && formData.fitnessLevel;
+  const isFormValid = true;
   return <form onSubmit={handleSubmit} className="space-y-6">
       <div>
         <h3 className="font-semibold mb-4 text-zinc-50 text-3xl">
@@ -52,7 +50,7 @@ const VoucherStep2 = ({
       <div className="space-y-6">
         <div>
           <Label className="text-sm font-medium text-white-700 mb-3 block">
-            What are you looking to achieve? (Select all that apply) *
+            What are you looking to achieve? (Select all that apply)
           </Label>
           <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
             {goals.map(goal => <div key={goal} className="flex items-start space-x-2">
@@ -64,7 +62,7 @@ const VoucherStep2 = ({
 
         <div>
           <Label className="text-sm font-medium text-white-700 mb-3 block">
-            How did you hear about us? *
+            How did you hear about us?
           </Label>
           <Select value={formData.howHeardAboutUs} onValueChange={value => updateFormData({
           howHeardAboutUs: value
@@ -82,7 +80,7 @@ const VoucherStep2 = ({
 
         <div>
           <Label className="text-sm font-medium text-white-700 mb-3 block">
-            When would you like to start? *
+            When would you like to start?
           </Label>
           <Select value={formData.whenToStart} onValueChange={value => updateFormData({
           whenToStart: value
@@ -100,7 +98,7 @@ const VoucherStep2 = ({
 
         <div>
           <Label className="text-sm font-medium text-white-700 mb-3 block">
-            What's your experience level? *
+            What's your experience level?
           </Label>
           <Select value={formData.priorExperience} onValueChange={value => updateFormData({
           priorExperience: value
@@ -118,7 +116,7 @@ const VoucherStep2 = ({
 
         <div>
           <Label className="text-sm font-medium text-white-900 mb-3 block">
-            How would you describe your current fitness level? *
+            How would you describe your current fitness level?
           </Label>
           <Select value={formData.fitnessLevel} onValueChange={value => updateFormData({
           fitnessLevel: value

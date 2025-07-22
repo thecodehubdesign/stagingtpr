@@ -1,8 +1,10 @@
+import { useState } from 'react';
 import { Button } from '@/components/ui/button';
 import { Label } from '@/components/ui/label';
 import { RadioGroup, RadioGroupItem } from '@/components/ui/radio-group';
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
-import { ArrowLeft, Gift, Star, Clock, Phone, Sparkles } from 'lucide-react';
+import { Input } from '@/components/ui/input';
+import { ArrowLeft, Clock, Calendar, Users, CreditCard } from 'lucide-react';
 import { VoucherFormData } from '../VoucherClaimForm';
 interface VoucherStep3Props {
   formData: VoucherFormData;
@@ -16,131 +18,242 @@ const VoucherStep3 = ({
   onPrev,
   onComplete
 }: VoucherStep3Props) => {
-  const vouchers = [{
-    id: 'first-class-80-off',
-    title: '80% Off First Class',
-    description: 'Perfect for trying us out with minimal commitment',
-    originalPrice: '$35',
-    discountPrice: '$7',
-    savings: '$28',
-    icon: Star,
-    highlight: 'Most Popular',
-    color: 'from-rose-500 to-pink-600'
-  }, {
-    id: 'intro-package-50-off',
-    title: '50% Off Intro Package',
-    description: '4 classes over 4 weeks - ideal for beginners',
-    originalPrice: '$120',
-    discountPrice: '$60',
-    savings: '$60',
-    icon: Gift,
-    highlight: 'Best Value',
-    color: 'from-purple-500 to-indigo-600'
-  }, {
-    id: 'unlimited-month-40-off',
-    title: '40% Off First Month Unlimited',
-    description: 'Unlimited classes for your first month',
-    originalPrice: '$180',
-    discountPrice: '$108',
-    savings: '$72',
-    icon: Sparkles,
-    highlight: 'For Committed Beginners',
-    color: 'from-cyan-500 to-blue-600'
-  }];
-  const handleEnrollmentCallChange = (wantsCall: string) => {
-    const wants = wantsCall === 'yes';
+  const [selectedClassId, setSelectedClassId] = useState<string>('');
+  const [showCreditCardForm, setShowCreditCardForm] = useState(false);
+  const [creditCardData, setCreditCardData] = useState({
+    cardNumber: '',
+    expiryDate: '',
+    cvv: '',
+    nameOnCard: ''
+  });
+
+  // Mock upcoming classes for the selected location
+  const getUpcomingClasses = () => {
+    const baseClasses = [
+      {
+        id: '1',
+        title: 'Beginner Pole Fundamentals',
+        time: '6:00 PM',
+        duration: '60 min',
+        level: 'Beginner',
+        date: 'Today',
+        daysFromNow: 0,
+        spotsRemaining: 8
+      },
+      {
+        id: '2',
+        title: 'Intro to Aerial Silks',
+        time: '7:30 PM',
+        duration: '60 min',
+        level: 'Beginner',
+        date: 'Today',
+        daysFromNow: 0,
+        spotsRemaining: 5
+      },
+      {
+        id: '3',
+        title: 'Pole Flow for Beginners',
+        time: '6:00 PM',
+        duration: '75 min',
+        level: 'Beginner',
+        date: 'Tomorrow',
+        daysFromNow: 1,
+        spotsRemaining: 12
+      },
+      {
+        id: '4',
+        title: 'Flexibility & Conditioning',
+        time: '5:30 PM',
+        duration: '45 min',
+        level: 'All Levels',
+        date: 'Wed 24 Jul',
+        daysFromNow: 2,
+        spotsRemaining: 15
+      },
+      {
+        id: '5',
+        title: 'Beginner Pole Tricks',
+        time: '7:00 PM',
+        duration: '60 min',
+        level: 'Beginner',
+        date: 'Thu 25 Jul',
+        daysFromNow: 3,
+        spotsRemaining: 9
+      }
+    ];
+    
+    return baseClasses;
+  };
+
+  const upcomingClasses = getUpcomingClasses();
+  const handleClassSelection = (classId: string) => {
+    setSelectedClassId(classId);
+    setShowCreditCardForm(true);
     updateFormData({
-      wantsEnrollmentCall: wants
+      selectedVoucher: classId
     });
+  };
+
+  const handleCreditCardChange = (field: string, value: string) => {
+    setCreditCardData(prev => ({
+      ...prev,
+      [field]: value
+    }));
   };
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
-    if (formData.selectedVoucher || formData.wantsEnrollmentCall) {
-      onComplete();
+    if (selectedClassId && creditCardData.cardNumber && creditCardData.expiryDate && creditCardData.cvv && creditCardData.nameOnCard) {
+      // Navigate to get-started page
+      window.location.href = '/get-started';
     }
   };
-  const canProceed = formData.selectedVoucher || formData.wantsEnrollmentCall;
+
+  const canProceed = selectedClassId && showCreditCardForm && creditCardData.cardNumber && creditCardData.expiryDate && creditCardData.cvv && creditCardData.nameOnCard;
   return <form onSubmit={handleSubmit} className="space-y-6">
       <div>
-        <h3 className="text-lg font-semibold mb-4 text-slate-50">
-          Choose Your Special Offer
+        <h3 className="text-lg font-semibold mb-2 text-slate-50">
+          Upcoming Free Trial Classes at {formData.studioLocation}
         </h3>
         <p className="text-sm mb-6 text-slate-50">
-          Select the voucher that best fits your goals and budget.
+          Select a class day and time within the next 4 days.
         </p>
       </div>
 
-      <div className="space-y-6">
-        <div className="border border-blue-200 rounded-lg p-4 bg-stone-900">
-          <div className="flex items-center space-x-2 mb-3">
-            <Phone className="w-5 h-5 text-blue-600" />
-            <h4 className="font-semibold text-fuchsia-700">Need Help Choosing?</h4>
+      {!showCreditCardForm && (
+        <div className="space-y-4">
+          <div className="bg-rose-100 border border-rose-200 rounded-lg p-3 mb-4">
+            <p className="text-sm text-rose-800">
+              <strong>Regular classes are normally $42 - Now FREE for newbies!</strong>
+            </p>
           </div>
-          <Label className="text-sm font-medium text-white-700 mb-3 block">
-            Would you like an Enrollment Specialist to call you to help choose the best offer?
-          </Label>
-          <RadioGroup value={formData.wantsEnrollmentCall ? 'yes' : 'no'} onValueChange={handleEnrollmentCallChange} className="space-y-2">
-            <div className="flex items-center space-x-2">
-              <RadioGroupItem value="yes" id="call-yes" />
-              <Label htmlFor="call-yes" className="text-sm">Yes, I'd like a call to help me choose</Label>
-            </div>
-            <div className="flex items-center space-x-2">
-              <RadioGroupItem value="no" id="call-no" />
-              <Label htmlFor="call-no" className="text-sm">No, I'll choose my voucher now</Label>
-            </div>
-          </RadioGroup>
-        </div>
 
-        {formData.wantsEnrollmentCall === false && <div>
-            <h4 className="font-medium mb-4 text-slate-50">Available Vouchers</h4>
-            <RadioGroup value={formData.selectedVoucher} onValueChange={value => updateFormData({
-          selectedVoucher: value
-        })} className="space-y-4">
-              {vouchers.map(voucher => <div key={voucher.id}>
-                  <RadioGroupItem value={voucher.id} id={voucher.id} className="sr-only" />
-                  <Label htmlFor={voucher.id} className="cursor-pointer">
-                    <Card className={`border-2 transition-all duration-200 ${formData.selectedVoucher === voucher.id ? 'border-rose-500 bg-rose-50 shadow-lg' : 'border-gray-200 hover:border-rose-300 hover:shadow-md'}`}>
-                      <CardHeader className="pb-3">
-                        <div className="flex items-center justify-between">
-                          <div className="flex items-center space-x-3">
-                            <div className={`p-2 rounded-lg bg-gradient-to-r ${voucher.color}`}>
-                              <voucher.icon className="w-5 h-5 text-white" />
-                            </div>
-                            <div>
-                              <CardTitle className="text-base">{voucher.title}</CardTitle>
-                              {voucher.highlight && <span className="text-xs font-medium text-rose-600 bg-rose-100 px-2 rounded-full mx-0 my-[4px] py-0">
-                                  {voucher.highlight}
-                                </span>}
-                            </div>
-                          </div>
-                        </div>
-                      </CardHeader>
-                      <CardContent className="pt-0">
-                        <p className="text-sm mb-4 text-slate-50">{voucher.description}</p>
-                        <div className="flex items-center justify-between">
-                          <div className="flex items-center space-x-2">
-                            <span className="text-lg font-bold text-green-600">{voucher.discountPrice}</span>
-                            <span className="text-sm text-gray-500 line-through">{voucher.originalPrice}</span>
-                          </div>
-                          <div className="text-right">
-                            <div className="text-sm font-medium text-rose-600">Save {voucher.savings}</div>
-                          </div>
-                        </div>
-                      </CardContent>
-                    </Card>
-                  </Label>
-                </div>)}
-            </RadioGroup>
-          </div>}
-      </div>
+          {upcomingClasses.map(classItem => (
+            <Card 
+              key={classItem.id} 
+              className="border-2 border-gray-200 hover:border-rose-300 hover:shadow-md transition-all duration-200 cursor-pointer"
+              onClick={() => handleClassSelection(classItem.id)}
+            >
+              <CardContent className="p-4">
+                <div className="flex justify-between items-start">
+                  <div className="flex-1">
+                    <h4 className="font-semibold text-lg text-slate-50 mb-1">{classItem.title}</h4>
+                    <div className="flex items-center space-x-4 text-sm text-slate-50 mb-2">
+                      <div className="flex items-center space-x-1">
+                        <Calendar className="w-4 h-4" />
+                        <span>{classItem.date}</span>
+                      </div>
+                      <div className="flex items-center space-x-1">
+                        <Clock className="w-4 h-4" />
+                        <span>{classItem.time} ({classItem.duration})</span>
+                      </div>
+                    </div>
+                    <div className="flex items-center space-x-4 text-sm">
+                      <span className="bg-blue-100 text-blue-800 px-2 py-1 rounded-full">
+                        {classItem.level}
+                      </span>
+                      <span className="text-slate-50">
+                        {formData.studioLocation}
+                      </span>
+                    </div>
+                    <p className="text-sm text-slate-50 mt-2">
+                      Starts in {classItem.daysFromNow === 0 ? 'today' : `${classItem.daysFromNow} days`}
+                    </p>
+                  </div>
+                  <div className="text-right">
+                    <div className="flex items-center space-x-1 text-sm text-green-600">
+                      <Users className="w-4 h-4" />
+                      <span>{classItem.spotsRemaining} spots remaining</span>
+                    </div>
+                  </div>
+                </div>
+              </CardContent>
+            </Card>
+          ))}
+        </div>
+      )}
+
+      {showCreditCardForm && (
+        <div className="space-y-6">
+          <div className="bg-yellow-100 border border-yellow-200 rounded-lg p-4">
+            <div className="flex items-start space-x-2">
+              <CreditCard className="w-5 h-5 text-yellow-600 mt-0.5" />
+              <div>
+                <h4 className="font-semibold text-yellow-800 mb-2">Credit Card Required</h4>
+                <p className="text-sm text-yellow-700 mb-2">
+                  In order for the reservation to be held, CC details must be provided. 
+                  In the case of a no-show the full cost of the session will be passed along.
+                </p>
+                <p className="text-sm text-yellow-700">
+                  <strong>6 hours notice is required to cancel a class.</strong>
+                </p>
+              </div>
+            </div>
+          </div>
+
+          <div className="space-y-4">
+            <div>
+              <Label className="text-sm font-medium text-slate-50 mb-2 block">
+                Name on Card
+              </Label>
+              <Input
+                type="text"
+                placeholder="John Doe"
+                value={creditCardData.nameOnCard}
+                onChange={(e) => handleCreditCardChange('nameOnCard', e.target.value)}
+              />
+            </div>
+
+            <div>
+              <Label className="text-sm font-medium text-slate-50 mb-2 block">
+                Card Number
+              </Label>
+              <Input
+                type="text"
+                placeholder="1234 5678 9012 3456"
+                value={creditCardData.cardNumber}
+                onChange={(e) => handleCreditCardChange('cardNumber', e.target.value)}
+              />
+            </div>
+
+            <div className="grid grid-cols-2 gap-4">
+              <div>
+                <Label className="text-sm font-medium text-slate-50 mb-2 block">
+                  Expiry Date
+                </Label>
+                <Input
+                  type="text"
+                  placeholder="MM/YY"
+                  value={creditCardData.expiryDate}
+                  onChange={(e) => handleCreditCardChange('expiryDate', e.target.value)}
+                />
+              </div>
+              <div>
+                <Label className="text-sm font-medium text-slate-50 mb-2 block">
+                  CVV
+                </Label>
+                <Input
+                  type="text"
+                  placeholder="123"
+                  value={creditCardData.cvv}
+                  onChange={(e) => handleCreditCardChange('cvv', e.target.value)}
+                />
+              </div>
+            </div>
+          </div>
+        </div>
+      )}
 
       <div className="flex space-x-4">
         <Button type="button" variant="outline" onClick={onPrev} className="flex items-center space-x-2">
           <ArrowLeft className="w-4 h-4" />
           <span>Back</span>
         </Button>
-        <Button type="submit" className="flex-1 bg-gradient-to-r from-rose-500 to-purple-600 hover:from-rose-600 hover:to-purple-700" disabled={!canProceed}>
-          {formData.wantsEnrollmentCall ? 'Request Call Back' : 'Claim My Voucher'}
+        <Button 
+          type="submit" 
+          className="flex-1 bg-gradient-to-r from-rose-500 to-purple-600 hover:from-rose-600 hover:to-purple-700" 
+          disabled={!canProceed}
+        >
+          {showCreditCardForm ? 'Make Reservation!' : 'Continue'}
         </Button>
       </div>
     </form>;
