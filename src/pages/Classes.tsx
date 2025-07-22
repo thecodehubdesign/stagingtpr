@@ -6,6 +6,7 @@ import { Badge } from '@/components/ui/badge';
 import { Input } from '@/components/ui/input';
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '@/components/ui/select';
 import { Clock, Users, Search, Filter, MapPin, GraduationCap, X, Wifi, Coffee, Car } from 'lucide-react';
+import { Tooltip, TooltipContent, TooltipProvider, TooltipTrigger } from '@/components/ui/tooltip';
 import { Link } from 'react-router-dom';
 import { useState, useMemo } from 'react';
 const Classes = () => {
@@ -33,6 +34,7 @@ const Classes = () => {
       image: "/lovable-uploads/3cc0b943-7d1c-4140-a59c-a60390d03154.jpg"
     }],
     location: "Mitcham",
+    locations: ["Mitcham", "Kilsyth", "Melbourne"],
     image: "/lovable-uploads/d97f60e6-9bb0-46b6-a9cc-aaa13ede7d4b.png",
     featured: true
   }, {
@@ -48,6 +50,7 @@ const Classes = () => {
       image: "/lovable-uploads/4d4d16ef-17d9-47e3-a464-cfa3c9b9eef6.jpg"
     }],
     location: "Kilsyth",
+    locations: ["Kilsyth", "Highett"],
     image: "/lovable-uploads/ecb5bd9c-6055-4d41-8797-bbb506648a5b.png"
   }, {
     name: "Pole Jam",
@@ -65,6 +68,7 @@ const Classes = () => {
       image: "/lovable-uploads/8b589fd4-a71e-43de-823f-c2af97fef88d.jpg"
     }],
     location: "Melbourne",
+    locations: ["Melbourne", "Mitcham", "Narre Warren", "Kilsyth"],
     image: "/lovable-uploads/e72918ef-7386-4492-8d6e-6cf1cbeb62e4.png"
   }, {
     name: "Chair and Lap",
@@ -79,6 +83,7 @@ const Classes = () => {
       image: "/lovable-uploads/c7f8bec0-23c5-44db-871b-dccfbacb26a5.jpg"
     }],
     location: "Highett",
+    locations: ["Highett", "Melbourne", "Narre Warren"],
     image: "/lovable-uploads/ff325961-11eb-4009-8f03-cb52bcfc97e0.png"
   }, {
     name: "Dance Filthy",
@@ -105,6 +110,7 @@ const Classes = () => {
       image: "/lovable-uploads/1d83d83b-0057-4bd1-8052-79584b039a97.jpg"
     }],
     location: "Narre Warren",
+    locations: ["Narre Warren", "Mitcham", "Kilsyth", "Melbourne", "Highett"],
     image: "/lovable-uploads/a3f3abdb-e872-4fb0-a921-052f1d92afec.png"
   }, {
     name: "Pole Conditioning",
@@ -122,6 +128,7 @@ const Classes = () => {
       image: "/lovable-uploads/4d4d16ef-17d9-47e3-a464-cfa3c9b9eef6.jpg"
     }],
     location: "Mitcham",
+    locations: ["Mitcham", "Melbourne"],
     image: "/lovable-uploads/cc11c8dc-6872-48a7-9124-7e1c3602e410.png"
   }, {
     name: "Pole Foundations",
@@ -136,6 +143,7 @@ const Classes = () => {
       image: "/lovable-uploads/1d83d83b-0057-4bd1-8052-79584b039a97.jpg"
     }],
     location: "Kilsyth",
+    locations: ["Kilsyth", "Highett", "Narre Warren", "Mitcham"],
     image: "/lovable-uploads/8a7c62c9-86e6-4d10-a555-f79e5ed95001.png",
     featured: true
   }, {
@@ -154,6 +162,7 @@ const Classes = () => {
       image: "/lovable-uploads/8b589fd4-a71e-43de-823f-c2af97fef88d.jpg"
     }],
     location: "Melbourne",
+    locations: ["Melbourne", "Mitcham", "Kilsyth"],
     image: "/lovable-uploads/119fcd15-3aac-4f1f-920c-a13497b0b348.png"
   }, {
     name: "Sexy Basics",
@@ -171,6 +180,7 @@ const Classes = () => {
       image: "/lovable-uploads/3cc0b943-7d1c-4140-a59c-a60390d03154.jpg"
     }],
     location: "Highett",
+    locations: ["Highett", "Narre Warren"],
     image: "/lovable-uploads/8be1e610-6a66-4ace-b02d-1945fd276001.png"
   }, {
     name: "Floor Play",
@@ -188,6 +198,7 @@ const Classes = () => {
       image: "/lovable-uploads/c7f8bec0-23c5-44db-871b-dccfbacb26a5.jpg"
     }],
     location: "Narre Warren",
+    locations: ["Narre Warren", "Kilsyth", "Melbourne"],
     image: "/lovable-uploads/32863f0f-165a-4abf-b73e-3eea2045dce5.png"
   }];
 
@@ -502,10 +513,19 @@ const Classes = () => {
                           <Clock className="w-4 h-4 mr-1" />
                           {classItem.duration}
                         </div>
-                        <div className="flex items-center">
-                          <MapPin className="w-4 h-4 mr-1" />
-                          {classItem.location} +1
-                        </div>
+                        <TooltipProvider>
+                          <Tooltip>
+                            <TooltipTrigger asChild>
+                              <div className="flex items-center cursor-pointer hover:text-fuchsia-400 transition-colors">
+                                <MapPin className="w-4 h-4 mr-1" />
+                                {classItem.location} +{classItem.locations.length - 1}
+                              </div>
+                            </TooltipTrigger>
+                            <TooltipContent>
+                              <p className="text-sm">Available at: {classItem.locations.join(', ')}</p>
+                            </TooltipContent>
+                          </Tooltip>
+                        </TooltipProvider>
                       </div>
 
                       <p className="text-gray-300 text-sm mb-4 leading-relaxed line-clamp-3">
