@@ -1,4 +1,3 @@
-
 import Header from '@/components/Header';
 import Footer from '@/components/Footer';
 import StudioSearch from '@/components/StudioSearch';
@@ -8,7 +7,6 @@ import { Button } from '@/components/ui/button';
 import { Card } from '@/components/ui/card';
 import { MapPin, Users, Wifi, Coffee, Car } from 'lucide-react';
 import FreeTrialBookingForm from '@/components/FreeTrialBookingForm';
-
 const Studios = () => {
   const sections = [{
     id: 'hero',
@@ -23,7 +21,6 @@ const Studios = () => {
     id: 'features',
     label: 'Features'
   }];
-
   const studioFeatures = [{
     icon: Users,
     title: "Small Class Sizes",
@@ -41,7 +38,6 @@ const Studios = () => {
     title: "Easy Access",
     description: "Convenient parking and public transport connections"
   }];
-
   return <div className="min-h-screen">
       <Header />
       <SectionNavigation sections={sections} />
@@ -76,11 +72,9 @@ const Studios = () => {
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="text-center mb-12">
             <h2 className="text-3xl sm:text-4xl font-bold text-white mb-6">
-              Find Your <span className="gradient-text">Nearest Studio</span>
+              Find Your <span className="gradient-text">Perfect Match</span>
             </h2>
-            <p className="text-lg text-gray-300 max-w-2xl mx-auto mb-8">
-              Search by location and filter by the apparatus you're interested in to find your ideal studio.
-            </p>
+            <p className="text-lg text-gray-300 max-w-2xl mx-auto mb-8">Not all locations offer the same programs and classes. Use our search to field to find the closest studio to home or work, and narrow down by the apparatus, facilities or services you're interested in learning about.</p>
           </div>
           <StudioSearch />
         </div>
@@ -114,5 +108,4 @@ const Studios = () => {
       <Footer />
     </div>;
 };
-
 export default Studios;
