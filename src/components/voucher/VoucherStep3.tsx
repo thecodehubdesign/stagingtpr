@@ -6,6 +6,7 @@ import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 import { Input } from '@/components/ui/input';
 import { ArrowLeft, Clock, Calendar, Users, CreditCard } from 'lucide-react';
 import { VoucherFormData } from '../VoucherClaimForm';
+import CountdownTimer from '../CountdownTimer';
 interface VoucherStep3Props {
   formData: VoucherFormData;
   updateFormData: (data: Partial<VoucherFormData>) => void;
@@ -138,7 +139,11 @@ const VoucherStep3 = ({
                       </span>
                     </div>
                     <p className="text-sm text-white mt-2">
-                      Starts in {classItem.daysFromNow === 0 ? 'today' : `${classItem.daysFromNow} days`}
+                      {classItem.daysFromNow === 0 ? (
+                        <CountdownTimer targetTime={classItem.time} className="text-white" />
+                      ) : (
+                        `Starts in ${classItem.daysFromNow} days`
+                      )}
                     </p>
                   </div>
                   <div className="text-right">
