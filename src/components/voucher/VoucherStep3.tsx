@@ -115,7 +115,7 @@ const VoucherStep3 = ({
   return <form onSubmit={handleSubmit} className="space-y-6">
       <div>
         <div className="flex items-center gap-2 mb-2">
-          <h3 className="text-lg font-semibold gradient-text">
+          <h3 className="text-4xl font-semibold gradient-text">
             Upcoming Free Trial Classes at
           </h3>
           <span className="bg-primary/20 px-3 py-1 rounded-full border border-primary/30 text-primary text-sm font-medium">
