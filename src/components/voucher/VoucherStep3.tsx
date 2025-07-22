@@ -36,45 +36,55 @@ const VoucherStep3 = ({
       time: '6:00 PM',
       duration: '60 min',
       level: 'Beginner',
+      apparatus: 'Pole',
       date: 'Today',
       daysFromNow: 0,
-      spotsRemaining: 8
+      spotsRemaining: 8,
+      address: '123 Main St, Mitcham VIC 3132'
     }, {
       id: '2',
       title: 'Intro to Aerial Silks',
       time: '7:30 PM',
       duration: '60 min',
       level: 'Beginner',
+      apparatus: 'Silks',
       date: 'Today',
       daysFromNow: 0,
-      spotsRemaining: 5
+      spotsRemaining: 5,
+      address: '123 Main St, Mitcham VIC 3132'
     }, {
       id: '3',
       title: 'Pole Flow for Beginners',
       time: '6:00 PM',
       duration: '75 min',
       level: 'Beginner',
+      apparatus: 'Pole',
       date: 'Tomorrow',
       daysFromNow: 1,
-      spotsRemaining: 12
+      spotsRemaining: 12,
+      address: '123 Main St, Mitcham VIC 3132'
     }, {
       id: '4',
       title: 'Flexibility & Conditioning',
       time: '5:30 PM',
       duration: '45 min',
       level: 'All Levels',
+      apparatus: 'Floor',
       date: 'Wed 24 Jul',
       daysFromNow: 2,
-      spotsRemaining: 15
+      spotsRemaining: 15,
+      address: '123 Main St, Mitcham VIC 3132'
     }, {
       id: '5',
       title: 'Beginner Pole Tricks',
       time: '7:00 PM',
       duration: '60 min',
       level: 'Beginner',
+      apparatus: 'Pole',
       date: 'Thu 25 Jul',
       daysFromNow: 3,
-      spotsRemaining: 9
+      spotsRemaining: 9,
+      address: '123 Main St, Mitcham VIC 3132'
     }];
     return baseClasses;
   };
@@ -115,46 +125,61 @@ const VoucherStep3 = ({
             </p>
           </div>
 
-          {upcomingClasses.map(classItem => <Card key={classItem.id} className="cyber-card hover:bg-card/80 transition-all duration-200 cursor-pointer" onClick={() => handleClassSelection(classItem.id)}>
+          {upcomingClasses.map(classItem => 
+            <Card key={classItem.id} className="cyber-card hover:bg-card/80 transition-all duration-200 cursor-pointer" onClick={() => handleClassSelection(classItem.id)}>
               <CardContent className="p-4">
-                <div className="flex justify-between items-start">
-                  <div className="flex-1">
-                    <h4 className="font-semibold text-lg mb-1 text-slate-50">{classItem.title}</h4>
-                    <div className="flex items-center space-x-4 text-sm text-muted-foreground mb-2">
-                      <div className="flex items-center space-x-1">
-                        <Calendar className="w-4 h-4 text-white" />
-                        <span className="text-white">{classItem.date}</span>
-                      </div>
-                      <div className="flex items-center space-x-1">
-                        <Clock className="w-4 h-4 text-white" />
-                        <span className="text-white">{classItem.time} ({classItem.duration})</span>
-                      </div>
-                    </div>
-                    <div className="flex items-center space-x-4 text-sm">
-                      <span className="bg-primary/20 px-2 py-1 rounded-full border border-primary/30 text-green-500">
-                        {classItem.level}
-                      </span>
-                      <span className="text-white">
-                        {formData.studioLocation}
-                      </span>
-                    </div>
-                    <p className="text-sm text-white mt-2">
-                      {classItem.daysFromNow === 0 ? (
-                        <CountdownTimer targetTime={classItem.time} className="text-white" />
-                      ) : (
-                        `Starts in ${classItem.daysFromNow} days`
-                      )}
-                    </p>
-                  </div>
-                  <div className="text-right">
+                <div className="space-y-3">
+                  {/* Header with title and spots */}
+                  <div className="flex flex-col sm:flex-row sm:justify-between sm:items-start gap-2">
+                    <h4 className="font-semibold text-lg text-slate-50">{classItem.title}</h4>
                     <div className="flex items-center space-x-1 text-sm text-emerald-400">
                       <Users className="w-4 h-4 text-white" />
                       <span className="text-white">{classItem.spotsRemaining} spots remaining</span>
                     </div>
                   </div>
+
+                  {/* Date and time info */}
+                  <div className="flex flex-col sm:flex-row sm:items-center gap-2 sm:gap-4 text-sm">
+                    <div className="flex items-center space-x-1">
+                      <Calendar className="w-4 h-4 text-white" />
+                      <span className="text-white">{classItem.date}</span>
+                    </div>
+                    <div className="flex items-center space-x-1">
+                      <Clock className="w-4 h-4 text-white" />
+                      <span className="text-white">{classItem.time} ({classItem.duration})</span>
+                    </div>
+                  </div>
+
+                  {/* Tags and location */}
+                  <div className="flex flex-col sm:flex-row sm:items-center gap-2 sm:gap-4">
+                    <div className="flex flex-wrap gap-2">
+                      <span className="bg-primary/20 px-3 py-1 rounded-full border border-primary/30 text-green-500 text-sm">
+                        {classItem.level}
+                      </span>
+                      <span className="bg-purple-500/20 px-3 py-1 rounded-full border border-purple-500/30 text-purple-300 text-sm">
+                        {classItem.apparatus}
+                      </span>
+                    </div>
+                  </div>
+
+                  {/* Studio location with address */}
+                  <div className="text-sm text-white">
+                    <div className="font-medium">{formData.studioLocation}</div>
+                    <div className="text-white/70">{classItem.address}</div>
+                  </div>
+
+                  {/* Countdown or days info */}
+                  <div className="text-sm text-white">
+                    {classItem.daysFromNow === 0 ? (
+                      <CountdownTimer targetTime={classItem.time} className="text-white font-medium" />
+                    ) : (
+                      `Starts in ${classItem.daysFromNow} days`
+                    )}
+                  </div>
                 </div>
               </CardContent>
-            </Card>)}
+            </Card>
+          )}
         </div>}
 
       {showCreditCardForm && <div className="space-y-6">
