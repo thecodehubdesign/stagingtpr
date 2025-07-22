@@ -199,13 +199,20 @@ const Classes = () => {
 
   // Filtered classes based on search and filters
   const filteredClasses = useMemo(() => {
-    return allClasses.filter(classItem => {
+    const filtered = allClasses.filter(classItem => {
       const matchesSearch = classItem.name.toLowerCase().includes(searchQuery.toLowerCase()) || classItem.description.toLowerCase().includes(searchQuery.toLowerCase()) || classItem.category.toLowerCase().includes(searchQuery.toLowerCase());
       const matchesLevel = !levelFilter || classItem.level === levelFilter;
       const matchesStyle = !styleFilter || classItem.style === styleFilter;
       const matchesLocation = !locationFilter || classItem.location === locationFilter;
       const matchesInstructor = !instructorFilter || classItem.instructors.some(instructor => instructor.name === instructorFilter);
       return matchesSearch && matchesLevel && matchesStyle && matchesLocation && matchesInstructor;
+    });
+    
+    // Sort to show featured classes first
+    return filtered.sort((a, b) => {
+      if (a.featured && !b.featured) return -1;
+      if (!a.featured && b.featured) return 1;
+      return 0;
     });
   }, [searchQuery, levelFilter, styleFilter, locationFilter, instructorFilter]);
   const clearFilters = () => {
@@ -477,14 +484,9 @@ const Classes = () => {
                     <div className="relative h-48 overflow-hidden">
                       <img src={classItem.image} alt={classItem.name} className="w-full h-full object-cover transition-transform duration-300 group-hover:scale-110" />
                       <div className="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent" />
-                      <div className="absolute top-4 right-4">
-                        <Badge className={`${getLevelColor(classItem.level)} border font-medium`}>
-                          {classItem.level}
-                        </Badge>
-                      </div>
                       {classItem.featured && <div className="absolute top-4 left-4">
                           <Badge className="bg-gradient-to-r from-fuchsia-500 to-purple-600 text-white border-0">
-                            Featured
+                            Free Trial Available
                           </Badge>
                         </div>}
                     </div>
@@ -502,7 +504,7 @@ const Classes = () => {
                         </div>
                         <div className="flex items-center">
                           <MapPin className="w-4 h-4 mr-1" />
-                          {classItem.location}
+                          {classItem.location} +1
                         </div>
                       </div>
 
@@ -527,6 +529,9 @@ const Classes = () => {
                         <span className="text-xs px-2 py-1 bg-purple-500/20 text-purple-300 rounded-full">
                           {classItem.style}
                         </span>
+                        <Badge className={`${getLevelColor(classItem.level)} border font-medium text-xs`}>
+                          {classItem.level}
+                        </Badge>
                       </div>
 
                       {/* View Class Button */}
