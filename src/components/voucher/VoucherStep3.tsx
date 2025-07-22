@@ -119,9 +119,7 @@ const VoucherStep3 = ({
         </h3>
         <p className="text-sm mb-4 text-muted-foreground">
           These classes are based on your preferences in Step 1. 
-          <button type="button" className="text-primary hover:underline ml-1" onClick={() => {/* Navigate to all classes */}}>
-            Click here to view all available free trial classes.
-          </button>
+          
         </p>
         <p className="text-sm mb-6 text-muted-foreground">
           Free trial classes cannot be booked more than 4 days ahead of time. To secure your spot please select your preferred class and complete final details.
@@ -223,7 +221,7 @@ const VoucherStep3 = ({
                   In the case of a no-show the full cost of the session will be passed along.
                 </p>
                 <p className="text-sm text-primary font-medium">
-                  <strong>6 hours notice is required to cancel a class.</strong>
+                  <strong className="bg-white rounded-2xl">6 hours notice is required to cancel a class.</strong>
                 </p>
               </div>
             </div>
