@@ -7,15 +7,30 @@ import { Input } from '@/components/ui/input';
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '@/components/ui/select';
 import { Clock, Users, Search, Filter, MapPin, GraduationCap, X, Wifi, Coffee, Car } from 'lucide-react';
 import { Tooltip, TooltipContent, TooltipProvider, TooltipTrigger } from '@/components/ui/tooltip';
-import { Link } from 'react-router-dom';
-import { useState, useMemo } from 'react';
+import { Link, useSearchParams } from 'react-router-dom';
+import { useState, useMemo, useEffect } from 'react';
 const Classes = () => {
-  // State for search and filters
-  const [searchQuery, setSearchQuery] = useState('');
-  const [levelFilter, setLevelFilter] = useState('');
-  const [styleFilter, setStyleFilter] = useState('');
-  const [locationFilter, setLocationFilter] = useState('');
-  const [instructorFilter, setInstructorFilter] = useState('');
+  const [searchParams, setSearchParams] = useSearchParams();
+  
+  // State for search and filters - initialize from URL params
+  const [searchQuery, setSearchQuery] = useState(searchParams.get('search') || '');
+  const [levelFilter, setLevelFilter] = useState(searchParams.get('level') || '');
+  const [styleFilter, setStyleFilter] = useState(searchParams.get('style') || '');
+  const [locationFilter, setLocationFilter] = useState(searchParams.get('location') || '');
+  const [instructorFilter, setInstructorFilter] = useState(searchParams.get('instructor') || '');
+
+  // Update URL when filters change
+  useEffect(() => {
+    const params = new URLSearchParams();
+    
+    if (searchQuery) params.set('search', searchQuery);
+    if (levelFilter) params.set('level', levelFilter);
+    if (styleFilter) params.set('style', styleFilter);
+    if (locationFilter) params.set('location', locationFilter);
+    if (instructorFilter) params.set('instructor', instructorFilter);
+    
+    setSearchParams(params, { replace: true });
+  }, [searchQuery, levelFilter, styleFilter, locationFilter, instructorFilter, setSearchParams]);
 
   // Enhanced class data with additional properties for filtering
   const allClasses = [{
@@ -232,6 +247,7 @@ const Classes = () => {
     setStyleFilter('');
     setLocationFilter('');
     setInstructorFilter('');
+    setSearchParams({}, { replace: true });
   };
   const getLevelColor = (level: string) => {
     switch (level) {
