@@ -5,10 +5,16 @@ import { Card } from '@/components/ui/card';
 import { Badge } from '@/components/ui/badge';
 import { Accordion, AccordionContent, AccordionItem, AccordionTrigger } from '@/components/ui/accordion';
 import { Check, Star, Zap, Heart, Crown, Gift, Clock, Users } from 'lucide-react';
+import { Toggle } from '@/components/ui/toggle';
+import { useState } from 'react';
+
 const Pricing = () => {
+  const [isCommitted, setIsCommitted] = useState(false);
+
   const membershipPlans = [{
     name: "Drop-In",
-    price: "$35",
+    flexiPrice: "$35",
+    committedPrice: "$32",
     period: "per class",
     description: "Perfect for trying us out or occasional visits",
     features: ["Access to any class", "No commitment", "Valid for 30 days", "Can be used at any studio"],
@@ -17,7 +23,8 @@ const Pricing = () => {
     color: "from-gray-500 to-gray-600"
   }, {
     name: "Starter Pack",
-    price: "$99",
+    flexiPrice: "$99",
+    committedPrice: "$89",
     period: "4 classes",
     description: "Great for new students to explore different class types",
     features: ["4 classes to use anytime", "Valid for 6 weeks", "Mix and match any classes", "All studio locations", "Free grip aids included"],
@@ -26,7 +33,8 @@ const Pricing = () => {
     color: "from-fuchsia-500 to-purple-600"
   }, {
     name: "Unlimited Monthly",
-    price: "$149",
+    flexiPrice: "$149",
+    committedPrice: "$134",
     period: "per month",
     description: "Best value for committed students",
     features: ["Unlimited classes", "All class types included", "All studio locations", "Priority booking", "10% off workshops", "Guest pass (1 per month)"],
@@ -105,7 +113,22 @@ const Pricing = () => {
             <h2 className="text-3xl sm:text-4xl font-bold text-white mb-6">
               Choose Your <span className="gradient-text">Membership</span>
             </h2>
-            <p className="text-lg text-gray-300 max-w-2xl mx-auto">All plans include access to our supportive community and expert instruction</p>
+            <p className="text-lg text-gray-300 max-w-2xl mx-auto mb-8">All plans include access to our supportive community and expert instruction</p>
+            
+            <div className="flex items-center justify-center gap-4 mb-8">
+              <span className={`text-sm font-medium ${!isCommitted ? 'text-white' : 'text-gray-400'}`}>
+                Flexi
+              </span>
+              <Toggle 
+                pressed={isCommitted}
+                onPressedChange={setIsCommitted}
+                className="data-[state=on]:bg-primary"
+              />
+              <span className={`text-sm font-medium ${isCommitted ? 'text-white' : 'text-gray-400'}`}>
+                Committed 
+                <span className="text-green-400 ml-1">(save 10%)</span>
+              </span>
+            </div>
           </div>
 
           <div className="grid md:grid-cols-3 gap-8">
@@ -122,7 +145,9 @@ const Pricing = () => {
                   </div>
                   <h3 className="text-2xl font-bold text-white mb-2">{plan.name}</h3>
                   <div className="mb-4">
-                    <span className="text-4xl font-bold text-white">{plan.price}</span>
+                    <span className="text-4xl font-bold text-white">
+                      {isCommitted ? plan.committedPrice : plan.flexiPrice}
+                    </span>
                     <span className="text-gray-400 ml-2">{plan.period}</span>
                   </div>
                   <p className="text-gray-300 text-sm">{plan.description}</p>
