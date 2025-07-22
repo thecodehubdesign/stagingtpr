@@ -4,11 +4,18 @@ import { Button } from '@/components/ui/button';
 import { Card } from '@/components/ui/card';
 import { Badge } from '@/components/ui/badge';
 import { Accordion, AccordionContent, AccordionItem, AccordionTrigger } from '@/components/ui/accordion';
-import { Check, Star, Zap, Heart, Crown, Gift, Clock, Users } from 'lucide-react';
+import { Check, Star, Zap, Heart, Crown, Gift, Clock, Users, FileText } from 'lucide-react';
+import { Toggle } from '@/components/ui/toggle';
+import { Dialog, DialogContent, DialogHeader, DialogTitle, DialogTrigger } from '@/components/ui/dialog';
+import { useState } from 'react';
+
 const Pricing = () => {
+  const [isCommitted, setIsCommitted] = useState(false);
+
   const membershipPlans = [{
-    name: "Drop-In",
-    price: "$35",
+    name: "Drop In Session",
+    flexiPrice: "$42",
+    committedPrice: "$42",
     period: "per class",
     description: "Perfect for trying us out or occasional visits",
     features: ["Access to any class", "No commitment", "Valid for 30 days", "Can be used at any studio"],
@@ -16,17 +23,19 @@ const Pricing = () => {
     icon: Zap,
     color: "from-gray-500 to-gray-600"
   }, {
-    name: "Starter Pack",
-    price: "$99",
-    period: "4 classes",
-    description: "Great for new students to explore different class types",
-    features: ["4 classes to use anytime", "Valid for 6 weeks", "Mix and match any classes", "All studio locations", "Free grip aids included"],
+    name: "Casual Flyer",
+    flexiPrice: "$59",
+    committedPrice: "$53.10",
+    period: "per month",
+    description: "Great for regular students who want flexibility",
+    features: ["8 classes per month", "Valid for 6 weeks", "Mix and match any classes", "All studio locations", "Free grip aids included"],
     popular: true,
     icon: Heart,
     color: "from-fuchsia-500 to-purple-600"
   }, {
-    name: "Unlimited Monthly",
-    price: "$149",
+    name: "High Flyer",
+    flexiPrice: "$99",
+    committedPrice: "$89.10",
     period: "per month",
     description: "Best value for committed students",
     features: ["Unlimited classes", "All class types included", "All studio locations", "Priority booking", "10% off workshops", "Guest pass (1 per month)"],
@@ -84,15 +93,25 @@ const Pricing = () => {
       <section className="pt-20 pb-16 bg-gradient-to-br from-gray-900 via-purple-900 to-gray-900 cyber-grid">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="text-center animate-fade-in">
-            <h1 className="text-4xl sm:text-6xl font-bold gradient-text neon-glow mb-6">
+            <h1 
+              className="text-4xl sm:text-6xl font-bold gradient-text neon-glow mb-6"
+              contentEditable
+              suppressContentEditableWarning={true}
+            >
               Pricing & Packages
             </h1>
-            <p className="text-xl text-gray-300 max-w-3xl mx-auto leading-relaxed mb-8">
+            <p 
+              className="text-xl text-gray-300 max-w-3xl mx-auto leading-relaxed mb-8"
+              contentEditable
+              suppressContentEditableWarning={true}
+            >
               Flexible options designed to fit your schedule and goals. 
               Start your transformation journey with our New Student Special!
             </p>
             <Button className="neon-button text-black font-bold text-lg px-8 py-3">
-              Claim Your Free Class
+              <span contentEditable suppressContentEditableWarning={true}>
+                Claim Your Free Class
+              </span>
             </Button>
           </div>
         </div>
@@ -102,10 +121,39 @@ const Pricing = () => {
       <section className="py-20 bg-gray-900">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="text-center mb-16">
-            <h2 className="text-3xl sm:text-4xl font-bold text-white mb-6">
+            <h2 
+              className="text-3xl sm:text-4xl font-bold text-white mb-6"
+              contentEditable
+              suppressContentEditableWarning={true}
+            >
               Choose Your <span className="gradient-text">Membership</span>
             </h2>
-            <p className="text-lg text-gray-300 max-w-2xl mx-auto">All plans include access to our supportive community and expert instruction</p>
+            <p 
+              className="text-lg text-gray-300 max-w-2xl mx-auto mb-8"
+              contentEditable
+              suppressContentEditableWarning={true}
+            >
+              All plans include access to our supportive community and expert instruction
+            </p>
+            
+            <div className="flex items-center justify-center gap-6 mb-8">
+              <span className={`text-lg font-semibold transition-colors ${!isCommitted ? 'text-white' : 'text-gray-500'}`}>
+                Flexi
+              </span>
+              <div className="relative">
+                <Toggle 
+                  pressed={isCommitted}
+                  onPressedChange={setIsCommitted}
+                  className="h-8 w-16 rounded-full bg-gray-600 data-[state=on]:bg-gradient-to-r data-[state=on]:from-green-500 data-[state=on]:to-emerald-500 transition-all duration-300 relative"
+                >
+                  <div className={`absolute w-6 h-6 bg-white rounded-full transition-transform duration-300 ${isCommitted ? 'translate-x-8' : 'translate-x-1'}`} />
+                </Toggle>
+              </div>
+              <span className={`text-lg font-semibold transition-colors ${isCommitted ? 'text-white' : 'text-gray-500'}`}>
+                Committed 
+                <span className="text-green-400 ml-2 text-sm font-medium">(save 10%)</span>
+              </span>
+            </div>
           </div>
 
           <div className="grid md:grid-cols-3 gap-8">
@@ -122,7 +170,9 @@ const Pricing = () => {
                   </div>
                   <h3 className="text-2xl font-bold text-white mb-2">{plan.name}</h3>
                   <div className="mb-4">
-                    <span className="text-4xl font-bold text-white">{plan.price}</span>
+                    <span className="text-4xl font-bold text-white">
+                      {isCommitted ? plan.committedPrice : plan.flexiPrice}
+                    </span>
                     <span className="text-gray-400 ml-2">{plan.period}</span>
                   </div>
                   <p className="text-gray-300 text-sm">{plan.description}</p>
@@ -135,9 +185,64 @@ const Pricing = () => {
                     </div>)}
                 </div>
 
-                <Button className={`w-full ${plan.popular ? 'neon-button text-black font-bold' : 'bg-gradient-to-r from-gray-600 to-gray-700 hover:from-gray-500 hover:to-gray-600'}`}>
+                <Button className={`w-full ${plan.popular ? 'neon-button text-black font-bold' : 'bg-gradient-to-r from-gray-600 to-gray-700 hover:from-gray-500 hover:to-gray-600'} mb-4`}>
                   {plan.popular ? 'Get Started' : 'Choose Plan'}
                 </Button>
+                
+                <Dialog>
+                  <DialogTrigger asChild>
+                    <button className="w-full text-gray-400 hover:text-white text-sm underline flex items-center justify-center gap-2 transition-colors">
+                      <FileText className="w-4 h-4" />
+                      Terms & Conditions
+                    </button>
+                  </DialogTrigger>
+                  <DialogContent className="max-w-4xl max-h-[80vh] overflow-y-auto bg-gray-900 text-white border-gray-700">
+                    <DialogHeader>
+                      <DialogTitle className="text-2xl font-bold gradient-text">Terms & Conditions</DialogTitle>
+                    </DialogHeader>
+                    <div className="space-y-6 text-gray-300">
+                      <div>
+                        <h3 className="text-lg font-semibold text-white mb-2">Membership Terms</h3>
+                        <ul className="list-disc list-inside space-y-1 text-sm">
+                          <li>All memberships are subject to a 12-month minimum commitment for committed pricing</li>
+                          <li>Flexi memberships can be cancelled with 30 days notice</li>
+                          <li>Class packages are valid for the specified period and cannot be extended</li>
+                          <li>All sales are final and non-refundable except as required by law</li>
+                        </ul>
+                      </div>
+                      
+                      <div>
+                        <h3 className="text-lg font-semibold text-white mb-2">Class Policies</h3>
+                        <ul className="list-disc list-inside space-y-1 text-sm">
+                          <li>Classes must be booked in advance through our booking system</li>
+                          <li>24-hour cancellation notice required to avoid losing your class credit</li>
+                          <li>Late arrivals (more than 10 minutes) may not be admitted for safety reasons</li>
+                          <li>Make-up classes are subject to availability</li>
+                        </ul>
+                      </div>
+                      
+                      <div>
+                        <h3 className="text-lg font-semibold text-white mb-2">Health & Safety</h3>
+                        <ul className="list-disc list-inside space-y-1 text-sm">
+                          <li>Medical clearance may be required for certain conditions</li>
+                          <li>Students participate at their own risk and must sign a waiver</li>
+                          <li>Appropriate attire is required for all classes</li>
+                          <li>No jewelry or loose clothing permitted during apparatus work</li>
+                        </ul>
+                      </div>
+                      
+                      <div>
+                        <h3 className="text-lg font-semibold text-white mb-2">Pricing & Payment</h3>
+                        <ul className="list-disc list-inside space-y-1 text-sm">
+                          <li>Prices are subject to change with 30 days notice</li>
+                          <li>Payment is due in advance for all services</li>
+                          <li>Student discounts require valid student ID verification</li>
+                          <li>Promotional offers cannot be combined unless stated otherwise</li>
+                        </ul>
+                      </div>
+                    </div>
+                  </DialogContent>
+                </Dialog>
               </Card>)}
           </div>
         </div>
@@ -147,10 +252,18 @@ const Pricing = () => {
       <section className="py-20 bg-gray-800">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="text-center mb-16">
-            <h2 className="text-3xl sm:text-4xl font-bold text-white mb-6">
+            <h2 
+              className="text-3xl sm:text-4xl font-bold text-white mb-6"
+              contentEditable
+              suppressContentEditableWarning={true}
+            >
               Special <span className="gradient-text">Offers</span>
             </h2>
-            <p className="text-lg text-gray-300 max-w-2xl mx-auto">
+            <p 
+              className="text-lg text-gray-300 max-w-2xl mx-auto"
+              contentEditable
+              suppressContentEditableWarning={true}
+            >
               Save money and bring friends along for the journey
             </p>
           </div>
@@ -175,10 +288,18 @@ const Pricing = () => {
       <section className="py-20 bg-gray-900">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="text-center mb-16">
-            <h2 className="text-3xl sm:text-4xl font-bold text-white mb-6">
+            <h2 
+              className="text-3xl sm:text-4xl font-bold text-white mb-6"
+              contentEditable
+              suppressContentEditableWarning={true}
+            >
               Add-Ons & <span className="gradient-text">Extras</span>
             </h2>
-            <p className="text-lg text-gray-300 max-w-2xl mx-auto">
+            <p 
+              className="text-lg text-gray-300 max-w-2xl mx-auto"
+              contentEditable
+              suppressContentEditableWarning={true}
+            >
               Enhance your training with specialized sessions and workshops
             </p>
           </div>
@@ -210,15 +331,25 @@ const Pricing = () => {
           <div className="bg-white/10 rounded-full w-20 h-20 flex items-center justify-center mx-auto mb-6">
             <Check className="w-10 h-10 text-white" />
           </div>
-          <h2 className="text-3xl sm:text-4xl font-bold text-white mb-6">
+          <h2 
+            className="text-3xl sm:text-4xl font-bold text-white mb-6"
+            contentEditable
+            suppressContentEditableWarning={true}
+          >
             100% Satisfaction Guarantee
           </h2>
-          <p className="text-lg text-green-100 mb-8 max-w-2xl mx-auto">
+          <p 
+            className="text-lg text-green-100 mb-8 max-w-2xl mx-auto"
+            contentEditable
+            suppressContentEditableWarning={true}
+          >
             If you're not completely satisfied with your first month, we'll refund your money. 
             We're confident you'll love our community and see real results.
           </p>
           <Button className="neon-button text-black font-bold text-lg px-8 py-3">
-            Start Risk-Free Today
+            <span contentEditable suppressContentEditableWarning={true}>
+              Start Risk-Free Today
+            </span>
           </Button>
         </div>
       </section>
@@ -227,7 +358,11 @@ const Pricing = () => {
       <section className="py-20 bg-gray-800">
         <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="cyber-card p-8">
-            <h2 className="text-3xl font-bold gradient-text mb-6 text-center">
+            <h2 
+              className="text-3xl font-bold gradient-text mb-6 text-center"
+              contentEditable
+              suppressContentEditableWarning={true}
+            >
               Frequently Asked Questions
             </h2>
             
@@ -270,15 +405,25 @@ const Pricing = () => {
       <section className="py-20 bg-gradient-to-r from-fuchsia-600 to-purple-600">
         <div className="max-w-4xl mx-auto text-center px-4 sm:px-6 lg:px-8">
           <Zap className="w-16 h-16 text-white mx-auto mb-6 pulse-neon" />
-          <h2 className="text-3xl sm:text-4xl font-bold text-white mb-6">
+          <h2 
+            className="text-3xl sm:text-4xl font-bold text-white mb-6"
+            contentEditable
+            suppressContentEditableWarning={true}
+          >
             Ready to Transform Your Life?
           </h2>
-          <p className="text-lg text-purple-100 mb-8 max-w-2xl mx-auto">
+          <p 
+            className="text-lg text-purple-100 mb-8 max-w-2xl mx-auto"
+            contentEditable
+            suppressContentEditableWarning={true}
+          >
             Don't wait another day to start your journey. Your first class is free, 
             and your transformation starts the moment you walk through our doors.
           </p>
           <Button className="neon-button text-black font-bold text-lg px-8 py-3">
-            Claim Your Free Class Now
+            <span contentEditable suppressContentEditableWarning={true}>
+              Claim Your Free Class Now
+            </span>
           </Button>
         </div>
       </section>
