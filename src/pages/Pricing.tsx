@@ -115,18 +115,22 @@ const Pricing = () => {
             </h2>
             <p className="text-lg text-gray-300 max-w-2xl mx-auto mb-8">All plans include access to our supportive community and expert instruction</p>
             
-            <div className="flex items-center justify-center gap-4 mb-8">
-              <span className={`text-sm font-medium ${!isCommitted ? 'text-white' : 'text-gray-400'}`}>
+            <div className="flex items-center justify-center gap-6 mb-8">
+              <span className={`text-lg font-semibold transition-colors ${!isCommitted ? 'text-white' : 'text-gray-500'}`}>
                 Flexi
               </span>
-              <Toggle 
-                pressed={isCommitted}
-                onPressedChange={setIsCommitted}
-                className="data-[state=on]:bg-primary"
-              />
-              <span className={`text-sm font-medium ${isCommitted ? 'text-white' : 'text-gray-400'}`}>
+              <div className="relative">
+                <Toggle 
+                  pressed={isCommitted}
+                  onPressedChange={setIsCommitted}
+                  className="h-8 w-16 rounded-full bg-gray-600 data-[state=on]:bg-gradient-to-r data-[state=on]:from-green-500 data-[state=on]:to-emerald-500 transition-all duration-300 relative"
+                >
+                  <div className={`absolute w-6 h-6 bg-white rounded-full transition-transform duration-300 ${isCommitted ? 'translate-x-8' : 'translate-x-1'}`} />
+                </Toggle>
+              </div>
+              <span className={`text-lg font-semibold transition-colors ${isCommitted ? 'text-white' : 'text-gray-500'}`}>
                 Committed 
-                <span className="text-green-400 ml-1">(save 10%)</span>
+                <span className="text-green-400 ml-2 text-sm font-medium">(save 10%)</span>
               </span>
             </div>
           </div>
