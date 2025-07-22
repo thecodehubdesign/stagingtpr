@@ -5,6 +5,7 @@ import Footer from '@/components/Footer';
 import { Button } from '@/components/ui/button';
 import { Card } from '@/components/ui/card';
 import { Badge } from '@/components/ui/badge';
+import { Accordion, AccordionContent, AccordionItem, AccordionTrigger } from '@/components/ui/accordion';
 import { CheckCircle, Share2, Star, ArrowLeft, Clock, MapPin, ChevronLeft, ChevronRight } from 'lucide-react';
 import { useEffect, useState } from 'react';
 
@@ -372,36 +373,42 @@ const ClassDetail = () => {
       {/* FAQ */}
       <section className="py-16 bg-gray-900">
         <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="text-center mb-12">
-            <h2 className="text-3xl font-bold text-white mb-4">
-              Frequently Asked <span className="gradient-text">Questions</span>
+          <div className="cyber-card p-8">
+            <h2 className="text-3xl font-bold gradient-text mb-6 text-center">
+              Frequently Asked Questions
             </h2>
-          </div>
-
-          <div className="space-y-6">
-            <Card className="cyber-card p-6">
-              <h3 className="text-lg font-bold text-white mb-2">What should I wear to class?</h3>
-              <p className="text-gray-300">
-                Wear shorts and a tank top or sports bra. Skin grip is essential for pole work. 
-                We recommend bringing a water bottle and small towel.
-              </p>
-            </Card>
             
-            <Card className="cyber-card p-6">
-              <h3 className="text-lg font-bold text-white mb-2">Is the first class really free?</h3>
-              <p className="text-gray-300">
-                Yes! All new students get their first Beginner Pole Foundations class completely free. 
-                No strings attached - just bring yourself and get ready to have fun.
-              </p>
-            </Card>
-            
-            <Card className="cyber-card p-6">
-              <h3 className="text-lg font-bold text-white mb-2">What if I'm not flexible or strong?</h3>
-              <p className="text-gray-300">
-                Perfect! This class is designed for absolute beginners. You'll build strength and 
-                flexibility naturally as you progress. Everyone starts somewhere.
-              </p>
-            </Card>
+            <Accordion type="single" collapsible className="space-y-4">
+              <AccordionItem value="item-0" className="border border-primary/20 rounded-lg px-4">
+                <AccordionTrigger className="text-left font-medium hover:text-primary">
+                  What should I wear to class?
+                </AccordionTrigger>
+                <AccordionContent className="text-muted-foreground">
+                  Wear shorts and a tank top or sports bra. Skin grip is essential for pole work. 
+                  We recommend bringing a water bottle and small towel.
+                </AccordionContent>
+              </AccordionItem>
+              
+              <AccordionItem value="item-1" className="border border-primary/20 rounded-lg px-4">
+                <AccordionTrigger className="text-left font-medium hover:text-primary">
+                  Is the first class really free?
+                </AccordionTrigger>
+                <AccordionContent className="text-muted-foreground">
+                  Yes! All new students get their first Beginner Pole Foundations class completely free. 
+                  No strings attached - just bring yourself and get ready to have fun.
+                </AccordionContent>
+              </AccordionItem>
+              
+              <AccordionItem value="item-2" className="border border-primary/20 rounded-lg px-4">
+                <AccordionTrigger className="text-left font-medium hover:text-primary">
+                  What if I'm not flexible or strong?
+                </AccordionTrigger>
+                <AccordionContent className="text-muted-foreground">
+                  Perfect! This class is designed for absolute beginners. You'll build strength and 
+                  flexibility naturally as you progress. Everyone starts somewhere.
+                </AccordionContent>
+              </AccordionItem>
+            </Accordion>
           </div>
         </div>
       </section>

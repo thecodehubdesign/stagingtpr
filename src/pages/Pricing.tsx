@@ -4,6 +4,7 @@ import Footer from '@/components/Footer';
 import { Button } from '@/components/ui/button';
 import { Card } from '@/components/ui/card';
 import { Badge } from '@/components/ui/badge';
+import { Accordion, AccordionContent, AccordionItem, AccordionTrigger } from '@/components/ui/accordion';
 import { Check, Star, Zap, Heart, Crown, Gift, Clock, Users } from 'lucide-react';
 
 const Pricing = () => {
@@ -282,36 +283,42 @@ const Pricing = () => {
       {/* FAQ Section */}
       <section className="py-20 bg-gray-800">
         <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="text-center mb-12">
-            <h2 className="text-3xl sm:text-4xl font-bold text-white mb-6">
-              Pricing <span className="gradient-text">FAQs</span>
+          <div className="cyber-card p-8">
+            <h2 className="text-3xl font-bold gradient-text mb-6 text-center">
+              Frequently Asked Questions
             </h2>
-          </div>
-
-          <div className="space-y-6">
-            <Card className="cyber-card p-6">
-              <h3 className="text-lg font-bold text-white mb-2">Can I freeze my membership?</h3>
-              <p className="text-gray-300">
-                Yes! Life happens. You can freeze your unlimited membership for up to 3 months per year 
-                for medical reasons, travel, or other circumstances.
-              </p>
-            </Card>
             
-            <Card className="cyber-card p-6">
-              <h3 className="text-lg font-bold text-white mb-2">What's your cancellation policy?</h3>
-              <p className="text-gray-300">
-                Monthly memberships require 30 days notice. Class packages are non-refundable but can be 
-                transferred to someone else with advance notice.
-              </p>
-            </Card>
-            
-            <Card className="cyber-card p-6">
-              <h3 className="text-lg font-bold text-white mb-2">Do you offer payment plans?</h3>
-              <p className="text-gray-300">
-                Yes! We offer payment plans for larger packages and can work with you to find 
-                a solution that fits your budget. Just ask our front desk team.
-              </p>
-            </Card>
+            <Accordion type="single" collapsible className="space-y-4">
+              <AccordionItem value="item-0" className="border border-primary/20 rounded-lg px-4">
+                <AccordionTrigger className="text-left font-medium hover:text-primary">
+                  Can I freeze my membership?
+                </AccordionTrigger>
+                <AccordionContent className="text-muted-foreground">
+                  Yes! Life happens. You can freeze your unlimited membership for up to 3 months per year 
+                  for medical reasons, travel, or other circumstances.
+                </AccordionContent>
+              </AccordionItem>
+              
+              <AccordionItem value="item-1" className="border border-primary/20 rounded-lg px-4">
+                <AccordionTrigger className="text-left font-medium hover:text-primary">
+                  What's your cancellation policy?
+                </AccordionTrigger>
+                <AccordionContent className="text-muted-foreground">
+                  Monthly memberships require 30 days notice. Class packages are non-refundable but can be 
+                  transferred to someone else with advance notice.
+                </AccordionContent>
+              </AccordionItem>
+              
+              <AccordionItem value="item-2" className="border border-primary/20 rounded-lg px-4">
+                <AccordionTrigger className="text-left font-medium hover:text-primary">
+                  Do you offer payment plans?
+                </AccordionTrigger>
+                <AccordionContent className="text-muted-foreground">
+                  Yes! We offer payment plans for larger packages and can work with you to find 
+                  a solution that fits your budget. Just ask our front desk team.
+                </AccordionContent>
+              </AccordionItem>
+            </Accordion>
           </div>
         </div>
       </section>

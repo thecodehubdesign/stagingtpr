@@ -3,6 +3,7 @@ import { useState } from 'react';
 import { Button } from '@/components/ui/button';
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card';
 import { Badge } from '@/components/ui/badge';
+import { Accordion, AccordionContent, AccordionItem, AccordionTrigger } from '@/components/ui/accordion';
 import { Collapsible, CollapsibleContent, CollapsibleTrigger } from '@/components/ui/collapsible';
 import { Calendar, MapPin, Clock, Star, Trophy, Sparkles, Camera, Users, Heart, ChevronDown, ChevronUp } from 'lucide-react';
 import Header from '@/components/Header';
@@ -382,37 +383,23 @@ const Events = () => {
       {/* FAQ Section */}
       <section className="py-20 px-4 sm:px-6 lg:px-8">
         <div className="max-w-4xl mx-auto">
-          <div className="text-center mb-16">
-            <h2 className="text-4xl font-bold gradient-text mb-4">
+          <div className="cyber-card p-8">
+            <h2 className="text-3xl font-bold gradient-text mb-6 text-center">
               Frequently Asked Questions
             </h2>
-            <p className="text-xl text-gray-400">
-              Everything you need to know about our events
-            </p>
-          </div>
-
-          <div className="space-y-4">
-            {faqs.map((faq, index) => (
-              <Collapsible key={index} open={openFaq === index}>
-                <CollapsibleTrigger asChild>
-                  <Button
-                    variant="ghost"
-                    className="w-full justify-between p-6 h-auto text-left hover:bg-gray-800/50 cyber-border"
-                    onClick={() => toggleFaq(index)}
-                  >
-                    <span className="text-lg font-semibold text-white">{faq.question}</span>
-                    {openFaq === index ? (
-                      <ChevronUp className="w-5 h-5 text-fuchsia-400" />
-                    ) : (
-                      <ChevronDown className="w-5 h-5 text-fuchsia-400" />
-                    )}
-                  </Button>
-                </CollapsibleTrigger>
-                <CollapsibleContent className="px-6 pb-6">
-                  <p className="text-gray-400 leading-relaxed">{faq.answer}</p>
-                </CollapsibleContent>
-              </Collapsible>
-            ))}
+            
+            <Accordion type="single" collapsible className="space-y-4">
+              {faqs.map((faq, index) => (
+                <AccordionItem key={index} value={`item-${index}`} className="border border-primary/20 rounded-lg px-4">
+                  <AccordionTrigger className="text-left font-medium hover:text-primary">
+                    {faq.question}
+                  </AccordionTrigger>
+                  <AccordionContent className="text-muted-foreground">
+                    {faq.answer}
+                  </AccordionContent>
+                </AccordionItem>
+              ))}
+            </Accordion>
           </div>
         </div>
       </section>

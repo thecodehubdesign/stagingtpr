@@ -486,27 +486,24 @@ const Franchise = () => {
       {/* FAQ Section */}
       <section className="py-20 bg-gray-900">
         <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="text-center mb-16">
-            <h2 className="text-3xl sm:text-4xl font-bold text-white mb-6">
-              Frequently Asked <span className="gradient-text">Questions</span>
+          <div className="cyber-card p-8">
+            <h2 className="text-3xl font-bold gradient-text mb-6 text-center">
+              Frequently Asked Questions
             </h2>
-            <p className="text-lg text-gray-300 max-w-2xl mx-auto">
-              Get answers to common questions about The Pole Room franchise opportunity.
-            </p>
+            
+            <Accordion type="single" collapsible className="space-y-4">
+              {faqs.map((faq, index) => (
+                <AccordionItem key={index} value={`item-${index}`} className="border border-primary/20 rounded-lg px-4">
+                  <AccordionTrigger className="text-left font-medium hover:text-primary">
+                    {faq.question}
+                  </AccordionTrigger>
+                  <AccordionContent className="text-muted-foreground">
+                    {faq.answer}
+                  </AccordionContent>
+                </AccordionItem>
+              ))}
+            </Accordion>
           </div>
-
-          <Accordion type="single" collapsible className="space-y-4">
-            {faqs.map((faq, index) => (
-              <AccordionItem key={index} value={`item-${index}`} className="cyber-card border-none">
-                <AccordionTrigger className="text-white hover:text-fuchsia-400 px-6 py-4">
-                  {faq.question}
-                </AccordionTrigger>
-                <AccordionContent className="text-gray-300 px-6 pb-4">
-                  {faq.answer}
-                </AccordionContent>
-              </AccordionItem>
-            ))}
-          </Accordion>
         </div>
       </section>
 
