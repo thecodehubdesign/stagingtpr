@@ -4,7 +4,7 @@ import { Label } from '@/components/ui/label';
 import { RadioGroup, RadioGroupItem } from '@/components/ui/radio-group';
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 import { Input } from '@/components/ui/input';
-import { ArrowLeft, Clock, Calendar, Users, CreditCard, Phone, Eye } from 'lucide-react';
+import { ArrowLeft, Clock, Calendar, Users, CreditCard } from 'lucide-react';
 import { VoucherFormData } from '../VoucherClaimForm';
 import CountdownTimer from '../CountdownTimer';
 interface VoucherStep3Props {
@@ -21,7 +21,6 @@ const VoucherStep3 = ({
 }: VoucherStep3Props) => {
   const [selectedClassId, setSelectedClassId] = useState<string>('');
   const [showCreditCardForm, setShowCreditCardForm] = useState(false);
-  const [showAllClasses, setShowAllClasses] = useState(false);
   const [creditCardData, setCreditCardData] = useState({
     cardNumber: '',
     expiryDate: '',
@@ -90,7 +89,6 @@ const VoucherStep3 = ({
     return baseClasses;
   };
   const upcomingClasses = getUpcomingClasses();
-  const displayedClasses = showAllClasses ? upcomingClasses : upcomingClasses.slice(0, 3);
   const handleClassSelection = (classId: string) => {
     setSelectedClassId(classId);
     setShowCreditCardForm(true);
@@ -114,27 +112,10 @@ const VoucherStep3 = ({
   const canProceed = selectedClassId && showCreditCardForm && creditCardData.cardNumber && creditCardData.expiryDate && creditCardData.cvv && creditCardData.nameOnCard;
   return <form onSubmit={handleSubmit} className="space-y-6">
       <div>
-        <div className="flex items-center gap-2 mb-2">
-          <h3 className="text-lg font-semibold gradient-text">
-            Upcoming Free Trial Classes at
-          </h3>
-          <span className="bg-primary/20 px-3 py-1 rounded-full border border-primary/30 text-primary text-sm font-medium">
-            {formData.studioLocation} Studio
-          </span>
-        </div>
-        <p className="text-sm mb-4 text-muted-foreground">
-          These classes are based on your preferences in Step 1. 
-          <button 
-            type="button" 
-            className="text-primary hover:underline ml-1"
-            onClick={() => {/* Navigate to all classes */}}
-          >
-            Click here to view all available free trial classes.
-          </button>
-        </p>
-        <p className="text-sm mb-6 text-muted-foreground">
-          Free trial classes cannot be booked more than 4 days ahead of time. To secure your spot please select your preferred class and complete final details.
-        </p>
+        <h3 className="text-lg font-semibold mb-2 gradient-text">
+          Upcoming Free Trial Classes at {formData.studioLocation}
+        </h3>
+        <p className="mb-6 text-muted-foreground text-2xl text-left">The schedule shows the upcoming Free Trial classes. Free trial classes cannot be booked anymore than 4 days ahead of time. To secure your spot please select your preferred class and complete final details. </p>
       </div>
 
       {!showCreditCardForm && <div className="space-y-4">
@@ -144,8 +125,7 @@ const VoucherStep3 = ({
             </p>
           </div>
 
-          {displayedClasses.map(classItem => 
-            <Card key={classItem.id} className="cyber-card hover:bg-card/80 transition-all duration-200 cursor-pointer" onClick={() => handleClassSelection(classItem.id)}>
+          {upcomingClasses.map(classItem => <Card key={classItem.id} className="cyber-card hover:bg-card/80 transition-all duration-200 cursor-pointer" onClick={() => handleClassSelection(classItem.id)}>
               <CardContent className="p-4">
                 <div className="space-y-3">
                   {/* Header with title and spots */}
@@ -189,52 +169,11 @@ const VoucherStep3 = ({
 
                   {/* Countdown or days info */}
                   <div className="text-sm text-white">
-                    {classItem.daysFromNow === 0 ? (
-                      <CountdownTimer targetTime={classItem.time} className="text-white font-medium" />
-                    ) : (
-                      `Starts in ${classItem.daysFromNow} days`
-                    )}
+                    {classItem.daysFromNow === 0 ? <CountdownTimer targetTime={classItem.time} className="text-white font-medium" /> : `Starts in ${classItem.daysFromNow} days`}
                   </div>
                 </div>
               </CardContent>
-            </Card>
-          )}
-
-          {/* Show more/less button */}
-          {upcomingClasses.length > 3 && (
-            <div className="flex justify-center mt-4">
-              <Button
-                type="button"
-                variant="outline"
-                onClick={() => setShowAllClasses(!showAllClasses)}
-                className="flex items-center space-x-2 cyber-border bg-card/30 hover:bg-card/50 text-white"
-              >
-                <Eye className="w-4 h-4" />
-                <span>{showAllClasses ? 'Show Less' : `Show All ${upcomingClasses.length} Classes`}</span>
-              </Button>
-            </div>
-          )}
-
-          {/* Enrollment specialist call option */}
-          <div className="cyber-border bg-accent/10 rounded-lg p-4 mt-6">
-            <div className="flex items-start space-x-3">
-              <Phone className="w-5 h-5 text-primary mt-0.5" />
-              <div>
-                <h4 className="font-semibold text-foreground mb-2">Need Help Choosing?</h4>
-                <p className="text-sm text-muted-foreground mb-3">
-                  Book a call with one of our enrollment specialists to discuss other options and find the perfect class for you.
-                </p>
-                <Button
-                  type="button"
-                  variant="outline"
-                  className="cyber-border bg-primary/10 hover:bg-primary/20 text-primary border-primary/30"
-                >
-                  <Phone className="w-4 h-4 mr-2" />
-                  Book Enrollment Call
-                </Button>
-              </div>
-            </div>
-          </div>
+            </Card>)}
         </div>}
 
       {showCreditCardForm && <div className="space-y-6">
