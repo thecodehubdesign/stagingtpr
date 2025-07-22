@@ -92,15 +92,25 @@ const Pricing = () => {
       <section className="pt-20 pb-16 bg-gradient-to-br from-gray-900 via-purple-900 to-gray-900 cyber-grid">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="text-center animate-fade-in">
-            <h1 className="text-4xl sm:text-6xl font-bold gradient-text neon-glow mb-6">
+            <h1 
+              className="text-4xl sm:text-6xl font-bold gradient-text neon-glow mb-6"
+              contentEditable
+              suppressContentEditableWarning={true}
+            >
               Pricing & Packages
             </h1>
-            <p className="text-xl text-gray-300 max-w-3xl mx-auto leading-relaxed mb-8">
+            <p 
+              className="text-xl text-gray-300 max-w-3xl mx-auto leading-relaxed mb-8"
+              contentEditable
+              suppressContentEditableWarning={true}
+            >
               Flexible options designed to fit your schedule and goals. 
               Start your transformation journey with our New Student Special!
             </p>
             <Button className="neon-button text-black font-bold text-lg px-8 py-3">
-              Claim Your Free Class
+              <span contentEditable suppressContentEditableWarning={true}>
+                Claim Your Free Class
+              </span>
             </Button>
           </div>
         </div>
@@ -110,10 +120,20 @@ const Pricing = () => {
       <section className="py-20 bg-gray-900">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="text-center mb-16">
-            <h2 className="text-3xl sm:text-4xl font-bold text-white mb-6">
+            <h2 
+              className="text-3xl sm:text-4xl font-bold text-white mb-6"
+              contentEditable
+              suppressContentEditableWarning={true}
+            >
               Choose Your <span className="gradient-text">Membership</span>
             </h2>
-            <p className="text-lg text-gray-300 max-w-2xl mx-auto mb-8">All plans include access to our supportive community and expert instruction</p>
+            <p 
+              className="text-lg text-gray-300 max-w-2xl mx-auto mb-8"
+              contentEditable
+              suppressContentEditableWarning={true}
+            >
+              All plans include access to our supportive community and expert instruction
+            </p>
             
             <div className="flex items-center justify-center gap-6 mb-8">
               <span className={`text-lg font-semibold transition-colors ${!isCommitted ? 'text-white' : 'text-gray-500'}`}>
@@ -176,10 +196,18 @@ const Pricing = () => {
       <section className="py-20 bg-gray-800">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="text-center mb-16">
-            <h2 className="text-3xl sm:text-4xl font-bold text-white mb-6">
+            <h2 
+              className="text-3xl sm:text-4xl font-bold text-white mb-6"
+              contentEditable
+              suppressContentEditableWarning={true}
+            >
               Special <span className="gradient-text">Offers</span>
             </h2>
-            <p className="text-lg text-gray-300 max-w-2xl mx-auto">
+            <p 
+              className="text-lg text-gray-300 max-w-2xl mx-auto"
+              contentEditable
+              suppressContentEditableWarning={true}
+            >
               Save money and bring friends along for the journey
             </p>
           </div>
@@ -204,10 +232,18 @@ const Pricing = () => {
       <section className="py-20 bg-gray-900">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="text-center mb-16">
-            <h2 className="text-3xl sm:text-4xl font-bold text-white mb-6">
+            <h2 
+              className="text-3xl sm:text-4xl font-bold text-white mb-6"
+              contentEditable
+              suppressContentEditableWarning={true}
+            >
               Add-Ons & <span className="gradient-text">Extras</span>
             </h2>
-            <p className="text-lg text-gray-300 max-w-2xl mx-auto">
+            <p 
+              className="text-lg text-gray-300 max-w-2xl mx-auto"
+              contentEditable
+              suppressContentEditableWarning={true}
+            >
               Enhance your training with specialized sessions and workshops
             </p>
           </div>
@@ -239,15 +275,25 @@ const Pricing = () => {
           <div className="bg-white/10 rounded-full w-20 h-20 flex items-center justify-center mx-auto mb-6">
             <Check className="w-10 h-10 text-white" />
           </div>
-          <h2 className="text-3xl sm:text-4xl font-bold text-white mb-6">
+          <h2 
+            className="text-3xl sm:text-4xl font-bold text-white mb-6"
+            contentEditable
+            suppressContentEditableWarning={true}
+          >
             100% Satisfaction Guarantee
           </h2>
-          <p className="text-lg text-green-100 mb-8 max-w-2xl mx-auto">
+          <p 
+            className="text-lg text-green-100 mb-8 max-w-2xl mx-auto"
+            contentEditable
+            suppressContentEditableWarning={true}
+          >
             If you're not completely satisfied with your first month, we'll refund your money. 
             We're confident you'll love our community and see real results.
           </p>
           <Button className="neon-button text-black font-bold text-lg px-8 py-3">
-            Start Risk-Free Today
+            <span contentEditable suppressContentEditableWarning={true}>
+              Start Risk-Free Today
+            </span>
           </Button>
         </div>
       </section>
@@ -256,7 +302,11 @@ const Pricing = () => {
       <section className="py-20 bg-gray-800">
         <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="cyber-card p-8">
-            <h2 className="text-3xl font-bold gradient-text mb-6 text-center">
+            <h2 
+              className="text-3xl font-bold gradient-text mb-6 text-center"
+              contentEditable
+              suppressContentEditableWarning={true}
+            >
               Frequently Asked Questions
             </h2>
             
@@ -299,15 +349,25 @@ const Pricing = () => {
       <section className="py-20 bg-gradient-to-r from-fuchsia-600 to-purple-600">
         <div className="max-w-4xl mx-auto text-center px-4 sm:px-6 lg:px-8">
           <Zap className="w-16 h-16 text-white mx-auto mb-6 pulse-neon" />
-          <h2 className="text-3xl sm:text-4xl font-bold text-white mb-6">
+          <h2 
+            className="text-3xl sm:text-4xl font-bold text-white mb-6"
+            contentEditable
+            suppressContentEditableWarning={true}
+          >
             Ready to Transform Your Life?
           </h2>
-          <p className="text-lg text-purple-100 mb-8 max-w-2xl mx-auto">
+          <p 
+            className="text-lg text-purple-100 mb-8 max-w-2xl mx-auto"
+            contentEditable
+            suppressContentEditableWarning={true}
+          >
             Don't wait another day to start your journey. Your first class is free, 
             and your transformation starts the moment you walk through our doors.
           </p>
           <Button className="neon-button text-black font-bold text-lg px-8 py-3">
-            Claim Your Free Class Now
+            <span contentEditable suppressContentEditableWarning={true}>
+              Claim Your Free Class Now
+            </span>
           </Button>
         </div>
       </section>
