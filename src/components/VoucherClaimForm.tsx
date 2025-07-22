@@ -13,7 +13,7 @@ export interface VoucherFormData {
   phone: string;
   email: string;
   studioLocation: string;
-  program: string;
+  programs: string[];
   agreeToTerms: boolean;
 
   // Step 2 - About You
@@ -35,7 +35,7 @@ const VoucherClaimForm = () => {
     phone: '',
     email: '',
     studioLocation: '',
-    program: '',
+    programs: [],
     agreeToTerms: false,
     goals: [],
     howHeardAboutUs: '',
@@ -73,7 +73,7 @@ const VoucherClaimForm = () => {
       phone: '',
       email: '',
       studioLocation: '',
-      program: '',
+      programs: [],
       agreeToTerms: false,
       goals: [],
       howHeardAboutUs: '',

@@ -2,7 +2,7 @@ import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
 import { Label } from '@/components/ui/label';
 import { Checkbox } from '@/components/ui/checkbox';
-import { RadioGroup, RadioGroupItem } from '@/components/ui/radio-group';
+
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '@/components/ui/select';
 import { VoucherFormData } from '../VoucherClaimForm';
 interface VoucherStep1Props {
@@ -19,11 +19,8 @@ const VoucherStep1 = ({
   const programs = ['Pole Dance', 'Aerial Silks', 'Aerial Lyra/Hoop', 'Other Aerials'];
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
-    if (formData.name && formData.email && formData.phone && formData.studioLocation && formData.program && formData.agreeToTerms) {
-      onNext();
-    }
+    onNext();
   };
-  const isFormValid = formData.name && formData.email && formData.phone && formData.studioLocation && formData.program && formData.agreeToTerms;
   return <form onSubmit={handleSubmit} className="space-y-6">
       <div>
         <h3 className="mb-4 text-3xl font-bold text-rose-600">
@@ -37,34 +34,34 @@ const VoucherStep1 = ({
       <div className="space-y-4">
         <div>
           <Label htmlFor="name" className="text-sm font-medium text-white-700">
-            Full Name *
+            Full Name
           </Label>
           <Input id="name" type="text" value={formData.name} onChange={e => updateFormData({
           name: e.target.value
-        })} className="mt-1" required />
+        })} className="mt-1" />
         </div>
 
         <div>
           <Label htmlFor="email" className="text-sm font-medium text-white-700">
-            Email Address *
+            Email Address
           </Label>
           <Input id="email" type="email" value={formData.email} onChange={e => updateFormData({
           email: e.target.value
-        })} className="mt-1" required />
+        })} className="mt-1" />
         </div>
 
         <div>
           <Label htmlFor="phone" className="text-sm font-medium text-white-700">
-            Phone Number *
+            Phone Number
           </Label>
           <Input id="phone" type="tel" value={formData.phone} onChange={e => updateFormData({
           phone: e.target.value
-        })} className="mt-1" required />
+        })} className="mt-1" />
         </div>
 
         <div>
           <Label className="text-sm font-medium text-white-700 mb-3 block">
-            Preferred Studio Location *
+            Preferred Studio Location
           </Label>
           <Select value={formData.studioLocation} onValueChange={value => updateFormData({
           studioLocation: value
@@ -82,16 +79,26 @@ const VoucherStep1 = ({
 
         <div>
           <Label className="text-sm font-medium text-white-700 mb-3 block">
-            Program Interest *
+            Program Interest (select all that apply)
           </Label>
-          <RadioGroup value={formData.program} onValueChange={value => updateFormData({
-          program: value
-        })} className="space-y-2">
-            {programs.map(program => <div key={program} className="flex items-center space-x-2">
-                <RadioGroupItem value={program} id={program} />
+          <div className="space-y-2">
+            {programs.map((program) => (
+              <div key={program} className="flex items-center space-x-2">
+                <Checkbox
+                  id={program}
+                  checked={formData.programs.includes(program)}
+                  onCheckedChange={(checked) => {
+                    if (checked) {
+                      updateFormData({ programs: [...formData.programs, program] });
+                    } else {
+                      updateFormData({ programs: formData.programs.filter(p => p !== program) });
+                    }
+                  }}
+                />
                 <Label htmlFor={program} className="text-sm">{program}</Label>
-              </div>)}
-          </RadioGroup>
+              </div>
+            ))}
+          </div>
         </div>
 
         <div className="flex items-start space-x-2 pt-4">
@@ -99,12 +106,12 @@ const VoucherStep1 = ({
           agreeToTerms: checked as boolean
         })} />
           <Label htmlFor="terms" className="text-sm text-white-600 leading-tight">
-            I agree to the Terms of Service and Privacy Policy. I understand this is a special offer voucher and consent to being contacted about my offer. *
+            I agree to the Terms of Service and Privacy Policy. I understand this is a special offer voucher and consent to being contacted about my offer.
           </Label>
         </div>
       </div>
 
-      <Button type="submit" disabled={!isFormValid} className="w-full bg-gradient-to-r from-rose-500 to-purple-600 hover:from-rose-600 hover:to-purple-700 font-normal">
+      <Button type="submit" className="w-full bg-gradient-to-r from-rose-500 to-purple-600 hover:from-rose-600 hover:to-purple-700 font-normal">
         Continue to Next Step
       </Button>
     </form>;
