@@ -4,17 +4,18 @@ import { Button } from '@/components/ui/button';
 import { Card } from '@/components/ui/card';
 import { Badge } from '@/components/ui/badge';
 import { Accordion, AccordionContent, AccordionItem, AccordionTrigger } from '@/components/ui/accordion';
-import { Check, Star, Zap, Heart, Crown, Gift, Clock, Users } from 'lucide-react';
+import { Check, Star, Zap, Heart, Crown, Gift, Clock, Users, FileText } from 'lucide-react';
 import { Toggle } from '@/components/ui/toggle';
+import { Dialog, DialogContent, DialogHeader, DialogTitle, DialogTrigger } from '@/components/ui/dialog';
 import { useState } from 'react';
 
 const Pricing = () => {
   const [isCommitted, setIsCommitted] = useState(false);
 
   const membershipPlans = [{
-    name: "Drop-In",
-    flexiPrice: "$35",
-    committedPrice: "$32",
+    name: "Drop In Session",
+    flexiPrice: "$42",
+    committedPrice: "$42",
     period: "per class",
     description: "Perfect for trying us out or occasional visits",
     features: ["Access to any class", "No commitment", "Valid for 30 days", "Can be used at any studio"],
@@ -22,19 +23,19 @@ const Pricing = () => {
     icon: Zap,
     color: "from-gray-500 to-gray-600"
   }, {
-    name: "Starter Pack",
-    flexiPrice: "$99",
-    committedPrice: "$89",
-    period: "4 classes",
-    description: "Great for new students to explore different class types",
-    features: ["4 classes to use anytime", "Valid for 6 weeks", "Mix and match any classes", "All studio locations", "Free grip aids included"],
+    name: "Casual Flyer",
+    flexiPrice: "$59",
+    committedPrice: "$53.10",
+    period: "per month",
+    description: "Great for regular students who want flexibility",
+    features: ["8 classes per month", "Valid for 6 weeks", "Mix and match any classes", "All studio locations", "Free grip aids included"],
     popular: true,
     icon: Heart,
     color: "from-fuchsia-500 to-purple-600"
   }, {
-    name: "Unlimited Monthly",
-    flexiPrice: "$149",
-    committedPrice: "$134",
+    name: "High Flyer",
+    flexiPrice: "$99",
+    committedPrice: "$89.10",
     period: "per month",
     description: "Best value for committed students",
     features: ["Unlimited classes", "All class types included", "All studio locations", "Priority booking", "10% off workshops", "Guest pass (1 per month)"],
@@ -184,9 +185,64 @@ const Pricing = () => {
                     </div>)}
                 </div>
 
-                <Button className={`w-full ${plan.popular ? 'neon-button text-black font-bold' : 'bg-gradient-to-r from-gray-600 to-gray-700 hover:from-gray-500 hover:to-gray-600'}`}>
+                <Button className={`w-full ${plan.popular ? 'neon-button text-black font-bold' : 'bg-gradient-to-r from-gray-600 to-gray-700 hover:from-gray-500 hover:to-gray-600'} mb-4`}>
                   {plan.popular ? 'Get Started' : 'Choose Plan'}
                 </Button>
+                
+                <Dialog>
+                  <DialogTrigger asChild>
+                    <button className="w-full text-gray-400 hover:text-white text-sm underline flex items-center justify-center gap-2 transition-colors">
+                      <FileText className="w-4 h-4" />
+                      Terms & Conditions
+                    </button>
+                  </DialogTrigger>
+                  <DialogContent className="max-w-4xl max-h-[80vh] overflow-y-auto bg-gray-900 text-white border-gray-700">
+                    <DialogHeader>
+                      <DialogTitle className="text-2xl font-bold gradient-text">Terms & Conditions</DialogTitle>
+                    </DialogHeader>
+                    <div className="space-y-6 text-gray-300">
+                      <div>
+                        <h3 className="text-lg font-semibold text-white mb-2">Membership Terms</h3>
+                        <ul className="list-disc list-inside space-y-1 text-sm">
+                          <li>All memberships are subject to a 12-month minimum commitment for committed pricing</li>
+                          <li>Flexi memberships can be cancelled with 30 days notice</li>
+                          <li>Class packages are valid for the specified period and cannot be extended</li>
+                          <li>All sales are final and non-refundable except as required by law</li>
+                        </ul>
+                      </div>
+                      
+                      <div>
+                        <h3 className="text-lg font-semibold text-white mb-2">Class Policies</h3>
+                        <ul className="list-disc list-inside space-y-1 text-sm">
+                          <li>Classes must be booked in advance through our booking system</li>
+                          <li>24-hour cancellation notice required to avoid losing your class credit</li>
+                          <li>Late arrivals (more than 10 minutes) may not be admitted for safety reasons</li>
+                          <li>Make-up classes are subject to availability</li>
+                        </ul>
+                      </div>
+                      
+                      <div>
+                        <h3 className="text-lg font-semibold text-white mb-2">Health & Safety</h3>
+                        <ul className="list-disc list-inside space-y-1 text-sm">
+                          <li>Medical clearance may be required for certain conditions</li>
+                          <li>Students participate at their own risk and must sign a waiver</li>
+                          <li>Appropriate attire is required for all classes</li>
+                          <li>No jewelry or loose clothing permitted during apparatus work</li>
+                        </ul>
+                      </div>
+                      
+                      <div>
+                        <h3 className="text-lg font-semibold text-white mb-2">Pricing & Payment</h3>
+                        <ul className="list-disc list-inside space-y-1 text-sm">
+                          <li>Prices are subject to change with 30 days notice</li>
+                          <li>Payment is due in advance for all services</li>
+                          <li>Student discounts require valid student ID verification</li>
+                          <li>Promotional offers cannot be combined unless stated otherwise</li>
+                        </ul>
+                      </div>
+                    </div>
+                  </DialogContent>
+                </Dialog>
               </Card>)}
           </div>
         </div>
