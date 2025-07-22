@@ -119,11 +119,7 @@ const VoucherStep3 = ({
         </h3>
         <p className="text-sm mb-4 text-muted-foreground">
           These classes are based on your preferences in Step 1. 
-          <button 
-            type="button" 
-            className="text-primary hover:underline ml-1"
-            onClick={() => {/* Navigate to all classes */}}
-          >
+          <button type="button" className="text-primary hover:underline ml-1" onClick={() => {/* Navigate to all classes */}}>
             Click here to view all available free trial classes.
           </button>
         </p>
@@ -139,8 +135,7 @@ const VoucherStep3 = ({
             </p>
           </div>
 
-          {displayedClasses.map(classItem => 
-            <Card key={classItem.id} className="cyber-card hover:bg-card/80 transition-all duration-200 cursor-pointer" onClick={() => handleClassSelection(classItem.id)}>
+          {displayedClasses.map(classItem => <Card key={classItem.id} className="cyber-card hover:bg-card/80 transition-all duration-200 cursor-pointer" onClick={() => handleClassSelection(classItem.id)}>
               <CardContent className="p-4">
                 <div className="space-y-3">
                   {/* Header with title and spots */}
@@ -185,31 +180,19 @@ const VoucherStep3 = ({
 
                   {/* Countdown or days info */}
                   <div className="text-sm text-white">
-                    {classItem.daysFromNow === 0 ? (
-                      <CountdownTimer targetTime={classItem.time} className="text-white font-medium" />
-                    ) : (
-                      `Starts in ${classItem.daysFromNow} days`
-                    )}
+                    {classItem.daysFromNow === 0 ? <CountdownTimer targetTime={classItem.time} className="text-white font-medium" /> : `Starts in ${classItem.daysFromNow} days`}
                   </div>
                 </div>
               </CardContent>
-            </Card>
-          )}
+            </Card>)}
 
           {/* Show more/less button */}
-          {upcomingClasses.length > 3 && (
-            <div className="flex justify-center mt-4">
-              <Button
-                type="button"
-                variant="outline"
-                onClick={() => setShowAllClasses(!showAllClasses)}
-                className="flex items-center space-x-2 cyber-border bg-card/30 hover:bg-card/50 text-white"
-              >
+          {upcomingClasses.length > 3 && <div className="flex justify-center mt-4">
+              <Button type="button" variant="outline" onClick={() => setShowAllClasses(!showAllClasses)} className="flex items-center space-x-2 cyber-border bg-card/30 hover:bg-card/50 text-white">
                 <Eye className="w-4 h-4" />
                 <span>{showAllClasses ? 'Show Less' : `Show All ${upcomingClasses.length} Classes`}</span>
               </Button>
-            </div>
-          )}
+            </div>}
 
           {/* Enrollment specialist call option */}
           <div className="cyber-border bg-accent/10 rounded-lg p-4 mt-6">
@@ -220,11 +203,7 @@ const VoucherStep3 = ({
                 <p className="text-sm text-muted-foreground mb-3">
                   Book a call with one of our enrollment specialists to discuss other options and find the perfect class for you.
                 </p>
-                <Button
-                  type="button"
-                  variant="outline"
-                  className="cyber-border bg-primary/10 hover:bg-primary/20 text-primary border-primary/30"
-                >
+                <Button type="button" variant="outline" className="cyber-border bg-primary/10 hover:bg-primary/20 text-primary border-primary/30">
                   <Phone className="w-4 h-4 mr-2" />
                   Book Enrollment Call
                 </Button>
@@ -239,7 +218,7 @@ const VoucherStep3 = ({
               <CreditCard className="w-5 h-5 text-primary mt-0.5" />
               <div>
                 <h4 className="font-semibold text-foreground mb-2">Credit Card Required</h4>
-                <p className="text-sm text-muted-foreground mb-2">
+                <p className="text-sm mb-2 text-zinc-50">
                   In order for the reservation to be held, CC details must be provided. 
                   In the case of a no-show the full cost of the session will be passed along.
                 </p>
