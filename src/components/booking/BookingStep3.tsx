@@ -204,6 +204,31 @@ const BookingStep3 = ({
           </div>}
       </div>
 
+      {canProceed && (
+        <div className="border border-gray-200 rounded-lg p-4 bg-gray-50">
+          <h4 className="font-medium text-gray-900 mb-3">Order Summary</h4>
+          <div className="space-y-2">
+            <div className="flex justify-between">
+              <span className="text-gray-600">Class Session</span>
+              <span className="text-gray-900">$42.00</span>
+            </div>
+            <div className="flex justify-between text-green-600">
+              <span>Free Trial Discount</span>
+              <span>-$42.00</span>
+            </div>
+            <div className="border-t pt-2">
+              <div className="flex justify-between font-semibold text-lg">
+                <span>Total</span>
+                <span className="text-green-600">$0.00</span>
+              </div>
+            </div>
+          </div>
+          <p className="text-xs text-gray-500 mt-2">
+            Your first class is completely free - no payment required!
+          </p>
+        </div>
+      )}
+
       <div className="flex space-x-4">
         <Button type="button" variant="outline" onClick={onPrev} className="flex items-center space-x-2">
           <ArrowLeft className="w-4 h-4" />
