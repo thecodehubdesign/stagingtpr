@@ -22,6 +22,9 @@ import Checkout from "./pages/Checkout";
 import GetStarted from "./pages/GetStarted";
 import Contact from "./pages/Contact";
 import HensParties from "./pages/HensParties";
+import PurePoleeDance from "./pages/PurePoleeDance";
+import FrontSplitsMasterclass from "./pages/FrontSplitsMasterclass";
+import DanceFilthy from "./pages/DanceFilthy";
 import NotFound from "./pages/NotFound";
 
 const queryClient = new QueryClient();
@@ -51,6 +54,9 @@ const App = () => (
           <Route path="/get-started" element={<GetStarted />} />
           <Route path="/contact" element={<Contact />} />
           <Route path="/hens-parties" element={<HensParties />} />
+          <Route path="/classes/pure-pole-dance" element={<PurePoleeDance />} />
+          <Route path="/classes/front-splits-masterclass" element={<FrontSplitsMasterclass />} />
+          <Route path="/classes/dance-filthy" element={<DanceFilthy />} />
           <Route path="*" element={<NotFound />} />
         </Routes>
       </BrowserRouter>
