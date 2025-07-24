@@ -21,6 +21,7 @@ import Products from "./pages/Products";
 import Checkout from "./pages/Checkout";
 import GetStarted from "./pages/GetStarted";
 import Contact from "./pages/Contact";
+import HensParties from "./pages/HensParties";
 import NotFound from "./pages/NotFound";
 
 const queryClient = new QueryClient();
@@ -49,6 +50,7 @@ const App = () => (
           <Route path="/checkout" element={<Checkout />} />
           <Route path="/get-started" element={<GetStarted />} />
           <Route path="/contact" element={<Contact />} />
+          <Route path="/hens-parties" element={<HensParties />} />
           <Route path="*" element={<NotFound />} />
         </Routes>
       </BrowserRouter>

@@ -30,6 +30,7 @@ const Header = () => {
     { name: 'Instructors', href: '/instructors', description: 'Meet our amazing team of certified instructors' },
     { name: 'Pricing', href: '/pricing', description: 'Flexible packages and membership options' },
     { name: 'Events', href: '/events', description: 'Competitions, showcases, and community events' },
+    { name: 'Hens Parties', href: '/hens-parties', description: 'Perfect celebration experience for your special day' },
     { name: 'Franchise', href: '/franchise', description: 'Join the movement and open your own studio' },
     { name: 'Blog', href: '/blog', description: 'Tips, stories, and inspiration from our community' },
     { name: 'Contact', href: '/contact', description: 'Get in touch with questions or to book a class' },
