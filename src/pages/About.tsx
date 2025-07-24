@@ -7,8 +7,10 @@ import SectionNavigation from '@/components/SectionNavigation';
 import { Button } from '@/components/ui/button';
 import { Card } from '@/components/ui/card';
 import { Heart, Zap, Users, Trophy, Star, Target } from 'lucide-react';
+import { useScrollToTop } from '@/hooks/useScrollToTop';
 
 const About = () => {
+  useScrollToTop();
   const sections = [
     { id: 'hero', label: 'About' },
     { id: 'founder', label: 'Founder' },

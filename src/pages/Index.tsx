@@ -8,8 +8,10 @@ import StudioLocations from '@/components/StudioLocations';
 import { PremiumTestimonials } from '@/components/ui/premium-testimonials';
 import Footer from '@/components/Footer';
 import SectionNavigation from '@/components/SectionNavigation';
+import { useScrollToTop } from '@/hooks/useScrollToTop';
 
 const Index = () => {
+  useScrollToTop();
   const sections = [
     { id: 'hero', label: 'Home' },
     { id: 'video', label: 'Video' },

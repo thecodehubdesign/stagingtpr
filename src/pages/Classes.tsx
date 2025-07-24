@@ -9,7 +9,9 @@ import { Clock, Users, Search, Filter, MapPin, GraduationCap, X, Wifi, Coffee, C
 import { Tooltip, TooltipContent, TooltipProvider, TooltipTrigger } from '@/components/ui/tooltip';
 import { Link, useSearchParams } from 'react-router-dom';
 import { useState, useMemo, useEffect } from 'react';
+import { useScrollToTop } from '@/hooks/useScrollToTop';
 const Classes = () => {
+  useScrollToTop();
   const [searchParams, setSearchParams] = useSearchParams();
   
   // State for search and filters - initialize from URL params

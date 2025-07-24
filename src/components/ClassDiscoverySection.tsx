@@ -5,7 +5,7 @@ import { motion } from "framer-motion";
 import { MapPin, Clock, Users, Star, Heart, Zap, Sparkles } from "lucide-react";
 import SectionHeader from '@/components/ui/section-header';
 import PoleTypeQuizModal from '@/components/PoleTypeQuizModal';
-import { Link } from 'react-router-dom';
+
 
 const ClassDiscoverySection = () => {
   const programTypes = [
@@ -150,9 +150,9 @@ const ClassDiscoverySection = () => {
                     asChild
                     className="w-full neon-button"
                   >
-                    <Link to={program.href}>
+                    <a href={program.href}>
                       View {program.title}
-                    </Link>
+                    </a>
                   </Button>
                 </div>
               </motion.div>

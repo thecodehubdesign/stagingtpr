@@ -9,8 +9,10 @@ import { MapPin, Clock, Users, Star, PartyPopper, Sparkles, Heart } from 'lucide
 import SectionHeader from '@/components/ui/section-header';
 import Footer from '@/components/Footer';
 import Header from '@/components/Header';
+import { useScrollToTop } from '@/hooks/useScrollToTop';
 
 const HensParties = () => {
+  useScrollToTop();
   const [formData, setFormData] = useState({
     fullName: '',
     numberOfPeople: '',

@@ -7,7 +7,10 @@ import { Button } from '@/components/ui/button';
 import { Card } from '@/components/ui/card';
 import { MapPin, Users, Wifi, Coffee, Car } from 'lucide-react';
 import FreeTrialBookingForm from '@/components/FreeTrialBookingForm';
+import { useScrollToTop } from '@/hooks/useScrollToTop';
+
 const Studios = () => {
+  useScrollToTop();
   const sections = [{
     id: 'hero',
     label: 'Studios'
