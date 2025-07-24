@@ -12,7 +12,7 @@ const ClassDiscoverySection = () => {
     {
       title: "Pole Classes",
       description: "Master the art of pole dancing with strength, grace, and confidence. From beginner spins to advanced tricks, our pole classes build both physical and mental strength while empowering you to express your unique style.",
-      image: "/lovable-uploads/d97f60e6-9bb0-46b6-a9cc-aaa13ede7d4b.png",
+      image: "/lovable-uploads/edc9bcfc-2538-4cb8-a3bb-76e663dbdaa7.png",
       icon: Zap,
       locations: "6 Locations",
       classTypes: "15 Class Types", 
@@ -23,7 +23,7 @@ const ClassDiscoverySection = () => {
     {
       title: "Aerial Classes", 
       description: "Soar through the air with silks, hoops, and hammocks. Our aerial classes combine artistry with athleticism, building upper body strength while creating beautiful flowing movements that defy gravity.",
-      image: "/lovable-uploads/ecb5bd9c-6055-4d41-8797-bbb506648a5b.png",
+      image: "/lovable-uploads/c618da64-e3a8-4e28-a461-697581921ed0.png",
       icon: Sparkles,
       locations: "4 Locations",
       classTypes: "8 Class Types",
@@ -34,7 +34,7 @@ const ClassDiscoverySection = () => {
     {
       title: "Flexibility Classes",
       description: "Improve your range of motion, prevent injury, and achieve your flexibility goals. From front splits to backbends, our targeted flexibility training helps you reach new levels of mobility and grace.",
-      image: "/lovable-uploads/ff325961-11eb-4009-8f03-cb52bcfc97e0.png", 
+      image: "/lovable-uploads/01796eea-20e3-4015-b2a9-7551b68dca94.png", 
       icon: Heart,
       locations: "6 Locations",
       classTypes: "6 Class Types",
