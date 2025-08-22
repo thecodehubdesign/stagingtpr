@@ -25,6 +25,7 @@ import HensParties from "./pages/HensParties";
 import PurePoleeDance from "./pages/PurePoleeDance";
 import FrontSplitsMasterclass from "./pages/FrontSplitsMasterclass";
 import DanceFilthy from "./pages/DanceFilthy";
+import Rewards from "./pages/Rewards";
 import NotFound from "./pages/NotFound";
 
 const queryClient = new QueryClient();
@@ -57,6 +58,7 @@ const App = () => (
           <Route path="/classes/pure-pole-dance" element={<PurePoleeDance />} />
           <Route path="/classes/front-splits-masterclass" element={<FrontSplitsMasterclass />} />
           <Route path="/classes/dance-filthy" element={<DanceFilthy />} />
+          <Route path="/rewards" element={<Rewards />} />
           <Route path="*" element={<NotFound />} />
         </Routes>
       </BrowserRouter>
