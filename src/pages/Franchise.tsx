@@ -266,8 +266,114 @@ const Franchise = () => {
         </div>
       </section>
 
-      {/* Benefits Section */}
+      {/* What's in the Guide */}
       <section className="py-20 bg-gray-900">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+          <div className="text-center mb-16">
+            <h2 className="text-3xl sm:text-4xl font-bold text-white mb-6">
+              What You'll Find in <span className="gradient-text">This Guide</span>
+            </h2>
+            <p className="text-lg text-gray-300 max-w-2xl mx-auto">
+              Our comprehensive franchise guide covers everything you need to make an informed decision about joining The Pole Room family.
+            </p>
+          </div>
+
+          <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
+            <motion.div
+              initial={{ opacity: 0, y: 30 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true }}
+              transition={{ duration: 0.6 }}
+            >
+              <Card className="cyber-card p-6 h-full">
+                <DollarSign className="w-12 h-12 text-fuchsia-400 mb-4" />
+                <h3 className="text-xl font-bold text-white mb-3">Investment Overview</h3>
+                <p className="text-gray-300 leading-relaxed">
+                  Detailed breakdown of initial investment, ongoing costs, and projected returns for your studio.
+                </p>
+              </Card>
+            </motion.div>
+
+            <motion.div
+              initial={{ opacity: 0, y: 30 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true }}
+              transition={{ duration: 0.6, delay: 0.1 }}
+            >
+              <Card className="cyber-card p-6 h-full">
+                <Target className="w-12 h-12 text-cyan-400 mb-4" />
+                <h3 className="text-xl font-bold text-white mb-3">Business Model</h3>
+                <p className="text-gray-300 leading-relaxed">
+                  Learn about our proven revenue streams, pricing strategies, and how franchisees build profitable businesses.
+                </p>
+              </Card>
+            </motion.div>
+
+            <motion.div
+              initial={{ opacity: 0, y: 30 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true }}
+              transition={{ duration: 0.6, delay: 0.2 }}
+            >
+              <Card className="cyber-card p-6 h-full">
+                <Users className="w-12 h-12 text-purple-400 mb-4" />
+                <h3 className="text-xl font-bold text-white mb-3">Training & Support</h3>
+                <p className="text-gray-300 leading-relaxed">
+                  Comprehensive training program, ongoing coaching, and the support systems that set you up for success.
+                </p>
+              </Card>
+            </motion.div>
+
+            <motion.div
+              initial={{ opacity: 0, y: 30 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true }}
+              transition={{ duration: 0.6, delay: 0.3 }}
+            >
+              <Card className="cyber-card p-6 h-full">
+                <MapPin className="w-12 h-12 text-pink-400 mb-4" />
+                <h3 className="text-xl font-bold text-white mb-3">Site Selection</h3>
+                <p className="text-gray-300 leading-relaxed">
+                  Guidelines for choosing the perfect location, lease negotiation tips, and territory availability.
+                </p>
+              </Card>
+            </motion.div>
+
+            <motion.div
+              initial={{ opacity: 0, y: 30 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true }}
+              transition={{ duration: 0.6, delay: 0.4 }}
+            >
+              <Card className="cyber-card p-6 h-full">
+                <Lightbulb className="w-12 h-12 text-yellow-400 mb-4" />
+                <h3 className="text-xl font-bold text-white mb-3">Marketing Strategy</h3>
+                <p className="text-gray-300 leading-relaxed">
+                  Our proven marketing playbook to attract students, build your community, and grow your brand locally.
+                </p>
+              </Card>
+            </motion.div>
+
+            <motion.div
+              initial={{ opacity: 0, y: 30 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true }}
+              transition={{ duration: 0.6, delay: 0.5 }}
+            >
+              <Card className="cyber-card p-6 h-full">
+                <Handshake className="w-12 h-12 text-green-400 mb-4" />
+                <h3 className="text-xl font-bold text-white mb-3">Success Stories</h3>
+                <p className="text-gray-300 leading-relaxed">
+                  Real results from franchisees who've built thriving studios and transformed their communities.
+                </p>
+              </Card>
+            </motion.div>
+          </div>
+        </div>
+      </section>
+
+      {/* Benefits Section */}
+      <section className="py-20 bg-gray-800">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="text-center mb-16">
             <h2 className="text-3xl sm:text-4xl font-bold text-white mb-6">
