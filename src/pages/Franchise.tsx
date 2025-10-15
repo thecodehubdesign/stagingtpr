@@ -596,6 +596,30 @@ const Franchise = () => {
         </div>
       </section>
 
+      {/* Compact Download Reminder */}
+      <section className="py-12 bg-gradient-to-r from-lime-400 via-lime-300 to-yellow-300">
+        <div className="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8">
+          <div className="flex flex-col md:flex-row items-center justify-between gap-6">
+            <div>
+              <h3 className="text-2xl sm:text-3xl font-black text-gray-900 mb-2">
+                Don't Miss Out on Your Franchise Guide
+              </h3>
+              <p className="text-gray-800 text-lg">
+                Get all the details about opening your own Pole Room studio
+              </p>
+            </div>
+            <Button 
+              size="lg"
+              className="bg-gray-900 hover:bg-gray-800 text-white font-bold px-8 py-4 rounded-xl shadow-xl hover:shadow-2xl transition-all duration-300 flex-shrink-0"
+              onClick={() => document.getElementById('application-form')?.scrollIntoView({ behavior: 'smooth' })}
+            >
+              Download Guide
+              <Download className="w-5 h-5 ml-2" />
+            </Button>
+          </div>
+        </div>
+      </section>
+
       <Footer />
     </div>
   );
