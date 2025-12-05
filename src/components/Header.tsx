@@ -1,8 +1,7 @@
 import React, { useState, useCallback } from 'react';
 import { Button } from '@/components/ui/button';
-import { Menu, X, Zap } from 'lucide-react';
+import { Menu, X, Zap, ChevronDown } from 'lucide-react';
 import { Link, useNavigate } from 'react-router-dom';
-import VoucherClaimForm from './VoucherClaimForm';
 import { SearchMenu } from './SearchMenu';
 import {
   NavigationMenu,
@@ -25,38 +24,76 @@ const Header = () => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const navigate = useNavigate();
 
-  const aboutUsItems = [
-    { name: 'About Us', href: '/about', description: 'Learn about our story, mission and values' },
-    { name: 'Instructors', href: '/instructors', description: 'Meet our amazing team of certified instructors' },
-    { name: 'Pricing', href: '/pricing', description: 'Flexible packages and membership options' },
-    { name: 'Events', href: '/events', description: 'Competitions, showcases, and community events' },
-    { name: 'Hens Parties', href: '/hens-parties', description: 'Perfect celebration experience for your special day' },
-    { name: 'Rewards Program', href: '/rewards', description: 'Unlock achievements and be recognised for your pole journey' },
-    { name: 'Franchise', href: '/franchise', description: 'Join the movement and open your own studio' },
-    { name: 'Blog', href: '/blog', description: 'Tips, stories, and inspiration from our community' },
-    { name: 'Contact', href: '/contact', description: 'Get in touch with questions or to book a class' },
-  ];
-
-  const classesItems = [
-    { name: 'All Classes', href: '/classes', description: 'Explore our full range of classes' },
-    { name: 'Pole Classes', href: '/classes?style=Pole', description: 'Master the art of pole dancing with strength and grace' },
-    { name: 'Aerial Classes', href: '/classes?style=Aerial', description: 'Soar through the air with silks and hoop classes' },
-    { name: 'Flexibility Classes', href: '/classes?style=Flexibility', description: 'Improve your range of motion and mobility' },
-  ];
+  // Programs Mega Menu Data
+  const programsData = {
+    pole: {
+      title: 'Pole Dancing',
+      items: [
+        { name: 'Beginner', href: '/programs/pole/beginner', description: 'Start your pole journey' },
+        { name: 'Intermediate', href: '/programs/pole/intermediate', description: 'Elevate your skills' },
+        { name: 'Advanced', href: '/programs/pole/advanced', description: 'Master complex moves' },
+        { name: 'Elite', href: '/programs/pole/elite', description: 'Competition level training' },
+        { name: '40+ & Fabulous', href: '/programs/pole/40-plus', description: 'Designed for adults 40+' },
+        { name: 'Teen Pole', href: '/programs/pole/teens', description: 'Ages 13-17' },
+        { name: 'Pure Pole Dance', href: '/programs/pole/pure-pole-dance', description: 'Dance-focused pole' },
+        { name: 'Dance Filthy', href: '/programs/pole/dance-filthy', description: 'Exotic & sensual styles' },
+        { name: 'Front Splits Masterclass', href: '/programs/pole/front-splits', description: 'Flexibility focused' },
+      ]
+    },
+    aerialHoop: {
+      title: 'Aerial Hoop',
+      items: [
+        { name: 'Beginner', href: '/programs/aerial-hoop/beginner', description: 'Discover aerial grace' },
+        { name: 'Intermediate', href: '/programs/aerial-hoop/intermediate', description: 'Soar higher' },
+        { name: 'Advanced', href: '/programs/aerial-hoop/advanced', description: 'Defy gravity' },
+      ]
+    },
+    aerialSilks: {
+      title: 'Aerial Silks',
+      items: [
+        { name: 'Beginner', href: '/programs/aerial-silks/beginner', description: 'Embrace the flow' },
+        { name: 'Intermediate', href: '/programs/aerial-silks/intermediate', description: 'Weave your story' },
+        { name: 'Hammock', href: '/programs/aerial-silks/hammock', description: 'Float and flow' },
+      ]
+    },
+    other: {
+      title: 'Other Options',
+      items: [
+        { name: 'Casual Classes', href: '/programs/casual-classes', description: 'Drop in, have fun' },
+        { name: 'Mini Terms', href: '/programs/mini-terms', description: 'Short & sweet programs' },
+        { name: 'Private Lessons', href: '/programs/private-lessons', description: 'One-on-one training' },
+        { name: 'Workshops', href: '/programs/workshops', description: 'Skill up fast' },
+        { name: 'Self Practice', href: '/programs/self-practice', description: 'Practice makes perfect' },
+      ]
+    }
+  };
 
   const studiosItems = [
-    { name: 'All Locations', href: '/studios', description: 'Find your perfect studio location' },
-    { name: 'Eltham', href: '/studios/eltham', description: 'Our Eltham location in the heart of the community' },
-    { name: 'Kilsyth', href: '/studios/kilsyth', description: 'Modern facilities in beautiful Kilsyth' },
-    { name: 'Highett', href: '/studios/highett', description: 'Convenient Highett studio with ample parking' },
-    { name: 'Mitcham', href: '/studios/mitcham', description: 'Spacious Mitcham location with all amenities' },
-    { name: 'Melbourne CBD', href: '/studios/cbd', description: 'Central city location for urban convenience' },
-    { name: 'Narre Warren', href: '/studios/narre-warren', description: 'Southeast Melbourne hub in Narre Warren' },
+    { name: 'All Locations', href: '/studios', description: 'Find your perfect studio' },
+    { name: 'Eltham', href: '/studios/eltham', description: 'Our Eltham location' },
+    { name: 'Kilsyth', href: '/studios/kilsyth', description: 'Modern Kilsyth studio' },
+    { name: 'Highett', href: '/studios/highett', description: 'Convenient Highett location' },
+    { name: 'Mitcham', href: '/studios/mitcham', description: 'Spacious Mitcham studio' },
+    { name: 'Melbourne CBD', href: '/studios/cbd', description: 'Central city location' },
+    { name: 'Narre Warren', href: '/studios/narre-warren', description: 'Southeast Melbourne hub' },
   ];
 
-  const singleNavItems = [
-    { name: 'First Timers', href: '/first-timers' },
-    { name: 'Shop', href: '/products' }
+  const functionsItems = [
+    { name: 'Hens Parties', href: '/hens-parties', description: 'Celebrate in style' },
+    { name: 'Birthday Parties', href: '/birthday-parties', description: 'Perfect party experience' },
+    { name: 'Corporate Events', href: '/corporate-events', description: 'Team building with a twist' },
+    { name: 'Custom Events', href: '/custom-events', description: 'Your event, your way' },
+  ];
+
+  const aboutItems = [
+    { name: 'Our Story', href: '/about', description: 'Learn about our journey' },
+    { name: 'Instructors', href: '/instructors', description: 'Meet our amazing team' },
+    { name: 'GLOW Events', href: '/events', description: 'Showcases & performances' },
+    { name: 'SHINE Competition', href: '/events/shine', description: 'Our premier competition' },
+    { name: 'Blog', href: '/blog', description: 'Tips & inspiration' },
+    { name: 'Contact', href: '/contact', description: 'Get in touch' },
+    { name: 'Pricing', href: '/pricing', description: 'Flexible packages' },
+    { name: 'Franchise', href: '/franchise', description: 'Join the movement' },
   ];
 
   const handleNavigation = useCallback((href: string) => {
@@ -77,46 +114,45 @@ const Header = () => {
           </div>
 
           {/* Desktop Navigation */}
-          <div className="hidden md:block">
+          <div className="hidden lg:block">
             <NavigationMenu>
               <NavigationMenuList>
-                {/* About Us Dropdown */}
+                {/* First Timers - Single Link */}
                 <NavigationMenuItem>
-                  <NavigationMenuTrigger className="text-gray-300 hover:text-fuchsia-400 bg-transparent data-[state=open]:bg-gray-800/50">
-                    About Us
-                  </NavigationMenuTrigger>
-                  <NavigationMenuContent>
-                    <ul className="grid w-[400px] gap-3 p-4 md:w-[500px] md:grid-cols-1">
-                      {aboutUsItems.map((item) => (
-                        <ListItem
-                          key={item.name}
-                          title={item.name}
-                          href={item.href}
-                        >
-                          {item.description}
-                        </ListItem>
-                      ))}
-                    </ul>
-                  </NavigationMenuContent>
+                  <button onClick={() => handleNavigation('/first-timers')}>
+                    <NavigationMenuLink className={cn(navigationMenuTriggerStyle(), "text-gray-300 hover:text-fuchsia-400 bg-transparent hover:bg-gray-800/50")}>
+                      First Timers
+                    </NavigationMenuLink>
+                  </button>
                 </NavigationMenuItem>
 
-                {/* Classes Dropdown */}
+                {/* Programs Mega Menu */}
                 <NavigationMenuItem>
                   <NavigationMenuTrigger className="text-gray-300 hover:text-fuchsia-400 bg-transparent data-[state=open]:bg-gray-800/50">
-                    Classes
+                    Programs
                   </NavigationMenuTrigger>
                   <NavigationMenuContent>
-                    <ul className="grid w-[400px] gap-3 p-4 md:w-[500px] md:grid-cols-1">
-                      {classesItems.map((item) => (
-                        <ListItem
-                          key={item.name}
-                          title={item.name}
-                          href={item.href}
-                        >
-                          {item.description}
-                        </ListItem>
+                    <div className="grid grid-cols-4 gap-6 p-6 w-[800px]">
+                      {Object.entries(programsData).map(([key, category]) => (
+                        <div key={key}>
+                          <h3 className="font-semibold text-fuchsia-400 mb-3 text-sm uppercase tracking-wider">
+                            {category.title}
+                          </h3>
+                          <ul className="space-y-2">
+                            {category.items.map((item) => (
+                              <li key={item.name}>
+                                <button
+                                  onClick={() => handleNavigation(item.href)}
+                                  className="block text-sm text-gray-300 hover:text-fuchsia-400 transition-colors w-full text-left"
+                                >
+                                  {item.name}
+                                </button>
+                              </li>
+                            ))}
+                          </ul>
+                        </div>
                       ))}
-                    </ul>
+                    </div>
                   </NavigationMenuContent>
                 </NavigationMenuItem>
 
@@ -126,13 +162,9 @@ const Header = () => {
                     Studios
                   </NavigationMenuTrigger>
                   <NavigationMenuContent>
-                    <ul className="grid w-[400px] gap-3 p-4 md:w-[500px] md:grid-cols-1">
+                    <ul className="grid w-[400px] gap-3 p-4">
                       {studiosItems.map((item) => (
-                        <ListItem
-                          key={item.name}
-                          title={item.name}
-                          href={item.href}
-                        >
+                        <ListItem key={item.name} title={item.name} href={item.href}>
                           {item.description}
                         </ListItem>
                       ))}
@@ -140,37 +172,65 @@ const Header = () => {
                   </NavigationMenuContent>
                 </NavigationMenuItem>
 
-                {/* Single Items */}
-                {singleNavItems.map((item) => (
-                  <NavigationMenuItem key={item.name}>
-                    <button onClick={() => handleNavigation(item.href)}>
-                      <NavigationMenuLink className={cn(navigationMenuTriggerStyle(), "text-gray-300 hover:text-fuchsia-400 bg-transparent hover:bg-gray-800/50")}>
-                        {item.name}
-                      </NavigationMenuLink>
-                    </button>
-                  </NavigationMenuItem>
-                ))}
+                {/* Functions Dropdown */}
+                <NavigationMenuItem>
+                  <NavigationMenuTrigger className="text-gray-300 hover:text-fuchsia-400 bg-transparent data-[state=open]:bg-gray-800/50">
+                    Functions
+                  </NavigationMenuTrigger>
+                  <NavigationMenuContent>
+                    <ul className="grid w-[400px] gap-3 p-4">
+                      {functionsItems.map((item) => (
+                        <ListItem key={item.name} title={item.name} href={item.href}>
+                          {item.description}
+                        </ListItem>
+                      ))}
+                    </ul>
+                  </NavigationMenuContent>
+                </NavigationMenuItem>
+
+                {/* About Dropdown */}
+                <NavigationMenuItem>
+                  <NavigationMenuTrigger className="text-gray-300 hover:text-fuchsia-400 bg-transparent data-[state=open]:bg-gray-800/50">
+                    About
+                  </NavigationMenuTrigger>
+                  <NavigationMenuContent>
+                    <ul className="grid w-[400px] gap-3 p-4">
+                      {aboutItems.map((item) => (
+                        <ListItem key={item.name} title={item.name} href={item.href}>
+                          {item.description}
+                        </ListItem>
+                      ))}
+                    </ul>
+                  </NavigationMenuContent>
+                </NavigationMenuItem>
+
+                {/* Shop - Single Link */}
+                <NavigationMenuItem>
+                  <button onClick={() => handleNavigation('/products')}>
+                    <NavigationMenuLink className={cn(navigationMenuTriggerStyle(), "text-gray-300 hover:text-fuchsia-400 bg-transparent hover:bg-gray-800/50")}>
+                      Shop
+                    </NavigationMenuLink>
+                  </button>
+                </NavigationMenuItem>
               </NavigationMenuList>
             </NavigationMenu>
           </div>
 
-          {/* Desktop Search and CTAs */}
-          <div className="hidden md:flex items-center space-x-4">
+          {/* Desktop CTA */}
+          <div className="hidden lg:flex items-center space-x-4">
             <SearchMenu />
             <Button 
+              className="neon-button font-bold"
               asChild
-              variant="outline" 
-              className="cyber-border text-cyan-400 hover:bg-cyan-400/10 hover:text-cyan-300"
             >
-              <Link to="/free-gifts">
-                Free Gifts 💝
+              <Link to="/get-started">
+                Get Started
               </Link>
             </Button>
-            <VoucherClaimForm />
           </div>
 
           {/* Mobile menu button */}
-          <div className="md:hidden">
+          <div className="lg:hidden">
             <button
               onClick={() => setIsMenuOpen(!isMenuOpen)}
               className="text-gray-300 hover:text-fuchsia-400"
@@ -182,49 +242,42 @@ const Header = () => {
 
         {/* Mobile Navigation */}
         {isMenuOpen && (
-          <div className="md:hidden">
-            <div className="px-2 pt-2 pb-3 space-y-1 sm:px-3 bg-black/95 border-t border-fuchsia-500/30 cyber-grid">
+          <div className="lg:hidden">
+            <div className="px-2 pt-2 pb-3 space-y-1 sm:px-3 bg-black/95 border-t border-fuchsia-500/30 cyber-grid max-h-[80vh] overflow-y-auto">
               {/* Mobile Search */}
               <div className="px-3 py-2">
                 <SearchMenu />
               </div>
 
-              <Accordion type="multiple" className="w-full">
-                {/* Mobile About Us Accordion */}
-                <AccordionItem value="about-us" className="border-fuchsia-500/30">
-                  <AccordionTrigger className="px-3 py-2 text-sm font-medium text-fuchsia-400 hover:text-fuchsia-300">
-                    About Us
-                  </AccordionTrigger>
-                  <AccordionContent>
-                    <div className="space-y-1">
-                      {aboutUsItems.map((item) => (
-                        <button
-                          key={item.name}
-                          onClick={() => handleNavigation(item.href)}
-                          className="text-gray-300 hover:text-fuchsia-400 block px-6 py-2 text-sm w-full text-left"
-                        >
-                          {item.name}
-                        </button>
-                      ))}
-                    </div>
-                  </AccordionContent>
-                </AccordionItem>
+              {/* First Timers */}
+              <button
+                onClick={() => handleNavigation('/first-timers')}
+                className="text-fuchsia-400 font-medium block px-3 py-2 text-sm w-full text-left"
+              >
+                First Timers
+              </button>
 
-                {/* Mobile Classes Accordion */}
-                <AccordionItem value="classes" className="border-fuchsia-500/30">
+              <Accordion type="multiple" className="w-full">
+                {/* Mobile Programs Accordion */}
+                <AccordionItem value="programs" className="border-fuchsia-500/30">
                   <AccordionTrigger className="px-3 py-2 text-sm font-medium text-fuchsia-400 hover:text-fuchsia-300">
-                    Classes
+                    Programs
                   </AccordionTrigger>
                   <AccordionContent>
-                    <div className="space-y-1">
-                      {classesItems.map((item) => (
-                        <button
-                          key={item.name}
-                          onClick={() => handleNavigation(item.href)}
-                          className="text-gray-300 hover:text-fuchsia-400 block px-6 py-2 text-sm w-full text-left"
-                        >
-                          {item.name}
-                        </button>
+                    <div className="space-y-4 pl-3">
+                      {Object.entries(programsData).map(([key, category]) => (
+                        <div key={key}>
+                          <p className="text-xs uppercase tracking-wider text-gray-500 mb-2 px-3">{category.title}</p>
+                          {category.items.map((item) => (
+                            <button
+                              key={item.name}
+                              onClick={() => handleNavigation(item.href)}
+                              className="text-gray-300 hover:text-fuchsia-400 block px-3 py-1.5 text-sm w-full text-left"
+                            >
+                              {item.name}
+                            </button>
+                          ))}
+                        </div>
                       ))}
                     </div>
                   </AccordionContent>
@@ -249,30 +302,65 @@ const Header = () => {
                     </div>
                   </AccordionContent>
                 </AccordionItem>
+
+                {/* Mobile Functions Accordion */}
+                <AccordionItem value="functions" className="border-fuchsia-500/30">
+                  <AccordionTrigger className="px-3 py-2 text-sm font-medium text-fuchsia-400 hover:text-fuchsia-300">
+                    Functions
+                  </AccordionTrigger>
+                  <AccordionContent>
+                    <div className="space-y-1">
+                      {functionsItems.map((item) => (
+                        <button
+                          key={item.name}
+                          onClick={() => handleNavigation(item.href)}
+                          className="text-gray-300 hover:text-fuchsia-400 block px-6 py-2 text-sm w-full text-left"
+                        >
+                          {item.name}
+                        </button>
+                      ))}
+                    </div>
+                  </AccordionContent>
+                </AccordionItem>
+
+                {/* Mobile About Accordion */}
+                <AccordionItem value="about" className="border-fuchsia-500/30">
+                  <AccordionTrigger className="px-3 py-2 text-sm font-medium text-fuchsia-400 hover:text-fuchsia-300">
+                    About
+                  </AccordionTrigger>
+                  <AccordionContent>
+                    <div className="space-y-1">
+                      {aboutItems.map((item) => (
+                        <button
+                          key={item.name}
+                          onClick={() => handleNavigation(item.href)}
+                          className="text-gray-300 hover:text-fuchsia-400 block px-6 py-2 text-sm w-full text-left"
+                        >
+                          {item.name}
+                        </button>
+                      ))}
+                    </div>
+                  </AccordionContent>
+                </AccordionItem>
               </Accordion>
 
-              {/* Mobile Single Items */}
-              {singleNavItems.map((item) => (
-                <button
-                  key={item.name}
-                  onClick={() => handleNavigation(item.href)}
-                  className="text-gray-300 hover:text-fuchsia-400 block px-3 py-2 text-sm font-medium w-full text-left"
-                >
-                  {item.name}
-                </button>
-              ))}
+              {/* Shop */}
+              <button
+                onClick={() => handleNavigation('/products')}
+                className="text-gray-300 hover:text-fuchsia-400 block px-3 py-2 text-sm font-medium w-full text-left"
+              >
+                Shop
+              </button>
 
-              <div className="flex flex-col space-y-2 px-3 pt-4">
+              <div className="px-3 pt-4">
                 <Button 
+                  className="w-full neon-button font-bold"
                   asChild
-                  variant="outline" 
-                  className="cyber-border text-cyan-400 hover:bg-cyan-400/10"
                 >
-                  <Link to="/free-gifts">
-                    Free Gifts 💝
+                  <Link to="/get-started">
+                    Get Started
                   </Link>
                 </Button>
-                <VoucherClaimForm />
               </div>
             </div>
           </div>
