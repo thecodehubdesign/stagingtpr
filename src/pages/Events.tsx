@@ -6,6 +6,7 @@ import { Badge } from '@/components/ui/badge';
 import { Accordion, AccordionContent, AccordionItem, AccordionTrigger } from '@/components/ui/accordion';
 import { Collapsible, CollapsibleContent, CollapsibleTrigger } from '@/components/ui/collapsible';
 import { Calendar, MapPin, Clock, Star, Trophy, Sparkles, Camera, Users, Heart, ChevronDown, ChevronUp } from 'lucide-react';
+import { Link } from 'react-router-dom';
 import Header from '@/components/Header';
 import Footer from '@/components/Footer';
 
@@ -15,6 +16,21 @@ const Events = () => {
   const featuredEvents = [
     {
       id: 1,
+      name: "GLOW Showcase",
+      tagline: "A Night of Fun, Passion & Community",
+      description: "Australia's largest pole & aerial showcase. 200+ performers take the stage after 8 weeks of training with their studio crew.",
+      image: "https://images.unsplash.com/photo-1470813740244-df37b8c1edcb?ixlib=rb-4.0.3&auto=format&fit=crop&w=2070&q=80",
+      nextDate: "April 26, 2026",
+      location: "The Round, Nunawading",
+      time: "6:30 PM",
+      price: "Performer Course | Spectator Tickets",
+      status: "Coming Soon",
+      buttonText: "Learn More",
+      buttonLink: "/events/glow",
+      highlights: ["200+ performers", "8-week course", "All levels welcome", "Professional production"]
+    },
+    {
+      id: 2,
       name: "SHINE Competition",
       tagline: "Where Stars Are Born",
       description: "Our premier pole competition celebrating artistry, athleticism, and personal achievement. Compete across multiple categories from beginner to advanced.",
@@ -24,36 +40,24 @@ const Events = () => {
       time: "6:00 PM - 10:00 PM",
       price: "Entry: $85 | Spectator: $35",
       status: "Registration Open",
-      buttonText: "Enter Competition",
+      buttonText: "Learn More",
+      buttonLink: "/events/shine",
       highlights: ["Cash prizes", "Professional judging", "Live streaming", "Networking opportunities"]
-    },
-    {
-      id: 2,
-      name: "Glow Showcase",
-      tagline: "Light Up Your Performance",
-      description: "A magical evening where students perform under UV lights with glow-in-the-dark costumes. Perfect for first-time performers and seasoned artists alike.",
-      image: "https://images.unsplash.com/photo-1470813740244-df37b8c1edcb?ixlib=rb-4.0.3&auto=format&fit=crop&w=2070&q=80",
-      nextDate: "June 8, 2025",
-      location: "The Pole Room Studios",
-      time: "7:30 PM - 9:30 PM",
-      price: "Performer: $65 | Guest: $25",
-      status: "Early Bird",
-      buttonText: "Register to Perform",
-      highlights: ["UV lighting effects", "Costume provided", "Professional photos", "Supportive atmosphere"]
     },
     {
       id: 3,
       name: "Performance Nights",
-      tagline: "Your Stage Awaits",
-      description: "Monthly intimate performances in our studios. The perfect stepping stone to build confidence and share your progress with friends and family.",
+      tagline: "Your Stage, Your Crew, Your Moment",
+      description: "End-of-term showcases where you perform with your studio crew in a safe and supportive environment. Part of our 4-week Performance Courses.",
       image: "https://images.unsplash.com/photo-1581090464777-f3220bbe1b8b?ixlib=rb-4.0.3&auto=format&fit=crop&w=2070&q=80",
-      nextDate: "Every 3rd Friday",
+      nextDate: "Every End of Term",
       location: "All Studio Locations",
       time: "7:00 PM - 8:30 PM",
       price: "Performer: $35 | Guest: $15",
       status: "Ongoing",
-      buttonText: "Book Your Spot",
-      highlights: ["Intimate setting", "Friends & family welcome", "Video recording", "Beginner friendly"]
+      buttonText: "Learn More",
+      buttonLink: "/events/performance-nights",
+      highlights: ["4-week course", "Intimate setting", "Friends & family welcome", "Beginner friendly"]
     }
   ];
 
@@ -247,11 +251,10 @@ const Events = () => {
                     </div>
                     
                     <div className="flex flex-col sm:flex-row gap-4">
-                      <Button size="lg" className="neon-button flex-1">
-                        {event.buttonText}
-                      </Button>
-                      <Button size="lg" variant="outline" className="cyber-border">
-                        Learn More
+                      <Button size="lg" className="neon-button flex-1" asChild>
+                        <Link to={event.buttonLink || '/get-started'}>
+                          {event.buttonText}
+                        </Link>
                       </Button>
                     </div>
                   </div>
