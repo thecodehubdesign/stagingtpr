@@ -92,6 +92,7 @@ const Header = () => {
       items: [
         { name: 'Our Story', href: '/about', description: 'Learn about our journey' },
         { name: 'Instructors', href: '/instructors', description: 'Meet our amazing team' },
+        { name: 'Pricing', href: '/pricing', description: 'Flexible packages' },
         { name: 'Blog', href: '/blog', description: 'Tips & inspiration' },
         { name: 'Contact', href: '/contact', description: 'Get in touch' },
       ]
@@ -108,8 +109,8 @@ const Header = () => {
     business: {
       title: 'Business',
       items: [
-        { name: 'Pricing', href: '/pricing', description: 'Flexible packages' },
         { name: 'Franchise', href: '/franchise', description: 'Join the movement' },
+        { name: 'Sponsorship', href: '/sponsorship', description: 'Partner with us' },
       ]
     }
   };
