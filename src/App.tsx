@@ -55,6 +55,8 @@ import CustomEventsPage from "./pages/functions/CustomEventsPage";
 
 // Events
 import ShinePage from "./pages/events/ShinePage";
+import GlowPage from "./pages/events/GlowPage";
+import PerformanceNightsPage from "./pages/events/PerformanceNightsPage";
 
 const queryClient = new QueryClient();
 
@@ -73,6 +75,8 @@ const App = () => (
           <Route path="/first-timers" element={<FirstTimers />} />
           <Route path="/events" element={<Events />} />
           <Route path="/events/shine" element={<ShinePage />} />
+          <Route path="/events/glow" element={<GlowPage />} />
+          <Route path="/events/performance-nights" element={<PerformanceNightsPage />} />
           <Route path="/franchise" element={<Franchise />} />
           <Route path="/blog" element={<Blog />} />
           <Route path="/blog/:id" element={<BlogPost />} />

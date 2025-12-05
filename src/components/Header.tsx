@@ -85,16 +85,34 @@ const Header = () => {
     { name: 'Custom Events', href: '/custom-events', description: 'Your event, your way' },
   ];
 
-  const aboutItems = [
-    { name: 'Our Story', href: '/about', description: 'Learn about our journey' },
-    { name: 'Instructors', href: '/instructors', description: 'Meet our amazing team' },
-    { name: 'GLOW Events', href: '/events', description: 'Showcases & performances' },
-    { name: 'SHINE Competition', href: '/events/shine', description: 'Our premier competition' },
-    { name: 'Blog', href: '/blog', description: 'Tips & inspiration' },
-    { name: 'Contact', href: '/contact', description: 'Get in touch' },
-    { name: 'Pricing', href: '/pricing', description: 'Flexible packages' },
-    { name: 'Franchise', href: '/franchise', description: 'Join the movement' },
-  ];
+  // About Mega Menu Data (categorized like Programs)
+  const aboutData = {
+    company: {
+      title: 'Company',
+      items: [
+        { name: 'Our Story', href: '/about', description: 'Learn about our journey' },
+        { name: 'Instructors', href: '/instructors', description: 'Meet our amazing team' },
+        { name: 'Blog', href: '/blog', description: 'Tips & inspiration' },
+        { name: 'Contact', href: '/contact', description: 'Get in touch' },
+      ]
+    },
+    events: {
+      title: 'Events & Showcases',
+      items: [
+        { name: 'All Events', href: '/events', description: 'Overview of all events' },
+        { name: 'GLOW Showcase', href: '/events/glow', description: "Australia's largest pole showcase" },
+        { name: 'SHINE Competition', href: '/events/shine', description: 'Our premier competition' },
+        { name: 'Performance Nights', href: '/events/performance-nights', description: 'End of term showcases' },
+      ]
+    },
+    business: {
+      title: 'Business',
+      items: [
+        { name: 'Pricing', href: '/pricing', description: 'Flexible packages' },
+        { name: 'Franchise', href: '/franchise', description: 'Join the movement' },
+      ]
+    }
+  };
 
   const handleNavigation = useCallback((href: string) => {
     navigate(href);
@@ -188,19 +206,33 @@ const Header = () => {
                   </NavigationMenuContent>
                 </NavigationMenuItem>
 
-                {/* About Dropdown */}
+                {/* About Mega Menu */}
                 <NavigationMenuItem>
                   <NavigationMenuTrigger className="text-gray-300 hover:text-fuchsia-400 bg-transparent data-[state=open]:bg-gray-800/50">
                     About
                   </NavigationMenuTrigger>
                   <NavigationMenuContent>
-                    <ul className="grid w-[400px] gap-3 p-4">
-                      {aboutItems.map((item) => (
-                        <ListItem key={item.name} title={item.name} href={item.href}>
-                          {item.description}
-                        </ListItem>
+                    <div className="grid grid-cols-3 gap-6 p-6 w-[600px]">
+                      {Object.entries(aboutData).map(([key, category]) => (
+                        <div key={key}>
+                          <h3 className="font-semibold text-fuchsia-400 mb-3 text-sm uppercase tracking-wider">
+                            {category.title}
+                          </h3>
+                          <ul className="space-y-2">
+                            {category.items.map((item) => (
+                              <li key={item.name}>
+                                <button
+                                  onClick={() => handleNavigation(item.href)}
+                                  className="block text-sm text-gray-300 hover:text-fuchsia-400 transition-colors w-full text-left"
+                                >
+                                  {item.name}
+                                </button>
+                              </li>
+                            ))}
+                          </ul>
+                        </div>
                       ))}
-                    </ul>
+                    </div>
                   </NavigationMenuContent>
                 </NavigationMenuItem>
 
@@ -329,15 +361,20 @@ const Header = () => {
                     About
                   </AccordionTrigger>
                   <AccordionContent>
-                    <div className="space-y-1">
-                      {aboutItems.map((item) => (
-                        <button
-                          key={item.name}
-                          onClick={() => handleNavigation(item.href)}
-                          className="text-gray-300 hover:text-fuchsia-400 block px-6 py-2 text-sm w-full text-left"
-                        >
-                          {item.name}
-                        </button>
+                    <div className="space-y-4 pl-3">
+                      {Object.entries(aboutData).map(([key, category]) => (
+                        <div key={key}>
+                          <p className="text-xs uppercase tracking-wider text-gray-500 mb-2 px-3">{category.title}</p>
+                          {category.items.map((item) => (
+                            <button
+                              key={item.name}
+                              onClick={() => handleNavigation(item.href)}
+                              className="text-gray-300 hover:text-fuchsia-400 block px-3 py-1.5 text-sm w-full text-left"
+                            >
+                              {item.name}
+                            </button>
+                          ))}
+                        </div>
                       ))}
                     </div>
                   </AccordionContent>
