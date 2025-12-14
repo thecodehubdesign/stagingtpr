@@ -2,16 +2,15 @@
 import { useParams } from 'react-router-dom';
 import Header from '@/components/Header';
 import Footer from '@/components/Footer';
-import StudioAbout from '@/components/studio/StudioAbout';
-import StudioContact from '@/components/studio/StudioContact';
-import StudioGettingStarted from '@/components/studio/StudioGettingStarted';
-import StudioInstructors from '@/components/studio/StudioInstructors';
-import StudioClassTypes from '@/components/studio/StudioClassTypes';
-import StudioReviews from '@/components/studio/StudioReviews';
+import StudioHero from '@/components/studio/StudioHero';
+import StudioClassesFilter from '@/components/studio/StudioClassesFilter';
 import StudioClassList from '@/components/studio/StudioClassList';
+import StudioInstructors from '@/components/studio/StudioInstructors';
+import StudioGallery from '@/components/studio/StudioGallery';
 import StudioFAQ from '@/components/studio/StudioFAQ';
-import StudioLocationMap from '@/components/studio/StudioLocationMap';
-import FreeTrialBookingForm from '@/components/FreeTrialBookingForm';
+import StudioLocalSupport from '@/components/studio/StudioLocalSupport';
+import StudioDirections from '@/components/studio/StudioDirections';
+import StudioContact from '@/components/studio/StudioContact';
 import SectionNavigation from '@/components/SectionNavigation';
 import { studios } from '@/data/studios';
 
@@ -33,15 +32,14 @@ const StudioDetail = () => {
 
   const sections = [
     { id: 'hero', label: 'Studio' },
-    { id: 'about', label: 'About' },
-    { id: 'contact', label: 'Contact' },
-    { id: 'getting-started', label: 'Getting Started' },
+    { id: 'classes-filter', label: 'Classes' },
+    { id: 'timetable', label: 'Timetable' },
     { id: 'instructors', label: 'Instructors' },
-    { id: 'class-types', label: 'Class Types' },
-    { id: 'reviews', label: 'Reviews' },
-    { id: 'classes', label: 'Classes' },
+    { id: 'gallery', label: 'Gallery' },
     { id: 'faq', label: 'FAQ' },
-    { id: 'location', label: 'Location' }
+    { id: 'local-support', label: 'Community' },
+    { id: 'directions', label: 'Directions' },
+    { id: 'contact', label: 'Contact' }
   ];
 
   return (
@@ -50,49 +48,48 @@ const StudioDetail = () => {
       <SectionNavigation sections={sections} />
       
       {/* Hero Section */}
-      <section id="hero" className="pt-20 pb-16 bg-gradient-to-br from-gray-900 via-purple-900 to-gray-900 cyber-grid">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="text-center animate-fade-in">
-            <h1 className="text-4xl sm:text-6xl font-bold gradient-text mb-6">
-              {studio.name}
-            </h1>
-            <p className="text-xl text-gray-300 max-w-3xl mx-auto leading-relaxed mb-8">
-              {studio.address}
-            </p>
-            <FreeTrialBookingForm />
-          </div>
-        </div>
-      </section>
+      <div id="hero">
+        <StudioHero studio={studio} />
+      </div>
 
-      {/* Studio Content */}
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div id="about">
-          <StudioAbout studio={studio} />
-        </div>
-        <div id="contact">
-          <StudioContact studio={studio} />
-        </div>
-        <div id="getting-started">
-          <StudioGettingStarted />
-        </div>
-        <div id="instructors">
-          <StudioInstructors studioId={studio.id} />
-        </div>
-        <div id="class-types">
-          <StudioClassTypes studio={studio} />
-        </div>
-        <div id="reviews">
-          <StudioReviews studioId={studio.id} />
-        </div>
-        <div id="classes">
-          <StudioClassList studioId={studio.id} />
-        </div>
-        <div id="faq">
-          <StudioFAQ />
-        </div>
-        <div id="location">
-          <StudioLocationMap studio={studio} />
-        </div>
+      {/* Classes Filter Section */}
+      <div id="classes-filter">
+        <StudioClassesFilter studio={studio} />
+      </div>
+
+      {/* Timetable Section */}
+      <div id="timetable">
+        <StudioClassList studioId={studio.id} />
+      </div>
+
+      {/* Instructors Section */}
+      <div id="instructors">
+        <StudioInstructors studioId={studio.id} />
+      </div>
+
+      {/* Gallery Section */}
+      <div id="gallery">
+        <StudioGallery studioId={studio.id} />
+      </div>
+
+      {/* FAQ Section */}
+      <div id="faq">
+        <StudioFAQ />
+      </div>
+
+      {/* Local Support Section */}
+      <div id="local-support">
+        <StudioLocalSupport studio={studio} />
+      </div>
+
+      {/* Directions Section */}
+      <div id="directions">
+        <StudioDirections studio={studio} />
+      </div>
+
+      {/* Contact Section */}
+      <div id="contact">
+        <StudioContact studio={studio} />
       </div>
 
       <Footer />

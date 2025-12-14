@@ -1,0 +1,178 @@
+import { motion } from 'framer-motion';
+import { MapPin, Star, Play, Instagram } from 'lucide-react';
+import { Button } from '@/components/ui/button';
+import { Studio } from '@/data/studios';
+
+interface StudioHeroProps {
+  studio: Studio;
+}
+
+const StudioHero = ({ studio }: StudioHeroProps) => {
+  const benefits = [
+    'New Student Offer',
+    'Beginner Friendly Classes',
+    'Award Winning Instructors',
+    'Make Amazing Friends',
+    'Part of the local community'
+  ];
+
+  return (
+    <section className="relative min-h-[90vh] bg-gradient-to-br from-gray-900 via-purple-900/80 to-gray-900 cyber-grid overflow-hidden">
+      {/* Floating orbs */}
+      <div className="absolute top-20 left-10 w-64 h-64 bg-fuchsia-500/20 rounded-full blur-3xl animate-float" />
+      <div className="absolute bottom-20 right-10 w-80 h-80 bg-cyan-500/20 rounded-full blur-3xl animate-float" style={{ animationDelay: '2s' }} />
+      <div className="absolute top-1/2 left-1/3 w-48 h-48 bg-purple-500/20 rounded-full blur-3xl animate-float" style={{ animationDelay: '4s' }} />
+
+      <div className="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pt-24 pb-16">
+        <div className="grid lg:grid-cols-2 gap-12 items-center">
+          {/* Left Content */}
+          <motion.div
+            initial={{ opacity: 0, x: -30 }}
+            animate={{ opacity: 1, x: 0 }}
+            transition={{ duration: 0.6 }}
+            className="space-y-6"
+          >
+            {/* Review Badge */}
+            <motion.div
+              initial={{ opacity: 0, y: -20 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ delay: 0.2 }}
+              className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-white/10 backdrop-blur-sm border border-fuchsia-500/30"
+            >
+              <div className="flex">
+                {[...Array(5)].map((_, i) => (
+                  <Star key={i} className="w-4 h-4 fill-fuchsia-400 text-fuchsia-400" />
+                ))}
+              </div>
+              <span className="text-white text-sm font-medium">
+                {studio.rating || 4.9} from {studio.reviewCount || 127} reviews
+              </span>
+            </motion.div>
+
+            {/* Title */}
+            <h1 className="text-4xl sm:text-5xl lg:text-6xl font-bold text-white leading-tight">
+              The Pole Room{' '}
+              <span className="gradient-text">{studio.name.replace('The Pole Room ', '')}</span>
+            </h1>
+
+            {/* Subtitle */}
+            <p className="text-lg text-gray-300 max-w-lg">
+              Build confidence, strength, and community in {studio.name.replace('The Pole Room ', '')}'s premier pole fitness studio
+            </p>
+
+            {/* Info Card */}
+            <div className="cyber-card p-6 space-y-4">
+              <div className="flex items-start gap-3">
+                <MapPin className="w-5 h-5 text-fuchsia-400 mt-1 flex-shrink-0" />
+                <div>
+                  <p className="text-white font-medium">{studio.address}</p>
+                  {studio.nearbyLandmark && (
+                    <p className="text-gray-400 text-sm mt-1">{studio.nearbyLandmark}</p>
+                  )}
+                </div>
+              </div>
+              
+              {studio.studioSpecs && (
+                <div className="pt-4 border-t border-white/10">
+                  <p className="text-cyan-400 text-sm font-medium mb-2">Studio Specs</p>
+                  <p className="text-gray-300 text-sm">{studio.studioSpecs}</p>
+                </div>
+              )}
+            </div>
+
+            {/* CTAs */}
+            <div className="flex flex-wrap gap-4">
+              <Button className="neon-button px-8 py-6 text-lg">
+                I'm a New Student
+              </Button>
+              <Button 
+                variant="outline" 
+                className="px-8 py-6 text-lg border-fuchsia-500/50 text-white hover:bg-fuchsia-500/20"
+              >
+                See {studio.name.replace('The Pole Room ', '')}'s Timetable
+              </Button>
+            </div>
+
+            {/* Social Icons */}
+            <div className="flex items-center gap-4 pt-4">
+              {studio.instagram && (
+                <a 
+                  href={studio.instagram} 
+                  target="_blank" 
+                  rel="noopener noreferrer"
+                  className="p-3 rounded-full bg-white/10 border border-fuchsia-500/30 hover:bg-fuchsia-500/20 transition-colors"
+                >
+                  <Instagram className="w-5 h-5 text-fuchsia-400" />
+                </a>
+              )}
+              {studio.facebook && (
+                <a 
+                  href={studio.facebook} 
+                  target="_blank" 
+                  rel="noopener noreferrer"
+                  className="p-3 rounded-full bg-white/10 border border-fuchsia-500/30 hover:bg-fuchsia-500/20 transition-colors"
+                >
+                  <svg className="w-5 h-5 text-fuchsia-400" fill="currentColor" viewBox="0 0 24 24">
+                    <path d="M24 12.073c0-6.627-5.373-12-12-12s-12 5.373-12 12c0 5.99 4.388 10.954 10.125 11.854v-8.385H7.078v-3.47h3.047V9.43c0-3.007 1.792-4.669 4.533-4.669 1.312 0 2.686.235 2.686.235v2.953H15.83c-1.491 0-1.956.925-1.956 1.874v2.25h3.328l-.532 3.47h-2.796v8.385C19.612 23.027 24 18.062 24 12.073z"/>
+                  </svg>
+                </a>
+              )}
+            </div>
+          </motion.div>
+
+          {/* Right Content - Video Preview */}
+          <motion.div
+            initial={{ opacity: 0, x: 30 }}
+            animate={{ opacity: 1, x: 0 }}
+            transition={{ duration: 0.6, delay: 0.3 }}
+            className="relative"
+          >
+            <div className="relative aspect-[4/3] rounded-2xl overflow-hidden cyber-border">
+              <img 
+                src={studio.image} 
+                alt={studio.name}
+                className="w-full h-full object-cover"
+              />
+              <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-transparent" />
+              
+              {/* Play Button */}
+              <button className="absolute inset-0 flex items-center justify-center group">
+                <div className="w-20 h-20 rounded-full bg-fuchsia-500/80 flex items-center justify-center backdrop-blur-sm group-hover:scale-110 transition-transform">
+                  <Play className="w-8 h-8 text-white fill-white ml-1" />
+                </div>
+              </button>
+              
+              {/* Label */}
+              <div className="absolute bottom-4 left-4 px-4 py-2 rounded-full bg-black/50 backdrop-blur-sm">
+                <span className="text-white text-sm font-medium">Watch Studio Tour</span>
+              </div>
+            </div>
+          </motion.div>
+        </div>
+
+        {/* Benefits Bar */}
+        <motion.div
+          initial={{ opacity: 0, y: 30 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.6, delay: 0.5 }}
+          className="mt-16 flex flex-wrap justify-center gap-3"
+        >
+          {benefits.map((benefit, index) => (
+            <span 
+              key={benefit}
+              className={`px-4 py-2 rounded-full text-sm font-medium backdrop-blur-sm transition-colors ${
+                index === benefits.length - 1 
+                  ? 'bg-fuchsia-500/30 text-fuchsia-300 border border-fuchsia-500/50' 
+                  : 'bg-white/10 text-gray-300 border border-white/20 hover:bg-white/20'
+              }`}
+            >
+              {benefit}
+            </span>
+          ))}
+        </motion.div>
+      </div>
+    </section>
+  );
+};
+
+export default StudioHero;
