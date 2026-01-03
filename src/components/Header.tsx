@@ -154,9 +154,18 @@ const Header = () => {
                     <div className="grid grid-cols-4 gap-6 p-6 w-[800px]">
                       {Object.entries(programsData).map(([key, category]) => (
                         <div key={key}>
-                          <h3 className="font-semibold text-fuchsia-400 mb-3 text-sm uppercase tracking-wider">
-                            {category.title}
-                          </h3>
+                          {key === 'pole' ? (
+                            <button
+                              onClick={() => handleNavigation('/programs/pole')}
+                              className="font-semibold text-fuchsia-400 mb-3 text-sm uppercase tracking-wider hover:text-fuchsia-300 transition-colors"
+                            >
+                              {category.title} →
+                            </button>
+                          ) : (
+                            <h3 className="font-semibold text-fuchsia-400 mb-3 text-sm uppercase tracking-wider">
+                              {category.title}
+                            </h3>
+                          )}
                           <ul className="space-y-2">
                             {category.items.map((item) => (
                               <li key={item.name}>
@@ -300,7 +309,16 @@ const Header = () => {
                     <div className="space-y-4 pl-3">
                       {Object.entries(programsData).map(([key, category]) => (
                         <div key={key}>
-                          <p className="text-xs uppercase tracking-wider text-gray-500 mb-2 px-3">{category.title}</p>
+                          {key === 'pole' ? (
+                            <button
+                              onClick={() => handleNavigation('/programs/pole')}
+                              className="text-xs uppercase tracking-wider text-fuchsia-400 mb-2 px-3 hover:text-fuchsia-300 transition-colors"
+                            >
+                              {category.title} →
+                            </button>
+                          ) : (
+                            <p className="text-xs uppercase tracking-wider text-gray-500 mb-2 px-3">{category.title}</p>
+                          )}
                           {category.items.map((item) => (
                             <button
                               key={item.name}
