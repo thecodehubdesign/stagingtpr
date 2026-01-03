@@ -21,6 +21,7 @@ import HensParties from "./pages/HensParties";
 import NotFound from "./pages/NotFound";
 
 // Pole Programs
+import PoleProgramsPage from "./pages/programs/PoleProgramsPage";
 import PoleBeginnerPage from "./pages/programs/pole/BeginnerPage";
 import PoleIntermediatePage from "./pages/programs/pole/IntermediatePage";
 import PoleAdvancedPage from "./pages/programs/pole/AdvancedPage";
@@ -91,6 +92,7 @@ const App = () => (
           <Route path="/custom-events" element={<CustomEventsPage />} />
           
           {/* Pole Programs */}
+          <Route path="/programs/pole" element={<PoleProgramsPage />} />
           <Route path="/programs/pole/beginner" element={<PoleBeginnerPage />} />
           <Route path="/programs/pole/intermediate" element={<PoleIntermediatePage />} />
           <Route path="/programs/pole/advanced" element={<PoleAdvancedPage />} />
