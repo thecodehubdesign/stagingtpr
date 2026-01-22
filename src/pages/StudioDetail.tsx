@@ -59,7 +59,7 @@ const StudioDetail = () => {
 
       {/* Timetable Section */}
       <div id="timetable">
-        <StudioClassList studioId={studio.id} />
+        <StudioClassList studio={studio} />
       </div>
 
       {/* Instructors Section */}
