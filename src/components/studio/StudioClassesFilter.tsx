@@ -100,7 +100,7 @@ const StudioClassesFilter = ({ studio }: StudioClassesFilterProps) => {
 
         {/* Classes Carousel */}
         <div className="relative">
-          <div className="flex gap-6 overflow-x-auto pb-4 scrollbar-none [&::-webkit-scrollbar]:hidden" style={{ scrollbarWidth: 'none' }}>
+          <div className="flex items-stretch gap-6 overflow-x-auto pb-4 scrollbar-none [&::-webkit-scrollbar]:hidden" style={{ scrollbarWidth: 'none' }}>
             {filteredClasses.map((classItem, index) => (
               <motion.div
                 key={classItem.name}
