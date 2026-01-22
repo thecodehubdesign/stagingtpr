@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useState, useRef } from 'react';
 import { motion } from 'framer-motion';
 import { ChevronLeft, ChevronRight } from 'lucide-react';
 import { Button } from '@/components/ui/button';
@@ -10,6 +10,17 @@ interface StudioClassesFilterProps {
 
 const StudioClassesFilter = ({ studio }: StudioClassesFilterProps) => {
   const [activeFilter, setActiveFilter] = useState('All');
+  const scrollRef = useRef<HTMLDivElement>(null);
+
+  const scroll = (direction: 'left' | 'right') => {
+    if (scrollRef.current) {
+      const scrollAmount = 300;
+      scrollRef.current.scrollBy({
+        left: direction === 'left' ? -scrollAmount : scrollAmount,
+        behavior: 'smooth'
+      });
+    }
+  };
   
   const filters = ['All', 'Pole', 'Aerial', 'Dance', 'Stretch', 'Strength'];
   
@@ -100,7 +111,7 @@ const StudioClassesFilter = ({ studio }: StudioClassesFilterProps) => {
 
         {/* Classes Carousel */}
         <div className="relative">
-          <div className="flex items-stretch gap-6 overflow-x-auto pb-4 scrollbar-none [&::-webkit-scrollbar]:hidden" style={{ scrollbarWidth: 'none' }}>
+          <div ref={scrollRef} className="flex items-stretch gap-6 overflow-x-auto pb-4 scrollbar-none [&::-webkit-scrollbar]:hidden" style={{ scrollbarWidth: 'none' }}>
             {filteredClasses.map((classItem, index) => (
               <motion.div
                 key={classItem.name}
@@ -139,10 +150,16 @@ const StudioClassesFilter = ({ studio }: StudioClassesFilterProps) => {
           </div>
 
           {/* Navigation Arrows */}
-          <button className="absolute left-0 top-1/2 -translate-y-1/2 -translate-x-4 w-12 h-12 rounded-full bg-gray-800 border border-fuchsia-500/30 flex items-center justify-center hover:bg-fuchsia-500/20 transition-colors hidden lg:flex">
+          <button 
+            onClick={() => scroll('left')}
+            className="absolute left-0 top-1/2 -translate-y-1/2 -translate-x-4 w-12 h-12 rounded-full bg-gray-800 border border-fuchsia-500/30 flex items-center justify-center hover:bg-fuchsia-500/20 transition-colors hidden lg:flex"
+          >
             <ChevronLeft className="w-6 h-6 text-white" />
           </button>
-          <button className="absolute right-0 top-1/2 -translate-y-1/2 translate-x-4 w-12 h-12 rounded-full bg-gray-800 border border-fuchsia-500/30 flex items-center justify-center hover:bg-fuchsia-500/20 transition-colors hidden lg:flex">
+          <button 
+            onClick={() => scroll('right')}
+            className="absolute right-0 top-1/2 -translate-y-1/2 translate-x-4 w-12 h-12 rounded-full bg-gray-800 border border-fuchsia-500/30 flex items-center justify-center hover:bg-fuchsia-500/20 transition-colors hidden lg:flex"
+          >
             <ChevronRight className="w-6 h-6 text-white" />
           </button>
         </div>
