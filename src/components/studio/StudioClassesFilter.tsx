@@ -100,7 +100,7 @@ const StudioClassesFilter = ({ studio }: StudioClassesFilterProps) => {
 
         {/* Classes Carousel */}
         <div className="relative">
-          <div className="flex gap-6 overflow-x-auto pb-4 scrollbar-hide">
+          <div className="flex gap-6 overflow-x-auto pb-4 scrollbar-none [&::-webkit-scrollbar]:hidden" style={{ scrollbarWidth: 'none' }}>
             {filteredClasses.map((classItem, index) => (
               <motion.div
                 key={classItem.name}
@@ -108,10 +108,10 @@ const StudioClassesFilter = ({ studio }: StudioClassesFilterProps) => {
                 whileInView={{ opacity: 1, y: 0 }}
                 viewport={{ once: true }}
                 transition={{ delay: index * 0.1 }}
-                className="flex-shrink-0 w-72"
+                className="flex-shrink-0 w-72 h-full"
               >
-                <div className="cyber-card overflow-hidden group cursor-pointer">
-                  <div className="relative aspect-[4/3] overflow-hidden">
+                <div className="cyber-card overflow-hidden group cursor-pointer h-full flex flex-col rounded-2xl">
+                  <div className="relative aspect-[4/3] overflow-hidden rounded-t-2xl">
                     <img 
                       src={classItem.image} 
                       alt={classItem.name}
@@ -123,12 +123,12 @@ const StudioClassesFilter = ({ studio }: StudioClassesFilterProps) => {
                       </span>
                     </div>
                   </div>
-                  <div className="p-5">
+                  <div className="p-5 flex-1 flex flex-col">
                     <h3 className="text-lg font-semibold text-white mb-2">{classItem.name}</h3>
                     <p className="text-gray-400 text-sm mb-4">{classItem.description}</p>
                     <a 
                       href="#classes" 
-                      className="text-fuchsia-400 hover:text-fuchsia-300 text-sm font-medium"
+                      className="text-fuchsia-400 hover:text-fuchsia-300 text-sm font-medium mt-auto"
                     >
                       See {studioLocation} timetable →
                     </a>
