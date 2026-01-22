@@ -80,11 +80,16 @@ const StudioGallery = ({ studioId }: StudioGalleryProps) => {
             challenge, and support you every step of your pole and aerial journey.
           </p>
           
-          {/* Instagram Handle */}
-          <div className="flex items-center justify-center gap-2 text-sm">
-            <span className="text-fuchsia-400 font-medium">@thepoleroom</span>
-            <CheckCircle className="w-4 h-4 text-cyan-400" />
-            <span className="text-gray-400">14.7K Followers</span>
+          {/* Instagram Header Image */}
+          <div className="flex flex-col items-center gap-3">
+            <img 
+              src="/images/instagram-header.png" 
+              alt="@thepoleroom on Instagram" 
+              className="h-10 md:h-12 w-auto"
+            />
+            <p className="text-gray-300 text-sm md:text-base tracking-wide uppercase">
+              Take A Look Inside Our Studio
+            </p>
           </div>
         </motion.div>
 
