@@ -1,11 +1,24 @@
+import { useRef } from 'react';
 import { motion } from 'framer-motion';
-import { Star, Play, CheckCircle } from 'lucide-react';
+import { Star, CheckCircle, ChevronLeft, ChevronRight } from 'lucide-react';
 
 interface StudioGalleryProps {
   studioId: string;
 }
 
 const StudioGallery = ({ studioId }: StudioGalleryProps) => {
+  const scrollRef = useRef<HTMLDivElement>(null);
+
+  const scroll = (direction: 'left' | 'right') => {
+    if (scrollRef.current) {
+      const scrollAmount = 280;
+      scrollRef.current.scrollBy({
+        left: direction === 'left' ? -scrollAmount : scrollAmount,
+        behavior: 'smooth'
+      });
+    }
+  };
+
   const reviews = [
     {
       text: "Super beginner friendly! The instructors make you feel so welcome from day one.",
@@ -17,13 +30,12 @@ const StudioGallery = ({ studioId }: StudioGalleryProps) => {
     }
   ];
 
-  const galleryImages = [
-    '/lovable-uploads/8b589fd4-a71e-43de-823f-c2af97fef88d.jpg',
-    '/lovable-uploads/c7f8bec0-23c5-44db-871b-dccfbacb26a5.jpg',
-    '/lovable-uploads/4d4d16ef-17d9-47e3-a464-cfa3c9b9eef6.jpg',
-    '/lovable-uploads/1d83d83b-0057-4bd1-8052-79584b039a97.jpg',
-    '/lovable-uploads/3cc0b943-7d1c-4140-a59c-a60390d03154.jpg',
-    '/lovable-uploads/8a7c62c9-86e6-4d10-a555-f79e5ed95001.png'
+  const galleryVideos = [
+    '/videos/reel-1.mp4',
+    '/videos/reel-3.mp4',
+    '/videos/reel-4.mp4',
+    '/videos/reel-5.mp4',
+    '/videos/reel-6.mp4',
   ];
 
   return (
@@ -76,41 +88,50 @@ const StudioGallery = ({ studioId }: StudioGalleryProps) => {
           </div>
         </motion.div>
 
-        {/* Gallery Title */}
-        <div className="text-center mb-8">
-          <h3 className="text-xl font-semibold text-white">
-            Take A Look Inside The Studio:
-          </h3>
-        </div>
-
-        {/* Gallery Grid */}
-        <div className="grid grid-cols-2 md:grid-cols-3 gap-4">
-          {galleryImages.map((image, index) => (
-            <motion.div
-              key={index}
-              initial={{ opacity: 0, scale: 0.9 }}
-              whileInView={{ opacity: 1, scale: 1 }}
-              viewport={{ once: true }}
-              transition={{ delay: index * 0.1 }}
-              className="relative aspect-square rounded-xl overflow-hidden group cursor-pointer"
-            >
-              <img 
-                src={image} 
-                alt={`Studio gallery ${index + 1}`}
-                className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500"
-              />
-              <div className="absolute inset-0 bg-gradient-to-t from-purple-900/60 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity" />
-              
-              {/* Play button overlay for video-style posts */}
-              {index % 3 === 0 && (
-                <div className="absolute inset-0 flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity">
-                  <div className="w-14 h-14 rounded-full bg-fuchsia-500/80 flex items-center justify-center backdrop-blur-sm">
-                    <Play className="w-6 h-6 text-white fill-white ml-0.5" />
-                  </div>
-                </div>
-              )}
-            </motion.div>
-          ))}
+        {/* Video Carousel - Facebook Reel Style */}
+        <div className="relative">
+          {/* Left Arrow */}
+          <button 
+            onClick={() => scroll('left')}
+            className="absolute left-0 top-1/2 -translate-y-1/2 z-10 w-10 h-10 rounded-full bg-gray-800/80 border border-fuchsia-500/30 flex items-center justify-center hover:bg-fuchsia-500/20 transition-colors"
+          >
+            <ChevronLeft className="w-5 h-5 text-white" />
+          </button>
+          
+          {/* Scrollable Video Container */}
+          <div 
+            ref={scrollRef}
+            className="flex gap-3 md:gap-4 overflow-x-auto scrollbar-none [&::-webkit-scrollbar]:hidden px-12 py-4"
+            style={{ scrollbarWidth: 'none' }}
+          >
+            {galleryVideos.map((video, index) => (
+              <motion.div
+                key={index}
+                initial={{ opacity: 0, scale: 0.9 }}
+                whileInView={{ opacity: 1, scale: 1 }}
+                viewport={{ once: true }}
+                transition={{ delay: index * 0.1 }}
+                className="flex-shrink-0 w-[160px] sm:w-[180px] md:w-[200px] lg:w-[220px] aspect-[9/16] rounded-xl overflow-hidden shadow-lg shadow-fuchsia-500/10"
+              >
+                <video
+                  src={video}
+                  autoPlay
+                  loop
+                  muted
+                  playsInline
+                  className="w-full h-full object-cover"
+                />
+              </motion.div>
+            ))}
+          </div>
+          
+          {/* Right Arrow */}
+          <button 
+            onClick={() => scroll('right')}
+            className="absolute right-0 top-1/2 -translate-y-1/2 z-10 w-10 h-10 rounded-full bg-gray-800/80 border border-fuchsia-500/30 flex items-center justify-center hover:bg-fuchsia-500/20 transition-colors"
+          >
+            <ChevronRight className="w-5 h-5 text-white" />
+          </button>
         </div>
       </div>
     </section>
