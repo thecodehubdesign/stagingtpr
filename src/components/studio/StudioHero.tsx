@@ -36,143 +36,50 @@ const StudioHero = ({ studio }: StudioHeroProps) => {
 
   return (
     <section className="relative bg-gradient-to-br from-gray-900 via-purple-900/80 to-gray-900 cyber-grid overflow-hidden">
-      {/* Floating orbs */}
-      <div className="absolute top-20 left-10 w-64 h-64 bg-fuchsia-500/20 rounded-full blur-3xl animate-float" />
-      <div className="absolute bottom-20 right-10 w-80 h-80 bg-cyan-500/20 rounded-full blur-3xl animate-float" style={{ animationDelay: '2s' }} />
-      <div className="absolute top-1/2 left-1/3 w-48 h-48 bg-purple-500/20 rounded-full blur-3xl animate-float" style={{ animationDelay: '4s' }} />
+      {/* Floating orbs - hidden on mobile for performance */}
+      <div className="hidden sm:block absolute top-20 left-10 w-64 h-64 bg-fuchsia-500/20 rounded-full blur-3xl animate-float" />
+      <div className="hidden sm:block absolute bottom-20 right-10 w-80 h-80 bg-cyan-500/20 rounded-full blur-3xl animate-float" style={{ animationDelay: '2s' }} />
+      <div className="hidden sm:block absolute top-1/2 left-1/3 w-48 h-48 bg-purple-500/20 rounded-full blur-3xl animate-float" style={{ animationDelay: '4s' }} />
 
-      <div className="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pt-24 pb-4">
-        <div className="grid lg:grid-cols-2 gap-12 items-start">
-          {/* Left Content */}
+      <div className="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pt-16 sm:pt-24 pb-4">
+        {/* Stack vertically on mobile, side-by-side on lg+ */}
+        <div className="flex flex-col lg:grid lg:grid-cols-2 gap-8 lg:gap-12 items-start">
+          
+          {/* Media Section - Shown FIRST on mobile */}
           <motion.div
-            initial={{ opacity: 0, x: -30 }}
-            animate={{ opacity: 1, x: 0 }}
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.6 }}
-            className="space-y-6"
-          >
-            {/* Review Badge */}
-            <motion.div
-              initial={{ opacity: 0, y: -20 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ delay: 0.2 }}
-              className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-white/10 backdrop-blur-sm border border-fuchsia-500/30"
-            >
-              <div className="flex">
-                {[...Array(5)].map((_, i) => (
-                  <Star key={i} className="w-4 h-4 fill-fuchsia-400 text-fuchsia-400" />
-                ))}
-              </div>
-              <span className="text-white text-sm font-medium">
-                {studio.rating || 4.9} from {studio.reviewCount || 127} reviews
-              </span>
-            </motion.div>
-
-            {/* Title */}
-            <h1 className="text-4xl sm:text-5xl lg:text-6xl font-bold text-white leading-tight">
-              The Pole Room{' '}
-              <span className="gradient-text">{studio.name.replace('The Pole Room ', '')}</span>
-            </h1>
-
-            {/* Subtitle */}
-            <p className="text-lg text-gray-300 max-w-lg">
-              Build confidence, strength, and community in {studio.name.replace('The Pole Room ', '')}'s premier pole fitness studio
-            </p>
-
-            {/* Info Card */}
-            <div className="cyber-card p-6 space-y-4">
-              <div className="flex items-start gap-3">
-                <MapPin className="w-5 h-5 text-fuchsia-400 mt-1 flex-shrink-0" />
-                <div>
-                  <p className="text-white font-medium">{studio.address}</p>
-                  {studio.nearbyLandmark && (
-                    <p className="text-gray-400 text-sm mt-1">{studio.nearbyLandmark}</p>
-                  )}
-                </div>
-              </div>
-              
-              {studio.studioSpecs && (
-                <div className="pt-4 border-t border-white/10">
-                  <p className="text-cyan-400 text-sm font-medium mb-2">Studio Specs</p>
-                  <p className="text-gray-300 text-sm">{studio.studioSpecs}</p>
-                </div>
-              )}
-            </div>
-
-            {/* CTAs */}
-            <div className="flex flex-wrap gap-4">
-              <Button className="neon-button px-8 py-6 text-lg">
-                I'm a New Student
-              </Button>
-              <Button 
-                variant="outline" 
-                className="px-8 py-6 text-lg border-fuchsia-500/50 text-white hover:bg-fuchsia-500/20"
-              >
-                See {studio.name.replace('The Pole Room ', '')}'s Timetable
-              </Button>
-            </div>
-
-            {/* Social Icons */}
-            <div className="flex items-center gap-4 pt-4 pb-8">
-              {studio.instagram && (
-                <a 
-                  href={studio.instagram} 
-                  target="_blank" 
-                  rel="noopener noreferrer"
-                  className="p-3 rounded-full bg-white/10 border border-fuchsia-500/30 hover:bg-fuchsia-500/20 transition-colors"
-                >
-                  <Instagram className="w-5 h-5 text-fuchsia-400" />
-                </a>
-              )}
-              {studio.facebook && (
-                <a 
-                  href={studio.facebook} 
-                  target="_blank" 
-                  rel="noopener noreferrer"
-                  className="p-3 rounded-full bg-white/10 border border-fuchsia-500/30 hover:bg-fuchsia-500/20 transition-colors"
-                >
-                  <svg className="w-5 h-5 text-fuchsia-400" fill="currentColor" viewBox="0 0 24 24">
-                    <path d="M24 12.073c0-6.627-5.373-12-12-12s-12 5.373-12 12c0 5.99 4.388 10.954 10.125 11.854v-8.385H7.078v-3.47h3.047V9.43c0-3.007 1.792-4.669 4.533-4.669 1.312 0 2.686.235 2.686.235v2.953H15.83c-1.491 0-1.956.925-1.956 1.874v2.25h3.328l-.532 3.47h-2.796v8.385C19.612 23.027 24 18.062 24 12.073z"/>
-                  </svg>
-                </a>
-              )}
-            </div>
-          </motion.div>
-
-          {/* Right Content - Video/Image Display with Arrow Navigation */}
-          <motion.div
-            initial={{ opacity: 0, x: 30 }}
-            animate={{ opacity: 1, x: 0 }}
-            transition={{ duration: 0.6, delay: 0.3 }}
-            className="relative space-y-4 lg:mt-16"
+            className="relative space-y-3 w-full order-1 lg:order-2 lg:mt-16"
           >
             {/* Main Display Area with Arrows */}
             <div className="relative">
               {/* Left Arrow */}
               <button
                 onClick={goToPrevious}
-                className="absolute left-0 top-1/2 -translate-y-1/2 -translate-x-1/2 z-10 
-                           w-12 h-12 rounded-full bg-black/60 backdrop-blur-sm 
+                className="absolute left-2 sm:left-0 top-1/2 -translate-y-1/2 sm:-translate-x-1/2 z-10 
+                           w-10 h-10 sm:w-12 sm:h-12 rounded-full bg-black/60 backdrop-blur-sm 
                            border border-white/20 hover:bg-fuchsia-500/30 
                            flex items-center justify-center transition-all hover:scale-110"
                 aria-label="Previous"
               >
-                <ChevronLeft className="w-6 h-6 text-white" />
+                <ChevronLeft className="w-5 h-5 sm:w-6 sm:h-6 text-white" />
               </button>
 
               {/* Right Arrow */}
               <button
                 onClick={goToNext}
-                className="absolute right-0 top-1/2 -translate-y-1/2 translate-x-1/2 z-10 
-                           w-12 h-12 rounded-full bg-black/60 backdrop-blur-sm 
+                className="absolute right-2 sm:right-0 top-1/2 -translate-y-1/2 sm:translate-x-1/2 z-10 
+                           w-10 h-10 sm:w-12 sm:h-12 rounded-full bg-black/60 backdrop-blur-sm 
                            border border-white/20 hover:bg-fuchsia-500/30 
                            flex items-center justify-center transition-all hover:scale-110"
                 aria-label="Next"
               >
-                <ChevronRight className="w-6 h-6 text-white" />
+                <ChevronRight className="w-5 h-5 sm:w-6 sm:h-6 text-white" />
               </button>
 
               {/* Media Container */}
-              <div className="relative aspect-video rounded-2xl overflow-hidden cyber-border bg-gray-800">
+              <div className="relative aspect-video rounded-xl sm:rounded-2xl overflow-hidden cyber-border bg-gray-800">
                 {currentMedia.type === 'video' ? (
                   <iframe
                     src={currentMedia.src}
@@ -198,9 +105,9 @@ const StudioHero = ({ studio }: StudioHeroProps) => {
                     animate={{ opacity: 1, y: 0 }}
                     exit={{ opacity: 0, y: -10 }}
                     transition={{ duration: 0.3 }}
-                    className="absolute bottom-4 left-1/2 -translate-x-1/2"
+                    className="absolute bottom-3 sm:bottom-4 left-1/2 -translate-x-1/2"
                   >
-                    <span className="px-6 py-2.5 rounded-full bg-gray-800/70 backdrop-blur-sm border border-white/20 text-white text-sm font-medium whitespace-nowrap shadow-lg">
+                    <span className="px-4 sm:px-6 py-2 sm:py-2.5 rounded-full bg-gray-800/70 backdrop-blur-sm border border-white/20 text-white text-xs sm:text-sm font-medium whitespace-nowrap shadow-lg">
                       {currentMedia.label}
                     </span>
                   </motion.div>
@@ -208,13 +115,13 @@ const StudioHero = ({ studio }: StudioHeroProps) => {
               </div>
             </div>
 
-            {/* Shopify-style Thumbnail Carousel */}
-            <div className="flex gap-3 overflow-x-auto pb-2 scrollbar-none">
+            {/* Thumbnail Carousel - Scrollable on mobile */}
+            <div className="flex gap-2 sm:gap-3 overflow-x-auto pb-2 scrollbar-none -mx-4 px-4 sm:mx-0 sm:px-0">
               {allMedia.map((media, index) => (
                 <button
                   key={index}
                   onClick={() => setCurrentIndex(index)}
-                  className={`relative flex-shrink-0 w-20 h-20 rounded-lg overflow-hidden border-2 transition-all ${
+                  className={`relative flex-shrink-0 w-16 h-16 sm:w-20 sm:h-20 rounded-lg overflow-hidden border-2 transition-all ${
                     currentIndex === index
                       ? 'border-fuchsia-500 ring-2 ring-fuchsia-500/50' 
                       : 'border-gray-600 hover:border-fuchsia-400'
@@ -228,7 +135,7 @@ const StudioHero = ({ studio }: StudioHeroProps) => {
                         className="w-full h-full object-cover"
                       />
                       <div className="absolute inset-0 bg-black/40 flex items-center justify-center">
-                        <Play className="w-6 h-6 text-white fill-white" />
+                        <Play className="w-5 h-5 sm:w-6 sm:h-6 text-white fill-white" />
                       </div>
                     </>
                   ) : (
@@ -242,8 +149,102 @@ const StudioHero = ({ studio }: StudioHeroProps) => {
               ))}
             </div>
           </motion.div>
-        </div>
 
+          {/* Left Content - Text/CTA Section */}
+          <motion.div
+            initial={{ opacity: 0, x: -30 }}
+            animate={{ opacity: 1, x: 0 }}
+            transition={{ duration: 0.6, delay: 0.2 }}
+            className="space-y-4 sm:space-y-6 order-2 lg:order-1"
+          >
+            {/* Review Badge */}
+            <motion.div
+              initial={{ opacity: 0, y: -20 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ delay: 0.3 }}
+              className="inline-flex items-center gap-2 px-3 sm:px-4 py-1.5 sm:py-2 rounded-full bg-white/10 backdrop-blur-sm border border-fuchsia-500/30"
+            >
+              <div className="flex">
+                {[...Array(5)].map((_, i) => (
+                  <Star key={i} className="w-3 h-3 sm:w-4 sm:h-4 fill-fuchsia-400 text-fuchsia-400" />
+                ))}
+              </div>
+              <span className="text-white text-xs sm:text-sm font-medium">
+                {studio.rating || 4.9} from {studio.reviewCount || 127} reviews
+              </span>
+            </motion.div>
+
+            {/* Title */}
+            <h1 className="text-3xl sm:text-4xl lg:text-5xl xl:text-6xl font-bold text-white leading-tight">
+              The Pole Room{' '}
+              <span className="gradient-text">{studio.name.replace('The Pole Room ', '')}</span>
+            </h1>
+
+            {/* Subtitle */}
+            <p className="text-base sm:text-lg text-gray-300 max-w-lg">
+              Build confidence, strength, and community in {studio.name.replace('The Pole Room ', '')}'s premier pole fitness studio
+            </p>
+
+            {/* Info Card */}
+            <div className="cyber-card p-4 sm:p-6 space-y-3 sm:space-y-4">
+              <div className="flex items-start gap-3">
+                <MapPin className="w-5 h-5 text-fuchsia-400 mt-0.5 flex-shrink-0" />
+                <div>
+                  <p className="text-white font-medium text-sm sm:text-base">{studio.address}</p>
+                  {studio.nearbyLandmark && (
+                    <p className="text-gray-400 text-xs sm:text-sm mt-1">{studio.nearbyLandmark}</p>
+                  )}
+                </div>
+              </div>
+              
+              {studio.studioSpecs && (
+                <div className="pt-3 sm:pt-4 border-t border-white/10">
+                  <p className="text-cyan-400 text-xs sm:text-sm font-medium mb-1 sm:mb-2">Studio Specs</p>
+                  <p className="text-gray-300 text-xs sm:text-sm">{studio.studioSpecs}</p>
+                </div>
+              )}
+            </div>
+
+            {/* CTAs - Stack on mobile */}
+            <div className="flex flex-col sm:flex-row gap-3 sm:gap-4">
+              <Button className="neon-button px-6 sm:px-8 py-5 sm:py-6 text-base sm:text-lg w-full sm:w-auto">
+                I'm a New Student
+              </Button>
+              <Button 
+                variant="outline" 
+                className="px-6 sm:px-8 py-5 sm:py-6 text-base sm:text-lg border-fuchsia-500/50 text-white hover:bg-fuchsia-500/20 w-full sm:w-auto"
+              >
+                See Timetable
+              </Button>
+            </div>
+
+            {/* Social Icons */}
+            <div className="flex items-center gap-3 sm:gap-4 pt-2 sm:pt-4 pb-4 sm:pb-8">
+              {studio.instagram && (
+                <a 
+                  href={studio.instagram} 
+                  target="_blank" 
+                  rel="noopener noreferrer"
+                  className="p-2.5 sm:p-3 rounded-full bg-white/10 border border-fuchsia-500/30 hover:bg-fuchsia-500/20 transition-colors"
+                >
+                  <Instagram className="w-4 h-4 sm:w-5 sm:h-5 text-fuchsia-400" />
+                </a>
+              )}
+              {studio.facebook && (
+                <a 
+                  href={studio.facebook} 
+                  target="_blank" 
+                  rel="noopener noreferrer"
+                  className="p-2.5 sm:p-3 rounded-full bg-white/10 border border-fuchsia-500/30 hover:bg-fuchsia-500/20 transition-colors"
+                >
+                  <svg className="w-4 h-4 sm:w-5 sm:h-5 text-fuchsia-400" fill="currentColor" viewBox="0 0 24 24">
+                    <path d="M24 12.073c0-6.627-5.373-12-12-12s-12 5.373-12 12c0 5.99 4.388 10.954 10.125 11.854v-8.385H7.078v-3.47h3.047V9.43c0-3.007 1.792-4.669 4.533-4.669 1.312 0 2.686.235 2.686.235v2.953H15.83c-1.491 0-1.956.925-1.956 1.874v2.25h3.328l-.532 3.47h-2.796v8.385C19.612 23.027 24 18.062 24 12.073z"/>
+                  </svg>
+                </a>
+              )}
+            </div>
+          </motion.div>
+        </div>
       </div>
     </section>
   );
