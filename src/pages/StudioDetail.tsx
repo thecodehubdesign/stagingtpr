@@ -12,6 +12,7 @@ import StudioFAQ from '@/components/studio/StudioFAQ';
 import StudioLocalSupport from '@/components/studio/StudioLocalSupport';
 import StudioDirections from '@/components/studio/StudioDirections';
 import StudioContact from '@/components/studio/StudioContact';
+import StudioOtherLocations from '@/components/studio/StudioOtherLocations';
 import SectionNavigation from '@/components/SectionNavigation';
 import FloatingReviewsButton from '@/components/studio/FloatingReviewsButton';
 import { studios } from '@/data/studios';
@@ -99,6 +100,11 @@ const StudioDetail = () => {
       {/* Contact Section */}
       <div id="contact">
         <StudioContact studio={studio} />
+      </div>
+
+      {/* Other Studios Slider */}
+      <div id="other-studios">
+        <StudioOtherLocations currentStudioId={studio.id} />
       </div>
 
       {/* Floating Reviews Button */}
