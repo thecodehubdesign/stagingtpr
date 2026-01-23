@@ -13,7 +13,9 @@ import StudioLocalSupport from '@/components/studio/StudioLocalSupport';
 import StudioDirections from '@/components/studio/StudioDirections';
 import StudioContact from '@/components/studio/StudioContact';
 import SectionNavigation from '@/components/SectionNavigation';
+import FloatingReviewsButton from '@/components/studio/FloatingReviewsButton';
 import { studios } from '@/data/studios';
+
 
 const StudioDetail = () => {
   const { slug } = useParams<{ slug: string }>();
@@ -98,6 +100,9 @@ const StudioDetail = () => {
       <div id="contact">
         <StudioContact studio={studio} />
       </div>
+
+      {/* Floating Reviews Button */}
+      <FloatingReviewsButton studioId={studio.id} />
 
       <Footer />
     </div>
