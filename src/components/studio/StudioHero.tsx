@@ -112,7 +112,7 @@ const StudioHero = ({ studio }: StudioHeroProps) => {
             </div>
 
             {/* Social Icons */}
-            <div className="flex items-center gap-4 pt-4">
+            <div className="flex items-center gap-4 pt-4 pb-8">
               {studio.instagram && (
                 <a 
                   href={studio.instagram} 
@@ -143,7 +143,7 @@ const StudioHero = ({ studio }: StudioHeroProps) => {
             initial={{ opacity: 0, x: 30 }}
             animate={{ opacity: 1, x: 0 }}
             transition={{ duration: 0.6, delay: 0.3 }}
-            className="relative space-y-4"
+            className="relative space-y-4 lg:mt-16"
           >
             {/* Main Display Area with Arrows */}
             <div className="relative">
