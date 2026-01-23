@@ -108,6 +108,140 @@
     border-color: rgba(0, 255, 255, 0.5);
     box-shadow: 0 8px 32px rgba(255, 0, 255, 0.2);
   }
+
+  /* MindBody Widget Custom Styling - Cyberpunk Theme */
+  .mindbody-widget-container {
+    background-color: rgba(20, 20, 35, 0.5) !important;
+  }
+
+  /* Remove white background, make transparent */
+  .mindbody-widget,
+  .healcode-container,
+  .hc-widget,
+  .bw-widget {
+    background-color: transparent !important;
+    background: none !important;
+  }
+
+  /* Style individual class rows */
+  .hc-class-row,
+  .healcode-row,
+  .bw-widget__schedule-row,
+  .bw-session {
+    background-color: rgba(20, 20, 35, 0.8) !important;
+    border: 1px solid rgba(255, 0, 255, 0.3) !important;
+    color: #ffffff !important;
+    margin-bottom: 8px !important;
+    border-radius: 8px !important;
+    transition: all 0.3s ease !important;
+  }
+
+  .hc-class-row:hover,
+  .healcode-row:hover,
+  .bw-widget__schedule-row:hover,
+  .bw-session:hover {
+    border-color: rgba(0, 255, 255, 0.5) !important;
+    box-shadow: 0 4px 20px rgba(255, 0, 255, 0.2) !important;
+  }
+
+  /* Text styling - force white text */
+  .hc-class-row *,
+  .healcode-row *,
+  .bw-widget *,
+  .mindbody-widget * {
+    color: #ffffff !important;
+  }
+
+  /* Headers and labels */
+  .hc-class-name,
+  .bw-widget__schedule-class-name,
+  .bw-session__name {
+    color: #e879f9 !important;
+    font-weight: 600 !important;
+  }
+
+  /* Time and instructor info */
+  .hc-class-time,
+  .hc-class-instructor,
+  .bw-widget__schedule-time,
+  .bw-session__time,
+  .bw-session__staff {
+    color: rgba(255, 255, 255, 0.8) !important;
+  }
+
+  /* Sign Up / Book buttons */
+  .hc-button,
+  .healcode-link-button,
+  .bw-widget__cta,
+  .bw-widget__button,
+  .bw-session__button,
+  .bw-session__signup {
+    background: linear-gradient(45deg, #ff00ff, #00ffff) !important;
+    border: none !important;
+    border-radius: 9999px !important;
+    text-transform: uppercase !important;
+    font-weight: 600 !important;
+    padding: 8px 20px !important;
+    box-shadow: 0 0 15px rgba(255, 0, 255, 0.4) !important;
+    transition: all 0.3s ease !important;
+  }
+
+  .hc-button:hover,
+  .healcode-link-button:hover,
+  .bw-widget__cta:hover,
+  .bw-widget__button:hover,
+  .bw-session__button:hover,
+  .bw-session__signup:hover {
+    box-shadow: 0 0 25px rgba(255, 0, 255, 0.6), 0 0 35px rgba(0, 255, 255, 0.3) !important;
+    transform: translateY(-2px) !important;
+  }
+
+  /* Calendar/date navigation */
+  .hc-calendar,
+  .bw-widget__calendar,
+  .bw-calendar {
+    background-color: rgba(20, 20, 35, 0.9) !important;
+    border: 1px solid rgba(255, 0, 255, 0.3) !important;
+    border-radius: 12px !important;
+  }
+
+  /* Selected/active dates */
+  .hc-calendar-day-selected,
+  .bw-widget__calendar-day--selected,
+  .bw-calendar__day--selected {
+    background-color: #d000ff !important;
+    box-shadow: 0 0 10px #d000ff !important;
+  }
+
+  /* Widget header/navigation */
+  .bw-header,
+  .bw-widget__header {
+    background-color: rgba(20, 20, 35, 0.9) !important;
+    border-bottom: 1px solid rgba(255, 0, 255, 0.3) !important;
+  }
+
+  /* Scrollbars within widget */
+  .mindbody-widget ::-webkit-scrollbar,
+  .mindbody-widget-container ::-webkit-scrollbar {
+    width: 8px;
+  }
+
+  .mindbody-widget ::-webkit-scrollbar-track,
+  .mindbody-widget-container ::-webkit-scrollbar-track {
+    background: rgba(20, 20, 35, 0.5);
+  }
+
+  .mindbody-widget ::-webkit-scrollbar-thumb,
+  .mindbody-widget-container ::-webkit-scrollbar-thumb {
+    background: linear-gradient(180deg, #ff00ff, #00ffff);
+    border-radius: 4px;
+  }
+
+  /* Loading states */
+  .bw-widget__loading,
+  .mindbody-widget .loading {
+    color: #e879f9 !important;
+  }
 }
 
 @keyframes pulse-neon {

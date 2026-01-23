@@ -1,15 +1,6 @@
 import { useState, useEffect } from 'react';
 import { Card } from '@/components/ui/card';
-import FreeTrialBookingForm from '../FreeTrialBookingForm';
 import { Studio } from '@/data/studios';
-
-declare global {
-  interface Window {
-    healcode?: {
-      loadWidgets: () => void;
-    };
-  }
-}
 
 interface StudioClassListProps {
   studio: Studio;
@@ -24,26 +15,18 @@ const StudioClassList = ({ studio }: StudioClassListProps) => {
   useEffect(() => {
     // Load the MindBody widget script
     const script = document.createElement('script');
-    script.src = 'https://widgets.mindbodyonline.com/javascripts/healcode.js';
-    script.type = 'text/javascript';
+    script.src = 'https://brandedweb.mindbodyonline.com/embed/widget.js';
     script.async = true;
-    document.head.appendChild(script);
+    document.body.appendChild(script);
 
     return () => {
       // Cleanup script on unmount
-      const existingScript = document.head.querySelector('script[src="https://widgets.mindbodyonline.com/javascripts/healcode.js"]');
+      const existingScript = document.querySelector('script[src="https://brandedweb.mindbodyonline.com/embed/widget.js"]');
       if (existingScript) {
-        document.head.removeChild(existingScript);
+        existingScript.remove();
       }
     };
   }, []);
-
-  // Reload widget when filter changes
-  useEffect(() => {
-    if (window.healcode) {
-      window.healcode.loadWidgets();
-    }
-  }, [activeFilter]);
 
   return (
     <section className="py-16 sm:py-24 bg-background">
@@ -97,25 +80,21 @@ const StudioClassList = ({ studio }: StudioClassListProps) => {
               <h3 className="text-xl font-bold text-white">Live Class Schedule</h3>
             </div>
             
-            {/* MindBody Schedule Widget Container - conditionally render based on filter */}
-            <div className="bg-white rounded-lg p-4 min-h-[400px]">
+            {/* MindBody Schedule Widget Container */}
+            <div className="mindbody-widget-container rounded-lg p-4 min-h-[400px] overflow-hidden">
               {activeFilter === 'full' ? (
                 <div 
                   key="full-schedule"
-                  dangerouslySetInnerHTML={{
-                    __html: `
-                      <healcode-widget data-type="schedules" data-widget-partner="object" data-widget-id="d927417628e" data-widget-version="1"></healcode-widget>
-                    `
-                  }}
+                  className="mindbody-widget" 
+                  data-widget-type="Schedules" 
+                  data-widget-id="d98128628e"
                 />
               ) : (
                 <div 
                   key="beginner-schedule"
-                  dangerouslySetInnerHTML={{
-                    __html: `
-                      <healcode-widget data-type="schedules" data-widget-partner="object" data-widget-id="BEGINNER_WIDGET_ID" data-widget-version="1"></healcode-widget>
-                    `
-                  }}
+                  className="mindbody-widget" 
+                  data-widget-type="Schedules" 
+                  data-widget-id="BEGINNER_WIDGET_ID"
                 />
               )}
             </div>
