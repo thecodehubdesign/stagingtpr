@@ -1,4 +1,3 @@
-
 import { useParams } from 'react-router-dom';
 import Header from '@/components/Header';
 import Footer from '@/components/Footer';
@@ -12,6 +11,7 @@ import StudioFAQ from '@/components/studio/StudioFAQ';
 import StudioLocalSupport from '@/components/studio/StudioLocalSupport';
 import StudioDirections from '@/components/studio/StudioDirections';
 import StudioContact from '@/components/studio/StudioContact';
+import StudioGoogleReviews from '@/components/studio/StudioGoogleReviews';
 import SectionNavigation from '@/components/SectionNavigation';
 import FloatingReviewsButton from '@/components/studio/FloatingReviewsButton';
 import { studios } from '@/data/studios';
@@ -43,6 +43,7 @@ const StudioDetail = () => {
     { id: 'faq', label: 'FAQ' },
     { id: 'local-support', label: 'Community' },
     { id: 'directions', label: 'Directions' },
+    { id: 'google-reviews', label: 'Google Reviews' },
     { id: 'contact', label: 'Contact' }
   ];
 
@@ -94,6 +95,11 @@ const StudioDetail = () => {
       {/* Directions Section */}
       <div id="directions">
         <StudioDirections studio={studio} />
+      </div>
+
+      {/* Google Reviews Section */}
+      <div id="google-reviews">
+        <StudioGoogleReviews studioId={studio.id} />
       </div>
 
       {/* Contact Section */}
