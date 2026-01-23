@@ -30,7 +30,7 @@ const instructors: Instructor[] = [
     experience: "8+ years",
     bio: "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Derryn brings passion and energy to every class, focusing on building strength and confidence in her students. Her teaching style emphasizes proper technique while making every session fun and engaging.",
     image: "/images/instructors/derryn.png",
-    video: "/videos/instructors/derryn.mp4"
+    video: "/videos/instructors/alison.mp4"
   },
   {
     id: 2,
@@ -40,7 +40,7 @@ const instructors: Instructor[] = [
     experience: "6+ years",
     bio: "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Bianca specializes in aerial arts and brings a graceful, creative approach to her classes. She loves helping students discover new movements and push their boundaries safely.",
     image: "/images/instructors/bianca.png",
-    video: "/videos/instructors/bianca.mp4"
+    video: "/videos/instructors/derryn.mp4"
   },
   {
     id: 3,
@@ -50,7 +50,7 @@ const instructors: Instructor[] = [
     experience: "10+ years",
     bio: "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Alison is dedicated to helping her students build incredible strength and master advanced pole tricks. Her systematic approach ensures safe progression for all levels.",
     image: "/images/instructors/alison.png",
-    video: "/videos/instructors/alison.mp4"
+    video: "/videos/instructors/bianca.mp4"
   },
   {
     id: 4,
@@ -163,7 +163,8 @@ const StudioInstructors = ({ studio }: StudioInstructorsProps) => {
   const scrollRef = useRef<HTMLDivElement>(null);
   const [selectedInstructor, setSelectedInstructor] = useState<Instructor | null>(null);
 
-  const scroll = (direction: 'left' | 'right') => {
+  const scroll = (direction: 'left' | 'right', e: React.MouseEvent) => {
+    e.stopPropagation();
     if (scrollRef.current) {
       const scrollAmount = 300;
       scrollRef.current.scrollBy({
@@ -202,8 +203,8 @@ const StudioInstructors = ({ studio }: StudioInstructorsProps) => {
         <div className="relative">
           {/* Left Arrow */}
           <button 
-            onClick={() => scroll('left')}
-            className="absolute left-0 top-1/2 -translate-y-1/2 z-10 bg-gray-800/90 hover:bg-fuchsia-500/30 border border-fuchsia-500/50 rounded-full p-3 transition-colors"
+            onClick={(e) => scroll('left', e)}
+            className="absolute left-0 top-1/2 -translate-y-1/2 z-20 bg-gray-800/90 hover:bg-fuchsia-500/30 border border-fuchsia-500/50 rounded-full p-3 transition-colors"
           >
             <ChevronLeft className="w-6 h-6 text-white" />
           </button>
@@ -226,8 +227,8 @@ const StudioInstructors = ({ studio }: StudioInstructorsProps) => {
 
           {/* Right Arrow */}
           <button 
-            onClick={() => scroll('right')}
-            className="absolute right-0 top-1/2 -translate-y-1/2 z-10 bg-gray-800/90 hover:bg-fuchsia-500/30 border border-fuchsia-500/50 rounded-full p-3 transition-colors"
+            onClick={(e) => scroll('right', e)}
+            className="absolute right-0 top-1/2 -translate-y-1/2 z-20 bg-gray-800/90 hover:bg-fuchsia-500/30 border border-fuchsia-500/50 rounded-full p-3 transition-colors"
           >
             <ChevronRight className="w-6 h-6 text-white" />
           </button>
