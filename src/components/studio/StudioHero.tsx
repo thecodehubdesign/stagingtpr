@@ -152,7 +152,7 @@ const StudioHero = ({ studio }: StudioHeroProps) => {
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.6 }}
-            className="relative w-full order-2 lg:mt-16"
+            className="relative w-full order-2 lg:mt-16 space-y-3"
           >
             {/* Main Display Area with Arrows */}
             <div className="relative">
@@ -215,6 +215,40 @@ const StudioHero = ({ studio }: StudioHeroProps) => {
                   </motion.div>
                 </AnimatePresence>
               </div>
+            </div>
+
+            {/* Thumbnail Strip - Static Grid */}
+            <div className="flex flex-wrap justify-center gap-2 sm:gap-3">
+              {allMedia.map((media, index) => (
+                <button
+                  key={index}
+                  onClick={() => setCurrentIndex(index)}
+                  className={`relative w-12 h-12 sm:w-16 sm:h-16 lg:w-[calc(10%-8px)] lg:h-auto lg:aspect-square rounded-lg overflow-hidden border-2 transition-all ${
+                    currentIndex === index
+                      ? 'border-fuchsia-500 ring-2 ring-fuchsia-500/50' 
+                      : 'border-gray-600 hover:border-fuchsia-400'
+                  }`}
+                >
+                  {media.type === 'video' ? (
+                    <>
+                      <img 
+                        src="/lovable-uploads/5b3dd8e8-6bc4-4f4a-af01-655d55902167.png"
+                        alt="Video thumbnail"
+                        className="w-full h-full object-cover"
+                      />
+                      <div className="absolute inset-0 bg-black/40 flex items-center justify-center">
+                        <Play className="w-4 h-4 sm:w-5 sm:h-5 text-white fill-white" />
+                      </div>
+                    </>
+                  ) : (
+                    <img 
+                      src={media.src} 
+                      alt={media.label}
+                      className="w-full h-full object-cover"
+                    />
+                  )}
+                </button>
+              ))}
             </div>
           </motion.div>
         </div>
