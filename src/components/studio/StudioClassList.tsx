@@ -47,13 +47,15 @@ const StudioClassList = ({ studio }: StudioClassListProps) => {
   }, [activeFilter]);
 
   return (
-    <section className="py-16 bg-gray-800/50 rounded-2xl my-16">
-      <div className="max-w-6xl mx-auto px-6">
+    <section className="py-16 sm:py-24 bg-background">
+      <div className="container mx-auto px-4">
         <div className="text-center mb-12">
-          <h2 className="text-3xl sm:text-4xl font-bold text-white mb-6">
-            {locationName} <span className="gradient-text">Daily Timetable</span>
+          <p className="text-fuchsia-400 text-sm uppercase tracking-widest mb-3">Our Classes</p>
+          <h2 className="text-3xl sm:text-4xl font-bold mb-4">
+            <span className="text-white">{locationName} </span>
+            <span className="gradient-text">Daily Timetable</span>
           </h2>
-          <p className="text-lg text-gray-300 max-w-3xl mx-auto">
+          <p className="text-muted-foreground max-w-3xl mx-auto">
             View our upcoming schedule with something for everyone. We aim to offer a variety 
             of classes for all skill levels across dance, conditioning and tricks classes. 
             You can also use the filters at the top to filter between all classes and beginner 
@@ -89,7 +91,7 @@ const StudioClassList = ({ studio }: StudioClassListProps) => {
           </button>
         </div>
 
-        <div className="mb-8">
+        <div className="max-w-6xl mx-auto">
           <Card className="p-6 bg-gray-800 border-gray-700">
             <div className="flex items-center mb-4">
               <Calendar className="w-6 h-6 mr-2 text-fuchsia-400" />
@@ -119,10 +121,6 @@ const StudioClassList = ({ studio }: StudioClassListProps) => {
               )}
             </div>
           </Card>
-        </div>
-
-        <div className="text-center mt-12">
-          <FreeTrialBookingForm />
         </div>
       </div>
     </section>
