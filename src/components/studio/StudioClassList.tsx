@@ -1,6 +1,5 @@
 import { useState, useEffect } from 'react';
 import { Card } from '@/components/ui/card';
-import { Calendar } from 'lucide-react';
 import FreeTrialBookingForm from '../FreeTrialBookingForm';
 import { Studio } from '@/data/studios';
 
@@ -55,7 +54,7 @@ const StudioClassList = ({ studio }: StudioClassListProps) => {
             <span className="text-white">{locationName} </span>
             <span className="gradient-text">Daily Timetable</span>
           </h2>
-          <p className="text-muted-foreground max-w-3xl mx-auto">
+          <p className="text-white/80 max-w-3xl mx-auto">
             View our upcoming schedule with something for everyone. We aim to offer a variety 
             of classes for all skill levels across dance, conditioning and tricks classes. 
             You can also use the filters at the top to filter between all classes and beginner 
@@ -67,34 +66,34 @@ const StudioClassList = ({ studio }: StudioClassListProps) => {
           </p>
         </div>
 
-        {/* Filter Toggle */}
-        <div className="flex justify-center gap-4 mb-8">
-          <button
-            onClick={() => setActiveFilter('full')}
-            className={`px-6 py-3 rounded-full font-medium transition-all ${
-              activeFilter === 'full'
-                ? 'bg-fuchsia-500 text-white shadow-lg shadow-fuchsia-500/30'
-                : 'bg-gray-700 text-gray-300 hover:bg-gray-600'
-            }`}
-          >
-            Full Timetable
-          </button>
-          <button
-            onClick={() => setActiveFilter('beginner')}
-            className={`px-6 py-3 rounded-full font-medium transition-all ${
-              activeFilter === 'beginner'
-                ? 'bg-fuchsia-500 text-white shadow-lg shadow-fuchsia-500/30'
-                : 'bg-gray-700 text-gray-300 hover:bg-gray-600'
-            }`}
-          >
-            Beginner Friendly
-          </button>
-        </div>
-
         <div className="max-w-6xl mx-auto">
           <Card className="p-6 bg-gray-800 border-gray-700">
+            {/* Filter Toggle - Inside Card */}
+            <div className="flex justify-center gap-4 mb-6">
+              <button
+                onClick={() => setActiveFilter('full')}
+                className={`px-6 py-3 rounded-full font-medium transition-all ${
+                  activeFilter === 'full'
+                    ? 'bg-fuchsia-500 text-white shadow-lg shadow-fuchsia-500/30'
+                    : 'bg-gray-700 text-gray-300 hover:bg-gray-600'
+                }`}
+              >
+                Full Timetable
+              </button>
+              <button
+                onClick={() => setActiveFilter('beginner')}
+                className={`px-6 py-3 rounded-full font-medium transition-all ${
+                  activeFilter === 'beginner'
+                    ? 'bg-fuchsia-500 text-white shadow-lg shadow-fuchsia-500/30'
+                    : 'bg-gray-700 text-gray-300 hover:bg-gray-600'
+                }`}
+              >
+                Beginner Friendly
+              </button>
+            </div>
+
             <div className="flex items-center mb-4">
-              <Calendar className="w-6 h-6 mr-2 text-fuchsia-400" />
+              <div className="w-3 h-3 bg-green-500 rounded-full animate-pulse mr-3 shadow-lg shadow-green-500/50" />
               <h3 className="text-xl font-bold text-white">Live Class Schedule</h3>
             </div>
             
