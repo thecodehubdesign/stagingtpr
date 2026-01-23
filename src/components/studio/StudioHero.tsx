@@ -28,13 +28,6 @@ const StudioHero = ({ studio }: StudioHeroProps) => {
     setCurrentIndex((prev) => (prev === allMedia.length - 1 ? 0 : prev + 1));
   };
 
-  const benefits = [
-    'New Student Offer',
-    'Beginner Friendly Classes',
-    'Award Winning Instructors',
-    'Make Amazing Friends',
-    'Part of the local community'
-  ];
 
   return (
     <section className="relative min-h-[90vh] bg-gradient-to-br from-gray-900 via-purple-900/80 to-gray-900 cyber-grid overflow-hidden">
@@ -43,7 +36,7 @@ const StudioHero = ({ studio }: StudioHeroProps) => {
       <div className="absolute bottom-20 right-10 w-80 h-80 bg-cyan-500/20 rounded-full blur-3xl animate-float" style={{ animationDelay: '2s' }} />
       <div className="absolute top-1/2 left-1/3 w-48 h-48 bg-purple-500/20 rounded-full blur-3xl animate-float" style={{ animationDelay: '4s' }} />
 
-      <div className="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pt-24 pb-16">
+      <div className="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pt-24 pb-8">
         <div className="grid lg:grid-cols-2 gap-12 items-center">
           {/* Left Content */}
           <motion.div
@@ -192,7 +185,7 @@ const StudioHero = ({ studio }: StudioHeroProps) => {
                   />
                 )}
                 
-                {/* Caption Overlay */}
+                {/* Caption Overlay - Pill Badge Style */}
                 <AnimatePresence mode="wait">
                   <motion.div
                     key={currentMedia.label}
@@ -200,9 +193,11 @@ const StudioHero = ({ studio }: StudioHeroProps) => {
                     animate={{ opacity: 1, y: 0 }}
                     exit={{ opacity: 0, y: -10 }}
                     transition={{ duration: 0.3 }}
-                    className="absolute bottom-0 left-0 right-0 bg-gradient-to-t from-black/80 via-black/50 to-transparent p-4 pt-12"
+                    className="absolute bottom-4 left-1/2 -translate-x-1/2"
                   >
-                    <p className="text-white text-lg font-semibold">{currentMedia.label}</p>
+                    <span className="px-6 py-2.5 rounded-full bg-gray-800/70 backdrop-blur-sm border border-white/20 text-white text-sm font-medium whitespace-nowrap shadow-lg">
+                      {currentMedia.label}
+                    </span>
                   </motion.div>
                 </AnimatePresence>
               </div>
@@ -244,26 +239,6 @@ const StudioHero = ({ studio }: StudioHeroProps) => {
           </motion.div>
         </div>
 
-        {/* Benefits Bar */}
-        <motion.div
-          initial={{ opacity: 0, y: 30 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.6, delay: 0.5 }}
-          className="mt-16 flex flex-wrap justify-center gap-3"
-        >
-          {benefits.map((benefit, index) => (
-            <span 
-              key={benefit}
-              className={`px-4 py-2 rounded-full text-sm font-medium backdrop-blur-sm transition-colors ${
-                index === benefits.length - 1 
-                  ? 'bg-fuchsia-500/30 text-fuchsia-300 border border-fuchsia-500/50' 
-                  : 'bg-white/10 text-gray-300 border border-white/20 hover:bg-white/20'
-              }`}
-            >
-              {benefit}
-            </span>
-          ))}
-        </motion.div>
       </div>
     </section>
   );
