@@ -52,6 +52,9 @@ const testimonials: Testimonial[] = [
 const logos = [
   { name: "Shark Tank", src: "/images/logos/shark-tank.png" },
   { name: "Herald Sun", src: "/images/logos/herald-sun.png" },
+  { name: "Leader", src: "/images/logos/leader.png" },
+  { name: "BIG Review TV", src: "/images/logos/big-review-tv.png" },
+  { name: "Australian Pole Dancers Magazine", src: "/images/logos/pole-dancers-magazine.png" },
 ];
 
 const StudioVideoTestimonials = () => {
@@ -72,80 +75,62 @@ const StudioVideoTestimonials = () => {
   };
 
   return (
-    <section className="py-16 relative overflow-hidden">
-      <div className="container mx-auto px-4">
-        {/* Section Title */}
-        <motion.h2 
+    <section className="py-20 bg-gray-800/50 cyber-grid">
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        {/* Section Header */}
+        <motion.div
           initial={{ opacity: 0, y: 20 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
-          className="text-2xl md:text-3xl lg:text-4xl font-bold text-center text-white mb-10 uppercase tracking-wide"
+          className="text-center mb-12"
         >
-          11 Years of Proving Fitness can Be <span className="gradient-text">Fun!</span>
-        </motion.h2>
+          <h2 className="text-3xl sm:text-4xl font-bold gradient-text mb-4">
+            Proving Fitness Can be Fun since 2014
+          </h2>
+          <p className="text-gray-400 max-w-2xl mx-auto">
+            Hear from our students how Pole has changed the way they move and their experience at The Pole Room
+          </p>
+        </motion.div>
 
-        {/* Carousel Container */}
-        <div className="relative">
-          {/* Left Arrow */}
-          <button
-            onClick={() => scroll('left')}
-            className="absolute left-0 top-1/2 -translate-y-1/2 z-10 bg-gray-800/90 hover:bg-fuchsia-500/30 border border-fuchsia-500/50 shadow-lg shadow-fuchsia-500/20 rounded-full p-3 transition-all hover:scale-110"
-            aria-label="Scroll left"
-          >
-            <ChevronLeft className="w-6 h-6 text-white" />
-          </button>
-
-          {/* Right Arrow */}
-          <button
-            onClick={() => scroll('right')}
-            className="absolute right-0 top-1/2 -translate-y-1/2 z-10 bg-gray-800/90 hover:bg-fuchsia-500/30 border border-fuchsia-500/50 shadow-lg shadow-fuchsia-500/20 rounded-full p-3 transition-all hover:scale-110"
-            aria-label="Scroll right"
-          >
-            <ChevronRight className="w-6 h-6 text-white" />
-          </button>
-
-          {/* Testimonials Scroll Container */}
-          <div
-            ref={scrollRef}
-            className="flex gap-4 overflow-x-auto scrollbar-none px-12 pb-4"
-            style={{ scrollbarWidth: 'none', msOverflowStyle: 'none' }}
-          >
-            {displayTestimonials.map((testimonial, index) => (
-              <motion.div
-                key={`${testimonial.id}-${index}`}
-                initial={{ opacity: 0, scale: 0.9 }}
-                whileInView={{ opacity: 1, scale: 1 }}
-                viewport={{ once: true }}
-                transition={{ delay: index * 0.05 }}
-                className="flex-shrink-0 w-[280px] cursor-pointer group"
-                onClick={() => setSelectedTestimonial(testimonial)}
-              >
-                {/* Card */}
-                <div className="relative rounded-2xl overflow-hidden cyber-card group-hover:border-cyan-400/50 transition-all">
-                  {/* Image with Play Button Overlay */}
-                  <div className="relative aspect-[3/4]">
-                    <img
-                      src={testimonial.image}
-                      alt={testimonial.name}
-                      className="w-full h-full object-cover"
-                    />
-                    {/* Play Button Overlay */}
-                    <div className="absolute inset-0 flex items-center justify-center bg-black/20 group-hover:bg-black/40 transition-colors">
-                      <div className="w-14 h-14 rounded-full bg-fuchsia-500/80 flex items-center justify-center group-hover:scale-110 transition-transform shadow-lg shadow-fuchsia-500/30">
-                        <Play className="w-6 h-6 text-white ml-1" fill="currentColor" />
-                      </div>
-                    </div>
+        {/* Testimonials Grid - Criss Cross Style */}
+        <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 gap-4 mb-8">
+          {displayTestimonials.slice(0, 8).map((testimonial, index) => (
+            <motion.div
+              key={`${testimonial.id}-${index}`}
+              initial={{ opacity: 0, scale: 0.9 }}
+              whileInView={{ opacity: 1, scale: 1 }}
+              viewport={{ once: true }}
+              transition={{ delay: index * 0.05 }}
+              className="aspect-[3/4] rounded-xl overflow-hidden group cursor-pointer"
+              onClick={() => setSelectedTestimonial(testimonial)}
+            >
+              <div className="w-full h-full relative overflow-hidden">
+                <img
+                  src={testimonial.image}
+                  alt={testimonial.name}
+                  className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500"
+                />
+                {/* Play Button Overlay */}
+                <div className="absolute inset-0 flex items-center justify-center bg-black/20 group-hover:bg-black/40 transition-colors">
+                  <div className="w-14 h-14 rounded-full bg-fuchsia-500/80 flex items-center justify-center group-hover:scale-110 transition-transform shadow-lg shadow-fuchsia-500/30">
+                    <Play className="w-6 h-6 text-white ml-1" fill="currentColor" />
                   </div>
                 </div>
-              </motion.div>
-            ))}
-          </div>
+                <div className="absolute inset-0 border-2 border-transparent group-hover:border-fuchsia-500/50 rounded-xl transition-colors" />
+              </div>
+            </motion.div>
+          ))}
         </div>
 
         {/* As Seen On Section */}
-        <div className="mt-12 text-center">
+        <motion.div
+          initial={{ opacity: 0, y: 10 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true }}
+          className="mt-12 text-center"
+        >
           <p className="text-gray-400 text-sm uppercase tracking-widest mb-6">As Seen In:</p>
-          <div className="flex items-center justify-center gap-8 md:gap-12 flex-wrap">
+          <div className="flex items-center justify-center gap-6 md:gap-10 flex-wrap">
             {logos.map((logo, index) => (
               <motion.img
                 key={index}
@@ -159,7 +144,7 @@ const StudioVideoTestimonials = () => {
               />
             ))}
           </div>
-        </div>
+        </motion.div>
       </div>
 
       {/* Video Modal */}
