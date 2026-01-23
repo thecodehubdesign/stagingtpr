@@ -71,7 +71,7 @@ const StudioDetail = () => {
 
       {/* Instructors Section */}
       <div id="instructors">
-        <StudioInstructors studioId={studio.id} />
+        <StudioInstructors studio={studio} />
       </div>
 
       {/* Gallery Section */}
