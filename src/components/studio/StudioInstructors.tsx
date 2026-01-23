@@ -107,7 +107,7 @@ const StudioInstructors = ({ studio }: StudioInstructorsProps) => {
           viewport={{ once: true }}
           className="text-center mb-12"
         >
-          <p className="text-fuchsia-400 text-sm uppercase tracking-widest mb-3">Team Divas</p>
+          <p className="text-fuchsia-400 text-sm uppercase tracking-widest mb-3">Our Team</p>
           <h2 className="text-3xl sm:text-4xl font-bold mb-4">
             <span className="text-white">Meet Your </span>
             <span className="gradient-text">{locationName} Instructors</span>
