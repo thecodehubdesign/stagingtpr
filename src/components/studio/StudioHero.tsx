@@ -15,6 +15,11 @@ const StudioHero = ({ studio }: StudioHeroProps) => {
     { type: 'image' as const, src: '/lovable-uploads/9f395d23-917c-4f57-aee6-3730701698b1.png', label: 'Make Amazing Friends' },
     { type: 'image' as const, src: '/lovable-uploads/29e3bddc-c99a-43e5-87df-ab4c0905e1a0.png', label: 'Award Winning Instructors' },
     { type: 'image' as const, src: '/lovable-uploads/14503a9b-f9c7-41ee-a0b5-131b4a9a6989.png', label: 'Part of the Local Community' },
+    { type: 'image' as const, src: '/lovable-uploads/8be1e610-6a66-4ace-b02d-1945fd276001.png', label: 'State of the Art Equipment' },
+    { type: 'image' as const, src: '/lovable-uploads/62c85b2c-a16e-4a03-ab52-224dae2b446b.png', label: 'All Skill Levels Welcome' },
+    { type: 'image' as const, src: '/lovable-uploads/a3f3abdb-e872-4fb0-a921-052f1d92afec.png', label: 'Supportive Environment' },
+    { type: 'image' as const, src: '/lovable-uploads/32863f0f-165a-4abf-b73e-3eea2045dce5.png', label: 'Fun Fitness Classes' },
+    { type: 'image' as const, src: '/lovable-uploads/e72918ef-7386-4492-8d6e-6cf1cbeb62e4.png', label: 'Build Your Confidence' },
   ];
 
   const [currentIndex, setCurrentIndex] = useState(0);
@@ -30,14 +35,14 @@ const StudioHero = ({ studio }: StudioHeroProps) => {
 
 
   return (
-    <section className="relative min-h-[90vh] bg-gradient-to-br from-gray-900 via-purple-900/80 to-gray-900 cyber-grid overflow-hidden">
+    <section className="relative bg-gradient-to-br from-gray-900 via-purple-900/80 to-gray-900 cyber-grid overflow-hidden">
       {/* Floating orbs */}
       <div className="absolute top-20 left-10 w-64 h-64 bg-fuchsia-500/20 rounded-full blur-3xl animate-float" />
       <div className="absolute bottom-20 right-10 w-80 h-80 bg-cyan-500/20 rounded-full blur-3xl animate-float" style={{ animationDelay: '2s' }} />
       <div className="absolute top-1/2 left-1/3 w-48 h-48 bg-purple-500/20 rounded-full blur-3xl animate-float" style={{ animationDelay: '4s' }} />
 
-      <div className="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pt-24 pb-8">
-        <div className="grid lg:grid-cols-2 gap-12 items-center">
+      <div className="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pt-24 pb-4">
+        <div className="grid lg:grid-cols-2 gap-12 items-start">
           {/* Left Content */}
           <motion.div
             initial={{ opacity: 0, x: -30 }}
