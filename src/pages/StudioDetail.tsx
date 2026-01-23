@@ -3,6 +3,7 @@ import { useParams } from 'react-router-dom';
 import Header from '@/components/Header';
 import Footer from '@/components/Footer';
 import StudioHero from '@/components/studio/StudioHero';
+import StudioVideoTestimonials from '@/components/studio/StudioVideoTestimonials';
 import StudioClassesFilter from '@/components/studio/StudioClassesFilter';
 import StudioClassList from '@/components/studio/StudioClassList';
 import StudioInstructors from '@/components/studio/StudioInstructors';
@@ -32,6 +33,7 @@ const StudioDetail = () => {
 
   const sections = [
     { id: 'hero', label: 'Studio' },
+    { id: 'testimonials', label: 'Reviews' },
     { id: 'classes-filter', label: 'Classes' },
     { id: 'timetable', label: 'Timetable' },
     { id: 'instructors', label: 'Instructors' },
@@ -50,6 +52,11 @@ const StudioDetail = () => {
       {/* Hero Section */}
       <div id="hero">
         <StudioHero studio={studio} />
+      </div>
+
+      {/* Video Testimonials Section */}
+      <div id="testimonials">
+        <StudioVideoTestimonials />
       </div>
 
       {/* Classes Filter Section */}
