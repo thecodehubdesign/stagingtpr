@@ -1,6 +1,7 @@
-import { useState, useEffect } from 'react';
+import { useState } from 'react';
 import { Card } from '@/components/ui/card';
 import { Studio } from '@/data/studios';
+import CustomTimetable from './CustomTimetable';
 
 interface StudioClassListProps {
   studio: Studio;
@@ -12,53 +13,37 @@ const StudioClassList = ({ studio }: StudioClassListProps) => {
   // Extract just the location name (e.g., "Mitcham" from "The Pole Room Mitcham")
   const locationName = studio.name.replace('The Pole Room ', '');
 
-  useEffect(() => {
-    // Load the MindBody widget script
-    const script = document.createElement('script');
-    script.src = 'https://brandedweb.mindbodyonline.com/embed/widget.js';
-    script.async = true;
-    document.body.appendChild(script);
-
-    return () => {
-      // Cleanup script on unmount
-      const existingScript = document.querySelector('script[src="https://brandedweb.mindbodyonline.com/embed/widget.js"]');
-      if (existingScript) {
-        existingScript.remove();
-      }
-    };
-  }, []);
-
   return (
     <section className="py-16 sm:py-24 bg-background">
       <div className="container mx-auto px-4">
         <div className="text-center mb-12">
-          <p className="text-fuchsia-400 text-sm uppercase tracking-widest mb-3">Our Classes</p>
+          <p className="text-primary text-sm uppercase tracking-widest mb-3">Our Classes</p>
           <h2 className="text-3xl sm:text-4xl font-bold mb-4">
-            <span className="text-white">{locationName} </span>
+            <span className="text-foreground">{locationName} </span>
             <span className="gradient-text">Daily Timetable</span>
           </h2>
-          <p className="text-white/80 max-w-3xl mx-auto">
+          <p className="text-foreground/80 max-w-3xl mx-auto">
             View our upcoming schedule with something for everyone. We aim to offer a variety 
             of classes for all skill levels across dance, conditioning and tricks classes. 
             You can also use the filters at the top to filter between all classes and beginner 
             friendly classes. Read the class descriptions to learn more. You can also view our{' '}
-            <a href="/programs/pole/beginner" className="text-fuchsia-400 hover:text-fuchsia-300 underline">
+            <a href="/programs/pole/beginner" className="text-primary hover:text-primary/80 underline">
               level guide here
             </a>{' '}
             with more information on starting out.
           </p>
         </div>
 
-        <div className="max-w-6xl mx-auto">
-          <Card className="p-6 bg-gray-800 border-gray-700">
+        <div className="max-w-4xl mx-auto">
+          <Card className="p-6 cyber-card border-0">
             {/* Filter Toggle - Inside Card */}
             <div className="flex justify-center gap-4 mb-6">
               <button
                 onClick={() => setActiveFilter('full')}
                 className={`px-6 py-3 rounded-full font-medium transition-all ${
                   activeFilter === 'full'
-                    ? 'bg-fuchsia-500 text-white shadow-lg shadow-fuchsia-500/30'
-                    : 'bg-gray-700 text-gray-300 hover:bg-gray-600'
+                    ? 'neon-button text-primary-foreground'
+                    : 'bg-secondary text-muted-foreground hover:bg-secondary/80'
                 }`}
               >
                 Full Timetable
@@ -67,37 +52,24 @@ const StudioClassList = ({ studio }: StudioClassListProps) => {
                 onClick={() => setActiveFilter('beginner')}
                 className={`px-6 py-3 rounded-full font-medium transition-all ${
                   activeFilter === 'beginner'
-                    ? 'bg-fuchsia-500 text-white shadow-lg shadow-fuchsia-500/30'
-                    : 'bg-gray-700 text-gray-300 hover:bg-gray-600'
+                    ? 'neon-button text-primary-foreground'
+                    : 'bg-secondary text-muted-foreground hover:bg-secondary/80'
                 }`}
               >
                 Beginner Friendly
               </button>
             </div>
 
-            <div className="flex items-center mb-4">
-              <div className="w-3 h-3 bg-green-500 rounded-full animate-pulse mr-3 shadow-lg shadow-green-500/50" />
-              <h3 className="text-xl font-bold text-white">Live Class Schedule</h3>
+            <div className="flex items-center mb-6">
+              <div className="w-3 h-3 bg-emerald-500 rounded-full animate-pulse mr-3 shadow-lg shadow-emerald-500/50" />
+              <h3 className="text-xl font-bold text-foreground">Live Class Schedule</h3>
             </div>
             
-            {/* MindBody Schedule Widget Container */}
-            <div className="mindbody-widget-container rounded-lg p-4 min-h-[400px] overflow-hidden">
-              {activeFilter === 'full' ? (
-                <div 
-                  key="full-schedule"
-                  className="mindbody-widget" 
-                  data-widget-type="Schedules" 
-                  data-widget-id="d98128628e"
-                />
-              ) : (
-                <div 
-                  key="beginner-schedule"
-                  className="mindbody-widget" 
-                  data-widget-type="Schedules" 
-                  data-widget-id="BEGINNER_WIDGET_ID"
-                />
-              )}
-            </div>
+            {/* Custom Timetable Component */}
+            <CustomTimetable 
+              studioName={locationName}
+              activeFilter={activeFilter}
+            />
           </Card>
         </div>
       </div>
