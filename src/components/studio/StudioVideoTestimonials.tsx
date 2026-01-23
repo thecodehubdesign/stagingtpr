@@ -84,8 +84,10 @@ const StudioVideoTestimonials = () => {
           viewport={{ once: true }}
           className="text-center mb-12"
         >
-          <h2 className="text-3xl sm:text-4xl font-bold gradient-text mb-4">
-            Proving Fitness Can be Fun since 2014
+          <p className="text-fuchsia-400 text-sm uppercase tracking-widest mb-3">Our Students</p>
+          <h2 className="text-3xl sm:text-4xl font-bold mb-4">
+            <span className="text-white">Proving Fitness </span>
+            <span className="gradient-text">Can be Fun since 2014</span>
           </h2>
           <p className="text-gray-400 max-w-2xl mx-auto">
             Hear from our students how Pole has changed the way they move and their experience at The Pole Room
