@@ -8,16 +8,14 @@ interface StudioLocalSupportProps {
 const StudioLocalSupport = ({ studio }: StudioLocalSupportProps) => {
   const studioLocation = studio.name.replace('The Pole Room ', '');
   
-  // Placeholder local business images
+  // Local businesses for Mitcham area
   const localBusinesses = [
-    '/lovable-uploads/8a7c62c9-86e6-4d10-a555-f79e5ed95001.png',
-    '/lovable-uploads/5b3dd8e8-6bc4-4f4a-af01-655d55902167.png',
-    '/lovable-uploads/b34c042d-145b-435a-8197-68969f1f31eb.png',
-    '/lovable-uploads/e72918ef-7386-4492-8d6e-6cf1cbeb62e4.png',
-    '/lovable-uploads/a3f3abdb-e872-4fb0-a921-052f1d92afec.png',
-    '/lovable-uploads/930cee8a-33f0-430b-8ef4-34c83d23d2d3.png',
-    '/lovable-uploads/9f395d23-917c-4f57-aee6-3730701698b1.png',
-    '/lovable-uploads/ff325961-11eb-4009-8f03-cb52bcfc97e0.png'
+    { name: "Rise & Grind Coffee Shop Mitcham", image: "/images/local-businesses/rise-grind.png" },
+    { name: "Subway Mitcham", image: "/images/local-businesses/subway.png" },
+    { name: "Woolworths Mitcham", image: "/images/local-businesses/woolworths.png" },
+    { name: "Nutrition Warehouse Ringwood", image: "/images/local-businesses/nutrition-warehouse.png" },
+    { name: "Mitcham Recovery Centre", image: "/images/local-businesses/mitcham-recovery.png" },
+    { name: "Eastland Shopping Centre", image: "/images/local-businesses/eastland.png" }
   ];
 
   return (
@@ -38,24 +36,25 @@ const StudioLocalSupport = ({ studio }: StudioLocalSupportProps) => {
           </p>
         </motion.div>
 
-        {/* Image Grid */}
-        <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 gap-4 mb-8">
-          {localBusinesses.map((image, index) => (
+        {/* Image Grid - 1/3 size with 6 columns */}
+        <div className="grid grid-cols-3 sm:grid-cols-6 gap-3 mb-8 max-w-3xl mx-auto">
+          {localBusinesses.map((business, index) => (
             <motion.div
               key={index}
               initial={{ opacity: 0, scale: 0.9 }}
               whileInView={{ opacity: 1, scale: 1 }}
               viewport={{ once: true }}
               transition={{ delay: index * 0.05 }}
-              className="aspect-square rounded-xl overflow-hidden group cursor-pointer"
+              className="aspect-square rounded-lg overflow-hidden group cursor-pointer"
+              title={business.name}
             >
-              <div className="w-full h-full bg-gray-700 relative overflow-hidden">
+              <div className="w-full h-full bg-white relative overflow-hidden">
                 <img 
-                  src={image} 
-                  alt={`Local business ${index + 1}`}
-                  className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500"
+                  src={business.image} 
+                  alt={business.name}
+                  className="w-full h-full object-contain p-2 group-hover:scale-110 transition-transform duration-500"
                 />
-                <div className="absolute inset-0 border-2 border-transparent group-hover:border-fuchsia-500/50 rounded-xl transition-colors" />
+                <div className="absolute inset-0 border-2 border-transparent group-hover:border-fuchsia-500/50 rounded-lg transition-colors" />
               </div>
             </motion.div>
           ))}
