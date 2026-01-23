@@ -92,34 +92,59 @@ const StudioVideoTestimonials = () => {
           </p>
         </motion.div>
 
-        {/* Testimonials Grid - Criss Cross Style */}
-        <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 gap-4 mb-8">
-          {displayTestimonials.slice(0, 8).map((testimonial, index) => (
-            <motion.div
-              key={`${testimonial.id}-${index}`}
-              initial={{ opacity: 0, scale: 0.9 }}
-              whileInView={{ opacity: 1, scale: 1 }}
-              viewport={{ once: true }}
-              transition={{ delay: index * 0.05 }}
-              className="aspect-[3/4] rounded-xl overflow-hidden group cursor-pointer"
-              onClick={() => setSelectedTestimonial(testimonial)}
-            >
-              <div className="w-full h-full relative overflow-hidden">
-                <img
-                  src={testimonial.image}
-                  alt={testimonial.name}
-                  className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500"
-                />
-                {/* Play Button Overlay */}
-                <div className="absolute inset-0 flex items-center justify-center bg-black/20 group-hover:bg-black/40 transition-colors">
-                  <div className="w-14 h-14 rounded-full bg-fuchsia-500/80 flex items-center justify-center group-hover:scale-110 transition-transform shadow-lg shadow-fuchsia-500/30">
-                    <Play className="w-6 h-6 text-white ml-1" fill="currentColor" />
+        {/* Testimonials Carousel - Single Row */}
+        <div className="relative">
+          {/* Left Arrow */}
+          <button
+            onClick={() => scroll('left')}
+            className="absolute left-0 top-1/2 -translate-y-1/2 z-10 bg-gray-800/90 hover:bg-fuchsia-500/30 border border-fuchsia-500/50 shadow-lg shadow-fuchsia-500/20 rounded-full p-3 transition-all hover:scale-110"
+            aria-label="Scroll left"
+          >
+            <ChevronLeft className="w-6 h-6 text-white" />
+          </button>
+
+          {/* Right Arrow */}
+          <button
+            onClick={() => scroll('right')}
+            className="absolute right-0 top-1/2 -translate-y-1/2 z-10 bg-gray-800/90 hover:bg-fuchsia-500/30 border border-fuchsia-500/50 shadow-lg shadow-fuchsia-500/20 rounded-full p-3 transition-all hover:scale-110"
+            aria-label="Scroll right"
+          >
+            <ChevronRight className="w-6 h-6 text-white" />
+          </button>
+
+          {/* Scrollable Container */}
+          <div
+            ref={scrollRef}
+            className="flex gap-4 overflow-x-auto scrollbar-none scroll-smooth px-12"
+            style={{ scrollbarWidth: 'none', msOverflowStyle: 'none' }}
+          >
+            {displayTestimonials.map((testimonial, index) => (
+              <motion.div
+                key={`${testimonial.id}-${index}`}
+                initial={{ opacity: 0, scale: 0.9 }}
+                whileInView={{ opacity: 1, scale: 1 }}
+                viewport={{ once: true }}
+                transition={{ delay: index * 0.03 }}
+                className="flex-shrink-0 w-[200px] sm:w-[220px] md:w-[240px] cursor-pointer group"
+                onClick={() => setSelectedTestimonial(testimonial)}
+              >
+                <div className="aspect-[3/4] rounded-xl overflow-hidden relative">
+                  <img
+                    src={testimonial.image}
+                    alt={testimonial.name}
+                    className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500"
+                  />
+                  {/* Play Button Overlay */}
+                  <div className="absolute inset-0 flex items-center justify-center bg-black/20 group-hover:bg-black/40 transition-colors">
+                    <div className="w-12 h-12 rounded-full bg-fuchsia-500/80 flex items-center justify-center group-hover:scale-110 transition-transform shadow-lg shadow-fuchsia-500/30">
+                      <Play className="w-5 h-5 text-white ml-0.5" fill="currentColor" />
+                    </div>
                   </div>
+                  <div className="absolute inset-0 border-2 border-transparent group-hover:border-fuchsia-500/50 rounded-xl transition-colors" />
                 </div>
-                <div className="absolute inset-0 border-2 border-transparent group-hover:border-fuchsia-500/50 rounded-xl transition-colors" />
-              </div>
-            </motion.div>
-          ))}
+              </motion.div>
+            ))}
+          </div>
         </div>
 
         {/* As Seen On Section */}
