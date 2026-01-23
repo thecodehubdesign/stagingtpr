@@ -1,6 +1,6 @@
 import { useState } from 'react';
-import { motion } from 'framer-motion';
-import { MapPin, Star, Play, Instagram } from 'lucide-react';
+import { motion, AnimatePresence } from 'framer-motion';
+import { MapPin, Star, Play, Instagram, ChevronLeft, ChevronRight } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 import { Studio } from '@/data/studios';
 
@@ -9,18 +9,24 @@ interface StudioHeroProps {
 }
 
 const StudioHero = ({ studio }: StudioHeroProps) => {
-  const [selectedMedia, setSelectedMedia] = useState<{ type: 'video' | 'image'; src: string }>({
-    type: 'video',
-    src: 'https://player.vimeo.com/video/286796328?autoplay=1&loop=1&muted=1&background=1'
-  });
-
-  const studioImages = [
-    { type: 'image' as const, src: studio.image, label: 'Studio' },
-    { type: 'image' as const, src: '/lovable-uploads/5b3dd8e8-6bc4-4f4a-af01-655d55902167.png', label: 'Poles' },
-    { type: 'image' as const, src: '/lovable-uploads/9f395d23-917c-4f57-aee6-3730701698b1.png', label: 'Aerial' },
-    { type: 'image' as const, src: '/lovable-uploads/29e3bddc-c99a-43e5-87df-ab4c0905e1a0.png', label: 'Class' },
-    { type: 'image' as const, src: '/lovable-uploads/14503a9b-f9c7-41ee-a0b5-131b4a9a6989.png', label: 'Community' },
+  const allMedia = [
+    { type: 'video' as const, src: 'https://player.vimeo.com/video/286796328?autoplay=0&loop=1', label: 'Take A Tour Of Our Studio' },
+    { type: 'image' as const, src: '/lovable-uploads/5b3dd8e8-6bc4-4f4a-af01-655d55902167.png', label: 'Beginner Friendly Classes' },
+    { type: 'image' as const, src: '/lovable-uploads/9f395d23-917c-4f57-aee6-3730701698b1.png', label: 'Make Amazing Friends' },
+    { type: 'image' as const, src: '/lovable-uploads/29e3bddc-c99a-43e5-87df-ab4c0905e1a0.png', label: 'Award Winning Instructors' },
+    { type: 'image' as const, src: '/lovable-uploads/14503a9b-f9c7-41ee-a0b5-131b4a9a6989.png', label: 'Part of the Local Community' },
   ];
+
+  const [currentIndex, setCurrentIndex] = useState(0);
+  const currentMedia = allMedia[currentIndex];
+
+  const goToPrevious = () => {
+    setCurrentIndex((prev) => (prev === 0 ? allMedia.length - 1 : prev - 1));
+  };
+
+  const goToNext = () => {
+    setCurrentIndex((prev) => (prev === allMedia.length - 1 ? 0 : prev + 1));
+  };
 
   const benefits = [
     'New Student Offer',
@@ -134,74 +140,104 @@ const StudioHero = ({ studio }: StudioHeroProps) => {
             </div>
           </motion.div>
 
-          {/* Right Content - Video/Image Display with Shopify Carousel */}
+          {/* Right Content - Video/Image Display with Arrow Navigation */}
           <motion.div
             initial={{ opacity: 0, x: 30 }}
             animate={{ opacity: 1, x: 0 }}
             transition={{ duration: 0.6, delay: 0.3 }}
             className="relative space-y-4"
           >
-            {/* Main Display Area */}
-            <div className="relative aspect-[4/3] rounded-2xl overflow-hidden cyber-border bg-gray-800">
-              {selectedMedia.type === 'video' ? (
-                <iframe
-                  src={selectedMedia.src}
-                  className="w-full h-full"
-                  frameBorder="0"
-                  allow="autoplay; fullscreen; picture-in-picture"
-                  allowFullScreen
-                  title="Studio Tour Video"
-                />
-              ) : (
-                <img 
-                  src={selectedMedia.src} 
-                  alt={studio.name}
-                  className="w-full h-full object-cover"
-                />
-              )}
-              <div className="absolute inset-0 bg-gradient-to-t from-black/30 via-transparent to-transparent pointer-events-none" />
+            {/* Main Display Area with Arrows */}
+            <div className="relative">
+              {/* Left Arrow */}
+              <button
+                onClick={goToPrevious}
+                className="absolute left-0 top-1/2 -translate-y-1/2 -translate-x-1/2 z-10 
+                           w-12 h-12 rounded-full bg-black/60 backdrop-blur-sm 
+                           border border-white/20 hover:bg-fuchsia-500/30 
+                           flex items-center justify-center transition-all hover:scale-110"
+                aria-label="Previous"
+              >
+                <ChevronLeft className="w-6 h-6 text-white" />
+              </button>
+
+              {/* Right Arrow */}
+              <button
+                onClick={goToNext}
+                className="absolute right-0 top-1/2 -translate-y-1/2 translate-x-1/2 z-10 
+                           w-12 h-12 rounded-full bg-black/60 backdrop-blur-sm 
+                           border border-white/20 hover:bg-fuchsia-500/30 
+                           flex items-center justify-center transition-all hover:scale-110"
+                aria-label="Next"
+              >
+                <ChevronRight className="w-6 h-6 text-white" />
+              </button>
+
+              {/* Media Container */}
+              <div className="relative aspect-video rounded-2xl overflow-hidden cyber-border bg-gray-800">
+                {currentMedia.type === 'video' ? (
+                  <iframe
+                    src={currentMedia.src}
+                    className="w-full h-full"
+                    frameBorder="0"
+                    allow="autoplay; fullscreen; picture-in-picture"
+                    allowFullScreen
+                    title="Studio Tour Video"
+                  />
+                ) : (
+                  <img 
+                    src={currentMedia.src} 
+                    alt={currentMedia.label}
+                    className="w-full h-full object-cover"
+                  />
+                )}
+                
+                {/* Caption Overlay */}
+                <AnimatePresence mode="wait">
+                  <motion.div
+                    key={currentMedia.label}
+                    initial={{ opacity: 0, y: 10 }}
+                    animate={{ opacity: 1, y: 0 }}
+                    exit={{ opacity: 0, y: -10 }}
+                    transition={{ duration: 0.3 }}
+                    className="absolute bottom-0 left-0 right-0 bg-gradient-to-t from-black/80 via-black/50 to-transparent p-4 pt-12"
+                  >
+                    <p className="text-white text-lg font-semibold">{currentMedia.label}</p>
+                  </motion.div>
+                </AnimatePresence>
+              </div>
             </div>
 
             {/* Shopify-style Thumbnail Carousel */}
             <div className="flex gap-3 overflow-x-auto pb-2 scrollbar-none">
-              {/* Video Thumbnail */}
-              <button
-                onClick={() => setSelectedMedia({ 
-                  type: 'video', 
-                  src: 'https://player.vimeo.com/video/286796328?autoplay=1&loop=1&muted=1&background=1' 
-                })}
-                className={`relative flex-shrink-0 w-20 h-20 rounded-lg overflow-hidden border-2 transition-all ${
-                  selectedMedia.type === 'video' 
-                    ? 'border-fuchsia-500 ring-2 ring-fuchsia-500/50' 
-                    : 'border-gray-600 hover:border-fuchsia-400'
-                }`}
-              >
-                <img 
-                  src={studio.image} 
-                  alt="Video thumbnail"
-                  className="w-full h-full object-cover"
-                />
-                <div className="absolute inset-0 bg-black/40 flex items-center justify-center">
-                  <Play className="w-6 h-6 text-white fill-white" />
-                </div>
-              </button>
-
-              {/* Image Thumbnails */}
-              {studioImages.map((image, index) => (
+              {allMedia.map((media, index) => (
                 <button
                   key={index}
-                  onClick={() => setSelectedMedia({ type: 'image', src: image.src })}
+                  onClick={() => setCurrentIndex(index)}
                   className={`relative flex-shrink-0 w-20 h-20 rounded-lg overflow-hidden border-2 transition-all ${
-                    selectedMedia.type === 'image' && selectedMedia.src === image.src
+                    currentIndex === index
                       ? 'border-fuchsia-500 ring-2 ring-fuchsia-500/50' 
                       : 'border-gray-600 hover:border-fuchsia-400'
                   }`}
                 >
-                  <img 
-                    src={image.src} 
-                    alt={image.label}
-                    className="w-full h-full object-cover"
-                  />
+                  {media.type === 'video' ? (
+                    <>
+                      <img 
+                        src="/lovable-uploads/5b3dd8e8-6bc4-4f4a-af01-655d55902167.png"
+                        alt="Video thumbnail"
+                        className="w-full h-full object-cover"
+                      />
+                      <div className="absolute inset-0 bg-black/40 flex items-center justify-center">
+                        <Play className="w-6 h-6 text-white fill-white" />
+                      </div>
+                    </>
+                  ) : (
+                    <img 
+                      src={media.src} 
+                      alt={media.label}
+                      className="w-full h-full object-cover"
+                    />
+                  )}
                 </button>
               ))}
             </div>
