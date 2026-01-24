@@ -78,18 +78,18 @@ const BookingStep2 = ({ formData, updateFormData, onNext, onPrev }: BookingStep2
   return (
     <form onSubmit={handleSubmit} className="space-y-6">
       <div>
-        <h3 className="text-lg font-semibold text-gray-900 mb-4">
+        <h3 className="text-lg font-semibold text-white mb-4">
           Tell us about yourself
         </h3>
-        <p className="text-sm text-gray-600 mb-6">
+        <p className="text-sm text-gray-400 mb-6">
           Help us customize your experience and match you with the perfect class.
         </p>
       </div>
 
       <div className="space-y-6">
         <div>
-          <Label className="text-sm font-medium text-gray-700 mb-3 block">
-            What are you looking to achieve? (Select all that apply) *
+          <Label className="text-sm font-medium text-gray-300 mb-3 block">
+            What are you looking to achieve? (Select all that apply) <span className="text-fuchsia-400">*</span>
           </Label>
           <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
             {goals.map((goal) => (
@@ -98,24 +98,29 @@ const BookingStep2 = ({ formData, updateFormData, onNext, onPrev }: BookingStep2
                   id={goal}
                   checked={formData.goals.includes(goal)}
                   onCheckedChange={(checked) => handleGoalChange(goal, checked as boolean)}
+                  className="border-fuchsia-500/50 data-[state=checked]:bg-fuchsia-500 data-[state=checked]:border-fuchsia-500"
                 />
-                <Label htmlFor={goal} className="text-sm leading-tight">{goal}</Label>
+                <Label htmlFor={goal} className="text-sm text-gray-300 leading-tight">{goal}</Label>
               </div>
             ))}
           </div>
         </div>
 
         <div>
-          <Label className="text-sm font-medium text-gray-700 mb-3 block">
-            How did you hear about us? *
+          <Label className="text-sm font-medium text-gray-300 mb-3 block">
+            How did you hear about us? <span className="text-fuchsia-400">*</span>
           </Label>
           <Select value={formData.howHeardAboutUs} onValueChange={(value) => updateFormData({ howHeardAboutUs: value })}>
-            <SelectTrigger>
+            <SelectTrigger className="bg-gray-800/50 border-fuchsia-500/30 text-white focus:border-fuchsia-500 focus:ring-fuchsia-500/50">
               <SelectValue placeholder="Select how you found us" />
             </SelectTrigger>
-            <SelectContent>
+            <SelectContent className="bg-gray-900 border-fuchsia-500/30">
               {hearAboutUsOptions.map((option) => (
-                <SelectItem key={option} value={option}>
+                <SelectItem 
+                  key={option} 
+                  value={option}
+                  className="text-white hover:bg-fuchsia-500/20 focus:bg-fuchsia-500/20"
+                >
                   {option}
                 </SelectItem>
               ))}
@@ -124,16 +129,20 @@ const BookingStep2 = ({ formData, updateFormData, onNext, onPrev }: BookingStep2
         </div>
 
         <div>
-          <Label className="text-sm font-medium text-gray-700 mb-3 block">
-            When would you like to start? *
+          <Label className="text-sm font-medium text-gray-300 mb-3 block">
+            When would you like to start? <span className="text-fuchsia-400">*</span>
           </Label>
           <Select value={formData.whenToStart} onValueChange={(value) => updateFormData({ whenToStart: value })}>
-            <SelectTrigger>
+            <SelectTrigger className="bg-gray-800/50 border-fuchsia-500/30 text-white focus:border-fuchsia-500 focus:ring-fuchsia-500/50">
               <SelectValue placeholder="Select when you'd like to start" />
             </SelectTrigger>
-            <SelectContent>
+            <SelectContent className="bg-gray-900 border-fuchsia-500/30">
               {startTimeOptions.map((option) => (
-                <SelectItem key={option} value={option}>
+                <SelectItem 
+                  key={option} 
+                  value={option}
+                  className="text-white hover:bg-fuchsia-500/20 focus:bg-fuchsia-500/20"
+                >
                   {option}
                 </SelectItem>
               ))}
@@ -142,16 +151,20 @@ const BookingStep2 = ({ formData, updateFormData, onNext, onPrev }: BookingStep2
         </div>
 
         <div>
-          <Label className="text-sm font-medium text-gray-700 mb-3 block">
-            What's your experience level? *
+          <Label className="text-sm font-medium text-gray-300 mb-3 block">
+            What's your experience level? <span className="text-fuchsia-400">*</span>
           </Label>
           <Select value={formData.priorExperience} onValueChange={(value) => updateFormData({ priorExperience: value })}>
-            <SelectTrigger>
+            <SelectTrigger className="bg-gray-800/50 border-fuchsia-500/30 text-white focus:border-fuchsia-500 focus:ring-fuchsia-500/50">
               <SelectValue placeholder="Select your experience level" />
             </SelectTrigger>
-            <SelectContent>
+            <SelectContent className="bg-gray-900 border-fuchsia-500/30">
               {experienceOptions.map((option) => (
-                <SelectItem key={option} value={option}>
+                <SelectItem 
+                  key={option} 
+                  value={option}
+                  className="text-white hover:bg-fuchsia-500/20 focus:bg-fuchsia-500/20"
+                >
                   {option}
                 </SelectItem>
               ))}
@@ -160,16 +173,20 @@ const BookingStep2 = ({ formData, updateFormData, onNext, onPrev }: BookingStep2
         </div>
 
         <div>
-          <Label className="text-sm font-medium text-gray-700 mb-3 block">
-            How would you describe your current fitness level? *
+          <Label className="text-sm font-medium text-gray-300 mb-3 block">
+            How would you describe your current fitness level? <span className="text-fuchsia-400">*</span>
           </Label>
           <Select value={formData.fitnessLevel} onValueChange={(value) => updateFormData({ fitnessLevel: value })}>
-            <SelectTrigger>
+            <SelectTrigger className="bg-gray-800/50 border-fuchsia-500/30 text-white focus:border-fuchsia-500 focus:ring-fuchsia-500/50">
               <SelectValue placeholder="Select your fitness level" />
             </SelectTrigger>
-            <SelectContent>
+            <SelectContent className="bg-gray-900 border-fuchsia-500/30">
               {fitnessLevels.map((level) => (
-                <SelectItem key={level} value={level}>
+                <SelectItem 
+                  key={level} 
+                  value={level}
+                  className="text-white hover:bg-fuchsia-500/20 focus:bg-fuchsia-500/20"
+                >
                   {level}
                 </SelectItem>
               ))}
@@ -183,14 +200,14 @@ const BookingStep2 = ({ formData, updateFormData, onNext, onPrev }: BookingStep2
           type="button"
           variant="outline"
           onClick={onPrev}
-          className="flex items-center space-x-2"
+          className="flex items-center space-x-2 border-fuchsia-500/50 text-white hover:bg-fuchsia-500/20 bg-transparent"
         >
           <ArrowLeft className="w-4 h-4" />
           <span>Back</span>
         </Button>
         <Button 
           type="submit" 
-          className="flex-1 bg-gradient-to-r from-rose-500 to-purple-600 hover:from-rose-600 hover:to-purple-700"
+          className="flex-1 neon-button"
           disabled={!isFormValid}
         >
           Continue to Booking
