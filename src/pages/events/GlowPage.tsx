@@ -66,12 +66,11 @@ const GlowPage = () => {
             The Pole Room Presents
           </Badge>
           
-          <h1 className="text-6xl sm:text-7xl lg:text-8xl font-bold gradient-text mb-4">
-            GLOW
-          </h1>
-          <p className="text-2xl sm:text-3xl text-cyan-400 font-semibold mb-6">
-            Showcase
-          </p>
+          <img 
+            src="/lovable-uploads/GLOW-2025-Logo.png"
+            alt="GLOW Showcase"
+            className="w-full max-w-md sm:max-w-lg lg:max-w-xl mx-auto mb-6"
+          />
           
           <p className="text-xl sm:text-2xl text-gray-300 mb-8 max-w-3xl mx-auto">
             A Night of Fun, Passion & Community
@@ -96,9 +95,13 @@ const GlowPage = () => {
             <Button size="lg" className="neon-button" asChild>
               <Link to="/get-started">Join Performance Course</Link>
             </Button>
-            <Button size="lg" variant="outline" className="cyber-border">
-              Event News & Updates
-            </Button>
+              <Button 
+                size="lg" 
+                variant="outline" 
+                className="border-2 border-fuchsia-500 text-fuchsia-400 bg-transparent hover:bg-fuchsia-500/10 hover:text-fuchsia-300 hover:border-fuchsia-400 transition-all duration-300"
+              >
+                Event News & Updates
+              </Button>
           </div>
         </div>
       </section>
