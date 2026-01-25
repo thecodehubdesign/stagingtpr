@@ -154,12 +154,9 @@ const GlowPage = () => {
               <h2 className="text-3xl sm:text-4xl font-bold gradient-text mb-4">
                 Course Bookings Open December 3rd
               </h2>
-              <p className="text-gray-400 text-lg mb-6">
+              <p className="text-gray-400 text-lg">
                 Join our 8-week GLOW Performance Course and take the stage at Australia's largest pole and aerial showcase.
               </p>
-              <Button size="lg" className="neon-button">
-                Get Notified When Bookings Open
-              </Button>
             </div>
             
             {/* Right: Countdown Card */}
