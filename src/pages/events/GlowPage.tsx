@@ -1,3 +1,4 @@
+import { useState, useEffect } from 'react';
 import { Button } from '@/components/ui/button';
 import { Card, CardContent } from '@/components/ui/card';
 import { Badge } from '@/components/ui/badge';
@@ -6,9 +7,32 @@ import { Link } from 'react-router-dom';
 import { motion } from 'framer-motion';
 import Header from '@/components/Header';
 import Footer from '@/components/Footer';
-import CountdownTimer from '@/components/CountdownTimer';
 
 const GlowPage = () => {
+  const [countdown, setCountdown] = useState({ days: 0, hours: 0 });
+
+  useEffect(() => {
+    const targetDate = new Date('2025-12-03T17:30:00').getTime();
+    
+    const updateCountdown = () => {
+      const now = new Date().getTime();
+      const difference = targetDate - now;
+      
+      if (difference > 0) {
+        setCountdown({
+          days: Math.floor(difference / (1000 * 60 * 60 * 24)),
+          hours: Math.floor((difference % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60)),
+        });
+      } else {
+        setCountdown({ days: 0, hours: 0 });
+      }
+    };
+
+    updateCountdown();
+    const timer = setInterval(updateCountdown, 1000);
+    
+    return () => clearInterval(timer);
+  }, []);
   const importantDates = [
     { date: 'Nov 11, 2025', event: 'GLOW 2026 Announced', status: 'complete' },
     { date: 'Dec 3, 2025 - 5:30 PM', event: 'Course Bookings Open', status: 'upcoming' },
@@ -123,11 +147,47 @@ const GlowPage = () => {
 
       {/* Countdown Section */}
       <section className="py-16 px-4 sm:px-6 lg:px-8 bg-gray-900/50">
-        <div className="max-w-4xl mx-auto text-center">
-          <h2 className="text-3xl font-bold gradient-text mb-8">
-            Course Bookings Open December 3rd
-          </h2>
-          <CountdownTimer targetTime="2025-12-03T17:30:00" />
+        <div className="max-w-6xl mx-auto">
+          <div className="grid md:grid-cols-2 gap-8 items-center">
+            {/* Left: Course Bookings Info */}
+            <div>
+              <h2 className="text-3xl sm:text-4xl font-bold gradient-text mb-4">
+                Course Bookings Open December 3rd
+              </h2>
+              <p className="text-gray-400 text-lg mb-6">
+                Join our 8-week GLOW Performance Course and take the stage at Australia's largest pole and aerial showcase.
+              </p>
+              <Button size="lg" className="neon-button">
+                Get Notified When Bookings Open
+              </Button>
+            </div>
+            
+            {/* Right: Countdown Card */}
+            <Card className="cyber-card p-8">
+              <div className="text-center">
+                <p className="text-fuchsia-400 uppercase tracking-wider text-sm font-semibold mb-6">
+                  Bookings Open In
+                </p>
+                <div className="flex justify-center items-center gap-4">
+                  {/* Days */}
+                  <div className="text-center">
+                    <div className="text-5xl sm:text-6xl font-bold text-white font-mono">
+                      {countdown.days.toString().padStart(2, '0')}
+                    </div>
+                    <div className="text-gray-400 text-sm uppercase mt-2">Days</div>
+                  </div>
+                  <div className="text-4xl sm:text-5xl font-bold text-fuchsia-400 mb-6">:</div>
+                  {/* Hours */}
+                  <div className="text-center">
+                    <div className="text-5xl sm:text-6xl font-bold text-white font-mono">
+                      {countdown.hours.toString().padStart(2, '0')}
+                    </div>
+                    <div className="text-gray-400 text-sm uppercase mt-2">Hours</div>
+                  </div>
+                </div>
+              </div>
+            </Card>
+          </div>
         </div>
       </section>
 
