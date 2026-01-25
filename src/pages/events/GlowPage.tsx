@@ -3,6 +3,7 @@ import { Card, CardContent } from '@/components/ui/card';
 import { Badge } from '@/components/ui/badge';
 import { Calendar, MapPin, Clock, Star, Users, Heart, Sparkles, Music, Camera, Mail, Phone } from 'lucide-react';
 import { Link } from 'react-router-dom';
+import { motion } from 'framer-motion';
 import Header from '@/components/Header';
 import Footer from '@/components/Footer';
 import CountdownTimer from '@/components/CountdownTimer';
@@ -67,10 +68,22 @@ const GlowPage = () => {
               The Pole Room Presents
             </p>
             
-            <img 
+            <motion.img 
               src="/lovable-uploads/GLOW-2025-Logo.png"
               alt="GLOW Showcase"
               className="w-full max-w-lg sm:max-w-xl lg:max-w-2xl xl:max-w-3xl mx-auto"
+              animate={{
+                filter: [
+                  'drop-shadow(0 0 20px rgba(236, 72, 153, 0.4)) drop-shadow(0 0 40px rgba(168, 85, 247, 0.3))',
+                  'drop-shadow(0 0 35px rgba(236, 72, 153, 0.6)) drop-shadow(0 0 60px rgba(168, 85, 247, 0.5))',
+                  'drop-shadow(0 0 20px rgba(236, 72, 153, 0.4)) drop-shadow(0 0 40px rgba(168, 85, 247, 0.3))',
+                ],
+              }}
+              transition={{
+                duration: 3,
+                repeat: Infinity,
+                ease: 'easeInOut',
+              }}
             />
             
             <p className="text-xl sm:text-2xl lg:text-3xl text-gray-300 mt-[-100px] sm:mt-[-140px] lg:mt-[-180px] z-10 max-w-3xl mx-auto">
