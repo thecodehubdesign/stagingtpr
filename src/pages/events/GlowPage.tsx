@@ -63,7 +63,7 @@ const GlowPage = () => {
         <div className="relative z-10 max-w-5xl mx-auto text-center px-4 sm:px-6 lg:px-8">
           {/* Overlaid Logo Composition */}
           <div className="relative flex flex-col items-center justify-center mb-8">
-            <p className="text-fuchsia-400 text-lg sm:text-xl font-semibold tracking-widest uppercase mb-[-60px] sm:mb-[-80px] lg:mb-[-100px] z-10">
+            <p className="text-fuchsia-400 text-lg sm:text-xl font-semibold tracking-widest uppercase mb-[-100px] sm:mb-[-140px] lg:mb-[-180px] z-10">
               The Pole Room Presents
             </p>
             
@@ -73,7 +73,7 @@ const GlowPage = () => {
               className="w-full max-w-lg sm:max-w-xl lg:max-w-2xl xl:max-w-3xl mx-auto"
             />
             
-            <p className="text-xl sm:text-2xl lg:text-3xl text-gray-300 mt-[-60px] sm:mt-[-80px] lg:mt-[-100px] z-10 max-w-3xl mx-auto">
+            <p className="text-xl sm:text-2xl lg:text-3xl text-gray-300 mt-[-100px] sm:mt-[-140px] lg:mt-[-180px] z-10 max-w-3xl mx-auto">
               A Night of Fun, Passion & Community
             </p>
           </div>
