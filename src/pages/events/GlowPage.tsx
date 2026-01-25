@@ -2,7 +2,7 @@ import { useState, useEffect } from 'react';
 import { Button } from '@/components/ui/button';
 import { Card, CardContent } from '@/components/ui/card';
 import { Badge } from '@/components/ui/badge';
-import { Calendar, MapPin, Clock, Star, Users, Heart, Sparkles, Music, Camera, Mail, Phone } from 'lucide-react';
+import { Calendar, MapPin, Clock, Star, Users, Heart, Sparkles, Music, Camera, Mail, Phone, ClipboardList } from 'lucide-react';
 import { Link } from 'react-router-dom';
 import { motion } from 'framer-motion';
 import Header from '@/components/Header';
@@ -204,90 +204,161 @@ const GlowPage = () => {
         </div>
       </section>
 
-      {/* Interactive GLOW Gallery */}
+      {/* Interactive GLOW Gallery with About Section */}
       <section className="py-20 px-4 sm:px-6 lg:px-8 relative overflow-hidden">
-        {/* Background orbital ring */}
-        <div className="absolute inset-0 flex items-center justify-center pointer-events-none">
-          <div className="w-[600px] h-[500px] sm:w-[800px] sm:h-[600px] border border-fuchsia-500/20 rounded-full" />
-          <div className="absolute w-[400px] h-[350px] sm:w-[550px] sm:h-[450px] border border-fuchsia-500/10 rounded-full" />
-        </div>
-        
-        <div className="max-w-6xl mx-auto relative">
-          {/* Mobile/Tablet: Simple grid layout */}
-          <div className="block lg:hidden">
-            <div className="grid grid-cols-2 gap-4">
-              {glowImages.map((image, index) => (
-                <motion.div
-                  key={index}
-                  className={`${index === 0 ? 'col-span-2' : ''} cursor-pointer`}
-                  whileHover={{ scale: 1.02 }}
-                  onClick={() => setActiveHeroIndex(index)}
-                >
-                  <div className={`rounded-xl overflow-hidden border-2 ${
-                    index === activeHeroIndex 
-                      ? 'border-fuchsia-500 shadow-[0_0_30px_rgba(236,72,153,0.5)]' 
-                      : 'border-fuchsia-500/40'
-                  } transition-all duration-300`}>
-                    <img 
-                      src={image.src}
-                      alt={image.alt}
-                      className={`w-full ${index === 0 ? 'aspect-video' : 'aspect-[4/3]'} object-cover`}
-                    />
-                  </div>
-                </motion.div>
-              ))}
-            </div>
-          </div>
-
-          {/* Desktop: Asymmetric hero layout */}
-          <div className="hidden lg:block relative h-[650px]">
-            {/* Hero Image - Center */}
-            <motion.div 
-              className="absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 w-[380px] z-10"
-              key={activeHeroIndex}
-              initial={{ opacity: 0, scale: 0.9 }}
-              animate={{ opacity: 1, scale: 1 }}
-              transition={{ duration: 0.4, ease: 'easeOut' }}
-            >
-              <div className="rounded-2xl overflow-hidden border-2 border-fuchsia-500/60 shadow-[0_0_50px_rgba(236,72,153,0.5)]">
-                <img 
-                  src={glowImages[activeHeroIndex].src}
-                  alt={glowImages[activeHeroIndex].alt}
-                  className="w-full aspect-[3/4] object-cover"
-                />
-              </div>
-            </motion.div>
+        <div className="max-w-7xl mx-auto relative">
+          <div className="grid lg:grid-cols-2 gap-12 items-center">
             
-            {/* Thumbnails - Positioned around */}
-            {glowImages.map((image, index) => {
-              if (index === activeHeroIndex) return null;
+            {/* LEFT: Photo Gallery */}
+            <div className="relative">
+              {/* Background orbital ring */}
+              <div className="absolute inset-0 flex items-center justify-center pointer-events-none">
+                <div className="w-[400px] h-[350px] sm:w-[500px] sm:h-[400px] border border-fuchsia-500/20 rounded-full" />
+                <div className="absolute w-[280px] h-[240px] sm:w-[350px] sm:h-[300px] border border-fuchsia-500/10 rounded-full" />
+              </div>
               
-              // Determine position index for non-active thumbnails
-              const activeBeforeMe = glowImages.slice(0, index).filter((_, i) => i !== activeHeroIndex).length;
-              const posIndex = index < activeHeroIndex ? index : activeBeforeMe;
-              const position = thumbnailPositions[posIndex % 4];
-              
-              return (
-                <motion.div
-                  key={index}
-                  className="absolute w-[200px] cursor-pointer"
-                  style={position}
-                  onClick={() => setActiveHeroIndex(index)}
-                  whileHover={{ scale: 1.08 }}
-                  initial={{ opacity: 0 }}
-                  animate={{ opacity: 1 }}
-                  transition={{ duration: 0.3, delay: posIndex * 0.1 }}
+              {/* Mobile/Tablet: Simple grid layout */}
+              <div className="block lg:hidden">
+                <div className="grid grid-cols-2 gap-4">
+                  {glowImages.map((image, index) => (
+                    <motion.div
+                      key={index}
+                      className={`${index === 0 ? 'col-span-2' : ''} cursor-pointer`}
+                      whileHover={{ scale: 1.02 }}
+                      onClick={() => setActiveHeroIndex(index)}
+                    >
+                      <div className={`rounded-xl overflow-hidden border-2 ${
+                        index === activeHeroIndex 
+                          ? 'border-fuchsia-500 shadow-[0_0_30px_rgba(236,72,153,0.5)]' 
+                          : 'border-fuchsia-500/40'
+                      } transition-all duration-300`}>
+                        <img 
+                          src={image.src}
+                          alt={image.alt}
+                          className={`w-full ${index === 0 ? 'aspect-video' : 'aspect-[4/3]'} object-cover`}
+                        />
+                      </div>
+                    </motion.div>
+                  ))}
+                </div>
+              </div>
+
+              {/* Desktop: Asymmetric hero layout */}
+              <div className="hidden lg:block relative h-[500px]">
+                {/* Hero Image - Center */}
+                <motion.div 
+                  className="absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 w-[280px] z-10"
+                  key={activeHeroIndex}
+                  initial={{ opacity: 0, scale: 0.9 }}
+                  animate={{ opacity: 1, scale: 1 }}
+                  transition={{ duration: 0.4, ease: 'easeOut' }}
                 >
-                  <div className="rounded-xl overflow-hidden border-2 border-fuchsia-500/40 shadow-[0_0_20px_rgba(236,72,153,0.3)] hover:border-fuchsia-500/80 hover:shadow-[0_0_35px_rgba(236,72,153,0.5)] transition-all duration-300">
+                  <div className="rounded-2xl overflow-hidden border-2 border-fuchsia-500/60 shadow-[0_0_50px_rgba(236,72,153,0.5)]">
                     <img 
-                      src={image.src}
-                      alt={image.alt}
-                      className="w-full aspect-[4/3] object-cover"
+                      src={glowImages[activeHeroIndex].src}
+                      alt={glowImages[activeHeroIndex].alt}
+                      className="w-full aspect-[3/4] object-cover"
                     />
                   </div>
                 </motion.div>
-              );
-            })}
+                
+                {/* Thumbnails - Positioned around */}
+                {glowImages.map((image, index) => {
+                  if (index === activeHeroIndex) return null;
+                  
+                  const activeBeforeMe = glowImages.slice(0, index).filter((_, i) => i !== activeHeroIndex).length;
+                  const posIndex = index < activeHeroIndex ? index : activeBeforeMe;
+                  const position = thumbnailPositions[posIndex % 4];
+                  
+                  return (
+                    <motion.div
+                      key={index}
+                      className="absolute w-[150px] cursor-pointer"
+                      style={position}
+                      onClick={() => setActiveHeroIndex(index)}
+                      whileHover={{ scale: 1.08 }}
+                      initial={{ opacity: 0 }}
+                      animate={{ opacity: 1 }}
+                      transition={{ duration: 0.3, delay: posIndex * 0.1 }}
+                    >
+                      <div className="rounded-xl overflow-hidden border-2 border-fuchsia-500/40 shadow-[0_0_20px_rgba(236,72,153,0.3)] hover:border-fuchsia-500/80 hover:shadow-[0_0_35px_rgba(236,72,153,0.5)] transition-all duration-300">
+                        <img 
+                          src={image.src}
+                          alt={image.alt}
+                          className="w-full aspect-[4/3] object-cover"
+                        />
+                      </div>
+                    </motion.div>
+                  );
+                })}
+              </div>
+            </div>
+            
+            {/* RIGHT: Content */}
+            <div className="order-first lg:order-last">
+              {/* ABOUT outline text */}
+              <p 
+                className="text-5xl lg:text-6xl font-bold text-transparent uppercase tracking-wider mb-2"
+                style={{ WebkitTextStroke: '1px rgba(236,72,153,0.4)' }}
+              >
+                ABOUT
+              </p>
+              
+              {/* Main Heading */}
+              <h2 className="text-3xl sm:text-4xl lg:text-5xl font-bold mb-6">
+                <span className="text-white">A NIGHT OF FUN,</span>
+                <br />
+                <span className="text-white">PASSION & </span>
+                <span className="gradient-text">COMMUNITY</span>
+              </h2>
+              
+              {/* Description */}
+              <p className="text-gray-400 text-lg leading-relaxed mb-8">
+                Get ready for an unforgettable experience as you take to the stage as a performer. <span className="text-white font-semibold">GLOW Student Showcase</span> returns for its <span className="text-white font-semibold">6th year running</span>, bigger and better than ever.
+              </p>
+              
+              {/* Button and Founder Row */}
+              <div className="flex flex-wrap items-center gap-6 mb-10">
+                <Link to="/get-started">
+                  <Button size="lg" className="neon-button">
+                    JOIN A COURSE
+                  </Button>
+                </Link>
+                
+                <div className="flex items-center gap-3">
+                  <div className="w-12 h-12 rounded-full overflow-hidden border-2 border-fuchsia-500/50">
+                    <img 
+                      src="/lovable-uploads/1d83d83b-0057-4bd1-8052-79584b039a97.jpg" 
+                      alt="Jasmine Zapka"
+                      className="w-full h-full object-cover"
+                    />
+                  </div>
+                  <div>
+                    <p className="text-white font-semibold">JASMINE ZAPKA</p>
+                    <p className="text-gray-400 text-sm">FOUNDER & EVENT ORGANISER</p>
+                  </div>
+                </div>
+              </div>
+              
+              {/* Three Feature Icons */}
+              <div className="cyber-card p-6 rounded-xl">
+                <div className="grid grid-cols-3 gap-4">
+                  {[
+                    { icon: ClipboardList, label: 'ENROL IN AN UPCOMING COURSE' },
+                    { icon: Users, label: 'PERFORM IN A GROUP ROUTINE' },
+                    { icon: Sparkles, label: 'BE PART OF A GLOW EXPERIENCE' },
+                  ].map((item, index) => (
+                    <div key={index} className="text-center">
+                      <div className="w-12 h-12 sm:w-14 sm:h-14 mx-auto bg-gradient-to-r from-fuchsia-500 to-pink-500 rounded-full flex items-center justify-center mb-3">
+                        <item.icon className="w-6 h-6 sm:w-7 sm:h-7 text-white" />
+                      </div>
+                      <p className="text-white text-xs font-semibold uppercase leading-tight">{item.label}</p>
+                    </div>
+                  ))}
+                </div>
+              </div>
+            </div>
+            
           </div>
         </div>
       </section>
