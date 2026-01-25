@@ -1,11 +1,15 @@
-
-import { ArrowLeft, Calendar, User, Tag, Clock, Share2, Heart, MessageCircle } from 'lucide-react';
+import { ArrowLeft, Calendar, User, Clock } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 import { Card, CardContent } from '@/components/ui/card';
 import { useParams, useNavigate } from 'react-router-dom';
 import Header from '@/components/Header';
 import Footer from '@/components/Footer';
 import { blogPostsData } from './Blog';
+import BlogProductsSidebar from '@/components/blog/BlogProductsSidebar';
+import BlogShareButtons from '@/components/blog/BlogShareButtons';
+import ArticleEndDivider from '@/components/blog/ArticleEndDivider';
+import BlogVideoPlayer from '@/components/blog/BlogVideoPlayer';
+import ReadingProgress from '@/components/blog/ReadingProgress';
 
 const BlogPost = () => {
   const { id } = useParams();
@@ -34,8 +38,11 @@ const BlogPost = () => {
     .filter(p => p.id !== post.id)
     .slice(0, 3);
 
+  const currentUrl = typeof window !== 'undefined' ? window.location.href : '';
+
   return (
     <div className="min-h-screen bg-background">
+      <ReadingProgress />
       <Header />
       
       <div className="cyber-grid pt-16">
@@ -94,42 +101,21 @@ const BlogPost = () => {
           </div>
         </div>
 
-        {/* Main Content */}
-        <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 py-16">
-          <div className="grid lg:grid-cols-4 gap-8">
-            {/* Article Content */}
-            <div className="lg:col-span-3">
+        {/* Main Content - 2 Column Layout */}
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-16">
+          <div className="grid lg:grid-cols-3 gap-8">
+            {/* Article Content - 2/3 width */}
+            <div className="lg:col-span-2">
               <Card className="cyber-card">
                 <CardContent className="p-8">
-                  {/* Social Actions */}
-                  <div className="flex items-center justify-between mb-8 pb-6 border-b border-gray-700/50">
-                    <div className="flex items-center space-x-4">
-                      <Button 
-                        variant="ghost" 
-                        size="sm" 
-                        className="text-gray-400 hover:text-pink-400 hover:bg-pink-400/10"
-                      >
-                        <Heart className="w-4 h-4 mr-2" />
-                        42 Likes
-                      </Button>
-                      <Button 
-                        variant="ghost" 
-                        size="sm" 
-                        className="text-gray-400 hover:text-blue-400 hover:bg-blue-400/10"
-                      >
-                        <MessageCircle className="w-4 h-4 mr-2" />
-                        8 Comments
-                      </Button>
-                    </div>
-                    <Button 
-                      variant="ghost" 
-                      size="sm" 
-                      className="text-gray-400 hover:text-cyan-400 hover:bg-cyan-400/10"
-                    >
-                      <Share2 className="w-4 h-4 mr-2" />
-                      Share
-                    </Button>
-                  </div>
+                  {/* Video Module (if available) */}
+                  {post.video && (
+                    <BlogVideoPlayer 
+                      videoUrl={post.video} 
+                      title={`Watch: ${post.title}`}
+                      summary={post.videoSummary}
+                    />
+                  )}
                   
                   {/* Article Body */}
                   <div 
@@ -143,18 +129,35 @@ const BlogPost = () => {
                     dangerouslySetInnerHTML={{ __html: post.content }}
                   />
                   
-                  {/* Author Bio */}
-                  <div className="mt-12 pt-8 border-t border-gray-700/50">
+                  {/* Clear Article End Divider */}
+                  <ArticleEndDivider />
+                  
+                  {/* Share Buttons */}
+                  <BlogShareButtons title={post.title} url={currentUrl} />
+                  
+                  {/* Author Bio with Image */}
+                  <div className="mt-8 pt-8 border-t border-gray-700/50">
+                    <h3 className="text-sm font-medium text-gray-400 uppercase tracking-wider mb-4">About the Author</h3>
                     <div className="flex items-start space-x-4">
-                      <div className="w-16 h-16 bg-gradient-to-br from-fuchsia-500 to-cyan-500 rounded-full flex items-center justify-center">
-                        <User className="w-8 h-8 text-white" />
+                      <div className="w-20 h-20 rounded-full overflow-hidden border-2 border-fuchsia-500/50 flex-shrink-0">
+                        {post.authorImage ? (
+                          <img 
+                            src={post.authorImage} 
+                            alt={post.author}
+                            className="w-full h-full object-cover"
+                          />
+                        ) : (
+                          <div className="w-full h-full bg-gradient-to-br from-fuchsia-500 to-cyan-500 flex items-center justify-center">
+                            <User className="w-10 h-10 text-white" />
+                          </div>
+                        )}
                       </div>
-                      <div>
+                      <div className="flex-1">
                         <h4 className="text-xl font-semibold text-gray-100 mb-2">{post.author}</h4>
                         <p className="text-gray-400 leading-relaxed">
-                          Our expert instructors and guest writers share their knowledge and passion for pole dancing, 
+                          {post.authorBio || `Our expert instructors and guest writers share their knowledge and passion for pole dancing, 
                           aerial arts, and fitness. Each brings unique perspectives and years of experience to help 
-                          guide your journey.
+                          guide your journey.`}
                         </p>
                       </div>
                     </div>
@@ -163,9 +166,12 @@ const BlogPost = () => {
               </Card>
             </div>
             
-            {/* Sidebar */}
+            {/* Sidebar - 1/3 width */}
             <div className="lg:col-span-1">
               <div className="sticky top-24 space-y-6">
+                {/* Products Sidebar */}
+                <BlogProductsSidebar />
+                
                 {/* Newsletter Signup */}
                 <Card className="cyber-card">
                   <CardContent className="p-6">
