@@ -61,20 +61,22 @@ const GlowPage = () => {
         />
         
         <div className="relative z-10 max-w-5xl mx-auto text-center px-4 sm:px-6 lg:px-8">
-          <Badge className="mb-6 bg-fuchsia-500/20 text-fuchsia-400 border-fuchsia-500/50">
-            <Sparkles className="w-4 h-4 mr-2" />
-            The Pole Room Presents
-          </Badge>
-          
-          <img 
-            src="/lovable-uploads/GLOW-2025-Logo.png"
-            alt="GLOW Showcase"
-            className="w-full max-w-md sm:max-w-lg lg:max-w-xl mx-auto mb-6"
-          />
-          
-          <p className="text-xl sm:text-2xl text-gray-300 mb-8 max-w-3xl mx-auto">
-            A Night of Fun, Passion & Community
-          </p>
+          {/* Overlaid Logo Composition */}
+          <div className="relative flex flex-col items-center justify-center mb-8">
+            <p className="text-fuchsia-400 text-lg sm:text-xl font-semibold tracking-widest uppercase mb-[-20px] sm:mb-[-30px] lg:mb-[-40px] z-10">
+              The Pole Room Presents
+            </p>
+            
+            <img 
+              src="/lovable-uploads/GLOW-2025-Logo.png"
+              alt="GLOW Showcase"
+              className="w-full max-w-lg sm:max-w-xl lg:max-w-2xl xl:max-w-3xl mx-auto"
+            />
+            
+            <p className="text-xl sm:text-2xl lg:text-3xl text-gray-300 mt-[-20px] sm:mt-[-30px] lg:mt-[-40px] z-10 max-w-3xl mx-auto">
+              A Night of Fun, Passion & Community
+            </p>
+          </div>
 
           <div className="flex flex-wrap justify-center gap-4 mb-8">
             <Badge variant="outline" className="text-white border-white/30 px-4 py-2">
