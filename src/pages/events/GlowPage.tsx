@@ -391,30 +391,111 @@ const GlowPage = () => {
         </div>
       </section>
 
-      {/* History/Stats Section */}
-      <section className="py-20 px-4 sm:px-6 lg:px-8 bg-gray-900/50">
-        <div className="max-w-6xl mx-auto">
-          <div className="text-center mb-16">
-            <Badge className="mb-4 bg-cyan-500/20 text-cyan-400 border-cyan-500/50">
-              Australia's Largest
-            </Badge>
-            <h2 className="text-4xl sm:text-5xl font-bold gradient-text mb-4">
-              Pole & Aerial Showcase
-            </h2>
-            <p className="text-xl text-gray-400 max-w-3xl mx-auto">
-              200+ pole and aerial performers come together for one spectacular night
-            </p>
-          </div>
-
-          <div className="grid grid-cols-2 lg:grid-cols-4 gap-6">
-            {stats.map((stat, index) => (
-              <div key={index} className="text-center">
-                <div className="text-5xl sm:text-6xl font-bold gradient-text mb-2">
-                  {stat.number}
+      {/* History Section */}
+      <section className="py-20 px-4 sm:px-6 lg:px-8 relative overflow-hidden">
+        <div className="max-w-7xl mx-auto">
+          <div className="grid lg:grid-cols-2 gap-12 items-start">
+            
+            {/* LEFT: Content */}
+            <div>
+              <p 
+                className="text-6xl lg:text-8xl font-bold text-transparent uppercase tracking-wider mb-4"
+                style={{ WebkitTextStroke: '1px rgba(236,72,153,0.4)' }}
+              >
+                HISTORY
+              </p>
+              
+              <h2 className="text-3xl sm:text-4xl lg:text-5xl font-bold mb-6">
+                <span className="text-white">AUSTRALIA'S</span>
+                <br />
+                <span className="text-white">LARGEST </span>
+                <span className="gradient-text">POLE</span>
+                <br />
+                <span className="gradient-text">& AERIAL SHOWCASE</span>
+              </h2>
+              
+              <p className="text-gray-400 text-lg leading-relaxed mb-8">
+                We're pretty confident this is Australia's biggest pole & aerial 
+                showcase—after all, what other <span className="text-white font-semibold">event brings over 200 pole and 
+                aerial performers together for one unforgettable night?</span>
+              </p>
+              
+              <Link to="/get-started">
+                <Button size="lg" className="neon-button">
+                  JOIN A COURSE
+                </Button>
+              </Link>
+              
+              {/* Large group photo */}
+              <div className="mt-8">
+                <div className="rounded-2xl overflow-hidden border-2 border-fuchsia-500/50 shadow-[0_0_25px_rgba(236,72,153,0.4)]">
+                  <img 
+                    src="/images/glow/history-1.png" 
+                    alt="GLOW performers group photo"
+                    className="w-full aspect-video object-cover"
+                  />
                 </div>
-                <p className="text-gray-400">{stat.label}</p>
               </div>
-            ))}
+            </div>
+            
+            {/* RIGHT: Image Gallery */}
+            <div className="relative">
+              <div className="grid grid-cols-2 gap-4">
+                {/* Top row: 2 images */}
+                <div className="rounded-2xl overflow-hidden border-2 border-fuchsia-500/50 shadow-[0_0_20px_rgba(236,72,153,0.3)]">
+                  <img 
+                    src="/images/glow/history-2.png" 
+                    alt="GLOW performance" 
+                    className="w-full aspect-[4/3] object-cover" 
+                  />
+                </div>
+                <div className="rounded-2xl overflow-hidden border-2 border-fuchsia-500/50 shadow-[0_0_20px_rgba(236,72,153,0.3)]">
+                  <img 
+                    src="/images/glow/history-3.png" 
+                    alt="GLOW themed performance" 
+                    className="w-full aspect-[4/3] object-cover" 
+                  />
+                </div>
+                
+                {/* Bottom row: wide image */}
+                <div className="rounded-2xl overflow-hidden border-2 border-fuchsia-500/50 shadow-[0_0_20px_rgba(236,72,153,0.3)] col-span-2">
+                  <img 
+                    src="/images/glow/history-4.png" 
+                    alt="GLOW group choreography" 
+                    className="w-full aspect-video object-cover" 
+                  />
+                </div>
+              </div>
+            </div>
+            
+          </div>
+          
+          {/* Stats Banner */}
+          <div className="mt-16 cyber-card p-8 rounded-2xl">
+            <div className="text-center mb-8">
+              <p className="text-xl text-gray-300 italic mb-2">
+                Experience the magic. Be part of the celebration.
+              </p>
+              <p className="text-xl font-semibold">
+                <span className="gradient-text">Welcome to GLOW!</span>
+                <span className="text-white"> Since 2019 the show has welcomed:</span>
+              </p>
+            </div>
+            
+            <div className="grid grid-cols-3 gap-8">
+              <div className="text-center">
+                <div className="text-4xl sm:text-5xl font-bold gradient-text mb-2">10+</div>
+                <p className="text-gray-400 uppercase text-sm tracking-wide">Soloist Performers</p>
+              </div>
+              <div className="text-center">
+                <div className="text-4xl sm:text-5xl font-bold gradient-text mb-2">200+</div>
+                <p className="text-gray-400 uppercase text-sm tracking-wide">Solo Student Performances</p>
+              </div>
+              <div className="text-center">
+                <div className="text-4xl sm:text-5xl font-bold gradient-text mb-2">2,000+</div>
+                <p className="text-gray-400 uppercase text-sm tracking-wide">Show Attendees</p>
+              </div>
+            </div>
           </div>
         </div>
       </section>
