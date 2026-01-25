@@ -10,6 +10,22 @@ import Footer from '@/components/Footer';
 
 const GlowPage = () => {
   const [countdown, setCountdown] = useState({ days: 0, hours: 0 });
+  const [activeHeroIndex, setActiveHeroIndex] = useState(0);
+
+  const glowImages = [
+    { src: '/images/glow/hero-1.png', alt: 'GLOW Performance - Aerial duo' },
+    { src: '/images/glow/hero-2.png', alt: 'GLOW Performance - Stage lights' },
+    { src: '/images/glow/hero-3.png', alt: 'GLOW Performance - Group pose' },
+    { src: '/images/glow/hero-4.png', alt: 'GLOW Performance - Silks' },
+    { src: '/images/glow/hero-5.png', alt: 'GLOW Performance - Pole artistry' },
+  ];
+
+  const thumbnailPositions = [
+    { top: '5%', left: '5%' },
+    { top: '5%', right: '5%' },
+    { bottom: '15%', left: '5%' },
+    { bottom: '15%', right: '5%' },
+  ];
 
   useEffect(() => {
     const targetDate = new Date('2025-12-03T17:30:00').getTime();
@@ -184,6 +200,94 @@ const GlowPage = () => {
                 </div>
               </div>
             </Card>
+          </div>
+        </div>
+      </section>
+
+      {/* Interactive GLOW Gallery */}
+      <section className="py-20 px-4 sm:px-6 lg:px-8 relative overflow-hidden">
+        {/* Background orbital ring */}
+        <div className="absolute inset-0 flex items-center justify-center pointer-events-none">
+          <div className="w-[600px] h-[500px] sm:w-[800px] sm:h-[600px] border border-fuchsia-500/20 rounded-full" />
+          <div className="absolute w-[400px] h-[350px] sm:w-[550px] sm:h-[450px] border border-fuchsia-500/10 rounded-full" />
+        </div>
+        
+        <div className="max-w-6xl mx-auto relative">
+          {/* Mobile/Tablet: Simple grid layout */}
+          <div className="block lg:hidden">
+            <div className="grid grid-cols-2 gap-4">
+              {glowImages.map((image, index) => (
+                <motion.div
+                  key={index}
+                  className={`${index === 0 ? 'col-span-2' : ''} cursor-pointer`}
+                  whileHover={{ scale: 1.02 }}
+                  onClick={() => setActiveHeroIndex(index)}
+                >
+                  <div className={`rounded-xl overflow-hidden border-2 ${
+                    index === activeHeroIndex 
+                      ? 'border-fuchsia-500 shadow-[0_0_30px_rgba(236,72,153,0.5)]' 
+                      : 'border-fuchsia-500/40'
+                  } transition-all duration-300`}>
+                    <img 
+                      src={image.src}
+                      alt={image.alt}
+                      className={`w-full ${index === 0 ? 'aspect-video' : 'aspect-[4/3]'} object-cover`}
+                    />
+                  </div>
+                </motion.div>
+              ))}
+            </div>
+          </div>
+
+          {/* Desktop: Asymmetric hero layout */}
+          <div className="hidden lg:block relative h-[650px]">
+            {/* Hero Image - Center */}
+            <motion.div 
+              className="absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 w-[380px] z-10"
+              key={activeHeroIndex}
+              initial={{ opacity: 0, scale: 0.9 }}
+              animate={{ opacity: 1, scale: 1 }}
+              transition={{ duration: 0.4, ease: 'easeOut' }}
+            >
+              <div className="rounded-2xl overflow-hidden border-2 border-fuchsia-500/60 shadow-[0_0_50px_rgba(236,72,153,0.5)]">
+                <img 
+                  src={glowImages[activeHeroIndex].src}
+                  alt={glowImages[activeHeroIndex].alt}
+                  className="w-full aspect-[3/4] object-cover"
+                />
+              </div>
+            </motion.div>
+            
+            {/* Thumbnails - Positioned around */}
+            {glowImages.map((image, index) => {
+              if (index === activeHeroIndex) return null;
+              
+              // Determine position index for non-active thumbnails
+              const activeBeforeMe = glowImages.slice(0, index).filter((_, i) => i !== activeHeroIndex).length;
+              const posIndex = index < activeHeroIndex ? index : activeBeforeMe;
+              const position = thumbnailPositions[posIndex % 4];
+              
+              return (
+                <motion.div
+                  key={index}
+                  className="absolute w-[200px] cursor-pointer"
+                  style={position}
+                  onClick={() => setActiveHeroIndex(index)}
+                  whileHover={{ scale: 1.08 }}
+                  initial={{ opacity: 0 }}
+                  animate={{ opacity: 1 }}
+                  transition={{ duration: 0.3, delay: posIndex * 0.1 }}
+                >
+                  <div className="rounded-xl overflow-hidden border-2 border-fuchsia-500/40 shadow-[0_0_20px_rgba(236,72,153,0.3)] hover:border-fuchsia-500/80 hover:shadow-[0_0_35px_rgba(236,72,153,0.5)] transition-all duration-300">
+                    <img 
+                      src={image.src}
+                      alt={image.alt}
+                      className="w-full aspect-[4/3] object-cover"
+                    />
+                  </div>
+                </motion.div>
+              );
+            })}
           </div>
         </div>
       </section>
