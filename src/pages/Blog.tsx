@@ -344,8 +344,16 @@ export const blogPostsData = [
     image: "/images/blog/mental-health-benefits.png",
     date: "March 15, 2024",
     author: "Jasmine Zapka",
+    authorImage: "/images/instructors/kp.png",
+    authorBio: "Jasmine is the founder of The Pole Room and has been teaching pole dancing for over 12 years. She's passionate about helping students discover their inner strength and confidence through movement.",
     tags: ["Mental Health", "Pole Dancing", "Wellness"],
     readTime: "5 min read",
+    video: "/videos/reel-1.mp4",
+    videoSummary: [
+      { time: "0:00", label: "Introduction to mental health benefits" },
+      { time: "0:15", label: "Building confidence through movement" },
+      { time: "0:30", label: "Community and connection" },
+    ],
     content: `
       <p>Pole dancing has evolved far beyond its origins to become a powerful form of fitness and self-expression that offers incredible mental health benefits. Here are five ways this art form can transform your mental wellbeing:</p>
       
@@ -374,6 +382,8 @@ export const blogPostsData = [
     image: "/images/blog/first-class-expectations.png",
     date: "March 10, 2024",
     author: "Sarah Mitchell",
+    authorImage: "/images/instructors/courtney.png",
+    authorBio: "Sarah has been a pole instructor for 5 years and specializes in beginner classes. She loves helping newcomers feel comfortable and confident from day one.",
     tags: ["Beginners", "Tips", "First Class"],
     readTime: "4 min read",
     content: `
@@ -404,8 +414,16 @@ export const blogPostsData = [
     image: "/images/blog/flexibility-science.png",
     date: "March 5, 2024",
     author: "Dr. Amanda Chen",
+    authorImage: "/images/instructors/gillian.png",
+    authorBio: "Dr. Amanda Chen is a sports physiotherapist and flexibility specialist who works with our instructors to develop safe, science-based stretching programs.",
     tags: ["Flexibility", "Science", "Training"],
     readTime: "7 min read",
+    video: "/videos/reel-3.mp4",
+    videoSummary: [
+      { time: "0:00", label: "Introduction to flexibility science" },
+      { time: "0:20", label: "Neuromuscular adaptations" },
+      { time: "0:40", label: "Progressive stretching techniques" },
+    ],
     content: `
       <p>Flexibility training is often misunderstood, but science reveals the fascinating mechanisms behind how our bodies adapt to stretching. Let's explore the biomechanics that make our flexibility program so effective:</p>
       
@@ -434,6 +452,8 @@ export const blogPostsData = [
     image: "/images/blog/silks-vs-pole.png",
     date: "February 28, 2024",
     author: "Emma Rodriguez",
+    authorImage: "/images/instructors/bianca.png",
+    authorBio: "Emma teaches both aerial silks and pole at The Pole Room. With expertise in both disciplines, she helps students find the perfect fit for their goals and personality.",
     tags: ["Aerial Silks", "Pole Dancing", "Comparison"],
     readTime: "6 min read",
     content: `
@@ -464,8 +484,17 @@ export const blogPostsData = [
     image: "/images/blog/upper-body-strength.png",
     date: "February 20, 2024",
     author: "Marcus Thompson",
+    authorImage: "/images/instructors/derryn.png",
+    authorBio: "Marcus is a certified personal trainer and strength coach who specializes in conditioning athletes for aerial arts. He's helped hundreds of students achieve their strength goals.",
     tags: ["Strength Training", "Upper Body", "Fitness"],
     readTime: "8 min read",
+    video: "/videos/reel-4.mp4",
+    videoSummary: [
+      { time: "0:00", label: "Introduction to strength training" },
+      { time: "0:15", label: "Pull-up progressions" },
+      { time: "0:30", label: "Core integration exercises" },
+      { time: "0:45", label: "Recovery tips" },
+    ],
     content: `
       <p>Upper body strength is crucial for aerial arts success, but building it doesn't have to be intimidating. Here's your roadmap to developing the strength you need for pole and aerial excellence:</p>
       
@@ -497,6 +526,8 @@ export const blogPostsData = [
     image: "/images/blog/home-practice-space.png",
     date: "February 15, 2024",
     author: "Lisa Park",
+    authorImage: "/images/instructors/alison.png",
+    authorBio: "Lisa is a studio designer and home practice enthusiast who has helped dozens of students create their own training spaces. Safety and inspiration are her top priorities.",
     tags: ["Home Practice", "Setup", "Safety"],
     readTime: "5 min read",
     content: `
