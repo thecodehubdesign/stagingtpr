@@ -480,9 +480,12 @@ const FirstTimers = () => {
             
             <div className="aspect-video max-w-4xl mx-auto rounded-2xl overflow-hidden border border-fuchsia-500/20">
               <iframe
-                src="https://www.google.com/maps/d/embed?mid=1ABC123&ehbc=2E312F"
-                className="w-full h-full"
+                src="https://www.google.com/maps/embed/v1/search?key=AIzaSyBFw0Qbyq9zTFTd-tUY6dZWTgaQzuU17R8&q=The+Pole+Room+Melbourne"
+                className="w-full h-full grayscale contrast-125"
                 style={{ border: 0 }}
+                allowFullScreen
+                loading="lazy"
+                referrerPolicy="no-referrer-when-downgrade"
                 title="The Pole Room Locations"
               />
             </div>
