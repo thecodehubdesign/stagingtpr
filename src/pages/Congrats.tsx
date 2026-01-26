@@ -1,5 +1,6 @@
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import { motion } from 'framer-motion';
+import confetti from 'canvas-confetti';
 import { CheckCircle, Copy, Check, Calendar, Clock, ShoppingBag, ChevronRight, X, Newspaper, User } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 import { toast } from 'sonner';
@@ -125,6 +126,40 @@ const Congrats = () => {
     }
   };
 
+  // Confetti celebration on page load
+  useEffect(() => {
+    const duration = 3000;
+    const animationEnd = Date.now() + duration;
+    
+    const interval = setInterval(() => {
+      const timeLeft = animationEnd - Date.now();
+      
+      if (timeLeft <= 0) {
+        return clearInterval(interval);
+      }
+      
+      // Left side burst
+      confetti({
+        particleCount: 3,
+        angle: 60,
+        spread: 55,
+        origin: { x: 0, y: 0.6 },
+        colors: ['#ff00ff', '#00ffff', '#e879f9', '#22d3ee', '#a855f7']
+      });
+      
+      // Right side burst  
+      confetti({
+        particleCount: 3,
+        angle: 120,
+        spread: 55,
+        origin: { x: 1, y: 0.6 },
+        colors: ['#ff00ff', '#00ffff', '#e879f9', '#22d3ee', '#a855f7']
+      });
+    }, 100);
+    
+    return () => clearInterval(interval);
+  }, []);
+
   const whatToWear = [
     'Shorts (bike shorts recommended)',
     'Singlet or crop top',
@@ -207,13 +242,32 @@ const Congrats = () => {
               Send this to your friends so they come along! Know someone who would love pole? Invite them to join you on this journey.
             </p>
             
-            {/* iPhone-style message bubble - CENTRED */}
+            {/* iPhone-style message bubble with iMessage tail */}
             <div className="flex justify-center mb-6">
-              <div 
-                className="max-w-sm rounded-2xl rounded-br-md p-4 text-white text-sm leading-relaxed"
-                style={{ backgroundColor: '#077dff' }}
-              >
-                {referralMessage}
+              <div className="relative">
+                <div 
+                  className="max-w-sm rounded-2xl rounded-br-sm p-4 text-white text-sm leading-relaxed"
+                  style={{ 
+                    backgroundColor: '#077dff',
+                    fontFamily: '-apple-system, BlinkMacSystemFont, "SF Pro Text", "SF Pro Display", system-ui, sans-serif',
+                    fontWeight: 400,
+                    letterSpacing: '-0.01em'
+                  }}
+                >
+                  {referralMessage}
+                </div>
+                {/* iMessage tail */}
+                <svg 
+                  className="absolute -bottom-[1px] -right-[7px]" 
+                  width="12" 
+                  height="16" 
+                  viewBox="0 0 12 16"
+                >
+                  <path 
+                    d="M0 0 Q0 16 12 16 L0 16 Z" 
+                    fill="#077dff"
+                  />
+                </svg>
               </div>
             </div>
             
@@ -355,6 +409,20 @@ const Congrats = () => {
                   <span className="text-gray-200">{item}</span>
                 </div>
               ))}
+            </div>
+          </motion.div>
+
+          {/* Transition Divider */}
+          <motion.div
+            initial={{ opacity: 0, scale: 0.9 }}
+            animate={{ opacity: 1, scale: 1 }}
+            transition={{ delay: 0.82, duration: 0.4 }}
+            className="flex justify-center mb-8"
+          >
+            <div className="inline-flex items-center gap-2 px-6 py-3 rounded-full bg-gradient-to-r from-green-500/20 to-cyan-500/20 border border-green-500/40">
+              <span className="text-white font-semibold text-lg">
+                ✅ Almost Ready to Go: Other things to consider!
+              </span>
             </div>
           </motion.div>
 
