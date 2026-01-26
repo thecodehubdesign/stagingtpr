@@ -1,6 +1,6 @@
 import { useState } from 'react';
 import { motion } from 'framer-motion';
-import { CheckCircle, Copy, Check, Calendar, Clock, ShoppingBag } from 'lucide-react';
+import { CheckCircle, Copy, Check, Calendar, Clock, ShoppingBag, ChevronRight, X, Newspaper, User } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 import { toast } from 'sonner';
 import { Link } from 'react-router-dom';
@@ -8,6 +8,10 @@ import Header from '@/components/Header';
 import Footer from '@/components/Footer';
 import { useScrollToTop } from '@/hooks/useScrollToTop';
 import { products } from '@/data/products';
+import { Sheet, SheetContent, SheetHeader, SheetTitle, SheetClose } from '@/components/ui/sheet';
+import { ScrollArea } from '@/components/ui/scroll-area';
+import { Badge } from '@/components/ui/badge';
+import { useIsMobile } from '@/hooks/use-mobile';
 
 import appStore from '@/assets/app-store.png';
 import googlePlay from '@/assets/google-play.png';
@@ -15,9 +19,94 @@ import appMockup from '@/assets/app-mockup.png';
 import jasmineSignature from '@/assets/jasmine-signature.png';
 import jasmineVerified from '@/assets/jasmine-verified.png';
 
+const considerationPosts = [
+  {
+    id: 1,
+    title: "Understanding Our Cancellation Policy",
+    excerpt: "Life happens! Here's everything you need to know about our flexible cancellation policy.",
+    image: "/lovable-uploads/8a7c62c9-86e6-4d10-a555-f79e5ed95001.png",
+    date: "January 2024",
+    author: "Admin Team",
+    readTime: "3 min read",
+    content: `<h3>Cancellation Window</h3>
+      <p>Classes can be cancelled up to <strong>12 hours before</strong> the scheduled start time without any penalty. Simply cancel through the app or website.</p>
+      <h3>Late Cancellations</h3>
+      <p>Cancellations made less than 12 hours before class time will result in a late cancellation fee or loss of your class credit. We understand emergencies happen - please contact us if you have extenuating circumstances.</p>
+      <h3>No-Shows</h3>
+      <p>If you don't show up to a booked class without cancelling, you will forfeit that class credit. Please be mindful of other students who may be on the waitlist!</p>
+      <h3>How to Cancel</h3>
+      <p>You can cancel through our booking app, website, or by calling the studio directly. The easiest way is through the app where you can manage all your bookings.</p>`
+  },
+  {
+    id: 2,
+    title: "Studio Safety Guidelines",
+    excerpt: "Stay safe and get the most out of every class with these important guidelines.",
+    image: "/lovable-uploads/930cee8a-33f0-430b-8ef4-34c83d23d2d3.png",
+    date: "January 2024",
+    author: "Safety Team",
+    readTime: "4 min read",
+    content: `<h3>Grip Products</h3>
+      <p>We provide grip aids at the studio, but feel free to bring your own. Apply grip <strong>sparingly</strong> - too much can actually make you slip!</p>
+      <h3>No Moisturisers</h3>
+      <p>Please avoid applying moisturiser, oils, or lotions on the day of class. These make your skin slippery and can be dangerous on the pole.</p>
+      <h3>Jewellery</h3>
+      <p>Remove all rings, watches, bracelets and dangling earrings before class. We have lockers available to store your valuables safely.</p>
+      <h3>Spotting</h3>
+      <p>Our instructors are trained in spotting techniques. Always wait for a spotter when trying new moves, especially inversions.</p>
+      <h3>Listen to Your Body</h3>
+      <p>Pole is challenging! Take breaks when you need them, stay hydrated, and never push through sharp pain.</p>`
+  },
+  {
+    id: 3,
+    title: "What to Expect in Your First Class",
+    excerpt: "Nervous about your first class? Here's exactly what will happen so you can relax and enjoy.",
+    image: "/lovable-uploads/64db70f4-cca6-4e12-9fa1-d1180c4595ae.png",
+    date: "January 2024",
+    author: "Instructor Team",
+    readTime: "5 min read",
+    content: `<h3>Warm Up (10 mins)</h3>
+      <p>Every class starts with a fun warm-up to get your body ready. We'll do some cardio, stretches, and wrist exercises.</p>
+      <h3>Technique & Moves (35 mins)</h3>
+      <p>This is the main part of class where you'll learn new spins, tricks, or transitions. Your instructor will break down each move step-by-step.</p>
+      <h3>Practice Time (10 mins)</h3>
+      <p>You'll have time to practice what you've learned with your instructor available for help and feedback.</p>
+      <h3>Cool Down (5 mins)</h3>
+      <p>We finish with stretches to help prevent soreness and improve flexibility over time.</p>
+      <h3>The Vibe</h3>
+      <p>Classes are supportive and judgement-free. Everyone is focused on their own journey - we celebrate each other's wins!</p>`
+  },
+  {
+    id: 4,
+    title: "Bringing Friends to Class",
+    excerpt: "Pole is more fun with friends! Here's how you can share the experience.",
+    image: "/lovable-uploads/c618da64-e3a8-4e28-a461-697581921ed0.png",
+    date: "January 2024",
+    author: "Community Team",
+    readTime: "2 min read",
+    content: `<h3>Buddy Discounts</h3>
+      <p>When you refer a friend who signs up, you both receive a discount on your next term. Ask at reception for our current referral offers!</p>
+      <h3>Group Bookings</h3>
+      <p>Want to book a class with a group of friends? Contact us about group rates and private sessions.</p>
+      <h3>Shared Experience</h3>
+      <p>Having a friend in class means you have someone to practice with, laugh with, and celebrate achievements together. Many of our students have formed lifelong friendships at the studio!</p>
+      <h3>Different Skill Levels?</h3>
+      <p>No problem! Friends can attend different level classes and still enjoy the studio together. Our timetable has overlapping class times so you can arrive and leave together.</p>`
+  }
+];
+
+const considerations = [
+  { question: "What's the cancellation policy?", blogPostId: 1 },
+  { question: "Studio safety guidelines", blogPostId: 2 },
+  { question: "What to expect in your first class", blogPostId: 3 },
+  { question: "Can I bring a friend?", blogPostId: 4 }
+];
+
 const Congrats = () => {
   useScrollToTop();
   const [copied, setCopied] = useState(false);
+  const [isPanelOpen, setIsPanelOpen] = useState(false);
+  const [selectedPost, setSelectedPost] = useState<typeof considerationPosts[0] | null>(null);
+  const isMobile = useIsMobile();
 
   const referralMessage = `Hey! I just signed up for The Pole Room's 4-Week Intro To Pole Program. It's basically a fun workout where we learn spins and tricks on the pole. They have a 40% off sale on right now and it starts Feb 9th. You should 100% do it with me. Grab a spot so we can go together: try.thepoleroom.com.au/intro-to-pole-a`;
 
@@ -26,6 +115,14 @@ const Congrats = () => {
     setCopied(true);
     toast.success("Message copied to clipboard!");
     setTimeout(() => setCopied(false), 3000);
+  };
+
+  const handleTopicClick = (blogPostId: number) => {
+    const post = considerationPosts.find(p => p.id === blogPostId);
+    if (post) {
+      setSelectedPost(post);
+      setIsPanelOpen(true);
+    }
   };
 
   const whatToWear = [
@@ -214,10 +311,10 @@ const Congrats = () => {
             </div>
             
             <h2 className="text-2xl sm:text-3xl font-bold text-white mb-3">
-              Get Ready For Orientation
+              Schedule Your Orientation Session
             </h2>
             <p className="text-gray-300 mb-6">
-              Before your first class, you'll attend a quick orientation session where we'll show you around the studio and answer any questions.
+              Book your orientation session where we'll show you around the studio and answer any questions before your first class.
             </p>
             
             <div className="grid sm:grid-cols-2 gap-4">
@@ -261,11 +358,49 @@ const Congrats = () => {
             </div>
           </motion.div>
 
+          {/* Other Things to Consider */}
+          <motion.div
+            initial={{ opacity: 0, y: 30 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ delay: 0.85, duration: 0.5 }}
+            className="cyber-card p-6 sm:p-8 rounded-2xl mb-8"
+          >
+            <h2 className="text-2xl sm:text-3xl font-bold text-white mb-4">
+              Other Things to Consider
+            </h2>
+            <p className="text-gray-300 mb-6">
+              Click on any topic to learn more about studio policies and what to expect.
+            </p>
+            
+            <div className="space-y-3">
+              {considerations.map((item, index) => (
+                <div
+                  key={index}
+                  onClick={() => handleTopicClick(item.blogPostId)}
+                  className="group cursor-pointer border border-fuchsia-500/20 rounded-xl p-4 bg-gray-900/50 hover:border-fuchsia-500/50 hover:bg-gray-900/80 transition-all duration-300"
+                >
+                  <div className="flex items-center justify-between gap-4">
+                    <span className="font-medium text-white group-hover:text-fuchsia-400 transition-colors">
+                      {item.question}
+                    </span>
+                    <div className="flex items-center gap-2 shrink-0">
+                      <Badge variant="outline" className="text-xs border-fuchsia-500/30 text-fuchsia-400 hidden sm:flex">
+                        <Newspaper className="w-3 h-3 mr-1" />
+                        Blog
+                      </Badge>
+                      <ChevronRight className="w-5 h-5 text-gray-500 group-hover:text-fuchsia-400 group-hover:translate-x-1 transition-all" />
+                    </div>
+                  </div>
+                </div>
+              ))}
+            </div>
+          </motion.div>
+
           {/* Shop Related Products */}
           <motion.div
             initial={{ opacity: 0, y: 30 }}
             animate={{ opacity: 1, y: 0 }}
-            transition={{ delay: 0.9, duration: 0.5 }}
+            transition={{ delay: 0.95, duration: 0.5 }}
             className="cyber-card p-6 sm:p-8 rounded-2xl mb-12"
           >
             <div className="flex items-center gap-3 mb-6">
@@ -284,7 +419,7 @@ const Congrats = () => {
                   key={product.id}
                   className="bg-gray-800/50 border border-gray-700/50 hover:border-fuchsia-500/50 rounded-xl p-4 transition-all duration-300"
                 >
-                  <div className="w-full aspect-square bg-gradient-to-br from-fuchsia-900/30 to-cyan-900/30 rounded-lg overflow-hidden mb-3">
+                  <div className="w-full aspect-square bg-gray-800/80 border border-fuchsia-500/20 rounded-lg overflow-hidden mb-3">
                     <img 
                       src={product.image} 
                       alt={product.name}
@@ -317,7 +452,7 @@ const Congrats = () => {
           <motion.div
             initial={{ opacity: 0, y: 30 }}
             animate={{ opacity: 1, y: 0 }}
-            transition={{ delay: 1.0, duration: 0.5 }}
+            transition={{ delay: 1.05, duration: 0.5 }}
             className="cyber-card p-6 sm:p-8 rounded-2xl"
           >
             <div className="grid md:grid-cols-2 gap-8 items-center">
@@ -352,6 +487,54 @@ const Congrats = () => {
           
         </div>
       </main>
+
+      {/* Side Panel for Blog Posts */}
+      <Sheet open={isPanelOpen} onOpenChange={setIsPanelOpen}>
+        <SheetContent 
+          side={isMobile ? "bottom" : "left"}
+          className={`bg-gray-950 border-fuchsia-500/30 p-0 flex flex-col
+            ${isMobile ? 'h-[90vh] w-full inset-x-0 rounded-t-2xl' : 'w-full sm:w-1/2 sm:max-w-[50vw] h-full'}`}
+        >
+          <SheetClose className="absolute right-4 top-4 z-50 rounded-full bg-gray-800/80 p-2 hover:bg-fuchsia-500/20 transition-colors">
+            <X className="h-5 w-5 text-white" />
+          </SheetClose>
+
+          {selectedPost && (
+            <>
+              <SheetHeader className="p-6 pb-4 border-b border-fuchsia-500/20">
+                <Badge className="bg-fuchsia-500/20 text-fuchsia-400 border-fuchsia-500/30 w-fit mb-3">
+                  <Newspaper className="w-3 h-3 mr-1" />
+                  Blog Post
+                </Badge>
+                <SheetTitle className="text-xl sm:text-2xl font-bold text-white text-left pr-8">
+                  {selectedPost.title}
+                </SheetTitle>
+                <div className="flex flex-wrap items-center gap-4 text-sm text-gray-400 mt-2">
+                  <span className="flex items-center gap-1">
+                    <User className="w-3 h-3" />{selectedPost.author}
+                  </span>
+                  <span className="flex items-center gap-1">
+                    <Clock className="w-3 h-3" />{selectedPost.readTime}
+                  </span>
+                </div>
+              </SheetHeader>
+              
+              <ScrollArea className="flex-1 p-6">
+                <img 
+                  src={selectedPost.image} 
+                  alt={selectedPost.title} 
+                  className="w-full h-48 sm:h-64 object-cover rounded-xl mb-6" 
+                />
+                <p className="text-fuchsia-300 text-lg mb-6">{selectedPost.excerpt}</p>
+                <div 
+                  className="prose prose-invert prose-fuchsia max-w-none prose-headings:text-white prose-headings:font-bold prose-p:text-gray-300 prose-strong:text-white" 
+                  dangerouslySetInnerHTML={{ __html: selectedPost.content }} 
+                />
+              </ScrollArea>
+            </>
+          )}
+        </SheetContent>
+      </Sheet>
       
       <Footer />
     </div>
