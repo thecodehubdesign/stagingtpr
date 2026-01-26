@@ -1,185 +1,615 @@
-
+import { useState } from 'react';
+import { motion } from 'framer-motion';
 import Header from '@/components/Header';
 import Footer from '@/components/Footer';
-import SectionNavigation from '@/components/SectionNavigation';
-import TermCountdown from '@/components/TermCountdown';
-import StartAnytime from '@/components/StartAnytime';
-import FastTrackProgram from '@/components/FastTrackProgram';
-import FourPolePathways from '@/components/FourPolePathways';
-import StyleQuizModal from '@/components/StyleQuizModal';
-import CoursesVsCasualComparison from '@/components/CoursesVsCasualComparison';
-import IntroOfferBlocks from '@/components/IntroOfferBlocks';
-import SocialProofCarousel from '@/components/SocialProofCarousel';
-import PoleTypeQuizModal from '@/components/PoleTypeQuizModal';
 import { Button } from '@/components/ui/button';
-import { Card } from '@/components/ui/card';
-import { Sparkles, MessageCircle, ArrowRight, Play } from 'lucide-react';
+import { Accordion, AccordionContent, AccordionItem, AccordionTrigger } from '@/components/ui/accordion';
+import { Check, Star, MapPin, Shield, Dumbbell, Sparkles, Compass, Heart, Play, ChevronRight, Quote } from 'lucide-react';
+import jasmineSignature from '@/assets/jasmine-signature.png';
+import jasminePhoto from '@/assets/jasmine-verified.png';
 
 const FirstTimers = () => {
-  const sections = [
-    { id: 'countdown', label: 'Next Term' },
-    { id: 'start-anytime', label: 'Start Now' },
-    { id: 'pathways', label: 'Find Your Path' },
-    { id: 'quiz', label: 'Take Quiz' },
-    { id: 'comparison', label: 'Learning Styles' },
-    { id: 'offers', label: 'Intro Offers' },
-    { id: 'fast-track', label: 'Fast Track' },
-    { id: 'testimonials', label: 'Success Stories' }
+  const [isVideoPlaying, setIsVideoPlaying] = useState(false);
+
+  const benefitsList = [
+    "Learn fun spins, poses and a simple routine",
+    "Start alongside others who are brand new to The Pole Room",
+    "Build strength and confidence as you go",
+    "Skip the gym and discover a workout you'll actually enjoy",
+    "Walk out smiling after your very first class"
+  ];
+
+  const galleryImages = [
+    { src: "/images/glow/hero-1.png", alt: "Pole dance performance" },
+    { src: "/images/glow/hero-2.png", alt: "Student stretching" },
+    { src: "/images/glow/hero-3.png", alt: "Neon studio sign" },
+    { src: "/images/glow/hero-4.png", alt: "Students with certificates" },
+    { src: "/images/glow/hero-5.png", alt: "Pole pose under purple lights" },
+    { src: "/images/glow/history-1.png", alt: "Group of students" }
+  ];
+
+  const shineFramework = [
+    {
+      letter: "S",
+      title: "Safety & Foundations",
+      description: "From day one, you're supported. Our beginner-friendly classes focus on proper technique, body awareness, and building the foundation you need to progress safely.",
+      icon: Shield
+    },
+    {
+      letter: "H",
+      title: "Hold & Strength",
+      description: "Every class builds your grip strength, core stability, and upper body power. You'll feel yourself getting stronger week by week.",
+      icon: Dumbbell
+    },
+    {
+      letter: "I",
+      title: "Integration & Flow",
+      description: "Learn to connect moves together into beautiful sequences. This is where pole becomes art and your unique style starts to emerge.",
+      icon: Sparkles
+    },
+    {
+      letter: "N",
+      title: "Navigate Your Progress",
+      description: "Track your journey with our structured progression system. Celebrate milestones and see exactly how far you've come.",
+      icon: Compass
+    },
+    {
+      letter: "E",
+      title: "Embrace Your Power",
+      description: "This is the transformation. You'll walk taller, feel stronger, and carry yourself with a confidence that radiates into every area of your life.",
+      icon: Heart
+    }
+  ];
+
+  const testimonials = [
+    {
+      name: "Sarah",
+      location: "Mitcham",
+      quote: "I was so nervous before my first class, but everyone was so welcoming. Now I can't imagine my life without pole!",
+      image: "/images/testimonials/sarah.png"
+    },
+    {
+      name: "Emma",
+      location: "Eltham",
+      quote: "The instructors are incredible. They make you feel like you can do anything, even when you're just starting out.",
+      image: "/images/testimonials/courtney.png"
+    },
+    {
+      name: "Jade",
+      location: "CBD",
+      quote: "I've never felt so strong and confident. Pole has completely changed how I see myself.",
+      image: "/images/testimonials/lauren.png"
+    }
+  ];
+
+  const faqs = [
+    {
+      question: "Do I need any dance or fitness background?",
+      answer: "Absolutely not! Our beginner program is designed for complete newbies. You'll start from scratch and we'll teach you everything you need to know. Many of our most successful students had zero dance or fitness experience before joining."
+    },
+    {
+      question: "I'm not confident in my body. Will I fit in?",
+      answer: "Yes! The Pole Room is a safe and supportive space where every body is welcomed and celebrated. Our students come in all shapes, sizes, ages, and fitness levels. You'll quickly discover that pole is for EVERY body."
+    },
+    {
+      question: "Is there an age limit?",
+      answer: "You must be at least 16 years old to join our classes. There's no upper age limit! We have students from their teens through to their 60s and beyond. It's never too late to start your pole journey."
+    },
+    {
+      question: "Do I need to wear heels?",
+      answer: "Not at all! Heels are completely optional and definitely not required for beginners. Going barefoot actually allows for better grip on the pole. If you're interested in heels later on, we have specific classes for that."
+    },
+    {
+      question: "What should I wear to my first class?",
+      answer: "Wear shorts (bike shorts are perfect) and a comfortable top like a singlet or sports bra. Avoid lotions or oils on your skin as they can make the pole slippery. Bring water and come ready to have fun!"
+    }
+  ];
+
+  const locations = [
+    "Mitcham", "Eltham", "CBD", "Kilsyth", "Highett", "Narre Warren"
   ];
 
   return (
-    <div className="min-h-screen">
+    <div className="min-h-screen bg-background">
       <Header />
-      <SectionNavigation sections={sections} />
       
       {/* Hero Section */}
-      <section className="pt-20 pb-16 bg-gradient-to-br from-gray-900 via-purple-900 to-gray-900 cyber-grid relative overflow-hidden">
-        {/* Animated background elements */}
-        <div className="absolute top-1/4 right-1/4 w-32 h-32 bg-fuchsia-400/20 rounded-full blur-3xl animate-pulse"></div>
-        <div className="absolute bottom-1/4 left-1/4 w-24 h-24 bg-cyan-400/20 rounded-full blur-2xl animate-pulse" style={{ animationDelay: '1s' }}></div>
+      <section className="relative pt-24 pb-16 overflow-hidden">
+        {/* Background effects */}
+        <div className="absolute inset-0 bg-gradient-to-br from-gray-900 via-purple-900/50 to-gray-900" />
+        <div className="absolute top-1/4 right-1/4 w-96 h-96 bg-fuchsia-500/20 rounded-full blur-3xl animate-pulse" />
+        <div className="absolute bottom-1/4 left-1/4 w-64 h-64 bg-cyan-500/20 rounded-full blur-3xl animate-pulse" style={{ animationDelay: '1s' }} />
         
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
-          <div className="text-center animate-fade-in">
-            <div className="inline-flex items-center space-x-2 bg-fuchsia-500/10 border border-fuchsia-500/30 rounded-full px-4 py-2 mb-6">
-              <Sparkles className="w-4 h-4 text-fuchsia-400" />
-              <span className="text-fuchsia-400 text-sm font-medium">Your Pole Journey Starts Here</span>
-            </div>
-            
-            <h1 className="text-4xl sm:text-6xl font-bold gradient-text mb-6">
-              Find Your Perfect<br />Pole Pathway
-            </h1>
-            
-            <p className="text-xl text-gray-300 max-w-3xl mx-auto leading-relaxed mb-8">
-              Pole is what you make it—fun, fitness, friends, or performance. 
-              <span className="text-fuchsia-400 font-semibold"> Start your journey with us!</span>
-            </p>
-            
-            {/* Hero Video/Image Placeholder */}
-            <div className="relative max-w-4xl mx-auto mb-8">
-              <div className="aspect-video bg-gradient-to-br from-gray-800 to-gray-900 rounded-2xl border border-fuchsia-500/30 flex items-center justify-center">
-                <div className="text-center">
-                  <Play className="w-16 h-16 text-fuchsia-400 mx-auto mb-4 neon-glow" />
-                  <p className="text-gray-300">Diverse, vibrant pole studio community</p>
-                  <p className="text-sm text-gray-400">Representing different ages, backgrounds, and personalities</p>
-                </div>
+        <div className="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+          <div className="grid lg:grid-cols-2 gap-12 items-center">
+            {/* Left - Content */}
+            <motion.div
+              initial={{ opacity: 0, x: -30 }}
+              animate={{ opacity: 1, x: 0 }}
+              transition={{ duration: 0.6 }}
+            >
+              <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-fuchsia-500/10 border border-fuchsia-500/30 mb-6">
+                <Sparkles className="w-4 h-4 text-fuchsia-400" />
+                <span className="text-fuchsia-400 text-sm font-medium">Special Offer For January</span>
               </div>
-            </div>
-
-            <div className="flex flex-col sm:flex-row gap-4 justify-center">
-              <PoleTypeQuizModal>
-                <Button className="neon-button text-black font-bold text-lg px-8 py-3">
-                  Take Our 1-Minute Quiz
-                  <ArrowRight className="w-5 h-5 ml-2" />
-                </Button>
-              </PoleTypeQuizModal>
-              <Button variant="outline" className="border-gray-600 text-gray-300 hover:bg-gray-700 text-lg px-8 py-3">
-                Chat With Our Team
-                <MessageCircle className="w-5 h-5 ml-2" />
+              
+              <h1 className="text-4xl sm:text-5xl lg:text-6xl font-bold text-white leading-tight mb-6">
+                Pole Dancing for Beginners:{' '}
+                <span className="gradient-text">Fitness That Feels Like Fun!</span>
+              </h1>
+              
+              <p className="text-lg text-gray-300 mb-8 leading-relaxed">
+                No treadmills. No boring workouts. Just 28 days of spins, poses and routines you'll actually look forward to. 
+                <span className="text-fuchsia-400 font-semibold"> Limited spots available!</span> Claim your Pole Dance Transformation before they're all gone!
+              </p>
+              
+              {/* Benefits List */}
+              <ul className="space-y-3 mb-8">
+                {benefitsList.map((benefit, index) => (
+                  <motion.li
+                    key={index}
+                    initial={{ opacity: 0, x: -20 }}
+                    animate={{ opacity: 1, x: 0 }}
+                    transition={{ delay: 0.3 + index * 0.1 }}
+                    className="flex items-start gap-3"
+                  >
+                    <Check className="w-5 h-5 text-fuchsia-400 mt-0.5 flex-shrink-0" />
+                    <span className="text-gray-200">{benefit}</span>
+                  </motion.li>
+                ))}
+              </ul>
+              
+              <Button className="neon-button text-black font-bold text-lg px-8 py-6 h-auto">
+                Yes, Claim My Beginner Spot
+                <ChevronRight className="w-5 h-5 ml-2" />
               </Button>
+            </motion.div>
+            
+            {/* Right - Video */}
+            <motion.div
+              initial={{ opacity: 0, x: 30 }}
+              animate={{ opacity: 1, x: 0 }}
+              transition={{ duration: 0.6, delay: 0.2 }}
+              className="relative"
+            >
+              <div className="aspect-video rounded-2xl overflow-hidden border-2 border-fuchsia-500/30 shadow-2xl shadow-fuchsia-500/20">
+                {isVideoPlaying ? (
+                  <iframe
+                    src="https://player.vimeo.com/video/370000000?autoplay=1"
+                    className="w-full h-full"
+                    allow="autoplay; fullscreen"
+                    title="Intro to Pole"
+                  />
+                ) : (
+                  <div 
+                    className="relative w-full h-full bg-gradient-to-br from-gray-800 to-gray-900 flex items-center justify-center cursor-pointer group"
+                    onClick={() => setIsVideoPlaying(true)}
+                  >
+                    <img 
+                      src="/images/glow/hero-1.png" 
+                      alt="Pole dancing intro"
+                      className="absolute inset-0 w-full h-full object-cover opacity-60"
+                    />
+                    <div className="relative z-10 flex flex-col items-center">
+                      <div className="w-20 h-20 rounded-full bg-fuchsia-500 flex items-center justify-center group-hover:scale-110 transition-transform shadow-lg shadow-fuchsia-500/50">
+                        <Play className="w-8 h-8 text-white ml-1" />
+                      </div>
+                      <span className="mt-4 text-white font-medium">Watch Your Journey Begin</span>
+                    </div>
+                  </div>
+                )}
+              </div>
+            </motion.div>
+          </div>
+        </div>
+      </section>
+
+      {/* Social Proof Banner */}
+      <section className="py-6 bg-gray-900/80 border-y border-fuchsia-500/20">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+          <div className="flex flex-col sm:flex-row items-center justify-center gap-6">
+            <div className="flex -space-x-3">
+              {[1, 2, 3, 4, 5].map((i) => (
+                <div key={i} className="w-10 h-10 rounded-full bg-gradient-to-br from-fuchsia-400 to-purple-600 border-2 border-gray-900 flex items-center justify-center">
+                  <span className="text-white text-xs font-bold">{String.fromCharCode(64 + i)}</span>
+                </div>
+              ))}
+            </div>
+            <div className="flex items-center gap-3">
+              <div className="flex items-center gap-1">
+                {[1, 2, 3, 4, 5].map((i) => (
+                  <Star key={i} className="w-5 h-5 text-yellow-400 fill-yellow-400" />
+                ))}
+              </div>
+              <span className="text-white font-semibold">4.9 Rating</span>
+              <span className="text-gray-400">|</span>
+              <span className="text-gray-300">376 Google Reviews</span>
             </div>
           </div>
         </div>
       </section>
 
-      {/* Term Countdown */}
-      <div id="countdown">
-        <TermCountdown />
-      </div>
+      {/* Marquee Banner */}
+      <section className="py-4 bg-fuchsia-500 overflow-hidden">
+        <div className="animate-marquee whitespace-nowrap flex">
+          {[...Array(4)].map((_, i) => (
+            <span key={i} className="text-black font-bold text-lg mx-8">
+              TRANSFORM YOUR BODY • BOOST YOUR CONFIDENCE • RECLAIM YOUR ENERGY •
+            </span>
+          ))}
+        </div>
+      </section>
 
-      {/* Start Anytime */}
-      <div id="start-anytime">
-        <StartAnytime />
-      </div>
-
-      {/* Four Pole Pathways */}
-      <div id="pathways">
-        <FourPolePathways />
-      </div>
-
-      {/* Interactive Quiz Section */}
-      <section id="quiz" className="py-20 bg-gray-800">
-        <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
-          <Card className="cyber-card p-12 relative overflow-hidden">
-            <div className="absolute top-0 left-0 w-full h-1 bg-gradient-to-r from-fuchsia-400 to-purple-600"></div>
-            
-            <Sparkles className="w-16 h-16 text-fuchsia-400 mx-auto mb-6 neon-glow" />
-            
-            <h2 className="text-3xl sm:text-4xl font-bold text-white mb-6">
-              Not Sure Which <span className="gradient-text">Fits You?</span>
+      {/* Pathway Section */}
+      <section className="py-20 relative">
+        <div className="absolute inset-0 cyber-grid opacity-30" />
+        <div className="relative max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
+          <motion.div
+            initial={{ opacity: 0, y: 30 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+          >
+            <span className="text-fuchsia-400 text-sm font-medium uppercase tracking-wider">Live your best life through The Pole Room</span>
+            <h2 className="text-3xl sm:text-4xl lg:text-5xl font-bold text-white mt-4 mb-8">
+              Your Pathway to Spins, Poses &{' '}
+              <span className="gradient-text">a Confidence Boost You'll Love</span>
             </h2>
             
-            <p className="text-lg text-gray-300 mb-8 max-w-2xl mx-auto">
-              Take our fun 1-minute quiz and discover your perfect pole pathway. 
-              We'll match you with the ideal intro offer and class recommendations!
-            </p>
-            
-            <div className="flex flex-col sm:flex-row gap-4 justify-center">
-              <StyleQuizModal />
-              <Button variant="outline" className="border-gray-600 text-gray-300 hover:bg-gray-700">
-                Skip Quiz - Show Me Everything
-              </Button>
+            <div className="space-y-6 text-lg text-gray-300 text-left max-w-3xl mx-auto">
+              <p>
+                In 30 days from now, you could walk into class and own it. Head high. Shoulders back. Power in every move.
+              </p>
+              <p className="text-white font-semibold">
+                Not hoping you're confident. <span className="text-fuchsia-400">Knowing that you are.</span>
+              </p>
+              
+              <div className="py-4">
+                <p className="text-gray-400 mb-4">Even if:</p>
+                <ul className="space-y-2">
+                  <li>👉 You've never danced or done pole fitness before</li>
+                  <li>👉 You don't think you have what it takes</li>
+                  <li>👉 Thinking about exercise makes you sigh</li>
+                </ul>
+              </div>
+              
+              <p className="text-gray-400">Let's be real…</p>
+              <p>Did you dream of forcing yourself through boring treadmill sessions?</p>
+              <p>Or standing under harsh gym lights, staring at your reflection and wondering, "what's wrong with me?"</p>
+              <p className="font-semibold text-white">No? Good!</p>
+              
+              <div className="py-4 border-l-4 border-fuchsia-500 pl-6 my-8">
+                <p className="text-xl font-medium text-white mb-4">Now imagine this instead:</p>
+                <ul className="space-y-3">
+                  <li className="flex items-start gap-3">
+                    <span className="text-fuchsia-400">✨</span>
+                    <span>You feel stronger every class, in your body and your mindset</span>
+                  </li>
+                  <li className="flex items-start gap-3">
+                    <span className="text-fuchsia-400">✨</span>
+                    <span>You look in the mirror and smile - proud of what you see</span>
+                  </li>
+                  <li className="flex items-start gap-3">
+                    <span className="text-fuchsia-400">✨</span>
+                    <span>You walk out of the studio taller, lighter, and ready for more</span>
+                  </li>
+                  <li className="flex items-start gap-3">
+                    <span className="text-fuchsia-400">✨</span>
+                    <span>You try your first spin and actually nail it</span>
+                  </li>
+                </ul>
+              </div>
+              
+              <p className="text-xl text-white">
+                At The Pole Room, you'll go from wondering if you can… to <span className="text-fuchsia-400 font-semibold">knowing that you did.</span>
+              </p>
+              <p className="text-xl text-white">
+                From feeling like you don't belong… to discovering <span className="text-fuchsia-400 font-semibold">you absolutely do.</span>
+              </p>
             </div>
-          </Card>
+            
+            <Button className="neon-button text-black font-bold text-lg px-8 py-6 h-auto mt-8">
+              Yes, I Want to Nail My First Spin!
+              <ChevronRight className="w-5 h-5 ml-2" />
+            </Button>
+          </motion.div>
         </div>
       </section>
 
-      {/* Courses vs Casual Comparison */}
-      <div id="comparison">
-        <CoursesVsCasualComparison />
-      </div>
+      {/* Gallery Section */}
+      <section className="py-16 bg-gray-900/50">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+          <div className="grid grid-cols-2 md:grid-cols-3 gap-4">
+            {galleryImages.map((image, index) => (
+              <motion.div
+                key={index}
+                initial={{ opacity: 0, scale: 0.9 }}
+                whileInView={{ opacity: 1, scale: 1 }}
+                viewport={{ once: true }}
+                transition={{ delay: index * 0.1 }}
+                className="aspect-square rounded-xl overflow-hidden border border-fuchsia-500/20 hover:border-fuchsia-500/50 transition-colors"
+              >
+                <img 
+                  src={image.src} 
+                  alt={image.alt}
+                  className="w-full h-full object-cover hover:scale-105 transition-transform duration-500"
+                />
+              </motion.div>
+            ))}
+          </div>
+        </div>
+      </section>
 
-      {/* Intro Offer Blocks */}
-      <div id="offers">
-        <IntroOfferBlocks />
-      </div>
+      {/* Fitness Experience Section */}
+      <section className="py-20 relative">
+        <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
+          <motion.div
+            initial={{ opacity: 0, y: 30 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+          >
+            <h2 className="text-3xl sm:text-4xl lg:text-5xl font-bold text-white mb-6">
+              <span className="italic text-gray-400">A Fitness Experience That</span>{' '}
+              <span className="gradient-text">Feels Nothing Like a Workout.</span>
+            </h2>
+            <p className="text-xl text-gray-300 mb-4">
+              Most fitness routines? <span className="text-gray-500">Designed to punish.</span>
+            </p>
+            <p className="text-xl text-fuchsia-400 font-semibold">
+              Our Program? Designed to celebrate.
+            </p>
+          </motion.div>
+        </div>
+      </section>
 
-      {/* Fast Track Program */}
-      <div id="fast-track">
-        <FastTrackProgram />
-      </div>
+      {/* S.H.I.N.E. Framework */}
+      <section className="py-20 bg-gray-900/50">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+          <motion.div
+            initial={{ opacity: 0, y: 30 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            className="text-center mb-16"
+          >
+            <h2 className="text-3xl sm:text-4xl lg:text-5xl font-bold text-white mb-4">
+              The <span className="gradient-text">S.H.I.N.E.</span> Framework
+            </h2>
+            <p className="text-xl text-gray-300">Your 5-Step Blueprint to Pole Success</p>
+          </motion.div>
+          
+          <div className="grid md:grid-cols-2 lg:grid-cols-5 gap-6">
+            {shineFramework.map((step, index) => (
+              <motion.div
+                key={step.letter}
+                initial={{ opacity: 0, y: 30 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true }}
+                transition={{ delay: index * 0.1 }}
+                className="cyber-card rounded-2xl p-6 text-center hover:border-fuchsia-500/50 transition-colors"
+              >
+                <div className="w-16 h-16 rounded-full bg-gradient-to-br from-fuchsia-500 to-purple-600 flex items-center justify-center mx-auto mb-4">
+                  <span className="text-2xl font-bold text-white">{step.letter}</span>
+                </div>
+                <step.icon className="w-8 h-8 text-fuchsia-400 mx-auto mb-3" />
+                <h3 className="text-lg font-bold text-white mb-2">{step.title}</h3>
+                <p className="text-sm text-gray-400">{step.description}</p>
+              </motion.div>
+            ))}
+          </div>
+        </div>
+      </section>
 
-      {/* Social Proof/Testimonials */}
-      <div id="testimonials">
-        <SocialProofCarousel />
-      </div>
+      {/* Founder Story */}
+      <section className="py-20 relative overflow-hidden">
+        <div className="absolute inset-0 bg-gradient-to-r from-purple-900/30 to-fuchsia-900/30" />
+        <div className="relative max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
+          <div className="grid lg:grid-cols-2 gap-12 items-center">
+            <motion.div
+              initial={{ opacity: 0, x: -30 }}
+              whileInView={{ opacity: 1, x: 0 }}
+              viewport={{ once: true }}
+            >
+              <h2 className="text-3xl sm:text-4xl font-bold text-white mb-6">
+                <span className="gradient-text">Jasmine's Story</span>
+              </h2>
+              <div className="space-y-4 text-gray-300">
+                <p>
+                  I used to hate the gym. Like, really hate it. The machines felt cold, the atmosphere was intimidating, and I never felt like I belonged.
+                </p>
+                <p>
+                  Then I discovered pole dancing, and everything changed. For the first time, exercise felt like freedom. Like art. Like me.
+                </p>
+                <p>
+                  I started The Pole Room in my parents' garage with just two poles and a dream. Fast forward to today, and we've grown to 6 studios across Melbourne, been featured on Shark Tank, and helped thousands of women discover their strength.
+                </p>
+                <p className="text-fuchsia-400 font-semibold">
+                  But the best part? Seeing the transformation in every single student who walks through our doors.
+                </p>
+              </div>
+              <div className="mt-8">
+                <img 
+                  src={jasmineSignature} 
+                  alt="Jasmine's signature"
+                  className="h-12 invert opacity-80"
+                />
+                <p className="text-sm text-gray-400 mt-2">Founder, The Pole Room</p>
+              </div>
+            </motion.div>
+            
+            <motion.div
+              initial={{ opacity: 0, x: 30 }}
+              whileInView={{ opacity: 1, x: 0 }}
+              viewport={{ once: true }}
+              className="relative"
+            >
+              <div className="aspect-[3/4] rounded-2xl overflow-hidden border-2 border-fuchsia-500/30">
+                <img 
+                  src={jasminePhoto} 
+                  alt="Jasmine, founder of The Pole Room"
+                  className="w-full h-full object-cover"
+                />
+              </div>
+            </motion.div>
+          </div>
+        </div>
+      </section>
+
+      {/* Locations */}
+      <section className="py-20 bg-gray-900/50">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
+          <motion.div
+            initial={{ opacity: 0, y: 30 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+          >
+            <h2 className="text-3xl sm:text-4xl font-bold text-white mb-4">
+              6 Studios Across <span className="gradient-text">Melbourne</span>
+            </h2>
+            <p className="text-gray-300 mb-8">Find your nearest Pole Room location</p>
+            
+            <div className="flex flex-wrap justify-center gap-4 mb-8">
+              {locations.map((location) => (
+                <div 
+                  key={location}
+                  className="flex items-center gap-2 px-4 py-2 rounded-full bg-gray-800 border border-fuchsia-500/30"
+                >
+                  <MapPin className="w-4 h-4 text-fuchsia-400" />
+                  <span className="text-white">{location}</span>
+                </div>
+              ))}
+            </div>
+            
+            <div className="aspect-video max-w-4xl mx-auto rounded-2xl overflow-hidden border border-fuchsia-500/20">
+              <iframe
+                src="https://www.google.com/maps/d/embed?mid=1ABC123&ehbc=2E312F"
+                className="w-full h-full"
+                style={{ border: 0 }}
+                title="The Pole Room Locations"
+              />
+            </div>
+          </motion.div>
+        </div>
+      </section>
+
+      {/* Testimonials */}
+      <section className="py-20">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+          <motion.div
+            initial={{ opacity: 0, y: 30 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            className="text-center mb-16"
+          >
+            <h2 className="text-3xl sm:text-4xl lg:text-5xl font-bold text-white mb-4">
+              Real Stories from <span className="gradient-text">Real Students</span>
+            </h2>
+            <p className="text-xl text-gray-300">Don't just take our word for it</p>
+          </motion.div>
+          
+          <div className="grid md:grid-cols-3 gap-8">
+            {testimonials.map((testimonial, index) => (
+              <motion.div
+                key={testimonial.name}
+                initial={{ opacity: 0, y: 30 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true }}
+                transition={{ delay: index * 0.1 }}
+                className="cyber-card rounded-2xl p-6"
+              >
+                <Quote className="w-10 h-10 text-fuchsia-400/40 mb-4" />
+                <p className="text-gray-300 mb-6 italic">"{testimonial.quote}"</p>
+                <div className="flex items-center gap-4">
+                  <div className="w-12 h-12 rounded-full overflow-hidden border-2 border-fuchsia-500/30">
+                    <img 
+                      src={testimonial.image} 
+                      alt={testimonial.name}
+                      className="w-full h-full object-cover"
+                    />
+                  </div>
+                  <div>
+                    <p className="font-semibold text-white">{testimonial.name}</p>
+                    <p className="text-sm text-fuchsia-400">{testimonial.location} Studio</p>
+                  </div>
+                </div>
+              </motion.div>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      {/* FAQ Section */}
+      <section className="py-20 bg-gray-900/50">
+        <div className="max-w-3xl mx-auto px-4 sm:px-6 lg:px-8">
+          <motion.div
+            initial={{ opacity: 0, y: 30 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            className="text-center mb-12"
+          >
+            <h2 className="text-3xl sm:text-4xl font-bold text-white mb-4">
+              Got Questions? <span className="gradient-text">We've Got Answers</span>
+            </h2>
+          </motion.div>
+          
+          <Accordion type="single" collapsible className="space-y-4">
+            {faqs.map((faq, index) => (
+              <AccordionItem 
+                key={index} 
+                value={`faq-${index}`}
+                className="cyber-card rounded-xl border-fuchsia-500/30 px-6"
+              >
+                <AccordionTrigger className="text-white hover:text-fuchsia-400 text-left">
+                  {faq.question}
+                </AccordionTrigger>
+                <AccordionContent className="text-gray-300">
+                  {faq.answer}
+                </AccordionContent>
+              </AccordionItem>
+            ))}
+          </Accordion>
+        </div>
+      </section>
 
       {/* Final CTA */}
-      <section className="py-20 bg-gradient-to-br from-fuchsia-600 via-purple-600 to-cyan-600 relative overflow-hidden">
-        {/* Animated background */}
-        <div className="absolute inset-0 cyber-grid opacity-20"></div>
-        <div className="absolute top-1/4 left-1/4 w-40 h-40 bg-white/10 rounded-full blur-3xl animate-pulse"></div>
-        <div className="absolute bottom-1/4 right-1/4 w-32 h-32 bg-cyan-300/20 rounded-full blur-2xl animate-pulse" style={{ animationDelay: '1.5s' }}></div>
+      <section className="py-20 relative overflow-hidden">
+        <div className="absolute inset-0 bg-gradient-to-br from-fuchsia-600 via-purple-600 to-cyan-600" />
+        <div className="absolute inset-0 cyber-grid opacity-20" />
         
-        <div className="max-w-4xl mx-auto text-center px-4 sm:px-6 lg:px-8 relative z-10">
-          <Sparkles className="w-16 h-16 text-white mx-auto mb-6 pulse-neon" />
-          
-          <h2 className="text-3xl sm:text-4xl font-bold text-white mb-6">
-            Ready to Begin Your Pole Journey?
-          </h2>
-          
-          <p className="text-lg text-purple-100 mb-8 max-w-2xl mx-auto leading-relaxed">
-            You belong here. Whether you're seeking strength, community, artistry, or pure fun - 
-            your perfect pole pathway is waiting. Take the first step today.
-          </p>
-          
-          <div className="flex flex-col sm:flex-row gap-4 justify-center">
-            <Button className="neon-button text-black font-bold text-lg px-8 py-3">
-              Book My First Class
-              <ArrowRight className="w-5 h-5 ml-2" />
+        <div className="relative max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
+          <motion.div
+            initial={{ opacity: 0, y: 30 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+          >
+            <Sparkles className="w-16 h-16 text-white mx-auto mb-6" />
+            <h2 className="text-3xl sm:text-4xl lg:text-5xl font-bold text-white mb-6">
+              Ready to Transform Your Life?
+            </h2>
+            <p className="text-xl text-purple-100 mb-8 max-w-2xl mx-auto">
+              Join thousands of women who've discovered the joy of pole dancing. Your journey starts with just one class.
+            </p>
+            <Button className="bg-white text-purple-900 hover:bg-gray-100 font-bold text-lg px-8 py-6 h-auto">
+              Yes, Claim My Beginner Spot
+              <ChevronRight className="w-5 h-5 ml-2" />
             </Button>
-            <Button variant="outline" className="border-white/30 text-white hover:bg-white/10 text-lg px-8 py-3">
-              Chat With Us
-              <MessageCircle className="w-5 h-5 ml-2" />
-            </Button>
-          </div>
-          
-          <p className="text-purple-200 text-sm mt-6">
-            Questions? Our friendly team is here to help you find your perfect starting point.
-          </p>
+            <p className="text-purple-200 text-sm mt-6">
+              Limited spots available • No experience needed • All bodies welcome
+            </p>
+          </motion.div>
         </div>
       </section>
 
       <Footer />
+      
+      {/* Add marquee animation */}
+      <style>{`
+        @keyframes marquee {
+          0% { transform: translateX(0); }
+          100% { transform: translateX(-50%); }
+        }
+        .animate-marquee {
+          animation: marquee 20s linear infinite;
+        }
+      `}</style>
     </div>
   );
 };
