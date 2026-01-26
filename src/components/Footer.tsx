@@ -1,8 +1,37 @@
 import { Instagram, Facebook, Youtube, Mail, Phone, MapPin, Star, Clock, Users, Heart, Globe } from 'lucide-react';
 import { Link } from 'react-router-dom';
 import FreeTrialOffer from '@/components/FreeTrialOffer';
+import {
+  Select,
+  SelectContent,
+  SelectItem,
+  SelectTrigger,
+  SelectValue,
+} from "@/components/ui/select";
+
+const languages = [
+  { code: 'en', name: 'English' },
+  { code: 'zh-CN', name: '中文 (简体)' },
+  { code: 'zh-TW', name: '中文 (繁體)' },
+  { code: 'es', name: 'Español' },
+  { code: 'vi', name: 'Tiếng Việt' },
+  { code: 'ar', name: 'العربية' },
+  { code: 'ko', name: '한국어' },
+  { code: 'ja', name: '日本語' },
+  { code: 'hi', name: 'हिन्दी' },
+  { code: 'fr', name: 'Français' },
+  { code: 'de', name: 'Deutsch' },
+  { code: 'it', name: 'Italiano' },
+];
 
 const Footer = () => {
+  const handleLanguageChange = (langCode: string) => {
+    const googleTranslateSelect = document.querySelector('.goog-te-combo') as HTMLSelectElement;
+    if (googleTranslateSelect) {
+      googleTranslateSelect.value = langCode;
+      googleTranslateSelect.dispatchEvent(new Event('change'));
+    }
+  };
   const programLinks = [
     { name: 'Pole Dancing', href: '/programs/pole/beginner' },
     { name: 'Aerial Hoop', href: '/programs/aerial-hoop/beginner' },
@@ -171,8 +200,27 @@ const Footer = () => {
             {/* Language Selector */}
             <div className="flex items-center gap-2">
               <Globe className="w-4 h-4 text-fuchsia-400" />
-              <div id="google_translate_element" className="translate-widget"></div>
+              <span className="text-gray-400 text-sm">Language:</span>
+              <Select onValueChange={handleLanguageChange} defaultValue="en">
+                <SelectTrigger className="w-[140px] h-8 bg-gray-800 border-fuchsia-500/30 text-gray-300 text-sm hover:border-fuchsia-500/60">
+                  <SelectValue placeholder="English" />
+                </SelectTrigger>
+                <SelectContent className="bg-gray-800 border-fuchsia-500/30 z-[9999]">
+                  {languages.map((lang) => (
+                    <SelectItem 
+                      key={lang.code} 
+                      value={lang.code}
+                      className="text-gray-300 hover:bg-fuchsia-500/20 focus:bg-fuchsia-500/20 focus:text-white cursor-pointer"
+                    >
+                      {lang.name}
+                    </SelectItem>
+                  ))}
+                </SelectContent>
+              </Select>
             </div>
+            
+            {/* Hidden Google Translate element */}
+            <div id="google_translate_element" className="hidden"></div>
             
             <div className="flex flex-wrap justify-center space-x-6 text-sm">
               <Link to="/first-timers" className="text-gray-400 hover:text-fuchsia-400 transition-colors">First Timers</Link>
