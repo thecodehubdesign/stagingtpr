@@ -252,5 +252,42 @@ export const studios: Studio[] = [
       "Wilson Parking on Flinders Lane",
       "QV Car Park 5 minutes walk"
     ]
+  },
+  {
+    id: 'rowville',
+    name: "The Pole Room Rowville",
+    address: "Rowville VIC 3178",
+    phone: "(03) 9789 0123",
+    email: "rowville@thepoleroom.com.au",
+    apparatus: ["Pole", "Aerials"],
+    features: ["Changing Rooms", "Studio Hire", "Hens Parties"],
+    image: "https://images.unsplash.com/photo-1513836279014-a89f7a76ae86?ixlib=rb-4.0.3&auto=format&fit=crop&w=1000&q=80",
+    lat: -37.9257,
+    lng: 145.2317,
+    hours: {
+      'Monday': '6:00 AM - 9:00 PM',
+      'Tuesday': '6:00 AM - 9:00 PM',
+      'Wednesday': '6:00 AM - 9:00 PM',
+      'Thursday': '6:00 AM - 9:00 PM',
+      'Friday': '6:00 AM - 8:00 PM',
+      'Saturday': '8:00 AM - 6:00 PM',
+      'Sunday': '8:00 AM - 6:00 PM'
+    },
+    description: "Our Rowville studio offers pole and aerial classes in a modern, welcoming space perfect for the Knox community.",
+    studioSpecs: "8 Poles 45mm X-Pole • 4 Aerial Hoops • Professional Rigging",
+    instagram: "https://instagram.com/thepoleroom",
+    facebook: "https://facebook.com/thepoleroom",
+    reviewCount: 95,
+    rating: 4.8,
+    nearbyLandmark: "Near Stud Park Shopping Centre",
+    transportInfo: [
+      "Take bus route 901 to Rowville",
+      "Nearest train station is Dandenong (15 min drive)",
+      "Easy access from Stud Road"
+    ],
+    parkingInfo: [
+      "Free onsite parking available",
+      "Street parking on surrounding streets"
+    ]
   }
 ];
