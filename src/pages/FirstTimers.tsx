@@ -64,6 +64,29 @@ const FirstTimers = () => {
     }
   ];
 
+  const gymComparisons = [
+    {
+      gym: "Join a gym...but feel lost and invisible.",
+      poleRoom: "Step into your first class and feel welcomed, supported, and empowered"
+    },
+    {
+      gym: "Push through workouts that feel like a chore",
+      poleRoom: "Move in ways that make you feel strong, confident, and free"
+    },
+    {
+      gym: "Same workout different day, repetitive movements",
+      poleRoom: "Finally, a workout you actually look forward to!"
+    },
+    {
+      gym: "Doubt yourself, avoid mirrors, stay stuck in the same cycle",
+      poleRoom: "See progress from as little as 4 weeks, both in your strength and how you carry yourself"
+    },
+    {
+      gym: "Start and stop, lose motivation and feel like a failure",
+      poleRoom: "Rediscover confidence, strength, and joy in your own skin"
+    }
+  ];
+
   const testimonials = [
     {
       name: "Sarah",
@@ -439,6 +462,78 @@ const FirstTimers = () => {
                 alt={galleryImages[5].alt}
                 className="w-full h-full object-cover hover:scale-105 transition-transform duration-500"
               />
+            </motion.div>
+          </div>
+        </div>
+      </section>
+
+      {/* Comparison Chart - Traditional Gym vs The Pole Room */}
+      <section className="py-20 relative overflow-hidden">
+        <div className="absolute inset-0 cyber-grid opacity-20" />
+        <div className="relative max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
+          <motion.div
+            initial={{ opacity: 0, y: 30 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            className="text-center mb-12"
+          >
+            <h2 className="text-3xl sm:text-4xl lg:text-5xl font-bold text-white italic">
+              Traditional Gyms VS{' '}
+              <span className="gradient-text not-italic">The Pole Room</span>
+            </h2>
+          </motion.div>
+
+          <div className="grid md:grid-cols-2 gap-6 lg:gap-8">
+            {/* Traditional Gym Card */}
+            <motion.div
+              initial={{ opacity: 0, x: -30 }}
+              whileInView={{ opacity: 1, x: 0 }}
+              viewport={{ once: true }}
+              className="rounded-2xl border border-white/20 bg-gray-900/50 p-6 sm:p-8"
+            >
+              <div className="flex justify-center mb-6">
+                <span className="px-4 py-2 rounded-full bg-white text-gray-900 font-bold text-sm uppercase tracking-wider">
+                  Traditional Gym
+                </span>
+              </div>
+              <ul className="space-y-0">
+                {gymComparisons.map((item, index) => (
+                  <li key={index} className="py-4 border-b border-white/10 last:border-b-0">
+                    <div className="flex items-start gap-3">
+                      <span className="text-white/60 mt-1">•</span>
+                      <span className="text-gray-300">{item.gym}</span>
+                    </div>
+                  </li>
+                ))}
+              </ul>
+            </motion.div>
+
+            {/* The Pole Room Card - Enhanced */}
+            <motion.div
+              initial={{ opacity: 0, x: 30 }}
+              whileInView={{ opacity: 1, x: 0 }}
+              viewport={{ once: true }}
+              className="relative rounded-2xl border-2 border-fuchsia-500/50 bg-gray-900/50 p-6 sm:p-8"
+            >
+              {/* Glow effect */}
+              <div className="absolute -inset-1 bg-gradient-to-r from-fuchsia-500/20 to-purple-500/20 rounded-2xl blur-xl" />
+              <div className="relative">
+                <div className="flex justify-center mb-6">
+                  <span className="px-4 py-2 rounded-full bg-gradient-to-r from-fuchsia-500 to-purple-600 text-white font-bold text-sm uppercase tracking-wider">
+                    The Pole Room
+                  </span>
+                </div>
+                <ul className="space-y-0">
+                  {gymComparisons.map((item, index) => (
+                    <li key={index} className="py-4 border-b border-fuchsia-500/20 last:border-b-0">
+                      <div className="flex items-start gap-3">
+                        <span className="text-fuchsia-400 mt-1">•</span>
+                        <span className="text-white">{item.poleRoom}</span>
+                      </div>
+                    </li>
+                  ))}
+                </ul>
+              </div>
             </motion.div>
           </div>
         </div>
