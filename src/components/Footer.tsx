@@ -1,3 +1,4 @@
+import { useEffect, useState } from 'react';
 import { Instagram, Facebook, Youtube, Mail, Phone, MapPin, Star, Clock, Users, Heart, Globe } from 'lucide-react';
 import { Link } from 'react-router-dom';
 import FreeTrialOffer from '@/components/FreeTrialOffer';
@@ -25,22 +26,92 @@ const languages = [
 ];
 
 const Footer = () => {
+  const [currentLang, setCurrentLang] = useState('en');
+
+  // Apply saved language on mount
+  useEffect(() => {
+    const savedLang = localStorage.getItem('preferredLanguage');
+    if (savedLang) {
+      setCurrentLang(savedLang);
+      
+      // If not English, try to trigger translation after page load
+      if (savedLang !== 'en') {
+        const applyTranslation = () => {
+          const select = document.querySelector('.goog-te-combo') as HTMLSelectElement;
+          if (select) {
+            select.value = savedLang;
+            select.dispatchEvent(new Event('change', { bubbles: true }));
+          }
+        };
+        
+        // Try multiple times as Google Translate loads asynchronously
+        setTimeout(applyTranslation, 1000);
+        setTimeout(applyTranslation, 2000);
+        setTimeout(applyTranslation, 3000);
+      }
+    }
+  }, []);
+
   const handleLanguageChange = (langCode: string) => {
+    // Store language preference
+    localStorage.setItem('preferredLanguage', langCode);
+    setCurrentLang(langCode);
+    
     if (langCode === 'en') {
-      // Reset to English - clear cookies and reload
+      // Reset to English - clear cookies and localStorage
       document.cookie = 'googtrans=; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=/;';
+      document.cookie = 'googtrans=; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=/; domain=' + window.location.hostname;
       document.cookie = 'googtrans=; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=/; domain=.' + window.location.hostname;
+      localStorage.removeItem('preferredLanguage');
       window.location.reload();
       return;
     }
     
-    // Set Google Translate cookie for the selected language
+    // Set Google Translate cookies for multiple domain variations
     const translateCookie = `/en/${langCode}`;
     document.cookie = `googtrans=${translateCookie}; path=/`;
+    document.cookie = `googtrans=${translateCookie}; path=/; domain=${window.location.hostname}`;
     document.cookie = `googtrans=${translateCookie}; path=/; domain=.${window.location.hostname}`;
     
-    // Reload page to apply translation
-    window.location.reload();
+    // Try to trigger translation directly via widget
+    const tryTranslate = () => {
+      // Method 1: Direct select element
+      const select = document.querySelector('.goog-te-combo') as HTMLSelectElement;
+      if (select) {
+        select.value = langCode;
+        select.dispatchEvent(new Event('change', { bubbles: true }));
+        return true;
+      }
+      
+      // Method 2: Try iframe menu
+      const frame = document.querySelector('.goog-te-menu-frame') as HTMLIFrameElement;
+      if (frame) {
+        try {
+          const frameDoc = frame.contentDocument || frame.contentWindow?.document;
+          const items = frameDoc?.querySelectorAll('.goog-te-menu2-item');
+          const langName = languages.find(l => l.code === langCode)?.name || '';
+          items?.forEach((item: Element) => {
+            if (item.textContent?.includes(langName)) {
+              (item as HTMLElement).click();
+            }
+          });
+        } catch (e) {
+          // Cross-origin access may fail
+        }
+      }
+      return false;
+    };
+    
+    // Attempt translation immediately
+    if (!tryTranslate()) {
+      // If widget not ready, wait and try again
+      setTimeout(tryTranslate, 500);
+    }
+    
+    // Fallback to reload if translation doesn't work
+    setTimeout(() => {
+      window.location.reload();
+    }, 1500);
   };
   const programLinks = [
     { name: 'Pole Dancing', href: '/programs/pole/beginner' },

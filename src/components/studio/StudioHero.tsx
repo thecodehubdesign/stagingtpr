@@ -57,7 +57,7 @@ const StudioHero = ({ studio }: StudioHeroProps) => {
               initial={{ opacity: 0, y: -20 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ delay: 0.3 }}
-              className="inline-flex items-center gap-2 px-3 sm:px-4 py-1.5 sm:py-2 rounded-full bg-white/10 backdrop-blur-sm border border-fuchsia-500/30"
+              className="mt-4 inline-flex items-center gap-2 px-3 sm:px-4 py-1.5 sm:py-2 rounded-full bg-white/10 backdrop-blur-sm border border-fuchsia-500/30"
             >
               {/* Google Logo */}
               <svg className="w-4 h-4 sm:w-5 sm:h-5" viewBox="0 0 24 24">
