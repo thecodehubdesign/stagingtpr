@@ -19,6 +19,7 @@ import GetStarted from "./pages/GetStarted";
 import Contact from "./pages/Contact";
 import HensParties from "./pages/HensParties";
 import NotFound from "./pages/NotFound";
+import Congrats from "./pages/Congrats";
 
 // Pole Programs
 import PoleProgramsPage from "./pages/programs/PoleProgramsPage";
@@ -84,6 +85,7 @@ const App = () => (
           <Route path="/products" element={<Products />} />
           <Route path="/get-started" element={<GetStarted />} />
           <Route path="/contact" element={<Contact />} />
+          <Route path="/congrats" element={<Congrats />} />
           
           {/* Functions */}
           <Route path="/hens-parties" element={<HensParties />} />
