@@ -26,49 +26,21 @@ const languages = [
 
 const Footer = () => {
   const handleLanguageChange = (langCode: string) => {
-    // Try to use Google Translate's widget directly first
-    const googleTranslateFrame = document.querySelector('.goog-te-menu-frame') as HTMLIFrameElement;
-    
-    if (googleTranslateFrame && googleTranslateFrame.contentDocument) {
-      // Find the language in the Google Translate dropdown
-      const gtLinks = googleTranslateFrame.contentDocument.querySelectorAll('.goog-te-menu2-item span.text');
-      gtLinks.forEach((link: Element) => {
-        const linkText = (link as HTMLElement).innerText.toLowerCase();
-        const targetLang = languages.find(l => l.code === langCode)?.name.toLowerCase() || '';
-        if (linkText.includes(targetLang.split(' ')[0]) || (langCode === 'en' && linkText.includes('english'))) {
-          (link as HTMLElement).click();
-        }
-      });
+    if (langCode === 'en') {
+      // Reset to English - clear cookies and reload
+      document.cookie = 'googtrans=; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=/;';
+      document.cookie = 'googtrans=; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=/; domain=.' + window.location.hostname;
+      window.location.reload();
       return;
     }
     
-    // Fallback: Try to find and click the Google Translate combo box
-    const gtCombo = document.querySelector('.goog-te-combo') as HTMLSelectElement;
-    if (gtCombo) {
-      gtCombo.value = langCode;
-      gtCombo.dispatchEvent(new Event('change', { bubbles: true }));
-      return;
-    }
+    // Set Google Translate cookie for the selected language
+    const translateCookie = `/en/${langCode}`;
+    document.cookie = `googtrans=${translateCookie}; path=/`;
+    document.cookie = `googtrans=${translateCookie}; path=/; domain=.${window.location.hostname}`;
     
-    // Last resort: Set cookies and reload (works on subsequent page loads)
-    const hostname = window.location.hostname;
-    const domains = ['', hostname, `.${hostname}`];
-    
-    // Clear existing cookies
-    domains.forEach(domain => {
-      const domainPart = domain ? `; domain=${domain}` : '';
-      document.cookie = `googtrans=; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=/${domainPart}`;
-    });
-    
-    if (langCode !== 'en') {
-      const translateCookie = `/en/${langCode}`;
-      document.cookie = `googtrans=${translateCookie}; path=/`;
-      document.cookie = `googtrans=${translateCookie}; path=/; domain=${hostname}`;
-      document.cookie = `googtrans=${translateCookie}; path=/; domain=.${hostname}`;
-    }
-    
-    // Reload the page
-    window.location.href = window.location.pathname + window.location.search;
+    // Reload page to apply translation
+    window.location.reload();
   };
   const programLinks = [
     { name: 'Pole Dancing', href: '/programs/pole/beginner' },
