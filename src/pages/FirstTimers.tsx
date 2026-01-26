@@ -206,7 +206,7 @@ const FirstTimers = () => {
                 ))}
               </ul>
               
-              <Button className="neon-button text-black font-bold text-lg px-8 py-6 h-auto w-full sm:w-auto">
+              <Button className="neon-button text-black font-bold text-base sm:text-lg px-6 sm:px-8 py-3 sm:py-4 h-auto w-full sm:w-auto">
                 Yes, Claim My Beginner Spot
                 <ChevronRight className="w-5 h-5 ml-2" />
               </Button>
@@ -319,7 +319,7 @@ const FirstTimers = () => {
               </p>
             </div>
             
-            <Button className="neon-button text-black font-bold text-lg px-8 py-6 h-auto mt-8">
+            <Button className="neon-button text-black font-bold text-base sm:text-lg px-6 sm:px-8 py-3 sm:py-4 h-auto mt-8">
               Yes, I Want to Nail My First Spin!
               <ChevronRight className="w-5 h-5 ml-2" />
             </Button>
@@ -665,7 +665,7 @@ const FirstTimers = () => {
             <p className="text-xl text-purple-100 mb-8 max-w-2xl mx-auto">
               Join thousands of women who've discovered the joy of pole dancing. Your journey starts with just one class.
             </p>
-            <Button className="bg-white text-purple-900 hover:bg-gray-100 font-bold text-lg px-8 py-6 h-auto">
+            <Button className="bg-white text-purple-900 hover:bg-gray-100 font-bold text-base sm:text-lg px-6 sm:px-8 py-3 sm:py-4 h-auto">
               Yes, Claim My Beginner Spot
               <ChevronRight className="w-5 h-5 ml-2" />
             </Button>
