@@ -26,11 +26,21 @@ const languages = [
 
 const Footer = () => {
   const handleLanguageChange = (langCode: string) => {
-    const googleTranslateSelect = document.querySelector('.goog-te-combo') as HTMLSelectElement;
-    if (googleTranslateSelect) {
-      googleTranslateSelect.value = langCode;
-      googleTranslateSelect.dispatchEvent(new Event('change'));
+    if (langCode === 'en') {
+      // Reset to English - clear cookies and reload
+      document.cookie = 'googtrans=; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=/;';
+      document.cookie = 'googtrans=; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=/; domain=.' + window.location.hostname;
+      window.location.reload();
+      return;
     }
+    
+    // Set Google Translate cookie for the selected language
+    const translateCookie = `/en/${langCode}`;
+    document.cookie = `googtrans=${translateCookie}; path=/`;
+    document.cookie = `googtrans=${translateCookie}; path=/; domain=.${window.location.hostname}`;
+    
+    // Reload page to apply translation
+    window.location.reload();
   };
   const programLinks = [
     { name: 'Pole Dancing', href: '/programs/pole/beginner' },
@@ -219,8 +229,8 @@ const Footer = () => {
               </Select>
             </div>
             
-            {/* Hidden Google Translate element */}
-            <div id="google_translate_element" className="hidden"></div>
+            {/* Google Translate element - positioned off-screen but functional */}
+            <div id="google_translate_element" className="fixed -bottom-24 left-0 opacity-0 pointer-events-none"></div>
             
             <div className="flex flex-wrap justify-center space-x-6 text-sm">
               <Link to="/first-timers" className="text-gray-400 hover:text-fuchsia-400 transition-colors">First Timers</Link>

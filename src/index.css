@@ -309,17 +309,19 @@
   animation: float 3s ease-in-out infinite;
 }
 
-/* Hide Google Translate default widget completely */
+/* Hide Google Translate default widget - keep functional but invisible */
 #google_translate_element {
-  position: absolute !important;
-  visibility: hidden !important;
-  height: 0 !important;
-  overflow: hidden !important;
+  position: fixed !important;
+  bottom: -100px !important;
+  left: 0 !important;
+  opacity: 0 !important;
+  pointer-events: none !important;
+  z-index: -1 !important;
 }
 
 .goog-te-gadget {
-  visibility: hidden !important;
-  height: 0 !important;
+  opacity: 0 !important;
+  pointer-events: none !important;
 }
 
 /* Hide Google Translate top bar */
