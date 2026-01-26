@@ -1,6 +1,6 @@
 import { useState } from 'react';
 import { motion } from 'framer-motion';
-import { CheckCircle, Copy, Check, Calendar, Clock, Instagram, Mail, ShoppingBag } from 'lucide-react';
+import { CheckCircle, Copy, Check, Calendar, Clock, ShoppingBag } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 import { toast } from 'sonner';
 import { Link } from 'react-router-dom';
@@ -110,8 +110,8 @@ const Congrats = () => {
               Send this to your friends so they come along! Know someone who would love pole? Invite them to join you on this journey.
             </p>
             
-            {/* iPhone-style message bubble */}
-            <div className="flex justify-end mb-6">
+            {/* iPhone-style message bubble - CENTRED */}
+            <div className="flex justify-center mb-6">
               <div 
                 className="max-w-sm rounded-2xl rounded-br-md p-4 text-white text-sm leading-relaxed"
                 style={{ backgroundColor: '#077dff' }}
@@ -284,8 +284,12 @@ const Congrats = () => {
                   key={product.id}
                   className="bg-gray-800/50 border border-gray-700/50 hover:border-fuchsia-500/50 rounded-xl p-4 transition-all duration-300"
                 >
-                  <div className="w-full aspect-square bg-gradient-to-br from-fuchsia-900/30 to-cyan-900/30 rounded-lg flex items-center justify-center mb-3">
-                    <ShoppingBag className="w-8 h-8 text-fuchsia-400/60" />
+                  <div className="w-full aspect-square bg-gradient-to-br from-fuchsia-900/30 to-cyan-900/30 rounded-lg overflow-hidden mb-3">
+                    <img 
+                      src={product.image} 
+                      alt={product.name}
+                      className="w-full h-full object-cover"
+                    />
                   </div>
                   <h3 className="text-white font-medium text-sm mb-1 line-clamp-1">{product.name}</h3>
                   <p className="text-gray-400 text-xs mb-2 line-clamp-2">{product.description}</p>
@@ -344,29 +348,6 @@ const Congrats = () => {
               </div>
             </div>
             
-            <div className="border-t border-gray-700/50 mt-8 pt-8">
-              <div className="flex flex-col sm:flex-row items-center justify-center gap-4">
-                <a 
-                  href="https://www.instagram.com/thepoleroom/" 
-                  target="_blank" 
-                  rel="noopener noreferrer"
-                  className="inline-flex items-center gap-2 px-6 py-3 border-2 border-fuchsia-500/50 rounded-full text-white hover:bg-fuchsia-500/20 transition-colors"
-                >
-                  <Instagram className="w-5 h-5" />
-                  Follow us on Instagram
-                </a>
-                <a 
-                  href="mailto:info@thepoleroom.com.au"
-                  className="inline-flex items-center gap-2 text-gray-400 hover:text-fuchsia-400 transition-colors"
-                >
-                  <Mail className="w-5 h-5" />
-                  info@thepoleroom.com.au
-                </a>
-              </div>
-              <p className="text-center text-gray-500 text-sm mt-4">
-                Need a hand? Reply to your confirmation email or reach out above.
-              </p>
-            </div>
           </motion.div>
           
         </div>
