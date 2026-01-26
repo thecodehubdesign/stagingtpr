@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import { motion } from 'framer-motion';
 import Header from '@/components/Header';
 import Footer from '@/components/Footer';
@@ -22,13 +22,28 @@ const FirstTimers = () => {
   ];
 
   const galleryImages = [
-    { src: "/images/glow/hero-1.png", alt: "Pole dance performance" },
-    { src: "/images/glow/hero-2.png", alt: "Student stretching" },
-    { src: "/images/glow/hero-3.png", alt: "Neon studio sign" },
-    { src: "/images/glow/hero-4.png", alt: "Students with certificates" },
-    { src: "/images/glow/hero-5.png", alt: "Pole pose under purple lights" },
-    { src: "/images/glow/history-1.png", alt: "Group of students" }
+    { src: "/images/first-timers/gallery-1.png", alt: "Pole dance class in action" },
+    { src: "/images/first-timers/gallery-2.avif", alt: "Students practicing spins" },
+    { src: "/images/first-timers/gallery-3.avif", alt: "Beginner pole class" },
+    { src: "/images/first-timers/gallery-4.avif", alt: "Group pole fitness" },
+    { src: "/images/first-timers/gallery-5.avif", alt: "Pole dance poses" },
+    { src: "/images/first-timers/gallery-6.avif", alt: "Studio atmosphere" }
   ];
+
+  // Load Mindbody widget script
+  useEffect(() => {
+    const script = document.createElement('script');
+    script.src = 'https://brandedweb.mindbodyonline.com/embed/widget.js';
+    script.async = true;
+    document.head.appendChild(script);
+
+    return () => {
+      const existingScript = document.querySelector('script[src="https://brandedweb.mindbodyonline.com/embed/widget.js"]');
+      if (existingScript) {
+        document.head.removeChild(existingScript);
+      }
+    };
+  }, []);
 
   const shineFramework = [
     {
@@ -122,86 +137,67 @@ const FirstTimers = () => {
         <div className="absolute top-1/4 right-1/4 w-96 h-96 bg-fuchsia-500/20 rounded-full blur-3xl animate-pulse" />
         <div className="absolute bottom-1/4 left-1/4 w-64 h-64 bg-cyan-500/20 rounded-full blur-3xl animate-pulse" style={{ animationDelay: '1s' }} />
         
-        <div className="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="grid lg:grid-cols-2 gap-12 items-center">
-            {/* Left - Content */}
-            <motion.div
-              initial={{ opacity: 0, x: -30 }}
-              animate={{ opacity: 1, x: 0 }}
-              transition={{ duration: 0.6 }}
-            >
-              <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-fuchsia-500/10 border border-fuchsia-500/30 mb-6">
-                <Sparkles className="w-4 h-4 text-fuchsia-400" />
-                <span className="text-fuchsia-400 text-sm font-medium">Special Offer For January</span>
-              </div>
-              
-              <h1 className="text-4xl sm:text-5xl lg:text-6xl font-bold text-white leading-tight mb-6">
-                Pole Dancing for Beginners:{' '}
-                <span className="gradient-text">Fitness That Feels Like Fun!</span>
-              </h1>
-              
-              <p className="text-lg text-gray-300 mb-8 leading-relaxed">
-                No treadmills. No boring workouts. Just 28 days of spins, poses and routines you'll actually look forward to. 
-                <span className="text-fuchsia-400 font-semibold"> Limited spots available!</span> Claim your Pole Dance Transformation before they're all gone!
-              </p>
-              
-              {/* Benefits List */}
-              <ul className="space-y-3 mb-8">
-                {benefitsList.map((benefit, index) => (
-                  <motion.li
-                    key={index}
-                    initial={{ opacity: 0, x: -20 }}
-                    animate={{ opacity: 1, x: 0 }}
-                    transition={{ delay: 0.3 + index * 0.1 }}
-                    className="flex items-start gap-3"
-                  >
-                    <Check className="w-5 h-5 text-fuchsia-400 mt-0.5 flex-shrink-0" />
-                    <span className="text-gray-200">{benefit}</span>
-                  </motion.li>
-                ))}
-              </ul>
-              
+        <div className="relative max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
+          <motion.div
+            initial={{ opacity: 0, y: -20 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.6 }}
+          >
+            <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-fuchsia-500/10 border border-fuchsia-500/30 mb-6">
+              <Sparkles className="w-4 h-4 text-fuchsia-400" />
+              <span className="text-fuchsia-400 text-sm font-medium">Special Offer For January</span>
+            </div>
+            
+            <h1 className="text-4xl sm:text-5xl lg:text-6xl font-bold text-white leading-tight mb-6">
+              Pole Dancing for Beginners:{' '}
+              <span className="gradient-text">Fitness That Feels Like Fun!</span>
+            </h1>
+            
+            <p className="text-lg sm:text-xl text-gray-300 mb-8 leading-relaxed max-w-3xl mx-auto">
+              No treadmills. No boring workouts. Just 28 days of spins, poses and routines you'll actually look forward to.
+              <span className="text-fuchsia-400 font-semibold"> Limited spots available!</span> Claim your Pole Dance Transformation before they're all gone!
+            </p>
+            
+            {/* Benefits List - Centered */}
+            <ul className="inline-block text-left space-y-3 mb-8">
+              {benefitsList.map((benefit, index) => (
+                <motion.li
+                  key={index}
+                  initial={{ opacity: 0, x: -20 }}
+                  animate={{ opacity: 1, x: 0 }}
+                  transition={{ delay: 0.3 + index * 0.1 }}
+                  className="flex items-start gap-3"
+                >
+                  <Check className="w-5 h-5 text-fuchsia-400 mt-0.5 flex-shrink-0" />
+                  <span className="text-gray-200">{benefit}</span>
+                </motion.li>
+              ))}
+            </ul>
+            
+            <div>
               <Button className="neon-button text-black font-bold text-lg px-8 py-6 h-auto">
                 Yes, Claim My Beginner Spot
                 <ChevronRight className="w-5 h-5 ml-2" />
               </Button>
-            </motion.div>
-            
-            {/* Right - Video */}
-            <motion.div
-              initial={{ opacity: 0, x: 30 }}
-              animate={{ opacity: 1, x: 0 }}
-              transition={{ duration: 0.6, delay: 0.2 }}
-              className="relative"
-            >
-              <div className="aspect-video rounded-2xl overflow-hidden border-2 border-fuchsia-500/30 shadow-2xl shadow-fuchsia-500/20">
-                {isVideoPlaying ? (
-                  <iframe
-                    src="https://player.vimeo.com/video/370000000?autoplay=1"
-                    className="w-full h-full"
-                    allow="autoplay; fullscreen"
-                    title="Intro to Pole"
-                  />
-                ) : (
-                  <div 
-                    className="relative w-full h-full bg-gradient-to-br from-gray-800 to-gray-900 flex items-center justify-center cursor-pointer group"
-                    onClick={() => setIsVideoPlaying(true)}
-                  >
-                    <img 
-                      src="/images/glow/hero-1.png" 
-                      alt="Pole dancing intro"
-                      className="absolute inset-0 w-full h-full object-cover opacity-60"
-                    />
-                    <div className="relative z-10 flex flex-col items-center">
-                      <div className="w-20 h-20 rounded-full bg-fuchsia-500 flex items-center justify-center group-hover:scale-110 transition-transform shadow-lg shadow-fuchsia-500/50">
-                        <Play className="w-8 h-8 text-white ml-1" />
-                      </div>
-                      <span className="mt-4 text-white font-medium">Watch Your Journey Begin</span>
-                    </div>
-                  </div>
-                )}
-              </div>
-            </motion.div>
+            </div>
+          </motion.div>
+        </div>
+      </section>
+
+      {/* Mindbody Booking Widget */}
+      <section className="py-12 bg-gray-900/50">
+        <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
+          <div className="cyber-card rounded-2xl p-8">
+            <h3 className="text-2xl font-bold text-white text-center mb-6">
+              Book Your <span className="gradient-text">Free Trial</span>
+            </h3>
+            <div className="min-h-[400px] mindbody-widget-container">
+              <div 
+                className="mindbody-widget" 
+                data-widget-type="Schedules" 
+                data-widget-id="d98131628e"
+              />
+            </div>
           </div>
         </div>
       </section>
