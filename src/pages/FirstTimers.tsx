@@ -30,20 +30,6 @@ const FirstTimers = () => {
     { src: "/images/first-timers/gallery-6.avif", alt: "Studio atmosphere" }
   ];
 
-  // Load Mindbody widget script
-  useEffect(() => {
-    const script = document.createElement('script');
-    script.src = 'https://brandedweb.mindbodyonline.com/embed/widget.js';
-    script.async = true;
-    document.head.appendChild(script);
-
-    return () => {
-      const existingScript = document.querySelector('script[src="https://brandedweb.mindbodyonline.com/embed/widget.js"]');
-      if (existingScript) {
-        document.head.removeChild(existingScript);
-      }
-    };
-  }, []);
 
   const shineFramework = [
     {
@@ -229,23 +215,6 @@ const FirstTimers = () => {
         </div>
       </section>
 
-      {/* Mindbody Booking Widget */}
-      <section className="py-12 bg-gray-900/50">
-        <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="cyber-card rounded-2xl p-8">
-            <h3 className="text-2xl font-bold text-white text-center mb-6">
-              Book Your <span className="gradient-text">Free Trial</span>
-            </h3>
-            <div className="min-h-[400px] mindbody-widget-container">
-              <div 
-                className="mindbody-widget" 
-                data-widget-type="Schedules" 
-                data-widget-id="d98131628e"
-              />
-            </div>
-          </div>
-        </div>
-      </section>
 
       {/* Social Proof Banner */}
       <section className="py-6 bg-gray-900/80 border-y border-fuchsia-500/20">
