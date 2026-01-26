@@ -1,4 +1,4 @@
-import { Instagram, Facebook, Youtube, Mail, Phone, MapPin, Star, Clock, Users, Heart } from 'lucide-react';
+import { Instagram, Facebook, Youtube, Mail, Phone, MapPin, Star, Clock, Users, Heart, Globe } from 'lucide-react';
 import { Link } from 'react-router-dom';
 import FreeTrialOffer from '@/components/FreeTrialOffer';
 
@@ -163,11 +163,18 @@ const Footer = () => {
       {/* Bottom Bar */}
       <div className="border-t border-gray-800">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-6">
-          <div className="flex flex-col md:flex-row justify-between items-center">
-            <div className="text-gray-400 text-sm mb-4 md:mb-0">
+          <div className="flex flex-col md:flex-row justify-between items-center gap-4">
+            <div className="text-gray-400 text-sm">
               © {new Date().getFullYear()} The Pole Room. All rights reserved.
             </div>
-            <div className="flex space-x-6 text-sm">
+            
+            {/* Language Selector */}
+            <div className="flex items-center gap-2">
+              <Globe className="w-4 h-4 text-fuchsia-400" />
+              <div id="google_translate_element" className="translate-widget"></div>
+            </div>
+            
+            <div className="flex flex-wrap justify-center space-x-6 text-sm">
               <Link to="/first-timers" className="text-gray-400 hover:text-fuchsia-400 transition-colors">First Timers</Link>
               <Link to="/get-started" className="text-gray-400 hover:text-fuchsia-400 transition-colors">Get Started</Link>
               <a href="#" className="text-gray-400 hover:text-fuchsia-400 transition-colors">Terms of Service</a>
