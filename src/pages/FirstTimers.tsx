@@ -106,7 +106,7 @@ const FirstTimers = () => {
   ];
 
   const locations = [
-    "Mitcham", "Eltham", "CBD", "Kilsyth", "Highett", "Narre Warren"
+    "Mitcham", "Eltham", "CBD", "Kilsyth", "Highett", "Narre Warren", "Rowville"
   ];
 
   return (
@@ -462,7 +462,7 @@ const FirstTimers = () => {
             viewport={{ once: true }}
           >
             <h2 className="text-3xl sm:text-4xl font-bold text-white mb-4">
-              6 Studios Across <span className="gradient-text">Melbourne</span>
+              7 Studios Across <span className="gradient-text">Melbourne</span>
             </h2>
             <p className="text-gray-300 mb-8">Find your nearest Pole Room location</p>
             
@@ -480,7 +480,7 @@ const FirstTimers = () => {
             
             <div className="aspect-video max-w-4xl mx-auto rounded-2xl overflow-hidden border border-fuchsia-500/20">
               <iframe
-                src="https://www.google.com/maps/embed/v1/search?key=AIzaSyBFw0Qbyq9zTFTd-tUY6dZWTgaQzuU17R8&q=The+Pole+Room+Melbourne"
+                src="https://www.google.com/maps/embed/v1/view?key=AIzaSyBFw0Qbyq9zTFTd-tUY6dZWTgaQzuU17R8&center=-37.85,145.15&zoom=10&maptype=roadmap"
                 className="w-full h-full grayscale contrast-125"
                 style={{ border: 0 }}
                 allowFullScreen
