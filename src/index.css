@@ -315,13 +315,18 @@
   bottom: -100px !important;
   left: 0 !important;
   opacity: 0 !important;
-  pointer-events: none !important;
   z-index: -1 !important;
+  /* Removed pointer-events: none to allow programmatic interaction */
 }
 
 .goog-te-gadget {
   opacity: 0 !important;
-  pointer-events: none !important;
+  /* Removed pointer-events: none to allow programmatic interaction */
+}
+
+.goog-te-combo {
+  /* Ensure the select element can be interacted with programmatically */
+  opacity: 0 !important;
 }
 
 /* Hide Google Translate top bar */

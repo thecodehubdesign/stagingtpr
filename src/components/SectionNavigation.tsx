@@ -11,43 +11,39 @@ interface SectionNavigationProps {
 }
 
 const SectionNavigation = ({ sections }: SectionNavigationProps) => {
-  const [activeSection, setActiveSection] = useState<string>('');
+  // Initialize active section to first item
+  const [activeSection, setActiveSection] = useState<string>(sections[0]?.id || '');
   const [isVisible, setIsVisible] = useState<boolean>(false);
-  const [lastScrollY, setLastScrollY] = useState<number>(0);
   const scrollContainerRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
     const handleScroll = () => {
       const currentScrollY = window.scrollY;
-      const documentHeight = document.documentElement.scrollHeight - window.innerHeight;
-      const scrollPercentage = (currentScrollY / documentHeight) * 100;
       
-      // Show navigation after 15% scroll
-      const pastThreshold = scrollPercentage >= 15;
-      
-      // Detect scroll direction
-      const isScrollingUp = currentScrollY < lastScrollY;
-      const isScrollingDown = currentScrollY > lastScrollY;
-      
-      // Update visibility based on scroll direction and threshold
-      if (isScrollingUp && isVisible) {
-        setIsVisible(false);
-      } else if (isScrollingDown && pastThreshold && !isVisible) {
+      // Show immediately when user scrolls past 50px (appears straight away)
+      if (currentScrollY > 50) {
         setIsVisible(true);
+      } else {
+        setIsVisible(false);
       }
       
-      // Update last scroll position
-      setLastScrollY(currentScrollY);
-      
       // Handle active section detection
-      const scrollPosition = currentScrollY + 100; // Offset for header
+      const scrollPosition = currentScrollY + 150; // Offset for header + nav
       
+      // Find active section
+      let foundActive = false;
       for (let i = sections.length - 1; i >= 0; i--) {
         const section = document.getElementById(sections[i].id);
         if (section && section.offsetTop <= scrollPosition) {
           setActiveSection(sections[i].id);
+          foundActive = true;
           break;
         }
+      }
+      
+      // Default to first section if none found
+      if (!foundActive && sections.length > 0) {
+        setActiveSection(sections[0].id);
       }
     };
 
@@ -55,7 +51,7 @@ const SectionNavigation = ({ sections }: SectionNavigationProps) => {
     handleScroll(); // Set initial state
     
     return () => window.removeEventListener('scroll', handleScroll);
-  }, [sections, lastScrollY]);
+  }, [sections]);
 
   // Auto-scroll active section into view on mobile
   useEffect(() => {
