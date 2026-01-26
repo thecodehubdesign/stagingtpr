@@ -1,11 +1,13 @@
 import { useState } from 'react';
 import { motion } from 'framer-motion';
-import { CheckCircle, Copy, Check, Calendar, Clock, Instagram, Mail } from 'lucide-react';
+import { CheckCircle, Copy, Check, Calendar, Clock, Instagram, Mail, ShoppingBag } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 import { toast } from 'sonner';
+import { Link } from 'react-router-dom';
 import Header from '@/components/Header';
 import Footer from '@/components/Footer';
 import { useScrollToTop } from '@/hooks/useScrollToTop';
+import { products } from '@/data/products';
 
 import appStore from '@/assets/app-store.png';
 import googlePlay from '@/assets/google-play.png';
@@ -42,6 +44,11 @@ const Congrats = () => {
     'Book and manage your classes easily'
   ];
 
+  // Get related shop items (protective gear and apparel for beginners)
+  const relatedProducts = products.filter(p => 
+    ['Protective Gear', 'Grip & Safety', 'Apparel'].includes(p.category)
+  ).slice(0, 4);
+
   return (
     <div className="min-h-screen bg-gradient-to-br from-gray-900 via-purple-900/80 to-gray-900">
       <Header />
@@ -75,9 +82,14 @@ const Congrats = () => {
                 Congratulations!
               </span>
             </h1>
-            <p className="text-lg sm:text-xl text-gray-300 max-w-2xl mx-auto">
+            <p className="text-lg sm:text-xl text-gray-300 max-w-2xl mx-auto mb-6">
               You've secured your spot in the Intro To Pole Program. We're so excited to have you join our community!
             </p>
+            
+            {/* Important Steps Callout */}
+            <div className="inline-flex items-center gap-2 px-6 py-3 rounded-full bg-gradient-to-r from-fuchsia-500/20 to-cyan-500/20 border border-fuchsia-500/40">
+              <span className="text-white font-semibold">⚡ Important: Complete these 3 steps so you're ready to go!</span>
+            </div>
           </motion.div>
 
           {/* Step 1: Refer A Friend */}
@@ -98,28 +110,34 @@ const Congrats = () => {
               Send this to your friends so they come along! Know someone who would love pole? Invite them to join you on this journey.
             </p>
             
-            <div className="bg-gray-800/50 border border-fuchsia-500/30 rounded-xl p-4 mb-4">
-              <p className="text-gray-200 text-sm leading-relaxed whitespace-pre-wrap">
+            {/* iPhone-style message bubble */}
+            <div className="flex justify-end mb-6">
+              <div 
+                className="max-w-sm rounded-2xl rounded-br-md p-4 text-white text-sm leading-relaxed"
+                style={{ backgroundColor: '#077dff' }}
+              >
                 {referralMessage}
-              </p>
+              </div>
             </div>
             
-            <Button 
-              onClick={handleCopy}
-              className="neon-button w-full sm:w-auto"
-            >
-              {copied ? (
-                <>
-                  <Check className="w-4 h-4 mr-2" />
-                  Copied!
-                </>
-              ) : (
-                <>
-                  <Copy className="w-4 h-4 mr-2" />
-                  Copy Message
-                </>
-              )}
-            </Button>
+            <div className="flex justify-center">
+              <Button 
+                onClick={handleCopy}
+                className="neon-button"
+              >
+                {copied ? (
+                  <>
+                    <Check className="w-4 h-4 mr-2" />
+                    Copied!
+                  </>
+                ) : (
+                  <>
+                    <Copy className="w-4 h-4 mr-2" />
+                    Copy Message
+                  </>
+                )}
+              </Button>
+            </div>
           </motion.div>
 
           {/* Step 2: Download The App */}
@@ -189,7 +207,7 @@ const Congrats = () => {
             initial={{ opacity: 0, y: 30 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ delay: 0.7, duration: 0.5 }}
-            className="cyber-card p-6 sm:p-8 rounded-2xl mb-12"
+            className="cyber-card p-6 sm:p-8 rounded-2xl mb-8"
           >
             <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-fuchsia-500/20 border border-fuchsia-500/30 mb-4">
               <span className="text-fuchsia-400 font-semibold text-sm">Step 3 of 3</span>
@@ -202,7 +220,7 @@ const Congrats = () => {
               Before your first class, you'll attend a quick orientation session where we'll show you around the studio and answer any questions.
             </p>
             
-            <div className="grid sm:grid-cols-2 gap-4 mb-8">
+            <div className="grid sm:grid-cols-2 gap-4">
               <div className="flex items-center gap-3 bg-gray-800/50 border border-fuchsia-500/30 rounded-xl p-4">
                 <Calendar className="w-6 h-6 text-fuchsia-400" />
                 <div>
@@ -218,8 +236,18 @@ const Congrats = () => {
                 </div>
               </div>
             </div>
-            
-            <h3 className="text-xl font-bold text-white mb-4">What To Wear</h3>
+          </motion.div>
+
+          {/* What To Wear - Separate Section */}
+          <motion.div
+            initial={{ opacity: 0, y: 30 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ delay: 0.8, duration: 0.5 }}
+            className="cyber-card p-6 sm:p-8 rounded-2xl mb-8"
+          >
+            <h2 className="text-2xl sm:text-3xl font-bold text-white mb-6">
+              What To Wear
+            </h2>
             <div className="grid sm:grid-cols-2 gap-3">
               {whatToWear.map((item, index) => (
                 <div 
@@ -233,11 +261,59 @@ const Congrats = () => {
             </div>
           </motion.div>
 
-          {/* Founder Sign-off */}
+          {/* Shop Related Products */}
           <motion.div
             initial={{ opacity: 0, y: 30 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ delay: 0.9, duration: 0.5 }}
+            className="cyber-card p-6 sm:p-8 rounded-2xl mb-12"
+          >
+            <div className="flex items-center gap-3 mb-6">
+              <ShoppingBag className="w-6 h-6 text-fuchsia-400" />
+              <h2 className="text-2xl sm:text-3xl font-bold text-white">
+                Get Ready For Class
+              </h2>
+            </div>
+            <p className="text-gray-300 mb-6">
+              Grab some essentials to make your first classes even better!
+            </p>
+            
+            <div className="grid sm:grid-cols-2 lg:grid-cols-4 gap-4 mb-6">
+              {relatedProducts.map((product) => (
+                <div 
+                  key={product.id}
+                  className="bg-gray-800/50 border border-gray-700/50 hover:border-fuchsia-500/50 rounded-xl p-4 transition-all duration-300"
+                >
+                  <div className="w-full aspect-square bg-gradient-to-br from-fuchsia-900/30 to-cyan-900/30 rounded-lg flex items-center justify-center mb-3">
+                    <ShoppingBag className="w-8 h-8 text-fuchsia-400/60" />
+                  </div>
+                  <h3 className="text-white font-medium text-sm mb-1 line-clamp-1">{product.name}</h3>
+                  <p className="text-gray-400 text-xs mb-2 line-clamp-2">{product.description}</p>
+                  <div className="flex items-center justify-between">
+                    <span className="text-fuchsia-400 font-bold">${product.price}</span>
+                    {product.originalPrice && (
+                      <span className="text-gray-500 text-xs line-through">${product.originalPrice}</span>
+                    )}
+                  </div>
+                </div>
+              ))}
+            </div>
+            
+            <div className="text-center">
+              <Link to="/products">
+                <Button className="neon-button">
+                  <ShoppingBag className="w-4 h-4 mr-2" />
+                  View All Products
+                </Button>
+              </Link>
+            </div>
+          </motion.div>
+
+          {/* Founder Sign-off */}
+          <motion.div
+            initial={{ opacity: 0, y: 30 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ delay: 1.0, duration: 0.5 }}
             className="cyber-card p-6 sm:p-8 rounded-2xl"
           >
             <div className="grid md:grid-cols-2 gap-8 items-center">
