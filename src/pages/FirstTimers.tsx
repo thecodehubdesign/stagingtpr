@@ -4,7 +4,7 @@ import Header from '@/components/Header';
 import Footer from '@/components/Footer';
 import { Button } from '@/components/ui/button';
 import { Accordion, AccordionContent, AccordionItem, AccordionTrigger } from '@/components/ui/accordion';
-import { Check, Star, MapPin, Shield, Dumbbell, Sparkles, Compass, Heart, Play, ChevronRight, Quote } from 'lucide-react';
+import { Check, Star, MapPin, Shield, Dumbbell, Sparkles, Compass, Heart, Play, ChevronRight, Quote, X } from 'lucide-react';
 import jasmineSignature from '@/assets/jasmine-signature.png';
 import jasminePhoto from '@/assets/jasmine-verified.png';
 import AllStudiosMap from '@/components/AllStudiosMap';
@@ -85,6 +85,18 @@ const FirstTimers = () => {
       gym: "Start and stop, lose motivation and feel like a failure",
       poleRoom: "Rediscover confidence, strength, and joy in your own skin"
     }
+  ];
+
+  const failedFitnessSolutions = [
+    "Gym memberships that leave you feeling lost and uninspired.",
+    "Diets that make you obsess over numbers but never change how you see yourself.",
+    "Self-help books that tell you to 'love yourself' but require exhaustive work that never sticks.."
+  ];
+
+  const poleRoomBenefits = [
+    "You don't wait to feel confident - you step into it from day 1.",
+    "You don't need to \"get fit\" before you start - Pole MAKES you strong.",
+    "You don't have to \"push through\" another workout - you'll actually look forward to it."
   ];
 
   const testimonials = [
@@ -467,6 +479,113 @@ const FirstTimers = () => {
         </div>
       </section>
 
+      {/* It's Not You - It's the Fitness Industry */}
+      <section className="py-20 relative overflow-hidden">
+        <div className="relative max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
+          <motion.div
+            initial={{ opacity: 0, y: 30 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            className="flex justify-center mb-8"
+          >
+            <span className="px-6 py-3 rounded-full bg-gray-800 text-white font-bold text-sm uppercase tracking-wider border border-white/20">
+              The Odds Are Stacked Against You...
+            </span>
+          </motion.div>
+          
+          <motion.h2
+            initial={{ opacity: 0, y: 30 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            transition={{ delay: 0.1 }}
+            className="text-3xl sm:text-4xl lg:text-5xl font-bold text-white text-center mb-8"
+          >
+            It's Not You - It's the{' '}
+            <span className="gradient-text italic">Fitness Industry</span>
+          </motion.h2>
+          
+          <motion.p
+            initial={{ opacity: 0, y: 20 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            transition={{ delay: 0.2 }}
+            className="text-lg text-gray-300 mb-8"
+          >
+            If you've ever felt like fitness wasn't made for you, you're not imagining things. The fitness industry has been selling false promises for decades:
+          </motion.p>
+          
+          <motion.div
+            initial={{ opacity: 0, y: 20 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            transition={{ delay: 0.3 }}
+            className="space-y-4 mb-8"
+          >
+            {failedFitnessSolutions.map((item, index) => (
+              <div key={index} className="flex items-start gap-3">
+                <X className="w-5 h-5 text-red-500 mt-1 flex-shrink-0" />
+                <span className="text-gray-300">{item}</span>
+              </div>
+            ))}
+          </motion.div>
+          
+          <motion.p
+            initial={{ opacity: 0, y: 20 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            transition={{ delay: 0.4 }}
+            className="text-lg text-gray-400 italic mb-6"
+          >
+            So when you hear about Pole, part of you wonders... "Is this just another thing that won't work for me?"
+          </motion.p>
+          
+          <motion.p
+            initial={{ opacity: 0, y: 20 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            transition={{ delay: 0.5 }}
+            className="text-xl text-white font-semibold mb-4"
+          >
+            We get it. That's why The Pole Room exists.
+          </motion.p>
+          
+          <motion.p
+            initial={{ opacity: 0, y: 20 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            transition={{ delay: 0.6 }}
+            className="text-lg text-gray-300 mb-8"
+          >
+            You see, most fitness programs focus on changing your body. <span className="text-white font-semibold">We focus on changing how you feel about your body.</span>
+          </motion.p>
+          
+          <motion.div
+            initial={{ opacity: 0, y: 20 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            transition={{ delay: 0.7 }}
+            className="space-y-4 mb-8"
+          >
+            {poleRoomBenefits.map((item, index) => (
+              <div key={index} className="flex items-start gap-3">
+                <Heart className="w-5 h-5 text-purple-500 mt-1 flex-shrink-0" />
+                <span className="text-gray-300">{item}</span>
+              </div>
+            ))}
+          </motion.div>
+          
+          <motion.p
+            initial={{ opacity: 0, y: 20 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            transition={{ delay: 0.8 }}
+            className="text-xl text-white font-semibold text-center"
+          >
+            This is about unlocking the most powerful version of you.
+          </motion.p>
+        </div>
+      </section>
+
       {/* Comparison Chart - Traditional Gym vs The Pole Room */}
       <section className="py-20 relative overflow-hidden">
         <div className="absolute inset-0 cyber-grid opacity-20" />
@@ -500,7 +619,7 @@ const FirstTimers = () => {
                 {gymComparisons.map((item, index) => (
                   <li key={index} className="py-4 border-b border-white/10 last:border-b-0">
                     <div className="flex items-start gap-3">
-                      <span className="text-white/60 mt-1">•</span>
+                      <X className="w-5 h-5 text-red-500 mt-0.5 flex-shrink-0" />
                       <span className="text-gray-300">{item.gym}</span>
                     </div>
                   </li>
@@ -527,7 +646,7 @@ const FirstTimers = () => {
                   {gymComparisons.map((item, index) => (
                     <li key={index} className="py-4 border-b border-fuchsia-500/20 last:border-b-0">
                       <div className="flex items-start gap-3">
-                        <span className="text-fuchsia-400 mt-1">•</span>
+                        <Check className="w-5 h-5 text-green-500 mt-0.5 flex-shrink-0" />
                         <span className="text-white">{item.poleRoom}</span>
                       </div>
                     </li>
