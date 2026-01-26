@@ -137,11 +137,13 @@ const FirstTimers = () => {
         <div className="absolute top-1/4 right-1/4 w-96 h-96 bg-fuchsia-500/20 rounded-full blur-3xl animate-pulse" />
         <div className="absolute bottom-1/4 left-1/4 w-64 h-64 bg-cyan-500/20 rounded-full blur-3xl animate-pulse" style={{ animationDelay: '1s' }} />
         
-        <div className="relative max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
+        <div className="relative max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
+          {/* Centered Header Content */}
           <motion.div
             initial={{ opacity: 0, y: -20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.6 }}
+            className="text-center"
           >
             <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-fuchsia-500/10 border border-fuchsia-500/30 mb-6">
               <Sparkles className="w-4 h-4 text-fuchsia-400" />
@@ -157,30 +159,73 @@ const FirstTimers = () => {
               No treadmills. No boring workouts. Just 28 days of spins, poses and routines you'll actually look forward to.
               <span className="text-fuchsia-400 font-semibold"> Limited spots available!</span> Claim your Pole Dance Transformation before they're all gone!
             </p>
-            
-            {/* Benefits List - Centered */}
-            <ul className="inline-block text-left space-y-3 mb-8">
-              {benefitsList.map((benefit, index) => (
-                <motion.li
-                  key={index}
-                  initial={{ opacity: 0, x: -20 }}
-                  animate={{ opacity: 1, x: 0 }}
-                  transition={{ delay: 0.3 + index * 0.1 }}
-                  className="flex items-start gap-3"
+          </motion.div>
+
+          {/* Two Column Layout - Video + Benefits */}
+          <div className="grid lg:grid-cols-2 gap-8 lg:gap-12 items-center mt-8">
+            {/* Left Column - Video */}
+            <motion.div
+              initial={{ opacity: 0, x: -30 }}
+              animate={{ opacity: 1, x: 0 }}
+              transition={{ duration: 0.6, delay: 0.3 }}
+              className="relative aspect-video rounded-2xl overflow-hidden cyber-card"
+            >
+              {!isVideoPlaying ? (
+                <div 
+                  className="relative w-full h-full cursor-pointer group"
+                  onClick={() => setIsVideoPlaying(true)}
                 >
-                  <Check className="w-5 h-5 text-fuchsia-400 mt-0.5 flex-shrink-0" />
-                  <span className="text-gray-200">{benefit}</span>
-                </motion.li>
-              ))}
-            </ul>
-            
-            <div>
-              <Button className="neon-button text-black font-bold text-lg px-8 py-6 h-auto">
+                  <img 
+                    src="/images/first-timers/gallery-1.png" 
+                    alt="First timers pole class" 
+                    className="w-full h-full object-cover"
+                  />
+                  <div className="absolute inset-0 bg-black/40 group-hover:bg-black/30 transition-colors flex items-center justify-center">
+                    <div className="w-20 h-20 rounded-full bg-fuchsia-500/80 flex items-center justify-center group-hover:bg-fuchsia-500 group-hover:scale-110 transition-all">
+                      <Play className="w-8 h-8 text-white ml-1" fill="white" />
+                    </div>
+                  </div>
+                </div>
+              ) : (
+                <iframe
+                  src="https://player.vimeo.com/video/298504350?autoplay=1"
+                  className="w-full h-full"
+                  allow="autoplay; fullscreen"
+                  allowFullScreen
+                />
+              )}
+            </motion.div>
+
+            {/* Right Column - Benefits + CTA */}
+            <motion.div
+              initial={{ opacity: 0, x: 30 }}
+              animate={{ opacity: 1, x: 0 }}
+              transition={{ duration: 0.6, delay: 0.4 }}
+              className="text-left"
+            >
+              <ul className="space-y-4 mb-8">
+                {benefitsList.map((benefit, index) => (
+                  <motion.li
+                    key={index}
+                    initial={{ opacity: 0, x: -20 }}
+                    animate={{ opacity: 1, x: 0 }}
+                    transition={{ delay: 0.5 + index * 0.1 }}
+                    className="flex items-start gap-3"
+                  >
+                    <div className="w-6 h-6 rounded-full bg-fuchsia-500/20 flex items-center justify-center flex-shrink-0 mt-0.5">
+                      <Check className="w-4 h-4 text-fuchsia-400" />
+                    </div>
+                    <span className="text-gray-200 text-lg">{benefit}</span>
+                  </motion.li>
+                ))}
+              </ul>
+              
+              <Button className="neon-button text-black font-bold text-lg px-8 py-6 h-auto w-full sm:w-auto">
                 Yes, Claim My Beginner Spot
                 <ChevronRight className="w-5 h-5 ml-2" />
               </Button>
-            </div>
-          </motion.div>
+            </motion.div>
+          </div>
         </div>
       </section>
 
