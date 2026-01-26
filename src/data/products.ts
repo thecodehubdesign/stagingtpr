@@ -47,7 +47,7 @@ export const products: Product[] = [
     price: 45,
     description: 'Professional grade knee protection for floor work and spins',
     category: 'Protective Gear',
-    image: '/placeholder.svg',
+    image: '/images/products/knee-pads.png',
     featured: true,
   },
   {
@@ -56,7 +56,7 @@ export const products: Product[] = [
     price: 25,
     description: 'Long-lasting grip formula for better pole connection',
     category: 'Grip & Safety',
-    image: '/placeholder.svg',
+    image: '/images/products/grip-spray.png',
   },
   {
     id: 'grip-gloves',
@@ -74,7 +74,7 @@ export const products: Product[] = [
     price: 55,
     description: 'Comfortable, stretchy shorts designed for pole movement',
     category: 'Apparel',
-    image: '/placeholder.svg',
+    image: '/images/products/pole-shorts.png',
     popular: true,
   },
   {
@@ -83,7 +83,7 @@ export const products: Product[] = [
     price: 40,
     description: 'Medium support sports bra perfect for pole classes',
     category: 'Apparel',
-    image: '/placeholder.svg',
+    image: '/images/products/sports-bra.png',
   },
   {
     id: 'tank-top',
