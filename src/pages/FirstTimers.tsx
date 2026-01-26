@@ -327,37 +327,15 @@ const FirstTimers = () => {
         </div>
       </section>
 
-      {/* Gallery Section */}
+      {/* Gallery Section with Fitness Experience Header */}
       <section className="py-16 bg-gray-900/50">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="grid grid-cols-2 md:grid-cols-3 gap-4">
-            {galleryImages.map((image, index) => (
-              <motion.div
-                key={index}
-                initial={{ opacity: 0, scale: 0.9 }}
-                whileInView={{ opacity: 1, scale: 1 }}
-                viewport={{ once: true }}
-                transition={{ delay: index * 0.1 }}
-                className="aspect-square rounded-xl overflow-hidden border border-fuchsia-500/20 hover:border-fuchsia-500/50 transition-colors"
-              >
-                <img 
-                  src={image.src} 
-                  alt={image.alt}
-                  className="w-full h-full object-cover hover:scale-105 transition-transform duration-500"
-                />
-              </motion.div>
-            ))}
-          </div>
-        </div>
-      </section>
-
-      {/* Fitness Experience Section */}
-      <section className="py-20 relative">
-        <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
+          {/* Fitness Experience Header - Moved Above Images */}
           <motion.div
             initial={{ opacity: 0, y: 30 }}
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
+            className="text-center mb-12"
           >
             <h2 className="text-3xl sm:text-4xl lg:text-5xl font-bold text-white mb-6">
               <span className="italic text-gray-400">A Fitness Experience That</span>{' '}
@@ -370,6 +348,99 @@ const FirstTimers = () => {
               Our Program? Designed to celebrate.
             </p>
           </motion.div>
+
+          {/* Bento-Style Grid with Varying Heights */}
+          <div className="grid grid-cols-2 md:grid-cols-3 gap-4 auto-rows-[180px] md:auto-rows-[200px]">
+            {/* Image 1: Short */}
+            <motion.div
+              initial={{ opacity: 0, scale: 0.9 }}
+              whileInView={{ opacity: 1, scale: 1 }}
+              viewport={{ once: true }}
+              transition={{ delay: 0.1 }}
+              className="row-span-1 rounded-xl overflow-hidden border border-fuchsia-500/20 hover:border-fuchsia-500/50 transition-colors"
+            >
+              <img 
+                src={galleryImages[0].src} 
+                alt={galleryImages[0].alt}
+                className="w-full h-full object-cover hover:scale-105 transition-transform duration-500"
+              />
+            </motion.div>
+
+            {/* Image 2: Tall */}
+            <motion.div
+              initial={{ opacity: 0, scale: 0.9 }}
+              whileInView={{ opacity: 1, scale: 1 }}
+              viewport={{ once: true }}
+              transition={{ delay: 0.2 }}
+              className="row-span-2 rounded-xl overflow-hidden border border-fuchsia-500/20 hover:border-fuchsia-500/50 transition-colors"
+            >
+              <img 
+                src={galleryImages[1].src} 
+                alt={galleryImages[1].alt}
+                className="w-full h-full object-cover hover:scale-105 transition-transform duration-500"
+              />
+            </motion.div>
+
+            {/* Image 3: Short */}
+            <motion.div
+              initial={{ opacity: 0, scale: 0.9 }}
+              whileInView={{ opacity: 1, scale: 1 }}
+              viewport={{ once: true }}
+              transition={{ delay: 0.3 }}
+              className="row-span-1 rounded-xl overflow-hidden border border-fuchsia-500/20 hover:border-fuchsia-500/50 transition-colors"
+            >
+              <img 
+                src={galleryImages[2].src} 
+                alt={galleryImages[2].alt}
+                className="w-full h-full object-cover hover:scale-105 transition-transform duration-500"
+              />
+            </motion.div>
+
+            {/* Image 4: Tall */}
+            <motion.div
+              initial={{ opacity: 0, scale: 0.9 }}
+              whileInView={{ opacity: 1, scale: 1 }}
+              viewport={{ once: true }}
+              transition={{ delay: 0.4 }}
+              className="row-span-2 rounded-xl overflow-hidden border border-fuchsia-500/20 hover:border-fuchsia-500/50 transition-colors"
+            >
+              <img 
+                src={galleryImages[3].src} 
+                alt={galleryImages[3].alt}
+                className="w-full h-full object-cover hover:scale-105 transition-transform duration-500"
+              />
+            </motion.div>
+
+            {/* Image 5: Short */}
+            <motion.div
+              initial={{ opacity: 0, scale: 0.9 }}
+              whileInView={{ opacity: 1, scale: 1 }}
+              viewport={{ once: true }}
+              transition={{ delay: 0.5 }}
+              className="row-span-1 rounded-xl overflow-hidden border border-fuchsia-500/20 hover:border-fuchsia-500/50 transition-colors"
+            >
+              <img 
+                src={galleryImages[4].src} 
+                alt={galleryImages[4].alt}
+                className="w-full h-full object-cover hover:scale-105 transition-transform duration-500"
+              />
+            </motion.div>
+
+            {/* Image 6: Tall */}
+            <motion.div
+              initial={{ opacity: 0, scale: 0.9 }}
+              whileInView={{ opacity: 1, scale: 1 }}
+              viewport={{ once: true }}
+              transition={{ delay: 0.6 }}
+              className="row-span-2 rounded-xl overflow-hidden border border-fuchsia-500/20 hover:border-fuchsia-500/50 transition-colors"
+            >
+              <img 
+                src={galleryImages[5].src} 
+                alt={galleryImages[5].alt}
+                className="w-full h-full object-cover hover:scale-105 transition-transform duration-500"
+              />
+            </motion.div>
+          </div>
         </div>
       </section>
 
