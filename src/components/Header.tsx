@@ -91,6 +91,7 @@ const Header = () => {
       title: 'Company',
       items: [
         { name: 'Our Story', href: '/about', description: 'Learn about our journey' },
+        { name: 'Pole vs Gym', href: '/about/pole-vs-gym', description: 'Why pole beats the gym' },
         { name: 'Instructors', href: '/instructors', description: 'Meet our amazing team' },
         { name: 'Pricing', href: '/pricing', description: 'Flexible packages' },
         { name: 'Blog', href: '/blog', description: 'Tips & inspiration' },
