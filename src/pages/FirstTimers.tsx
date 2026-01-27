@@ -72,12 +72,37 @@ const eligibilityTable = [
   { status: "Visiting from another studio", eligible: false, note: "Placement consultation" },
 ];
 
-const firstVisitSteps = [
-  { step: 1, title: "Arrive 10 minutes early", description: "Time to settle in and meet your instructor" },
-  { step: 2, title: "Check in at the desk", description: "Quick registration and waiver" },
-  { step: 3, title: "Warm up together", description: "Group stretches and body prep" },
-  { step: 4, title: "Foundations moves", description: "Learn your first spins and poses" },
-  { step: 5, title: "Cool down & stretch", description: "Wind down and celebrate your first class" },
+const firstVisitAccordion = [
+  { 
+    step: 1, 
+    title: "Arrive 10 minutes early", 
+    description: "Time to settle in and meet your instructor",
+    image: "/images/first-timers/gallery-2.avif"
+  },
+  { 
+    step: 2, 
+    title: "Check in at the desk", 
+    description: "Quick registration and waiver",
+    image: "/images/first-timers/gallery-3.avif"
+  },
+  { 
+    step: 3, 
+    title: "Warm up together", 
+    description: "Group stretches and body prep",
+    image: "/images/first-timers/gallery-4.avif"
+  },
+  { 
+    step: 4, 
+    title: "Foundations moves", 
+    description: "Learn your first spins and poses",
+    image: "/images/first-timers/gallery-5.avif"
+  },
+  { 
+    step: 5, 
+    title: "Cool down & stretch", 
+    description: "Wind down and celebrate your first class",
+    image: "/images/first-timers/gallery-6.avif"
+  },
 ];
 
 const classAttire = [
@@ -164,11 +189,23 @@ const FirstTimers = () => {
         <div className="absolute top-1/4 right-1/4 w-96 h-96 bg-fuchsia-500/10 rounded-full blur-3xl" />
         
         <div className="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+          {/* First Timers Bubble */}
+          <motion.div
+            initial={{ opacity: 0, y: -10 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.5 }}
+            className="text-center"
+          >
+            <span className="inline-block px-4 py-2 rounded-full bg-fuchsia-500/10 border border-fuchsia-500/30 text-fuchsia-400 text-sm font-medium mb-6">
+              First Timers
+            </span>
+          </motion.div>
+          
           {/* H1 - Full Width Single Column */}
           <motion.h1
             initial={{ opacity: 0, y: -20 }}
             animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.6 }}
+            transition={{ duration: 0.6, delay: 0.1 }}
             className="text-4xl sm:text-5xl lg:text-6xl font-bold text-white leading-tight mb-8 text-center"
           >
             Your First Class{' '}
@@ -440,7 +477,7 @@ const FirstTimers = () => {
       </section>
 
       {/* Section 6: Choose Your Studio */}
-      <section className="py-20 bg-gray-900/50">
+      <section className="py-20 bg-gray-900/50 overflow-hidden">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <motion.div
             initial={{ opacity: 0, y: 30 }}
@@ -453,42 +490,34 @@ const FirstTimers = () => {
             </h2>
             <p className="text-xl text-gray-300">7 locations across Melbourne</p>
           </motion.div>
-          
-          <div className="grid sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6">
-            {studios.map((studio, index) => (
-              <motion.div
-                key={studio.id}
-                initial={{ opacity: 0, y: 30 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                viewport={{ once: true }}
-                transition={{ delay: index * 0.05 }}
-                className="cyber-card rounded-xl overflow-hidden hover:border-fuchsia-500/50 transition-all"
+        </div>
+        
+        {/* Sliding Studios Carousel */}
+        <div className="relative">
+          <div className="flex animate-scroll-left">
+            {[...studios, ...studios].map((studio, index) => (
+              <Link 
+                key={`${studio.id}-${index}`}
+                to={`/studios/${studio.id}`}
+                className="flex-shrink-0 mx-3 w-[280px] cyber-card rounded-xl overflow-hidden hover:border-fuchsia-500/50 transition-all group"
               >
                 <div className="aspect-video overflow-hidden">
                   <img 
                     src={studio.image} 
                     alt={studio.name}
-                    className="w-full h-full object-cover"
+                    className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
                   />
                 </div>
                 <div className="p-4">
-                  <h3 className="text-lg font-bold text-white mb-1">{studio.name.replace('The Pole Room ', '')}</h3>
-                  <p className="text-sm text-gray-400 mb-4 flex items-center gap-1">
+                  <h3 className="text-lg font-bold text-white mb-1">
+                    {studio.name.replace('The Pole Room ', '')}
+                  </h3>
+                  <p className="text-sm text-gray-400 flex items-center gap-1">
                     <MapPin className="w-3 h-3" />
                     {studio.address.split(',')[0]}
                   </p>
-                  <div className="flex gap-2">
-                    <Button size="sm" variant="outline" className="flex-1 border-fuchsia-500/50 text-white hover:bg-fuchsia-500/10 text-xs" asChild>
-                      <Link to={`/studios/${studio.id}`}>See Timetable</Link>
-                    </Button>
-                    <Button size="sm" variant="ghost" className="text-gray-400 hover:text-fuchsia-400 text-xs" asChild>
-                      <Link to={`/studios/${studio.id}`}>
-                        <MapPin className="w-4 h-4" />
-                      </Link>
-                    </Button>
-                  </div>
                 </div>
-              </motion.div>
+              </Link>
             ))}
           </div>
         </div>
@@ -586,7 +615,7 @@ const FirstTimers = () => {
 
       {/* Section 8: What to Expect */}
       <section className="py-20 bg-gray-900/50">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div className="max-w-3xl mx-auto px-4 sm:px-6 lg:px-8">
           <motion.div
             initial={{ opacity: 0, y: 30 }}
             whileInView={{ opacity: 1, y: 0 }}
@@ -598,76 +627,36 @@ const FirstTimers = () => {
             </h2>
           </motion.div>
           
-          <div className="grid lg:grid-cols-2 gap-12 items-center">
-            {/* Left - Steps */}
-            <motion.div
-              initial={{ opacity: 0, x: -30 }}
-              whileInView={{ opacity: 1, x: 0 }}
-              viewport={{ once: true }}
-              className="space-y-6"
-            >
-              {firstVisitSteps.map((step, index) => (
-                <motion.div
-                  key={step.step}
-                  initial={{ opacity: 0, x: -20 }}
-                  whileInView={{ opacity: 1, x: 0 }}
-                  viewport={{ once: true }}
-                  transition={{ delay: index * 0.1 }}
-                  className="flex gap-4 items-start"
-                >
-                  <div className="w-10 h-10 rounded-full bg-gradient-to-br from-fuchsia-500 to-purple-600 flex items-center justify-center flex-shrink-0">
-                    <span className="text-white font-bold">{step.step}</span>
+          <Accordion type="single" collapsible className="space-y-4">
+            {firstVisitAccordion.map((item, index) => (
+              <AccordionItem 
+                key={index} 
+                value={`visit-${index}`}
+                className="cyber-card rounded-xl border-fuchsia-500/30 px-6 overflow-hidden"
+              >
+                <AccordionTrigger className="text-white hover:text-fuchsia-400 text-left py-4 hover:no-underline">
+                  <div className="flex items-center gap-4">
+                    <div className="w-8 h-8 rounded-full bg-gradient-to-br from-fuchsia-500 to-purple-600 flex items-center justify-center flex-shrink-0">
+                      <span className="text-white font-bold text-sm">{item.step}</span>
+                    </div>
+                    <div>
+                      <h3 className="font-semibold">{item.title}</h3>
+                      <p className="text-sm text-gray-400 font-normal">{item.description}</p>
+                    </div>
                   </div>
-                  <div>
-                    <h3 className="text-lg font-semibold text-white mb-1">{step.title}</h3>
-                    <p className="text-gray-400">{step.description}</p>
+                </AccordionTrigger>
+                <AccordionContent>
+                  <div className="pb-4">
+                    <img 
+                      src={item.image} 
+                      alt={item.title}
+                      className="w-full h-48 object-cover rounded-xl border border-fuchsia-500/20"
+                    />
                   </div>
-                </motion.div>
-              ))}
-            </motion.div>
-            
-            {/* Right - Images */}
-            <div className="grid grid-rows-3 gap-4">
-              <motion.div
-                initial={{ opacity: 0, scale: 0.9 }}
-                whileInView={{ opacity: 1, scale: 1 }}
-                viewport={{ once: true }}
-                className="rounded-xl overflow-hidden border border-fuchsia-500/20"
-              >
-                <img 
-                  src="/images/first-timers/gallery-2.avif" 
-                  alt="Check in at reception" 
-                  className="w-full h-32 object-cover"
-                />
-              </motion.div>
-              <motion.div
-                initial={{ opacity: 0, scale: 0.9 }}
-                whileInView={{ opacity: 1, scale: 1 }}
-                viewport={{ once: true }}
-                transition={{ delay: 0.1 }}
-                className="rounded-xl overflow-hidden border border-fuchsia-500/20"
-              >
-                <img 
-                  src="/images/first-timers/gallery-3.avif" 
-                  alt="Warm up together" 
-                  className="w-full h-32 object-cover"
-                />
-              </motion.div>
-              <motion.div
-                initial={{ opacity: 0, scale: 0.9 }}
-                whileInView={{ opacity: 1, scale: 1 }}
-                viewport={{ once: true }}
-                transition={{ delay: 0.2 }}
-                className="rounded-xl overflow-hidden border border-fuchsia-500/20"
-              >
-                <img 
-                  src="/images/first-timers/gallery-4.avif" 
-                  alt="Instructor demonstration" 
-                  className="w-full h-32 object-cover"
-                />
-              </motion.div>
-            </div>
-          </div>
+                </AccordionContent>
+              </AccordionItem>
+            ))}
+          </Accordion>
         </div>
       </section>
 
