@@ -37,10 +37,12 @@ const firstClassReviews = [
 ];
 
 const trustBadges = [
-  { icon: Users, text: "Beginner-only entry point" },
-  { icon: Calendar, text: "Runs in structured terms" },
-  { icon: Award, text: "Expert instructors" },
-  { icon: Monitor, text: "Virtual Studio included" },
+  { icon: Calendar, text: "Runs in Structured Terms" },
+  { icon: Award, text: "Expert Instructors" },
+  { icon: Users, text: "Beginner Friendly" },
+  { icon: Sparkles, text: "Variety of Classes" },
+  { icon: Trophy, text: "Level Programs" },
+  { icon: Heart, text: "Female Owned" },
 ];
 
 const disciplineGrid = [
@@ -162,37 +164,30 @@ const FirstTimers = () => {
         <div className="absolute top-1/4 right-1/4 w-96 h-96 bg-fuchsia-500/10 rounded-full blur-3xl" />
         
         <div className="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+          {/* H1 - Full Width Single Column */}
+          <motion.h1
+            initial={{ opacity: 0, y: -20 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.6 }}
+            className="text-4xl sm:text-5xl lg:text-6xl font-bold text-white leading-tight mb-8"
+          >
+            Your first class{' '}
+            <span className="gradient-text">starts here</span>
+          </motion.h1>
+          
           <div className="grid lg:grid-cols-2 gap-12 items-center">
             {/* Left - Text */}
             <motion.div
               initial={{ opacity: 0, x: -30 }}
               animate={{ opacity: 1, x: 0 }}
-              transition={{ duration: 0.6 }}
+              transition={{ duration: 0.6, delay: 0.1 }}
             >
-              <h1 className="text-4xl sm:text-5xl lg:text-6xl font-bold text-white leading-tight mb-6">
-                Your first class{' '}
-                <span className="gradient-text">starts here</span>
-              </h1>
-              
               <p className="text-xl text-gray-300 mb-4">
                 No experience needed. No judgment. Just a supportive, structured environment where you'll learn at your own pace.
               </p>
               <p className="text-lg text-gray-400 mb-8">
                 Join hundreds of first-timers who walked in nervous and walked out smiling.
               </p>
-              
-              <div className="flex flex-col sm:flex-row gap-4 mb-8">
-                <Button className="neon-button text-black font-bold text-lg px-8 py-4 h-auto">
-                  Join the Next Beginner Induction
-                  <ChevronRight className="w-5 h-5 ml-2" />
-                </Button>
-                <Button variant="outline" className="border-fuchsia-500/50 text-white hover:bg-fuchsia-500/10 font-medium text-lg px-8 py-4 h-auto" asChild>
-                  <Link to="/studios">
-                    <MapPin className="w-5 h-5 mr-2" />
-                    Pick Your Studio
-                  </Link>
-                </Button>
-              </div>
               
               {/* Trust Badges */}
               <div className="grid grid-cols-2 gap-4">
