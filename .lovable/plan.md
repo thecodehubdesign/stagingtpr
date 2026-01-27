@@ -1,208 +1,9 @@
 
-## Update First Timers Page - Bubble, Studios Slider & First Visit Accordion
+## Add Section Navigation & Move Content to Pricing Page
 
-### Changes Overview
+### Overview
 
-1. **Add "First Timers" bubble** at the very top of the hero section
-2. **Replace studio locations grid** with a horizontal sliding carousel (matching the reviews slider style)
-3. **Convert "What to Expect in Your First Visit"** to an accordion with images in the dropdown
-
----
-
-### File: `src/pages/FirstTimers.tsx`
-
----
-
-### Change 1: Add "First Timers" Bubble
-
-**Location:** Inside the hero section, above the H1 heading (around line 167)
-
-Add a centered pill/bubble badge above the main heading:
-
-```tsx
-<motion.span
-  initial={{ opacity: 0, y: -10 }}
-  animate={{ opacity: 1, y: 0 }}
-  transition={{ duration: 0.5 }}
-  className="inline-block px-4 py-2 rounded-full bg-fuchsia-500/10 border border-fuchsia-500/30 text-fuchsia-400 text-sm font-medium mb-6"
->
-  First Timers
-</motion.span>
-```
-
-**Visual Result:**
-```text
-+----------------------------------------------------------+
-|              [ First Timers ]  ← Pill badge              |
-|                                                          |
-|       Your First Class Starts Here                       |
-+----------------------------------------------------------+
-```
-
----
-
-### Change 2: Replace Studio Locations Grid with Sliding Carousel
-
-**Current:** Lines 442-495 - 4-column grid of studio cards  
-**Replace with:** Horizontal infinite slider (matching the reviews animation)
-
-**New Implementation:**
-
-```tsx
-{/* Section 6: Choose Your Studio */}
-<section className="py-20 bg-gray-900/50 overflow-hidden">
-  <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-    <motion.div
-      initial={{ opacity: 0, y: 30 }}
-      whileInView={{ opacity: 1, y: 0 }}
-      viewport={{ once: true }}
-      className="text-center mb-12"
-    >
-      <h2 className="text-3xl sm:text-4xl font-bold text-white mb-4">
-        Choose Your <span className="gradient-text">Studio</span>
-      </h2>
-      <p className="text-xl text-gray-300">7 locations across Melbourne</p>
-    </motion.div>
-  </div>
-  
-  {/* Sliding Studios Carousel */}
-  <div className="relative">
-    <div className="flex animate-scroll-left">
-      {[...studios, ...studios].map((studio, index) => (
-        <Link 
-          key={`${studio.id}-${index}`}
-          to={`/studios/${studio.id}`}
-          className="flex-shrink-0 mx-3 w-[280px] cyber-card rounded-xl overflow-hidden hover:border-fuchsia-500/50 transition-all group"
-        >
-          <div className="aspect-video overflow-hidden">
-            <img 
-              src={studio.image} 
-              alt={studio.name}
-              className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
-            />
-          </div>
-          <div className="p-4">
-            <h3 className="text-lg font-bold text-white mb-1">
-              {studio.name.replace('The Pole Room ', '')}
-            </h3>
-            <p className="text-sm text-gray-400 flex items-center gap-1">
-              <MapPin className="w-3 h-3" />
-              {studio.address.split(',')[0]}
-            </p>
-          </div>
-        </Link>
-      ))}
-    </div>
-  </div>
-</section>
-```
-
-This uses the same `animate-scroll-left` CSS animation already defined at the bottom of the file (lines 1031-1039).
-
----
-
-### Change 3: Convert "What to Expect" to Accordion with Images
-
-**Current:** Lines 587-672 - Two-column layout with steps list + stacked images  
-**Replace with:** Accordion component where each step expands to show an image
-
-**New Data Array** (add to data section around line 75):
-
-```tsx
-const firstVisitAccordion = [
-  { 
-    step: 1, 
-    title: "Arrive 10 minutes early", 
-    description: "Time to settle in and meet your instructor",
-    image: "/images/first-timers/gallery-2.avif"
-  },
-  { 
-    step: 2, 
-    title: "Check in at the desk", 
-    description: "Quick registration and waiver",
-    image: "/images/first-timers/gallery-3.avif"
-  },
-  { 
-    step: 3, 
-    title: "Warm up together", 
-    description: "Group stretches and body prep",
-    image: "/images/first-timers/gallery-4.avif"
-  },
-  { 
-    step: 4, 
-    title: "Foundations moves", 
-    description: "Learn your first spins and poses",
-    image: "/images/first-timers/gallery-5.avif"
-  },
-  { 
-    step: 5, 
-    title: "Cool down & stretch", 
-    description: "Wind down and celebrate your first class",
-    image: "/images/first-timers/gallery-6.avif"
-  },
-];
-```
-
-**New Section Layout:**
-
-```tsx
-{/* Section 8: What to Expect */}
-<section className="py-20 bg-gray-900/50">
-  <div className="max-w-3xl mx-auto px-4 sm:px-6 lg:px-8">
-    <motion.div
-      initial={{ opacity: 0, y: 30 }}
-      whileInView={{ opacity: 1, y: 0 }}
-      viewport={{ once: true }}
-      className="text-center mb-12"
-    >
-      <h2 className="text-3xl sm:text-4xl font-bold text-white mb-4">
-        What to Expect in Your <span className="gradient-text">First Visit</span>
-      </h2>
-    </motion.div>
-    
-    <Accordion type="single" collapsible className="space-y-4">
-      {firstVisitAccordion.map((item, index) => (
-        <AccordionItem 
-          key={index} 
-          value={`visit-${index}`}
-          className="cyber-card rounded-xl border-fuchsia-500/30 px-6 overflow-hidden"
-        >
-          <AccordionTrigger className="text-white hover:text-fuchsia-400 text-left py-4">
-            <div className="flex items-center gap-4">
-              <div className="w-8 h-8 rounded-full bg-gradient-to-br from-fuchsia-500 to-purple-600 flex items-center justify-center flex-shrink-0">
-                <span className="text-white font-bold text-sm">{item.step}</span>
-              </div>
-              <div>
-                <h3 className="font-semibold">{item.title}</h3>
-                <p className="text-sm text-gray-400 font-normal">{item.description}</p>
-              </div>
-            </div>
-          </AccordionTrigger>
-          <AccordionContent>
-            <div className="pb-4">
-              <img 
-                src={item.image} 
-                alt={item.title}
-                className="w-full h-48 object-cover rounded-xl border border-fuchsia-500/20"
-              />
-            </div>
-          </AccordionContent>
-        </AccordionItem>
-      ))}
-    </Accordion>
-  </div>
-</section>
-```
-
----
-
-### Summary of Changes
-
-| Location | Current | New |
-|----------|---------|-----|
-| Hero (top) | Just H1 heading | "First Timers" bubble + H1 |
-| Section 6 (Studios) | 4-column grid of cards | Horizontal sliding carousel |
-| Section 8 (First Visit) | 2-column with steps + images | Accordion with image dropdowns |
+This plan adds a sticky section submenu (like on studio/location pages) to the Pricing page, and moves the Virtual Studio and Performance Opportunities sections from FirstTimers.tsx to Pricing.tsx.
 
 ---
 
@@ -210,13 +11,262 @@ const firstVisitAccordion = [
 
 | File | Changes |
 |------|---------|
-| `src/pages/FirstTimers.tsx` | Add bubble badge, replace studios grid with slider, convert first visit to accordion |
+| `src/pages/Pricing.tsx` | Add SectionNavigation component, add section IDs, add Virtual Studio & Performance Opportunities sections |
+| `src/pages/FirstTimers.tsx` | Remove Virtual Studio & Performance Opportunities sections |
+
+---
+
+### Change 1: Add SectionNavigation to Pricing.tsx
+
+**Import the component and define sections array:**
+
+```tsx
+import SectionNavigation from '@/components/SectionNavigation';
+import { motion } from 'framer-motion';
+import { Star, ChevronRight, Monitor } from 'lucide-react';
+import appMockup from '@/assets/app-mockup.png';
+
+const pricingSections = [
+  { id: 'membership', label: 'Membership' },
+  { id: 'offers', label: 'Special Offers' },
+  { id: 'add-ons', label: 'Add-Ons' },
+  { id: 'virtual-studio', label: 'Virtual Studio' },
+  { id: 'performances', label: 'Performances' },
+  { id: 'guarantee', label: 'Guarantee' },
+  { id: 'faq', label: 'FAQ' },
+];
+```
+
+**Place SectionNavigation after Header:**
+
+```tsx
+<Header />
+<SectionNavigation sections={pricingSections} />
+```
+
+---
+
+### Change 2: Add Section IDs to Existing Sections
+
+Add `id` attributes to each existing section so the navigation can scroll to them:
+
+| Section | ID to Add |
+|---------|-----------|
+| Main Pricing Plans | `id="membership"` |
+| Special Offers | `id="offers"` |
+| Add-Ons & Extras | `id="add-ons"` |
+| Money Back Guarantee | `id="guarantee"` |
+| FAQ Section | `id="faq"` |
+
+---
+
+### Change 3: Add Virtual Studio Section to Pricing.tsx
+
+**Add after Add-Ons section (before Money Back Guarantee):**
+
+```tsx
+{/* Virtual Studio Section */}
+<section id="virtual-studio" className="py-20 bg-gray-800">
+  <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+    <div className="grid lg:grid-cols-2 gap-12 items-center">
+      <motion.div
+        initial={{ opacity: 0, x: -30 }}
+        whileInView={{ opacity: 1, x: 0 }}
+        viewport={{ once: true }}
+      >
+        <span className="px-4 py-2 rounded-full bg-fuchsia-500/10 border border-fuchsia-500/30 text-fuchsia-400 text-sm font-medium mb-4 inline-block">
+          <Monitor className="w-4 h-4 inline mr-2" />
+          Included with Membership
+        </span>
+        <h2 className="text-3xl sm:text-4xl font-bold text-white mb-6">
+          Virtual Studio for <span className="gradient-text">Members</span>
+        </h2>
+        <p className="text-lg text-gray-300 mb-6">
+          Can't make it to class? Traveling? Want extra practice between sessions? 
+          Our Virtual Studio gives you on-demand access to tutorials, drills, and training content.
+        </p>
+        
+        {/* Comparison Table */}
+        <div className="cyber-card rounded-xl p-6 mb-6">
+          <table className="w-full">
+            <thead>
+              <tr className="border-b border-fuchsia-500/30">
+                <th className="text-left py-3 text-gray-400 font-medium">Feature</th>
+                <th className="text-center py-3 text-fuchsia-400 font-semibold">In-Studio</th>
+                <th className="text-center py-3 text-fuchsia-400 font-semibold">Virtual</th>
+              </tr>
+            </thead>
+            <tbody>
+              {studioComparison.map((row, index) => (
+                <tr key={index} className="border-b border-gray-700/50 last:border-b-0">
+                  <td className="py-3 text-gray-300">{row.feature}</td>
+                  <td className="py-3 text-center text-white">{row.inStudio}</td>
+                  <td className="py-3 text-center text-gray-400">{row.virtual}</td>
+                </tr>
+              ))}
+            </tbody>
+          </table>
+        </div>
+        
+        <div className="flex gap-4">
+          <Button className="neon-button text-black font-bold">
+            Preview Virtual Studio
+          </Button>
+        </div>
+      </motion.div>
+      
+      <motion.div
+        initial={{ opacity: 0, x: 30 }}
+        whileInView={{ opacity: 1, x: 0 }}
+        viewport={{ once: true }}
+        className="relative"
+      >
+        <div className="aspect-[4/3] rounded-2xl overflow-hidden border-2 border-fuchsia-500/30 bg-gray-800">
+          <img 
+            src={appMockup} 
+            alt="Virtual Studio interface" 
+            className="w-full h-full object-contain"
+          />
+        </div>
+      </motion.div>
+    </div>
+  </div>
+</section>
+```
+
+**Add data array for comparison table:**
+
+```tsx
+const studioComparison = [
+  { feature: "Coaching feedback", inStudio: "Live, personalised", virtual: "Video-based support" },
+  { feature: "Skill learning", inStudio: "Hands-on guidance", virtual: "Tutorials & drills" },
+  { feature: "Strength & Flexibility", inStudio: "Class-based", virtual: "On-demand programs" },
+  { feature: "Consistency between classes", inStudio: "Weekly schedule", virtual: "Train anytime" },
+];
+```
+
+---
+
+### Change 4: Add Performance Opportunities Section to Pricing.tsx
+
+**Add after Virtual Studio section:**
+
+```tsx
+{/* Performance Opportunities Section */}
+<section id="performances" className="py-20 bg-gray-900">
+  <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+    <div className="grid lg:grid-cols-2 gap-12 items-center">
+      <motion.div
+        initial={{ opacity: 0, x: -30 }}
+        whileInView={{ opacity: 1, x: 0 }}
+        viewport={{ once: true }}
+      >
+        <h2 className="text-3xl sm:text-4xl font-bold text-white mb-6">
+          Performance <span className="gradient-text">Opportunities</span>
+        </h2>
+        <p className="text-lg text-gray-300 mb-6">
+          Performing is completely optional, but for many students, it becomes the highlight 
+          of their pole journey. We host regular showcase events where you can share what 
+          you've learned with friends and family.
+        </p>
+        <ul className="space-y-3 mb-8">
+          <li className="flex items-center gap-3 text-gray-300">
+            <Star className="w-5 h-5 text-fuchsia-400" />
+            <strong>SHINE Competition</strong> - Our annual student competition
+          </li>
+          <li className="flex items-center gap-3 text-gray-300">
+            <Star className="w-5 h-5 text-fuchsia-400" />
+            <strong>GLOW Showcase</strong> - Australia's largest pole showcase
+          </li>
+          <li className="flex items-center gap-3 text-gray-300">
+            <Star className="w-5 h-5 text-fuchsia-400" />
+            <strong>Performance Nights</strong> - End of term showcases
+          </li>
+        </ul>
+        
+        {/* Timeline */}
+        <div className="flex items-center gap-4">
+          <div className="flex items-center gap-2">
+            <div className="w-8 h-8 rounded-full bg-fuchsia-500/20 flex items-center justify-center">
+              <span className="text-fuchsia-400 text-sm">1</span>
+            </div>
+            <span className="text-gray-300 text-sm">Train</span>
+          </div>
+          <ChevronRight className="w-4 h-4 text-gray-500" />
+          <div className="flex items-center gap-2">
+            <div className="w-8 h-8 rounded-full bg-fuchsia-500/20 flex items-center justify-center">
+              <span className="text-fuchsia-400 text-sm">2</span>
+            </div>
+            <span className="text-gray-300 text-sm">Rehearse</span>
+          </div>
+          <ChevronRight className="w-4 h-4 text-gray-500" />
+          <div className="flex items-center gap-2">
+            <div className="w-8 h-8 rounded-full bg-fuchsia-500/20 flex items-center justify-center">
+              <span className="text-fuchsia-400 text-sm">3</span>
+            </div>
+            <span className="text-gray-300 text-sm">Showcase</span>
+          </div>
+        </div>
+      </motion.div>
+      
+      <motion.div
+        initial={{ opacity: 0, x: 30 }}
+        whileInView={{ opacity: 1, x: 0 }}
+        viewport={{ once: true }}
+        className="grid grid-cols-2 gap-4"
+      >
+        <div className="aspect-[3/4] rounded-xl overflow-hidden border border-fuchsia-500/20">
+          <img 
+            src="/images/glow/hero-2.png" 
+            alt="GLOW showcase performance" 
+            className="w-full h-full object-cover"
+          />
+        </div>
+        <div className="aspect-[3/4] rounded-xl overflow-hidden border border-fuchsia-500/20">
+          <img 
+            src="/images/glow/hero-3.png" 
+            alt="SHINE competition" 
+            className="w-full h-full object-cover"
+          />
+        </div>
+      </motion.div>
+    </div>
+  </div>
+</section>
+```
+
+---
+
+### Change 5: Remove Sections from FirstTimers.tsx
+
+**Remove the following from FirstTimers.tsx:**
+
+1. Lines 791-869: Performance Opportunities section
+2. Lines 871-939: Virtual Studio section
+3. Lines 147-152: `studioComparison` data array (no longer needed on this page)
+
+---
+
+### Final Section Order on Pricing Page
+
+| # | Section | ID |
+|---|---------|-----|
+| 1 | Hero | (no id) |
+| 2 | Section Navigation | (sticky) |
+| 3 | Membership Plans | `membership` |
+| 4 | Special Offers | `offers` |
+| 5 | Add-Ons & Extras | `add-ons` |
+| 6 | Virtual Studio | `virtual-studio` |
+| 7 | Performance Opportunities | `performances` |
+| 8 | Money Back Guarantee | `guarantee` |
+| 9 | FAQ | `faq` |
+| 10 | Final CTA | (no id) |
 
 ---
 
 ### Technical Notes
 
-- The sliding animation reuses the existing `animate-scroll-left` CSS already in the file
-- The Accordion component is already imported and used for FAQs, so no new imports needed
-- The new `firstVisitAccordion` data array replaces `firstVisitSteps` (which can be removed)
-- Studio cards link directly to the studio detail page for improved UX
+- The `SectionNavigation` component is already built and works by detecting scroll position and highlighting the active section
+- Framer Motion is needed for the new sections' animations - will be imported
+- The `appMockup` asset needs to be imported for the Virtual Studio image
+- Section IDs must match the `pricingSections` array for scroll-spy to work correctly
