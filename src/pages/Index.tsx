@@ -8,6 +8,7 @@ import StudioLocations from '@/components/StudioLocations';
 import { PremiumTestimonials } from '@/components/ui/premium-testimonials';
 import Footer from '@/components/Footer';
 import SectionNavigation from '@/components/SectionNavigation';
+import WhyChooseSection from '@/components/WhyChooseSection';
 import { useScrollToTop } from '@/hooks/useScrollToTop';
 
 const Index = () => {
@@ -18,6 +19,7 @@ const Index = () => {
     { id: 'method', label: 'Method' },
     { id: 'classes', label: 'Classes' },
     { id: 'testimonials', label: 'Testimonials' },
+    { id: 'why-choose', label: 'Why Us' },
     { id: 'locations', label: 'Locations' }
   ];
 
@@ -39,6 +41,9 @@ const Index = () => {
       </div>
       <div id="testimonials">
         <PremiumTestimonials />
+      </div>
+      <div id="why-choose">
+        <WhyChooseSection />
       </div>
       <div id="locations">
         <StudioLocations />
