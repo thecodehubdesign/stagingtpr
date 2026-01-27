@@ -183,24 +183,46 @@ const beginnerClasses = [
 
 const FirstTimers = () => {
   const [countdown, setCountdown] = useState({ days: 0, hours: 0 });
+  const [nextIntakeDate, setNextIntakeDate] = useState('');
   const [activeClassFilter, setActiveClassFilter] = useState('All');
+  const [activeVisitStep, setActiveVisitStep] = useState<string | undefined>('visit-0');
   const classesScrollRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
-    // Target next term start - February 3rd, 2025 at 9:00 AM
-    const targetDate = new Date('2025-02-03T09:00:00').getTime();
+    // First intake date: February 9th, 2025
+    const firstIntakeDate = new Date('2025-02-09T09:00:00');
+    const fourWeeksMs = 4 * 7 * 24 * 60 * 60 * 1000; // 4 weeks in milliseconds
+    
+    const getNextIntakeDate = () => {
+      const now = new Date();
+      let nextIntake = new Date(firstIntakeDate);
+      
+      // Keep adding 4 weeks until we find a date in the future
+      while (nextIntake <= now) {
+        nextIntake = new Date(nextIntake.getTime() + fourWeeksMs);
+      }
+      
+      return nextIntake;
+    };
     
     const updateCountdown = () => {
       const now = new Date().getTime();
+      const nextIntake = getNextIntakeDate();
+      const targetDate = nextIntake.getTime();
       const difference = targetDate - now;
+      
+      // Set the formatted date for display
+      const formattedDate = nextIntake.toLocaleDateString('en-AU', { 
+        month: 'long', 
+        day: 'numeric' 
+      });
+      setNextIntakeDate(formattedDate);
       
       if (difference > 0) {
         setCountdown({
           days: Math.floor(difference / (1000 * 60 * 60 * 24)),
           hours: Math.floor((difference % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60)),
         });
-      } else {
-        setCountdown({ days: 0, hours: 0 });
       }
     };
 
@@ -334,14 +356,88 @@ const FirstTimers = () => {
         </div>
       </section>
 
-      {/* Section 2.5: Next Intake Countdown */}
+      {/* Section 3: What to Expect - Horizontal Layout */}
+      <section className="py-16 bg-gray-900/50">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+          <motion.div
+            initial={{ opacity: 0, y: 30 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            className="text-center mb-12"
+          >
+            <h2 className="text-3xl sm:text-4xl font-bold text-white mb-4">
+              What to Expect in Your <span className="gradient-text">First Visit</span>
+            </h2>
+          </motion.div>
+          
+          <div className="grid lg:grid-cols-2 gap-8 items-start">
+            {/* Left: Accordion Steps */}
+            <Accordion 
+              type="single" 
+              defaultValue="visit-0"
+              value={activeVisitStep}
+              onValueChange={setActiveVisitStep}
+              className="space-y-3"
+            >
+              {firstVisitAccordion.map((item, index) => (
+                <AccordionItem 
+                  key={index} 
+                  value={`visit-${index}`}
+                  className="cyber-card rounded-xl border-fuchsia-500/30 px-6 overflow-hidden"
+                >
+                  <AccordionTrigger className="text-white hover:text-fuchsia-400 text-left py-4 hover:no-underline">
+                    <div className="flex items-center gap-4">
+                      <div className="w-10 h-10 rounded-full bg-gradient-to-br from-fuchsia-500 to-purple-600 flex items-center justify-center flex-shrink-0">
+                        <span className="text-white font-bold">{item.step}</span>
+                      </div>
+                      <div>
+                        <h3 className="font-semibold text-lg">{item.title}</h3>
+                        <p className="text-sm text-gray-400 font-normal">{item.description}</p>
+                      </div>
+                    </div>
+                  </AccordionTrigger>
+                  <AccordionContent>
+                    {/* Mobile only: show image in accordion on small screens */}
+                    <div className="pb-4 lg:hidden">
+                      <img 
+                        src={item.image} 
+                        alt={item.title}
+                        className="w-full h-48 object-cover rounded-xl border border-fuchsia-500/20"
+                      />
+                    </div>
+                  </AccordionContent>
+                </AccordionItem>
+              ))}
+            </Accordion>
+            
+            {/* Right: Active Image (desktop only) */}
+            <div className="hidden lg:block sticky top-24">
+              <motion.div
+                key={activeVisitStep}
+                initial={{ opacity: 0, scale: 0.95 }}
+                animate={{ opacity: 1, scale: 1 }}
+                transition={{ duration: 0.3 }}
+                className="aspect-[4/3] rounded-2xl overflow-hidden border-2 border-fuchsia-500/30"
+              >
+                <img 
+                  src={firstVisitAccordion[parseInt(activeVisitStep?.split('-')[1] || '0')]?.image || firstVisitAccordion[0].image}
+                  alt="First visit step"
+                  className="w-full h-full object-cover"
+                />
+              </motion.div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      {/* Section 4: Next Intake Countdown */}
       <section className="py-16 px-4 sm:px-6 lg:px-8 bg-gray-900/50">
         <div className="max-w-6xl mx-auto">
           <div className="grid md:grid-cols-2 gap-8 items-center">
             {/* Left: Intake Info */}
             <div>
               <h2 className="text-3xl sm:text-4xl font-bold gradient-text mb-4">
-                Next Beginner Intake Opens February 3rd
+                Next Beginner Intake Opens {nextIntakeDate || 'Soon'}
               </h2>
               <p className="text-gray-400 text-lg">
                 Join our structured beginner program and start your pole journey with others at your level.
@@ -749,52 +845,6 @@ const FirstTimers = () => {
         </div>
       </section>
 
-      {/* Section 8: What to Expect */}
-      <section className="py-20 bg-gray-900/50">
-        <div className="max-w-3xl mx-auto px-4 sm:px-6 lg:px-8">
-          <motion.div
-            initial={{ opacity: 0, y: 30 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true }}
-            className="text-center mb-12"
-          >
-            <h2 className="text-3xl sm:text-4xl font-bold text-white mb-4">
-              What to Expect in Your <span className="gradient-text">First Visit</span>
-            </h2>
-          </motion.div>
-          
-          <Accordion type="single" collapsible className="space-y-4">
-            {firstVisitAccordion.map((item, index) => (
-              <AccordionItem 
-                key={index} 
-                value={`visit-${index}`}
-                className="cyber-card rounded-xl border-fuchsia-500/30 px-6 overflow-hidden"
-              >
-                <AccordionTrigger className="text-white hover:text-fuchsia-400 text-left py-4 hover:no-underline">
-                  <div className="flex items-center gap-4">
-                    <div className="w-8 h-8 rounded-full bg-gradient-to-br from-fuchsia-500 to-purple-600 flex items-center justify-center flex-shrink-0">
-                      <span className="text-white font-bold text-sm">{item.step}</span>
-                    </div>
-                    <div>
-                      <h3 className="font-semibold">{item.title}</h3>
-                      <p className="text-sm text-gray-400 font-normal">{item.description}</p>
-                    </div>
-                  </div>
-                </AccordionTrigger>
-                <AccordionContent>
-                  <div className="pb-4">
-                    <img 
-                      src={item.image} 
-                      alt={item.title}
-                      className="w-full h-48 object-cover rounded-xl border border-fuchsia-500/20"
-                    />
-                  </div>
-                </AccordionContent>
-              </AccordionItem>
-            ))}
-          </Accordion>
-        </div>
-      </section>
 
       {/* Section 9: What to Wear */}
       <section className="py-20">
