@@ -60,6 +60,9 @@ import ShinePage from "./pages/events/ShinePage";
 import GlowPage from "./pages/events/GlowPage";
 import PerformanceNightsPage from "./pages/events/PerformanceNightsPage";
 
+// About Pages
+import PoleVsGymPage from "./pages/about/PoleVsGymPage";
+
 const queryClient = new QueryClient();
 
 const App = () => (
@@ -86,6 +89,7 @@ const App = () => (
           <Route path="/get-started" element={<GetStarted />} />
           <Route path="/contact" element={<Contact />} />
           <Route path="/congrats" element={<Congrats />} />
+          <Route path="/about/pole-vs-gym" element={<PoleVsGymPage />} />
           
           {/* Functions */}
           <Route path="/hens-parties" element={<HensParties />} />
