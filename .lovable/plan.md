@@ -6,15 +6,32 @@
 
 1. **Move H1 to single column** at the top of the hero (outside the 2-column grid)
 2. **Remove the two CTA buttons** ("Join the Next Beginner Induction" and "Pick Your Studio")
-3. **Update trust badges** to 8 new items displayed in a responsive grid
+3. **Update trust badges** to 6 new items displayed in a 2-column grid
 
 ---
 
 ### File: `src/pages/FirstTimers.tsx`
 
-#### Change 1: Restructure Hero Layout
+#### Change 1: Update Trust Badges Array
 
-Current structure (lines 164-235):
+**Lines 39-44** - Replace with 6 new items:
+
+```tsx
+const trustBadges = [
+  { icon: Calendar, text: "Runs in Structured Terms" },
+  { icon: Award, text: "Expert Instructors" },
+  { icon: Users, text: "Beginner Friendly" },
+  { icon: Sparkles, text: "Variety of Classes" },
+  { icon: Trophy, text: "Level Programs" },
+  { icon: Heart, text: "Female Owned" },
+];
+```
+
+---
+
+#### Change 2: Restructure Hero Layout (Lines 164-235)
+
+**Current structure:**
 ```text
 <div className="grid lg:grid-cols-2">
   [Left Column: H1 + Copy + Buttons + Trust Badges]
@@ -22,18 +39,20 @@ Current structure (lines 164-235):
 </div>
 ```
 
-New structure:
+**New structure:**
 ```text
 [H1 - Full Width Single Column at Top]
 <div className="grid lg:grid-cols-2">
-  [Left Column: Copy + Trust Badges (8 items)]
+  [Left Column: Copy + Trust Badges (6 items, 2 columns)]
   [Right Column: Image]
 </div>
 ```
 
+Move the `<h1>` element outside the grid, before it, so it spans full width.
+
 ---
 
-#### Change 2: Remove CTA Buttons
+#### Change 3: Remove CTA Buttons
 
 **Lines 184-195** - Remove this entire block:
 ```tsx
@@ -45,33 +64,14 @@ New structure:
 
 ---
 
-#### Change 3: Update Trust Badges Array
+#### Change 4: Keep Trust Badges Grid at 2 Columns
 
-**Lines 39-44** - Replace with 8 new items:
-
-| Current (4 items) | New (8 items) |
-|-------------------|---------------|
-| Beginner-only entry point | Structured Terms |
-| Runs in structured terms | Expert Instructors |
-| Expert instructors | Beginner Friendly |
-| Virtual Studio included | Variety of Classes |
-| | Level Programs |
-| | Female Owned |
-| | 7 Locations In Melb |
-| | Top Rated Studios |
-
----
-
-#### Change 4: Update Trust Badges Grid
-
-**Lines 198-211** - Update grid to display 4 columns on desktop:
+**Lines 198** - Keep the existing 2-column grid:
 ```tsx
-// From:
 <div className="grid grid-cols-2 gap-4">
-
-// To:
-<div className="grid grid-cols-2 sm:grid-cols-4 gap-3">
 ```
+
+This will display the 6 badges as 3 rows of 2 items each.
 
 ---
 
@@ -80,17 +80,16 @@ New structure:
 ```text
 +----------------------------------------------------------+
 |  H1: "Your first class starts here"                      |
-|  (Full width, centered or left-aligned, single column)   |
+|  (Full width, single column at top)                      |
 +----------------------------------------------------------+
 |  [Left Column - 50%]           |  [Right Column - 50%]   |
 |                                |                         |
 |  Reassurance copy paragraph    |  Hero image/video       |
 |                                |                         |
-|  [8 Trust Badges - 4x2 grid]   |                         |
+|  [6 Trust Badges - 2 columns]  |                         |
 |  Structured Terms | Expert     |                         |
 |  Beginner Friendly | Variety   |                         |
 |  Level Programs | Female Owned |                         |
-|  7 Locations | Top Rated       |                         |
 +----------------------------------------------------------+
 ```
 
@@ -100,5 +99,5 @@ New structure:
 
 | File | Changes |
 |------|---------|
-| `src/pages/FirstTimers.tsx` | Move H1 outside grid, remove buttons, update trustBadges array to 8 items, update grid to 4 columns |
+| `src/pages/FirstTimers.tsx` | Move H1 outside grid, remove buttons, update trustBadges array to 6 items |
 
