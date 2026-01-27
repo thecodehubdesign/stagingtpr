@@ -169,10 +169,10 @@ const FirstTimers = () => {
             initial={{ opacity: 0, y: -20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.6 }}
-            className="text-4xl sm:text-5xl lg:text-6xl font-bold text-white leading-tight mb-8"
+            className="text-4xl sm:text-5xl lg:text-6xl font-bold text-white leading-tight mb-8 text-center"
           >
-            Your first class{' '}
-            <span className="gradient-text">starts here</span>
+            Your First Class{' '}
+            <span className="gradient-text">Starts Here</span>
           </motion.h1>
           
           <div className="grid lg:grid-cols-2 gap-12 items-center">
