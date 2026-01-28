@@ -127,7 +127,7 @@ const Footer = () => {
     { name: 'Instructors', href: '/instructors' },
     { name: 'Blog', href: '/blog' },
     { name: 'Contact', href: '/contact' },
-    { name: 'Pricing', href: '/pricing' },
+    { name: 'Memberships', href: '/memberships' },
     { name: 'Franchise', href: '/franchise' },
   ];
 

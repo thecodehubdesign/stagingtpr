@@ -5,7 +5,7 @@ import { Button } from '@/components/ui/button';
 import { Card } from '@/components/ui/card';
 import { Badge } from '@/components/ui/badge';
 import { Accordion, AccordionContent, AccordionItem, AccordionTrigger } from '@/components/ui/accordion';
-import { Check, Star, Zap, Heart, Crown, Gift, FileText, Monitor, ChevronRight, BookOpen, TrendingUp, Sparkles, Calendar, RefreshCw, Target } from 'lucide-react';
+import { Check, Star, Zap, Heart, Crown, Gift, FileText, Monitor, ChevronRight, BookOpen, TrendingUp, Sparkles, Calendar, RefreshCw, Target, MapPin } from 'lucide-react';
 import { Toggle } from '@/components/ui/toggle';
 import { Dialog, DialogContent, DialogHeader, DialogTitle, DialogTrigger } from '@/components/ui/dialog';
 import { useState } from 'react';
@@ -20,7 +20,7 @@ const pricingSections = [
   { id: 'whats-included', label: "What's Included" },
   { id: 'virtual-studio', label: 'Virtual Studio' },
   { id: 'performances', label: 'Performances' },
-  { id: 'guarantee', label: 'Guarantee' },
+  { id: 'sister-studios', label: 'Sister Studios' },
   { id: 'faq', label: 'FAQ' },
 ];
 
@@ -114,11 +114,6 @@ const Pricing = () => {
               Flexible memberships designed to fit your schedule and goals. 
               Start your transformation journey today!
             </p>
-            <Button className="neon-button text-black font-bold text-lg px-8 py-3">
-              <span contentEditable suppressContentEditableWarning={true}>
-                Claim Your Free Class
-              </span>
-            </Button>
           </div>
         </div>
       </section>
@@ -261,7 +256,7 @@ const Pricing = () => {
           <div className="text-center mb-16">
             <span className="px-4 py-2 rounded-full bg-fuchsia-500/10 border border-fuchsia-500/30 text-fuchsia-400 text-sm font-medium mb-6 inline-block">
               <Gift className="w-4 h-4 inline mr-2" />
-              Everything Included
+              Everything Included in Our Memberships
             </span>
             <h2 className="text-3xl sm:text-4xl font-bold text-white mb-4">
               What's Waiting For You <span className="gradient-text">Inside?</span>
@@ -282,7 +277,7 @@ const Pricing = () => {
             >
               <span className="px-4 py-2 rounded-full bg-purple-500/10 border border-purple-500/30 text-purple-400 text-sm font-medium mb-4 inline-block">
                 <BookOpen className="w-4 h-4 inline mr-2" />
-                4-Week Structured Course
+                Structured Course Lessons
               </span>
               <h3 className="text-2xl sm:text-3xl font-bold text-white mb-4">
                 Progressive Training That <span className="gradient-text">Builds You Up</span>
@@ -366,7 +361,7 @@ const Pricing = () => {
             >
               <span className="px-4 py-2 rounded-full bg-cyan-500/10 border border-cyan-500/30 text-cyan-400 text-sm font-medium mb-4 inline-block">
                 <Calendar className="w-4 h-4 inline mr-2" />
-                8 Sessions Per Month
+                Casual Class Sessions
               </span>
               <h3 className="text-2xl sm:text-3xl font-bold text-white mb-4">
                 Weekly Classes Designed to <span className="gradient-text">Empower You</span>
@@ -406,7 +401,7 @@ const Pricing = () => {
             >
               <span className="px-4 py-2 rounded-full bg-green-500/10 border border-green-500/30 text-green-400 text-sm font-medium mb-4 inline-block">
                 <RefreshCw className="w-4 h-4 inline mr-2" />
-                Unlimited Access
+                Unlimited Practice Time
               </span>
               <h3 className="text-2xl sm:text-3xl font-bold text-white mb-4">
                 Practice Time to Perfect Your <span className="gradient-text">Power Moves</span>
@@ -464,7 +459,7 @@ const Pricing = () => {
             >
               <span className="px-4 py-2 rounded-full bg-fuchsia-500/10 border border-fuchsia-500/30 text-fuchsia-400 text-sm font-medium mb-4 inline-block">
                 <Monitor className="w-4 h-4 inline mr-2" />
-                Included with Membership
+                Virtual Studio Access
               </span>
               <h2 className="text-3xl sm:text-4xl font-bold text-white mb-6">
                 Virtual Studio for <span className="gradient-text">Members</span>
@@ -530,6 +525,10 @@ const Pricing = () => {
               whileInView={{ opacity: 1, x: 0 }}
               viewport={{ once: true }}
             >
+              <span className="px-4 py-2 rounded-full bg-fuchsia-500/10 border border-fuchsia-500/30 text-fuchsia-400 text-sm font-medium mb-4 inline-block">
+                <Star className="w-4 h-4 inline mr-2" />
+                TPR Stage Shows & Comp Eligibility
+              </span>
               <h2 className="text-3xl sm:text-4xl font-bold text-white mb-6">
                 Performance <span className="gradient-text">Opportunities</span>
               </h2>
@@ -603,32 +602,64 @@ const Pricing = () => {
         </div>
       </section>
 
-      {/* Money Back Guarantee */}
-      <section id="guarantee" className="py-20 bg-gradient-to-r from-green-600 to-emerald-600">
-        <div className="max-w-4xl mx-auto text-center px-4 sm:px-6 lg:px-8">
-          <div className="bg-white/10 rounded-full w-20 h-20 flex items-center justify-center mx-auto mb-6">
-            <Check className="w-10 h-10 text-white" />
-          </div>
-          <h2 
-            className="text-3xl sm:text-4xl font-bold text-white mb-6"
-            contentEditable
-            suppressContentEditableWarning={true}
+      {/* Sister Studios / Training Relationships */}
+      <section id="sister-studios" className="py-20 bg-gray-900">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+          <motion.div
+            initial={{ opacity: 0, y: 20 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            className="text-center mb-12"
           >
-            100% Satisfaction Guarantee
-          </h2>
-          <p 
-            className="text-lg text-green-100 mb-8 max-w-2xl mx-auto"
-            contentEditable
-            suppressContentEditableWarning={true}
-          >
-            If you're not completely satisfied with your first month, we'll refund your money. 
-            We're confident you'll love our community and see real results.
-          </p>
-          <Button className="neon-button text-black font-bold text-lg px-8 py-3">
-            <span contentEditable suppressContentEditableWarning={true}>
-              Start Risk-Free Today
+            <span className="px-4 py-2 rounded-full bg-purple-500/10 border border-purple-500/30 text-purple-400 text-sm font-medium mb-6 inline-block">
+              <Heart className="w-4 h-4 inline mr-2" />
+              Training Relationships
             </span>
-          </Button>
+            <h2 className="text-3xl sm:text-4xl font-bold text-white mb-4">
+              Sister <span className="gradient-text">Studios</span>
+            </h2>
+            <p className="text-lg text-gray-300 max-w-3xl mx-auto">
+              Our studios share training partnerships, giving you more flexibility and options for your pole journey.
+            </p>
+          </motion.div>
+          
+          <div className="grid md:grid-cols-2 gap-8 max-w-4xl mx-auto">
+            {/* Partnership 1 */}
+            <motion.div
+              initial={{ opacity: 0, x: -20 }}
+              whileInView={{ opacity: 1, x: 0 }}
+              viewport={{ once: true }}
+              className="cyber-card p-6 rounded-xl"
+            >
+              <div className="flex items-center gap-4 mb-4">
+                <div className="w-12 h-12 rounded-full bg-fuchsia-500/20 flex items-center justify-center">
+                  <MapPin className="w-6 h-6 text-fuchsia-400" />
+                </div>
+                <h3 className="text-xl font-bold text-white">Rowville & Narre Warren</h3>
+              </div>
+              <p className="text-gray-300">
+                These sister studios share memberships — train at either location when holding a membership at one of these two studios.
+              </p>
+            </motion.div>
+            
+            {/* Partnership 2 */}
+            <motion.div
+              initial={{ opacity: 0, x: 20 }}
+              whileInView={{ opacity: 1, x: 0 }}
+              viewport={{ once: true }}
+              className="cyber-card p-6 rounded-xl"
+            >
+              <div className="flex items-center gap-4 mb-4">
+                <div className="w-12 h-12 rounded-full bg-cyan-500/20 flex items-center justify-center">
+                  <MapPin className="w-6 h-6 text-cyan-400" />
+                </div>
+                <h3 className="text-xl font-bold text-white">Mitcham & Kilsyth</h3>
+              </div>
+              <p className="text-gray-300">
+                These sister studios share memberships — train at either location when holding a membership at one of these two studios.
+              </p>
+            </motion.div>
+          </div>
         </div>
       </section>
 
@@ -656,39 +687,6 @@ const Pricing = () => {
                 </AccordionItem>
               ))}
             </Accordion>
-          </div>
-        </div>
-      </section>
-
-      {/* Final CTA */}
-      <section className="py-20 bg-gradient-to-br from-gray-900 via-purple-900 to-gray-900 cyber-grid">
-        <div className="max-w-4xl mx-auto text-center px-4 sm:px-6 lg:px-8">
-          <h2 
-            className="text-3xl sm:text-4xl font-bold text-white mb-6"
-            contentEditable
-            suppressContentEditableWarning={true}
-          >
-            Ready to Start Your <span className="gradient-text">Journey</span>?
-          </h2>
-          <p 
-            className="text-lg text-gray-300 mb-8 max-w-2xl mx-auto"
-            contentEditable
-            suppressContentEditableWarning={true}
-          >
-            Join thousands of students who have transformed their fitness, 
-            confidence, and lives through pole dance and aerial arts.
-          </p>
-          <div className="flex flex-col sm:flex-row gap-4 justify-center">
-            <Button className="neon-button text-black font-bold text-lg px-8 py-3">
-              <span contentEditable suppressContentEditableWarning={true}>
-                Claim Your Free Class
-              </span>
-            </Button>
-            <Button variant="outline" className="cyber-border text-cyan-400 hover:bg-cyan-400/10 font-bold text-lg px-8 py-3">
-              <span contentEditable suppressContentEditableWarning={true}>
-                View Timetable
-              </span>
-            </Button>
           </div>
         </div>
       </section>
