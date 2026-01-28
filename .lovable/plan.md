@@ -1,281 +1,245 @@
 
 
-## Add "What's Waiting For You Inside?" Section to Pricing Page
+## Restyle "What's Waiting For You Inside?" Section
 
 ### Overview
 
-Add a new comprehensive section to the Pricing page that details what's included in memberships. This section will feature 3 inclusion cards with images, values, and benefit bullet points - styled similarly to the existing Virtual Studio and Performance Opportunities sections.
+Completely restyle the membership inclusions section to match the professional aesthetic of the Virtual Studio and Performance Opportunities sections. Remove pricing values and emojis, replace with icons, badges, and cleaner design elements.
 
 ---
 
-### Files to Modify/Create
+### Files to Modify
 
-| File | Action |
+| File | Changes |
 |------|---------|
-| `src/pages/Pricing.tsx` | Add new "What's Waiting" section with 3 inclusion cards |
-| `src/assets/courses-asset.png` | **COPY** - Pole Foundations image |
-| `src/assets/flexi-pass-asset.png` | **COPY** - 8 Session Flexi Pass image |
-| `src/assets/practice-asset.png` | **COPY** - Unlimited Practice image |
+| `src/pages/Pricing.tsx` | Restyle the "whats-included" section (lines 277-440) |
 
 ---
 
-### Section Structure
+### Design Pattern to Follow
 
-The new section will be placed **after the Membership section (after line 271)** and **before Special Offers section**.
+Based on the Virtual Studio and Performance sections:
 
-#### Header Content
+| Element | Current (Remove) | New (Add) |
+|---------|------------------|-----------|
+| Bullet icons | Emojis (📈💪✨) | Lucide icons (Check, Zap, TrendingUp, etc.) |
+| Value labels | "Value: $199" | Remove entirely |
+| Badge style | Large standalone badge | Top badge like "Included with Membership" |
+| List style | emoji + text | Star/Check icon + bold label + description |
+
+---
+
+### New Section Structure
+
+#### Header (Simplified)
 
 ```tsx
-{/* What's Waiting Section */}
-<section id="whats-included" className="py-20 bg-gray-800">
-  <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-    {/* Section Header */}
-    <div className="text-center mb-16">
-      <h2 className="text-3xl sm:text-4xl font-bold text-white mb-4">
-        What's Waiting For You <span className="gradient-text">Inside?</span>
-      </h2>
-      <p className="text-xl text-fuchsia-400 font-semibold mb-4">
-        Your Membership: Your All Access Pass to Spins, Strength and Serious Fun
-      </p>
-      <p className="text-gray-300 max-w-3xl mx-auto mb-4">
-        Here's everything included in our Memberships, with each inclusion designed to keep you moving, motivated, and making real progress towards your pole goals.
-      </p>
-      <p className="text-gray-400 max-w-2xl mx-auto italic">
-        This is not a "come when you feel like it" situation. It's consistent, supported training that builds real skill, real strength, and real confidence.
-      </p>
-    </div>
+<div className="text-center mb-16">
+  <span className="px-4 py-2 rounded-full bg-fuchsia-500/10 border border-fuchsia-500/30 text-fuchsia-400 text-sm font-medium mb-6 inline-block">
+    <Gift className="w-4 h-4 inline mr-2" />
+    Everything Included
+  </span>
+  <h2 className="text-3xl sm:text-4xl font-bold text-white mb-4">
+    What's Waiting For You <span className="gradient-text">Inside?</span>
+  </h2>
+  <p className="text-lg text-gray-300 max-w-3xl mx-auto">
+    Your membership is your all-access pass to spins, strength, and serious fun. 
+    Consistent, supported training that builds real skill and confidence.
+  </p>
+</div>
 ```
 
 ---
 
-### Three Inclusion Cards
-
-Each card will have:
-- Large image on one side
-- Title with value badge
-- Description paragraph
-- 3 bullet points with emoji icons
-
-#### Card 1: Pole Foundations Course
+#### Inclusion 1: Pole Foundations Course
 
 ```tsx
-{/* Inclusion 1: Pole Foundations */}
-<motion.div className="grid lg:grid-cols-2 gap-8 items-center mb-16">
-  <div className="order-2 lg:order-1">
-    <div className="flex items-center gap-3 mb-4">
-      <h3 className="text-2xl font-bold text-white">
-        Progressive Pole Training That Builds You Up Fast
-      </h3>
-    </div>
-    <div className="inline-block mb-4">
-      <Badge className="bg-fuchsia-500/20 text-fuchsia-400 border-fuchsia-500/30 text-lg px-4 py-2">
-        1 x 4 Week Pole Foundations Course
-      </Badge>
-    </div>
-    <p className="text-gray-400 mb-2">Value: <span className="text-white font-semibold">$199</span></p>
+<motion.div className="grid lg:grid-cols-2 gap-12 items-center mb-20">
+  <motion.div
+    initial={{ opacity: 0, x: -30 }}
+    whileInView={{ opacity: 1, x: 0 }}
+    viewport={{ once: true }}
+  >
+    <span className="px-4 py-2 rounded-full bg-purple-500/10 border border-purple-500/30 text-purple-400 text-sm font-medium mb-4 inline-block">
+      <BookOpen className="w-4 h-4 inline mr-2" />
+      4-Week Structured Course
+    </span>
+    <h3 className="text-2xl sm:text-3xl font-bold text-white mb-4">
+      Progressive Training That <span className="gradient-text">Builds You Up</span>
+    </h3>
+    <p className="text-lg text-gray-300 mb-6">
+      A structured pathway where each week builds on the last, so you're never stuck, always improving, and constantly surprised by what you can do.
+    </p>
     
-    <ul className="space-y-4 mt-6">
-      <li className="flex items-start gap-3">
-        <span className="text-2xl">📈</span>
-        <div>
-          <span className="text-white font-semibold">Step by step progress:</span>
-          <span className="text-gray-300"> a structured pathway where each week builds on the last, so you're never stuck, always improving.</span>
-        </div>
+    <ul className="space-y-3 mb-6">
+      <li className="flex items-center gap-3 text-gray-300">
+        <TrendingUp className="w-5 h-5 text-fuchsia-400 flex-shrink-0" />
+        <span><strong>Step by step progress</strong> with clear milestones each week</span>
       </li>
-      <li className="flex items-start gap-3">
-        <span className="text-2xl">💪</span>
-        <div>
-          <span className="text-white font-semibold">Stronger every session:</span>
-          <span className="text-gray-300"> training that develops your strength, technique, and stamina in a way that actually sticks.</span>
-        </div>
+      <li className="flex items-center gap-3 text-gray-300">
+        <Zap className="w-5 h-5 text-fuchsia-400 flex-shrink-0" />
+        <span><strong>Stronger every session</strong> - technique and stamina that sticks</span>
       </li>
-      <li className="flex items-start gap-3">
-        <span className="text-2xl">✨</span>
-        <div>
-          <span className="text-white font-semibold">Confidence on repeat:</span>
-          <span className="text-gray-300"> finish each session with new wins, new skills, and momentum for your next class.</span>
-        </div>
+      <li className="flex items-center gap-3 text-gray-300">
+        <Sparkles className="w-5 h-5 text-fuchsia-400 flex-shrink-0" />
+        <span><strong>Confidence on repeat</strong> - new wins with every class</span>
       </li>
     </ul>
-  </div>
+  </motion.div>
   
-  <div className="order-1 lg:order-2">
-    <div className="aspect-square rounded-2xl overflow-hidden border-2 border-fuchsia-500/30">
+  <motion.div
+    initial={{ opacity: 0, x: 30 }}
+    whileInView={{ opacity: 1, x: 0 }}
+    viewport={{ once: true }}
+  >
+    <div className="aspect-square rounded-2xl overflow-hidden border-2 border-fuchsia-500/30 bg-gray-800">
       <img src={coursesAsset} alt="Pole Foundations Course" className="w-full h-full object-cover" />
     </div>
-  </div>
+  </motion.div>
 </motion.div>
 ```
 
-#### Card 2: 8 Session Flexi Pass (Image on left)
+---
+
+#### Inclusion 2: Session Flexi Pass (Image Left)
 
 ```tsx
-{/* Inclusion 2: Flexi Pass */}
-<motion.div className="grid lg:grid-cols-2 gap-8 items-center mb-16">
-  <div>
-    <div className="aspect-square rounded-2xl overflow-hidden border-2 border-fuchsia-500/30">
-      <img src={flexiPassAsset} alt="8 Session Flexi Pass" className="w-full h-full object-cover" />
+<motion.div className="grid lg:grid-cols-2 gap-12 items-center mb-20">
+  <motion.div
+    initial={{ opacity: 0, x: -30 }}
+    whileInView={{ opacity: 1, x: 0 }}
+    viewport={{ once: true }}
+  >
+    <div className="aspect-square rounded-2xl overflow-hidden border-2 border-fuchsia-500/30 bg-gray-800">
+      <img src={flexiPassAsset} alt="Weekly Classes" className="w-full h-full object-cover" />
     </div>
-  </div>
+  </motion.div>
   
-  <div>
-    <h3 className="text-2xl font-bold text-white mb-4">
-      Sweat, Smile, Repeat: Weekly Classes Designed to Empower You
+  <motion.div
+    initial={{ opacity: 0, x: 30 }}
+    whileInView={{ opacity: 1, x: 0 }}
+    viewport={{ once: true }}
+  >
+    <span className="px-4 py-2 rounded-full bg-cyan-500/10 border border-cyan-500/30 text-cyan-400 text-sm font-medium mb-4 inline-block">
+      <Calendar className="w-4 h-4 inline mr-2" />
+      8 Sessions Per Month
+    </span>
+    <h3 className="text-2xl sm:text-3xl font-bold text-white mb-4">
+      Weekly Classes Designed to <span className="gradient-text">Empower You</span>
     </h3>
-    <Badge className="bg-fuchsia-500/20 text-fuchsia-400 border-fuchsia-500/30 text-lg px-4 py-2 mb-4 inline-block">
-      8 x Session Flexi Pass
-    </Badge>
-    <p className="text-gray-400 mb-2">Value: <span className="text-white font-semibold">$336</span></p>
+    <p className="text-lg text-gray-300 mb-6">
+      Dance, conditioning, and skill-based classes across the week to keep your training fresh, fun, and effective.
+    </p>
     
-    <ul className="space-y-4 mt-6">
-      <li className="flex items-start gap-3">
-        <span className="text-2xl">💜</span>
-        <div>
-          <span className="text-white font-semibold">Choose your vibe every time:</span>
-          <span className="text-gray-300"> with dance, conditioning, and skill based classes, your training stays fresh and fun.</span>
-        </div>
+    <ul className="space-y-3 mb-6">
+      <li className="flex items-center gap-3 text-gray-300">
+        <Heart className="w-5 h-5 text-fuchsia-400 flex-shrink-0" />
+        <span><strong>Choose your vibe</strong> - variety keeps every session fresh</span>
       </li>
-      <li className="flex items-start gap-3">
-        <span className="text-2xl">💪</span>
-        <div>
-          <span className="text-white font-semibold">Fun that works:</span>
-          <span className="text-gray-300"> every session leaves you sweaty, smiling, and stronger - making showing up easier.</span>
-        </div>
+      <li className="flex items-center gap-3 text-gray-300">
+        <Zap className="w-5 h-5 text-fuchsia-400 flex-shrink-0" />
+        <span><strong>Fun that works</strong> - sweaty, smiling, and stronger</span>
       </li>
-      <li className="flex items-start gap-3">
-        <span className="text-2xl">✨</span>
-        <div>
-          <span className="text-white font-semibold">Grow on your terms:</span>
-          <span className="text-gray-300"> explore different class styles, find what you love, and build confidence with every session.</span>
-        </div>
+      <li className="flex items-center gap-3 text-gray-300">
+        <Sparkles className="w-5 h-5 text-fuchsia-400 flex-shrink-0" />
+        <span><strong>Grow on your terms</strong> - explore and find what you love</span>
       </li>
     </ul>
-  </div>
+  </motion.div>
 </motion.div>
 ```
 
-#### Card 3: Unlimited Practice (Image on right)
+---
+
+#### Inclusion 3: Unlimited Practice (Image Right)
 
 ```tsx
-{/* Inclusion 3: Unlimited Practice */}
-<motion.div className="grid lg:grid-cols-2 gap-8 items-center">
-  <div className="order-2 lg:order-1">
-    <h3 className="text-2xl font-bold text-white mb-4">
-      Unlimited Practice Time to Perfect Your Power Moves
+<motion.div className="grid lg:grid-cols-2 gap-12 items-center">
+  <motion.div
+    initial={{ opacity: 0, x: -30 }}
+    whileInView={{ opacity: 1, x: 0 }}
+    viewport={{ once: true }}
+  >
+    <span className="px-4 py-2 rounded-full bg-green-500/10 border border-green-500/30 text-green-400 text-sm font-medium mb-4 inline-block">
+      <RefreshCw className="w-4 h-4 inline mr-2" />
+      Unlimited Access
+    </span>
+    <h3 className="text-2xl sm:text-3xl font-bold text-white mb-4">
+      Practice Time to Perfect Your <span className="gradient-text">Power Moves</span>
     </h3>
-    <Badge className="bg-fuchsia-500/20 text-fuchsia-400 border-fuchsia-500/30 text-lg px-4 py-2 mb-4 inline-block">
-      Unlimited Practice Sessions
-    </Badge>
-    <p className="text-gray-400 mb-2">Value: <span className="text-white font-semibold">$180</span></p>
+    <p className="text-lg text-gray-300 mb-6">
+      Repeat moves until they click and feel natural in your body. The more you practice, the faster you progress.
+    </p>
     
-    <ul className="space-y-4 mt-6">
-      <li className="flex items-start gap-3">
-        <span className="text-2xl">🔄</span>
-        <div>
-          <span className="text-white font-semibold">Progress at your own pace:</span>
-          <span className="text-gray-300"> repeat moves until they click and feel natural in your body.</span>
-        </div>
+    <ul className="space-y-3 mb-6">
+      <li className="flex items-center gap-3 text-gray-300">
+        <Target className="w-5 h-5 text-fuchsia-400 flex-shrink-0" />
+        <span><strong>Progress at your pace</strong> - until moves feel natural</span>
       </li>
-      <li className="flex items-start gap-3">
-        <span className="text-2xl">💪</span>
-        <div>
-          <span className="text-white font-semibold">Lock in muscle memory faster:</span>
-          <span className="text-gray-300"> extra practice helps you retain skills and improve quicker between classes.</span>
-        </div>
+      <li className="flex items-center gap-3 text-gray-300">
+        <Zap className="w-5 h-5 text-fuchsia-400 flex-shrink-0" />
+        <span><strong>Lock in muscle memory</strong> - retain skills faster</span>
       </li>
-      <li className="flex items-start gap-3">
-        <span className="text-2xl">✨</span>
-        <div>
-          <span className="text-white font-semibold">Turn consistency into confidence:</span>
-          <span className="text-gray-300"> the more you show up, the stronger, smoother, and more fearless you become.</span>
-        </div>
+      <li className="flex items-center gap-3 text-gray-300">
+        <Sparkles className="w-5 h-5 text-fuchsia-400 flex-shrink-0" />
+        <span><strong>Consistency builds confidence</strong> - smoother and fearless</span>
       </li>
     </ul>
-  </div>
+  </motion.div>
   
-  <div className="order-1 lg:order-2">
-    <div className="aspect-square rounded-2xl overflow-hidden border-2 border-fuchsia-500/30">
+  <motion.div
+    initial={{ opacity: 0, x: 30 }}
+    whileInView={{ opacity: 1, x: 0 }}
+    viewport={{ once: true }}
+  >
+    <div className="aspect-square rounded-2xl overflow-hidden border-2 border-fuchsia-500/30 bg-gray-800">
       <img src={practiceAsset} alt="Unlimited Practice" className="w-full h-full object-cover" />
     </div>
-  </div>
+  </motion.div>
 </motion.div>
 ```
 
 ---
 
-### Navigation Update
-
-Add new section to the `pricingSections` array:
+### Icon Imports to Add
 
 ```tsx
-const pricingSections = [
-  { id: 'membership', label: 'Membership' },
-  { id: 'whats-included', label: "What's Included" },  // NEW
-  { id: 'offers', label: 'Special Offers' },
-  { id: 'add-ons', label: 'Add-Ons' },
-  { id: 'virtual-studio', label: 'Virtual Studio' },
-  { id: 'performances', label: 'Performances' },
-  { id: 'guarantee', label: 'Guarantee' },
-  { id: 'faq', label: 'FAQ' },
-];
+import { 
+  // ... existing imports
+  Gift, 
+  BookOpen, 
+  TrendingUp, 
+  Sparkles, 
+  Calendar, 
+  Heart, 
+  RefreshCw, 
+  Target 
+} from 'lucide-react';
 ```
 
 ---
 
-### Image Assets
+### Summary of Changes
 
-Copy the 3 uploaded images to `src/assets/`:
-
-| Source | Destination |
-|--------|-------------|
-| `user-uploads://Courses_Asset.png` | `src/assets/courses-asset.png` |
-| `user-uploads://8Sessionpackage.png` | `src/assets/flexi-pass-asset.png` |
-| `user-uploads://unlimited_Pratcice_Asset.png` | `src/assets/practice-asset.png` |
-
-Add imports at the top of the file:
-
-```tsx
-import coursesAsset from '@/assets/courses-asset.png';
-import flexiPassAsset from '@/assets/flexi-pass-asset.png';
-import practiceAsset from '@/assets/practice-asset.png';
-```
+| Before | After |
+|--------|-------|
+| Emojis (📈💪✨💜🔄) | Lucide icons (TrendingUp, Zap, Sparkles, Heart, RefreshCw, Target) |
+| "Value: $199" pricing text | Removed |
+| Large `<Badge>` component | Styled `<span>` badges with icons (matching Virtual Studio style) |
+| Simple motion y-axis animation | Left/right x-axis animations (matching other sections) |
+| `gap-8` spacing | `gap-12` spacing (matching other sections) |
+| `mb-16` between cards | `mb-20` for more breathing room |
 
 ---
 
-### Layout Pattern
+### Visual Consistency Achieved
 
-The section alternates image positions for visual interest:
+The restyled section will now match:
+- Virtual Studio: top badge with icon, x-axis animations, clean typography
+- Performance Opportunities: icon-based bullet lists with bold labels, professional spacing
 
-| Card | Image Position | Background |
-|------|----------------|------------|
-| 1. Pole Foundations | Right | - |
-| 2. Flexi Pass | Left | - |
-| 3. Unlimited Practice | Right | - |
-
-Each card uses `motion.div` with staggered animations matching the existing Virtual Studio and Performance sections.
-
----
-
-### Section Placement in Page Flow
-
-1. Hero
-2. Membership Plans (id="membership")
-3. **What's Waiting For You Inside? (id="whats-included")** - NEW
-4. Special Offers (id="offers")
-5. Add-Ons (id="add-ons")
-6. Virtual Studio (id="virtual-studio")
-7. Performances (id="performances")
-8. Guarantee (id="guarantee")
-9. FAQ (id="faq")
-10. Final CTA
-
----
-
-### Technical Notes
-
-- Images imported as ES6 modules from `src/assets/` for proper bundling
-- Uses same motion animation patterns as existing sections (`initial`, `whileInView`, `viewport`)
-- Maintains cyberpunk aesthetic with `cyber-card`, gradient borders, and fuchsia accent colors
-- Emoji icons used for bullet points as specified in the content
-- Alternating grid layout creates visual rhythm matching similar sections
+Color-coded badges for each inclusion:
+- Pole Foundations: Purple (learning/education)
+- Session Pass: Cyan (variety/freshness)  
+- Unlimited Practice: Green (growth/progress)
 
