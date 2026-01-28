@@ -5,7 +5,7 @@ import { Button } from '@/components/ui/button';
 import { Card } from '@/components/ui/card';
 import { Badge } from '@/components/ui/badge';
 import { Accordion, AccordionContent, AccordionItem, AccordionTrigger } from '@/components/ui/accordion';
-import { Check, Star, Zap, Heart, Crown, Gift, Clock, Users, FileText, Monitor, ChevronRight, BookOpen, TrendingUp, Sparkles, Calendar, RefreshCw, Target } from 'lucide-react';
+import { Check, Star, Zap, Heart, Crown, Gift, FileText, Monitor, ChevronRight, BookOpen, TrendingUp, Sparkles, Calendar, RefreshCw, Target } from 'lucide-react';
 import { Toggle } from '@/components/ui/toggle';
 import { Dialog, DialogContent, DialogHeader, DialogTitle, DialogTrigger } from '@/components/ui/dialog';
 import { useState } from 'react';
@@ -18,8 +18,6 @@ import practiceAsset from '@/assets/practice-asset.png';
 const pricingSections = [
   { id: 'membership', label: 'Membership' },
   { id: 'whats-included', label: "What's Included" },
-  { id: 'offers', label: 'Special Offers' },
-  { id: 'add-ons', label: 'Add-Ons' },
   { id: 'virtual-studio', label: 'Virtual Studio' },
   { id: 'performances', label: 'Performances' },
   { id: 'guarantee', label: 'Guarantee' },
@@ -33,21 +31,45 @@ const studioComparison = [
   { feature: "Consistency between classes", inStudio: "Weekly schedule", virtual: "Train anytime" },
 ];
 
+const membershipFAQ = [
+  {
+    question: "What's the difference between Casual Flyer and High Flyer?",
+    answer: "Casual Flyer gives you 8 classes per month - perfect if you train 2x per week. High Flyer is unlimited, so you can attend as many classes as you like across all our studios."
+  },
+  {
+    question: "Can I switch between membership types?",
+    answer: "Absolutely! You can upgrade or downgrade your membership at any time. Changes take effect from your next billing cycle."
+  },
+  {
+    question: "Can I use my membership at any studio?",
+    answer: "Yes! Both Casual Flyer and High Flyer memberships give you access to all 6 of our studio locations. Train wherever is convenient for you."
+  },
+  {
+    question: "What happens if I miss a class?",
+    answer: "Life happens! Casual Flyer sessions roll over for up to 6 weeks. High Flyer members have unlimited access so there's nothing to track."
+  },
+  {
+    question: "Can I freeze my membership?",
+    answer: "Yes, you can freeze your membership for up to 3 months per year for medical reasons, travel, or other circumstances. Just give us 7 days notice."
+  },
+  {
+    question: "Do you offer a trial before I commit?",
+    answer: "We offer a free first class so you can experience our studio, instructors, and community before making any commitment."
+  },
+  {
+    question: "What's included in my membership?",
+    answer: "Every membership includes access to our structured courses, weekly classes, unlimited practice sessions, Virtual Studio content, and performance opportunities."
+  },
+  {
+    question: "Is there a joining fee?",
+    answer: "No joining fee! The price you see is the price you pay. We also offer a 100% satisfaction guarantee on your first month."
+  }
+];
 
 const Pricing = () => {
   const [isCommitted, setIsCommitted] = useState(false);
 
   const membershipPlans = [{
-    name: "Drop In Session",
-    flexiPrice: "$42",
-    committedPrice: "$42",
-    period: "per class",
-    description: "Perfect for trying us out or occasional visits",
-    features: ["Access to any class", "No commitment", "Valid for 30 days", "Can be used at any studio"],
-    popular: false,
-    icon: Zap,
-    color: "from-gray-500 to-gray-600"
-  }, {
     name: "Casual Flyer",
     flexiPrice: "$59",
     committedPrice: "$53.10",
@@ -68,49 +90,7 @@ const Pricing = () => {
     icon: Crown,
     color: "from-purple-500 to-pink-600"
   }];
-  const addOns = [{
-    name: "Private Session",
-    price: "$120",
-    duration: "60 minutes",
-    description: "One-on-one instruction tailored to your goals"
-  }, {
-    name: "Semi-Private (2 people)",
-    price: "$80",
-    duration: "60 minutes per person",
-    description: "Share a private session with a friend"
-  }, {
-    name: "Workshop Drop-In",
-    price: "$45",
-    duration: "90-120 minutes",
-    description: "Special workshops and masterclasses"
-  }, {
-    name: "Competition Team",
-    price: "$200",
-    duration: "per month",
-    description: "Elite training for competitions and performances"
-  }];
-  const studentDeals = [{
-    title: "New Student Special",
-    offer: "First Class FREE",
-    description: "Try any beginner class completely free - no strings attached",
-    validFor: "First time visitors only",
-    icon: Gift,
-    color: "bg-green-500"
-  }, {
-    title: "Student Discount",
-    offer: "20% off all packages",
-    description: "Valid student ID required. Cannot combine with other offers",
-    validFor: "Full-time students",
-    icon: Star,
-    color: "bg-blue-500"
-  }, {
-    title: "Bring a Friend",
-    offer: "$10 off each",
-    description: "When you and a friend sign up together for any package",
-    validFor: "New students only",
-    icon: Users,
-    color: "bg-purple-500"
-  }];
+
   return <div className="min-h-screen">
       <Header />
       <SectionNavigation sections={pricingSections} />
@@ -124,15 +104,15 @@ const Pricing = () => {
               contentEditable
               suppressContentEditableWarning={true}
             >
-              Pricing & Packages
+              Memberships
             </h1>
             <p 
               className="text-xl text-gray-300 max-w-3xl mx-auto leading-relaxed mb-8"
               contentEditable
               suppressContentEditableWarning={true}
             >
-              Flexible options designed to fit your schedule and goals. 
-              Start your transformation journey with our New Student Special!
+              Flexible memberships designed to fit your schedule and goals. 
+              Start your transformation journey today!
             </p>
             <Button className="neon-button text-black font-bold text-lg px-8 py-3">
               <span contentEditable suppressContentEditableWarning={true}>
@@ -182,7 +162,7 @@ const Pricing = () => {
             </div>
           </div>
 
-          <div className="grid md:grid-cols-3 gap-8">
+          <div className="grid md:grid-cols-2 gap-8 max-w-4xl mx-auto">
             {membershipPlans.map((plan, index) => <Card key={index} className={`cyber-card p-8 relative animate-fade-in ${plan.popular ? 'ring-2 ring-fuchsia-500 scale-105' : ''}`} style={{
             animationDelay: `${index * 0.15}s`
           }}>
@@ -274,7 +254,7 @@ const Pricing = () => {
         </div>
       </section>
 
-      {/* What's Waiting For You Inside Section */}
+      {/* What's Waiting For You Inside - Section 1: Foundations (gray-800) */}
       <section id="whats-included" className="py-20 bg-gray-800">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           {/* Section Header */}
@@ -292,8 +272,8 @@ const Pricing = () => {
             </p>
           </div>
 
-          {/* Inclusion 1: Pole Foundations */}
-          <div className="grid lg:grid-cols-2 gap-12 items-center mb-20">
+          {/* Inclusion 1: Pole Foundations with 3-image gallery */}
+          <div className="grid lg:grid-cols-2 gap-12 items-center">
             <motion.div
               initial={{ opacity: 0, x: -30 }}
               whileInView={{ opacity: 1, x: 0 }}
@@ -333,22 +313,47 @@ const Pricing = () => {
               viewport={{ once: true }}
               transition={{ duration: 0.6 }}
             >
-              <div className="aspect-square rounded-2xl overflow-hidden border-2 border-fuchsia-500/30 bg-gray-800">
-                <img src={coursesAsset} alt="Pole Foundations Course" className="w-full h-full object-cover" />
+              {/* 3-Image Overlapping Gallery */}
+              <div className="relative h-[500px]">
+                {/* Main large image */}
+                <div className="absolute top-0 right-0 w-[75%] aspect-[4/5] rounded-2xl overflow-hidden border-2 border-fuchsia-500/30 shadow-2xl z-10">
+                  <img src={coursesAsset} alt="Pole Foundations Course" className="w-full h-full object-cover" />
+                </div>
+                {/* Secondary image - offset left */}
+                <div className="absolute bottom-8 left-0 w-[55%] aspect-[4/5] rounded-2xl overflow-hidden border-2 border-purple-500/30 shadow-xl z-20">
+                  <img src="/images/glow/hero-1.png" alt="Training session" className="w-full h-full object-cover" />
+                </div>
+                {/* Small accent image - top left */}
+                <div className="absolute top-12 left-8 w-[35%] aspect-square rounded-xl overflow-hidden border-2 border-cyan-500/30 shadow-lg z-0">
+                  <img src="/images/glow/hero-4.png" alt="Pole skills" className="w-full h-full object-cover" />
+                </div>
               </div>
             </motion.div>
           </div>
+        </div>
+      </section>
 
-          {/* Inclusion 2: Session Flexi Pass (Image Left) */}
-          <div className="grid lg:grid-cols-2 gap-12 items-center mb-20">
+      {/* What's Included - Section 2: Flexi Pass (gray-900) */}
+      <section className="py-20 bg-gray-900">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+          <div className="grid lg:grid-cols-2 gap-12 items-center">
             <motion.div
               initial={{ opacity: 0, x: -30 }}
               whileInView={{ opacity: 1, x: 0 }}
               viewport={{ once: true }}
               transition={{ duration: 0.6 }}
+              className="order-2 lg:order-1"
             >
-              <div className="aspect-square rounded-2xl overflow-hidden border-2 border-fuchsia-500/30 bg-gray-800">
-                <img src={flexiPassAsset} alt="Weekly Classes" className="w-full h-full object-cover" />
+              {/* 2-Image Side Overlap Gallery */}
+              <div className="relative h-[450px]">
+                {/* Primary image */}
+                <div className="absolute top-0 left-0 w-[65%] aspect-[3/4] rounded-2xl overflow-hidden border-2 border-fuchsia-500/30 shadow-2xl z-10">
+                  <img src={flexiPassAsset} alt="Weekly Classes" className="w-full h-full object-cover" />
+                </div>
+                {/* Secondary image - offset right and down */}
+                <div className="absolute bottom-0 right-0 w-[55%] aspect-[3/4] rounded-2xl overflow-hidden border-2 border-cyan-500/30 shadow-xl z-20">
+                  <img src="/images/glow/hero-2.png" alt="Dance class" className="w-full h-full object-cover" />
+                </div>
               </div>
             </motion.div>
             
@@ -357,6 +362,7 @@ const Pricing = () => {
               whileInView={{ opacity: 1, x: 0 }}
               viewport={{ once: true }}
               transition={{ duration: 0.6 }}
+              className="order-1 lg:order-2"
             >
               <span className="px-4 py-2 rounded-full bg-cyan-500/10 border border-cyan-500/30 text-cyan-400 text-sm font-medium mb-4 inline-block">
                 <Calendar className="w-4 h-4 inline mr-2" />
@@ -385,8 +391,12 @@ const Pricing = () => {
               </ul>
             </motion.div>
           </div>
+        </div>
+      </section>
 
-          {/* Inclusion 3: Unlimited Practice (Image Right) */}
+      {/* What's Included - Section 3: Unlimited Practice (gray-800) */}
+      <section className="py-20 bg-gray-800">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="grid lg:grid-cols-2 gap-12 items-center">
             <motion.div
               initial={{ opacity: 0, x: -30 }}
@@ -427,93 +437,24 @@ const Pricing = () => {
               viewport={{ once: true }}
               transition={{ duration: 0.6 }}
             >
-              <div className="aspect-square rounded-2xl overflow-hidden border-2 border-fuchsia-500/30 bg-gray-800">
-                <img src={practiceAsset} alt="Unlimited Practice" className="w-full h-full object-cover" />
+              {/* 2-Image Stacked Gallery */}
+              <div className="relative h-[450px]">
+                {/* Primary image */}
+                <div className="absolute top-0 right-0 w-[70%] aspect-[3/4] rounded-2xl overflow-hidden border-2 border-fuchsia-500/30 shadow-2xl z-10">
+                  <img src={practiceAsset} alt="Unlimited Practice" className="w-full h-full object-cover" />
+                </div>
+                {/* Secondary image - offset left and down */}
+                <div className="absolute bottom-0 left-0 w-[50%] aspect-[3/4] rounded-2xl overflow-hidden border-2 border-green-500/30 shadow-xl z-20">
+                  <img src="/images/glow/hero-3.png" alt="Practice session" className="w-full h-full object-cover" />
+                </div>
               </div>
             </motion.div>
           </div>
         </div>
       </section>
 
-      {/* Special Offers */}
-      <section id="offers" className="py-20 bg-gray-800">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="text-center mb-16">
-            <h2 
-              className="text-3xl sm:text-4xl font-bold text-white mb-6"
-              contentEditable
-              suppressContentEditableWarning={true}
-            >
-              Special <span className="gradient-text">Offers</span>
-            </h2>
-            <p 
-              className="text-lg text-gray-300 max-w-2xl mx-auto"
-              contentEditable
-              suppressContentEditableWarning={true}
-            >
-              Save money and bring friends along for the journey
-            </p>
-          </div>
-
-          <div className="grid md:grid-cols-3 gap-8">
-            {studentDeals.map((deal, index) => <Card key={index} className="cyber-card p-6 animate-fade-in" style={{
-            animationDelay: `${index * 0.15}s`
-          }}>
-                <div className={`w-12 h-12 ${deal.color} rounded-full flex items-center justify-center mb-4`}>
-                  <deal.icon className="w-6 h-6 text-white" />
-                </div>
-                <h3 className="text-xl font-bold text-white mb-2">{deal.title}</h3>
-                <div className="text-2xl font-bold text-fuchsia-400 mb-3">{deal.offer}</div>
-                <p className="text-gray-300 text-sm mb-3 leading-relaxed">{deal.description}</p>
-                <p className="text-gray-400 text-xs">{deal.validFor}</p>
-              </Card>)}
-          </div>
-        </div>
-      </section>
-
-      {/* Add-Ons & Extras */}
-      <section id="add-ons" className="py-20 bg-gray-900">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="text-center mb-16">
-            <h2 
-              className="text-3xl sm:text-4xl font-bold text-white mb-6"
-              contentEditable
-              suppressContentEditableWarning={true}
-            >
-              Add-Ons & <span className="gradient-text">Extras</span>
-            </h2>
-            <p 
-              className="text-lg text-gray-300 max-w-2xl mx-auto"
-              contentEditable
-              suppressContentEditableWarning={true}
-            >
-              Enhance your training with specialized sessions and workshops
-            </p>
-          </div>
-
-          <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-6">
-            {addOns.map((addon, index) => <Card key={index} className="cyber-card p-6 animate-fade-in" style={{
-            animationDelay: `${index * 0.1}s`
-          }}>
-                <div className="text-center">
-                  <h3 className="text-lg font-bold text-white mb-2">{addon.name}</h3>
-                  <div className="text-2xl font-bold text-fuchsia-400 mb-2">{addon.price}</div>
-                  <div className="flex items-center justify-center text-gray-400 text-sm mb-3">
-                    <Clock className="w-4 h-4 mr-1" />
-                    {addon.duration}
-                  </div>
-                  <p className="text-gray-300 text-xs leading-relaxed mb-4">{addon.description}</p>
-                  <Button variant="outline" className="w-full cyber-border text-cyan-400 hover:bg-cyan-400/10 text-sm">
-                    Book Now
-                  </Button>
-                </div>
-              </Card>)}
-          </div>
-        </div>
-      </section>
-
-      {/* Virtual Studio Section */}
-      <section id="virtual-studio" className="py-20 bg-gray-800">
+      {/* Virtual Studio Section (gray-900) */}
+      <section id="virtual-studio" className="py-20 bg-gray-900">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="grid lg:grid-cols-2 gap-12 items-center">
             <motion.div
@@ -580,8 +521,8 @@ const Pricing = () => {
         </div>
       </section>
 
-      {/* Performance Opportunities Section */}
-      <section id="performances" className="py-20 bg-gray-900">
+      {/* Performance Opportunities Section (gray-800) */}
+      <section id="performances" className="py-20 bg-gray-800">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="grid lg:grid-cols-2 gap-12 items-center">
             <motion.div
@@ -691,8 +632,8 @@ const Pricing = () => {
         </div>
       </section>
 
-      {/* FAQ Section */}
-      <section id="faq" className="py-20 bg-gray-800">
+      {/* FAQ Section (gray-900) */}
+      <section id="faq" className="py-20 bg-gray-900">
         <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="cyber-card p-8">
             <h2 
@@ -700,72 +641,60 @@ const Pricing = () => {
               contentEditable
               suppressContentEditableWarning={true}
             >
-              Frequently Asked Questions
+              Membership FAQ
             </h2>
             
             <Accordion type="single" collapsible className="space-y-4">
-              <AccordionItem value="item-0" className="border border-primary/20 rounded-lg px-4">
-                <AccordionTrigger className="text-left font-medium hover:text-primary">
-                  Can I freeze my membership?
-                </AccordionTrigger>
-                <AccordionContent className="text-muted-foreground">
-                  Yes! Life happens. You can freeze your unlimited membership for up to 3 months per year 
-                  for medical reasons, travel, or other circumstances.
-                </AccordionContent>
-              </AccordionItem>
-              
-              <AccordionItem value="item-1" className="border border-primary/20 rounded-lg px-4">
-                <AccordionTrigger className="text-left font-medium hover:text-primary">
-                  What's your cancellation policy?
-                </AccordionTrigger>
-                <AccordionContent className="text-muted-foreground">
-                  Monthly memberships require 30 days notice. Class packages are non-refundable but can be 
-                  transferred to someone else with advance notice.
-                </AccordionContent>
-              </AccordionItem>
-              
-              <AccordionItem value="item-2" className="border border-primary/20 rounded-lg px-4">
-                <AccordionTrigger className="text-left font-medium hover:text-primary">
-                  Do you offer payment plans?
-                </AccordionTrigger>
-                <AccordionContent className="text-muted-foreground">
-                  Yes! We offer payment plans for larger packages and can work with you to find 
-                  a solution that fits your budget. Just ask our front desk team.
-                </AccordionContent>
-              </AccordionItem>
+              {membershipFAQ.map((faq, index) => (
+                <AccordionItem key={index} value={`item-${index}`} className="border border-primary/20 rounded-lg px-4">
+                  <AccordionTrigger className="text-left font-medium hover:text-primary">
+                    {faq.question}
+                  </AccordionTrigger>
+                  <AccordionContent className="text-muted-foreground">
+                    {faq.answer}
+                  </AccordionContent>
+                </AccordionItem>
+              ))}
             </Accordion>
           </div>
         </div>
       </section>
 
       {/* Final CTA */}
-      <section className="py-20 bg-gradient-to-r from-fuchsia-600 to-purple-600">
+      <section className="py-20 bg-gradient-to-br from-gray-900 via-purple-900 to-gray-900 cyber-grid">
         <div className="max-w-4xl mx-auto text-center px-4 sm:px-6 lg:px-8">
-          <Zap className="w-16 h-16 text-white mx-auto mb-6 pulse-neon" />
           <h2 
             className="text-3xl sm:text-4xl font-bold text-white mb-6"
             contentEditable
             suppressContentEditableWarning={true}
           >
-            Ready to Transform Your Life?
+            Ready to Start Your <span className="gradient-text">Journey</span>?
           </h2>
           <p 
-            className="text-lg text-purple-100 mb-8 max-w-2xl mx-auto"
+            className="text-lg text-gray-300 mb-8 max-w-2xl mx-auto"
             contentEditable
             suppressContentEditableWarning={true}
           >
-            Don't wait another day to start your journey. Your first class is free, 
-            and your transformation starts the moment you walk through our doors.
+            Join thousands of students who have transformed their fitness, 
+            confidence, and lives through pole dance and aerial arts.
           </p>
-          <Button className="neon-button text-black font-bold text-lg px-8 py-3">
-            <span contentEditable suppressContentEditableWarning={true}>
-              Claim Your Free Class Now
-            </span>
-          </Button>
+          <div className="flex flex-col sm:flex-row gap-4 justify-center">
+            <Button className="neon-button text-black font-bold text-lg px-8 py-3">
+              <span contentEditable suppressContentEditableWarning={true}>
+                Claim Your Free Class
+              </span>
+            </Button>
+            <Button variant="outline" className="cyber-border text-cyan-400 hover:bg-cyan-400/10 font-bold text-lg px-8 py-3">
+              <span contentEditable suppressContentEditableWarning={true}>
+                View Timetable
+              </span>
+            </Button>
+          </div>
         </div>
       </section>
 
       <Footer />
     </div>;
 };
+
 export default Pricing;
