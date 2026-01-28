@@ -1,10 +1,10 @@
 
 
-## Memberships Page Redesign
+## Memberships Page URL & Content Updates
 
 ### Overview
 
-Major overhaul of the Pricing page to create a cleaner, more focused Memberships page with alternating section colors, dynamic image galleries, simplified membership options (Casual Flyer & High Flyer only), and a membership-focused FAQ.
+This plan updates the Pricing page to use `/memberships` URL, adds a sister studios section, updates section badges, and removes several sections as requested.
 
 ---
 
@@ -12,25 +12,50 @@ Major overhaul of the Pricing page to create a cleaner, more focused Memberships
 
 | File | Changes |
 |------|---------|
-| `src/pages/Pricing.tsx` | Complete restructure with new sections, layouts, and FAQ |
+| `src/App.tsx` | Change route from `/pricing` to `/memberships` |
+| `src/components/Header.tsx` | Update navigation links (desktop + mobile) |
+| `src/components/Footer.tsx` | Update footer link |
+| `src/pages/Pricing.tsx` | Major content updates |
 
 ---
 
-### Summary of Changes
+### 1. Route Change (App.tsx)
 
-| Current | New |
-|---------|-----|
-| Title: "Pricing & Packages" | Title: "Memberships" |
-| 3 membership plans (Drop In, Casual Flyer, High Flyer) | 2 plans only (Casual Flyer, High Flyer) |
-| Special Offers section | **REMOVE** |
-| Add-Ons & Extras section | **REMOVE** |
-| Single images per inclusion | Multi-image galleries (2-3 overlapping images) |
-| Same background color pattern | Alternating section colors as you scroll |
-| Generic FAQ | Membership-specific FAQ |
+**Line 79:** Change `/pricing` to `/memberships`
+
+```text
+<Route path="/memberships" element={<Pricing />} />
+```
 
 ---
 
-### Section Navigation Update
+### 2. Header Navigation Updates (Header.tsx)
+
+**Line 96:** Update About menu link from `/pricing` to `/memberships`
+
+```text
+{ name: 'Memberships', href: '/memberships', description: 'Flexible packages' },
+```
+
+Also update the mobile menu section that references pricing (around line 390+).
+
+---
+
+### 3. Footer Link Update (Footer.tsx)
+
+**Line 130:** Update company links array
+
+```text
+{ name: 'Memberships', href: '/memberships' },
+```
+
+---
+
+### 4. Pricing.tsx Content Updates
+
+#### 4.1 Update Section Navigation (Lines 18-25)
+
+Remove 'guarantee' from the sections array:
 
 ```text
 const pricingSections = [
@@ -38,167 +63,160 @@ const pricingSections = [
   { id: 'whats-included', label: "What's Included" },
   { id: 'virtual-studio', label: 'Virtual Studio' },
   { id: 'performances', label: 'Performances' },
-  { id: 'guarantee', label: 'Guarantee' },
+  { id: 'sister-studios', label: 'Sister Studios' },
   { id: 'faq', label: 'FAQ' },
 ];
 ```
 
----
+#### 4.2 Update Hero Section (Lines 99-124)
 
-### Hero Section Changes
+- Remove the "Claim Your Free Class" button (lines 117-121)
+- Keep hero text as is
 
-```text
-<h1 className="text-4xl sm:text-6xl font-bold gradient-text neon-glow mb-6">
-  Memberships
-</h1>
-<p className="text-xl text-gray-300 max-w-3xl mx-auto leading-relaxed mb-8">
-  Flexible memberships designed to fit your schedule and goals. 
-  Start your transformation journey today!
-</p>
-```
+#### 4.3 Update Main Header Text (Lines 261-272)
 
----
-
-### Membership Plans - 2 Options Only
-
-Remove "Drop In Session" and keep only:
-
-| Plan | Description |
-|------|-------------|
-| **Casual Flyer** | 8 classes per month, flexible scheduling |
-| **High Flyer** | Unlimited classes, priority booking, full access |
-
-Grid changes from `md:grid-cols-3` to `md:grid-cols-2 max-w-4xl mx-auto` for centered 2-column layout.
-
----
-
-### Alternating Section Colors
-
-| Section | Background |
-|---------|------------|
-| Hero | `bg-gradient-to-br from-gray-900 via-purple-900 to-gray-900` |
-| Membership Plans | `bg-gray-900` |
-| What's Included (Foundations) | `bg-gray-800` |
-| What's Included (Flexi Pass) | `bg-gray-900` |
-| What's Included (Practice) | `bg-gray-800` |
-| Virtual Studio | `bg-gray-900` |
-| Performances | `bg-gray-800` |
-| Guarantee | `bg-gradient-to-r from-green-600 to-emerald-600` |
-| FAQ | `bg-gray-900` |
-| Final CTA | `bg-gradient-to-br from-gray-900 via-purple-900 to-gray-900` |
-
----
-
-### Multi-Image Gallery Layout
-
-Replace single square images with dynamic overlapping galleries:
-
-**Gallery Option A (3 images - stacked overlap):**
-```text
-<div className="relative h-[500px]">
-  {/* Main large image */}
-  <div className="absolute top-0 right-0 w-[75%] aspect-[4/5] rounded-2xl overflow-hidden border-2 border-fuchsia-500/30 shadow-2xl z-10">
-    <img src={image1} className="w-full h-full object-cover" />
-  </div>
-  {/* Secondary image - offset left */}
-  <div className="absolute bottom-8 left-0 w-[55%] aspect-[4/5] rounded-2xl overflow-hidden border-2 border-purple-500/30 shadow-xl z-20">
-    <img src={image2} className="w-full h-full object-cover" />
-  </div>
-  {/* Small accent image - top left */}
-  <div className="absolute top-12 left-8 w-[35%] aspect-square rounded-xl overflow-hidden border-2 border-cyan-500/30 shadow-lg z-0">
-    <img src={image3} className="w-full h-full object-cover" />
-  </div>
-</div>
-```
-
-**Gallery Option B (2 images - side overlap):**
-```text
-<div className="relative h-[450px]">
-  {/* Primary image */}
-  <div className="absolute top-0 left-0 w-[65%] aspect-[3/4] rounded-2xl overflow-hidden border-2 border-fuchsia-500/30 shadow-2xl z-10">
-    <img src={image1} className="w-full h-full object-cover" />
-  </div>
-  {/* Secondary image - offset right and down */}
-  <div className="absolute bottom-0 right-0 w-[55%] aspect-[3/4] rounded-2xl overflow-hidden border-2 border-cyan-500/30 shadow-xl z-20">
-    <img src={image2} className="w-full h-full object-cover" />
-  </div>
-</div>
-```
-
-Each "What's Included" section will use a different gallery arrangement for visual variety.
-
----
-
-### Image Sources for Galleries
-
-Use existing project images:
-
-| Section | Images to Use |
-|---------|---------------|
-| Pole Foundations | `coursesAsset`, `/images/glow/hero-1.png`, `/images/glow/hero-4.png` |
-| Flexi Pass Classes | `flexiPassAsset`, `/images/glow/hero-2.png`, `/images/glow/hero-5.png` |
-| Unlimited Practice | `practiceAsset`, `/images/glow/hero-3.png` |
-
----
-
-### Removed Sections
-
-Delete these sections entirely (lines 438-513):
-- **Special Offers** (`id="offers"`) - student deals grid
-- **Add-Ons & Extras** (`id="add-ons"`) - private sessions, workshops grid
-
-Also remove the `studentDeals` and `addOns` arrays from the component.
-
----
-
-### New Membership FAQ
-
-Replace generic pricing FAQ with membership-focused questions:
-
-| Question | Answer |
-|----------|--------|
-| What's the difference between Casual Flyer and High Flyer? | Casual Flyer gives you 8 classes per month - perfect if you train 2x per week. High Flyer is unlimited, so you can attend as many classes as you like across all our studios. |
-| Can I switch between membership types? | Absolutely! You can upgrade or downgrade your membership at any time. Changes take effect from your next billing cycle. |
-| Can I use my membership at any studio? | Yes! Both Casual Flyer and High Flyer memberships give you access to all 6 of our studio locations. Train wherever is convenient for you. |
-| What happens if I miss a class? | Life happens! Casual Flyer sessions roll over for up to 6 weeks. High Flyer members have unlimited access so there's nothing to track. |
-| Can I freeze my membership? | Yes, you can freeze your membership for up to 3 months per year for medical reasons, travel, or other circumstances. Just give us 7 days notice. |
-| Do you offer a trial before I commit? | We offer a free first class so you can experience our studio, instructors, and community before making any commitment. |
-| What's included in my membership? | Every membership includes access to our structured courses, weekly classes, unlimited practice sessions, Virtual Studio content, and performance opportunities. |
-| Is there a joining fee? | No joining fee! The price you see is the price you pay. We also offer a 100% satisfaction guarantee on your first month. |
-
----
-
-### Technical Implementation
-
-1. **Update imports** - Remove unused `Clock`, `Users` if not needed after section removal
-2. **Update `pricingSections` array** - Remove 'offers' and 'add-ons'
-3. **Update hero title** - Change to "Memberships"
-4. **Filter `membershipPlans`** - Keep only Casual Flyer and High Flyer
-5. **Update membership grid** - 2 columns centered instead of 3
-6. **Split "What's Included" section** - Each inclusion becomes its own section with alternating backgrounds
-7. **Create image gallery components** - Overlapping image layouts for each section
-8. **Delete Special Offers section** - Lines 438-472
-9. **Delete Add-Ons section** - Lines 474-513
-10. **Replace FAQ content** - New membership-focused questions
-
----
-
-### Visual Rhythm
-
-The page will flow with alternating dark/darker backgrounds:
+Change the header badge and title:
 
 ```text
-[HERO - gradient purple] ↓
-[MEMBERSHIP PLANS - gray-900] ↓
-[FOUNDATIONS - gray-800 with 3-image gallery] ↓
-[FLEXI PASS - gray-900 with 2-image gallery] ↓
-[PRACTICE - gray-800 with 2-image gallery] ↓
-[VIRTUAL STUDIO - gray-900] ↓
-[PERFORMANCES - gray-800] ↓
-[GUARANTEE - green gradient] ↓
-[FAQ - gray-900] ↓
-[FINAL CTA - gradient purple]
+<span className="px-4 py-2 rounded-full bg-fuchsia-500/10 border border-fuchsia-500/30 text-fuchsia-400 text-sm font-medium mb-6 inline-block">
+  <Gift className="w-4 h-4 inline mr-2" />
+  Everything Included in Our Memberships
+</span>
 ```
 
-Each section transition creates visual breathing room while maintaining cohesion.
+#### 4.4 Update Section Badges
+
+Replace each section's badge text:
+
+| Section | Current Badge | New Badge |
+|---------|--------------|-----------|
+| Pole Foundations (line 284) | "4-Week Structured Course" | "Structured Course Lessons" |
+| Flexi Pass (line 367) | "8 Sessions Per Month" | "Casual Class Sessions" |
+| Practice (line 407) | "Unlimited Access" | "Unlimited Practice Time" |
+| Virtual Studio (line 467) | "Included with Membership" | "Virtual Studio Access" |
+| Performances (line 533) | None | Add: "TPR Stage Shows & Comp Eligibility" |
+
+#### 4.5 Remove 100% Satisfaction Guarantee Section (Lines 606-633)
+
+Delete entire section:
+```text
+{/* Money Back Guarantee */}
+<section id="guarantee" className="py-20 bg-gradient-to-r from-green-600 to-emerald-600">
+  ...
+</section>
+```
+
+#### 4.6 Add Sister Studios / Training Relationships Section
+
+Insert new section before FAQ (after performances section, around line 604):
+
+```text
+{/* Sister Studios / Training Relationships */}
+<section id="sister-studios" className="py-20 bg-gray-900">
+  <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+    <motion.div
+      initial={{ opacity: 0, y: 20 }}
+      whileInView={{ opacity: 1, y: 0 }}
+      viewport={{ once: true }}
+      className="text-center mb-12"
+    >
+      <span className="px-4 py-2 rounded-full bg-purple-500/10 border border-purple-500/30 text-purple-400 text-sm font-medium mb-6 inline-block">
+        <Heart className="w-4 h-4 inline mr-2" />
+        Training Relationships
+      </span>
+      <h2 className="text-3xl sm:text-4xl font-bold text-white mb-4">
+        Sister <span className="gradient-text">Studios</span>
+      </h2>
+      <p className="text-lg text-gray-300 max-w-3xl mx-auto">
+        Our studios share training partnerships, giving you more flexibility and options for your pole journey.
+      </p>
+    </motion.div>
+    
+    <div className="grid md:grid-cols-2 gap-8 max-w-4xl mx-auto">
+      {/* Partnership 1 */}
+      <motion.div
+        initial={{ opacity: 0, x: -20 }}
+        whileInView={{ opacity: 1, x: 0 }}
+        viewport={{ once: true }}
+        className="cyber-card p-6 rounded-xl"
+      >
+        <div className="flex items-center gap-4 mb-4">
+          <div className="w-12 h-12 rounded-full bg-fuchsia-500/20 flex items-center justify-center">
+            <MapPin className="w-6 h-6 text-fuchsia-400" />
+          </div>
+          <h3 className="text-xl font-bold text-white">Rowville & Narre Warren</h3>
+        </div>
+        <p className="text-gray-300">
+          These sister studios share memberships - train at either location when holding a membership at one of these two studios.
+        </p>
+      </motion.div>
+      
+      {/* Partnership 2 */}
+      <motion.div
+        initial={{ opacity: 0, x: 20 }}
+        whileInView={{ opacity: 1, x: 0 }}
+        viewport={{ once: true }}
+        className="cyber-card p-6 rounded-xl"
+      >
+        <div className="flex items-center gap-4 mb-4">
+          <div className="w-12 h-12 rounded-full bg-cyan-500/20 flex items-center justify-center">
+            <MapPin className="w-6 h-6 text-cyan-400" />
+          </div>
+          <h3 className="text-xl font-bold text-white">Mitcham & Kilsyth</h3>
+        </div>
+        <p className="text-gray-300">
+          These sister studios share memberships - train at either location when holding a membership at one of these two studios.
+        </p>
+      </motion.div>
+    </div>
+  </div>
+</section>
+```
+
+#### 4.7 Remove "Ready to Start Your Journey" Section (Lines 663-694)
+
+Delete the entire Final CTA section:
+```text
+{/* Final CTA */}
+<section className="py-20 bg-gradient-to-br from-gray-900 via-purple-900 to-gray-900 cyber-grid">
+  ...
+</section>
+```
+
+#### 4.8 Add MapPin Icon Import (Line 8)
+
+Add `MapPin` to lucide-react imports for the sister studios section.
+
+---
+
+### Summary of Removals
+
+| Section | Status |
+|---------|--------|
+| Hero "Claim Your Free Class" button | REMOVE |
+| 100% Satisfaction Guarantee section | REMOVE |
+| "Ready to Start Your Journey" final CTA | REMOVE |
+
+### Summary of Additions
+
+| Section | Status |
+|---------|--------|
+| Sister Studios section | ADD (before FAQ) |
+| Performance badge "TPR Stage Shows & Comp Eligibility" | ADD |
+
+### URL Changes
+
+| Location | Old | New |
+|----------|-----|-----|
+| Route (App.tsx) | `/pricing` | `/memberships` |
+| Header menu | `Pricing` → `/pricing` | `Memberships` → `/memberships` |
+| Footer link | `Pricing` → `/pricing` | `Memberships` → `/memberships` |
+
+---
+
+### Technical Notes
+
+- The Rowville studio mentioned in the sister studios section needs to be added to the studios data if not already present
+- All internal links referencing `/pricing` should be updated to `/memberships`
+- The section navigation will automatically update scroll-spy behavior based on the new sections array
 
