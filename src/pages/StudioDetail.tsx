@@ -12,6 +12,7 @@ import StudioLocalSupport from '@/components/studio/StudioLocalSupport';
 import StudioDirections from '@/components/studio/StudioDirections';
 import StudioContact from '@/components/studio/StudioContact';
 import StudioGoogleReviews from '@/components/studio/StudioGoogleReviews';
+import StudioSisterStudio from '@/components/studio/StudioSisterStudio';
 import SectionNavigation from '@/components/SectionNavigation';
 import FloatingReviewsButton from '@/components/studio/FloatingReviewsButton';
 import { studios } from '@/data/studios';
@@ -71,6 +72,9 @@ const StudioDetail = () => {
       <div id="timetable">
         <StudioClassList studio={studio} />
       </div>
+
+      {/* Sister Studio Section - Only shows for partnered studios */}
+      <StudioSisterStudio studio={studio} />
 
       {/* Instructors Section */}
       <div id="instructors">
