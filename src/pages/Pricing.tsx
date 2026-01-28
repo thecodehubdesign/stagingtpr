@@ -5,7 +5,7 @@ import { Button } from '@/components/ui/button';
 import { Card } from '@/components/ui/card';
 import { Badge } from '@/components/ui/badge';
 import { Accordion, AccordionContent, AccordionItem, AccordionTrigger } from '@/components/ui/accordion';
-import { Check, Star, Zap, Heart, Crown, Gift, Clock, Users, FileText, Monitor, ChevronRight } from 'lucide-react';
+import { Check, Star, Zap, Heart, Crown, Gift, Clock, Users, FileText, Monitor, ChevronRight, BookOpen, TrendingUp, Sparkles, Calendar, RefreshCw, Target } from 'lucide-react';
 import { Toggle } from '@/components/ui/toggle';
 import { Dialog, DialogContent, DialogHeader, DialogTitle, DialogTrigger } from '@/components/ui/dialog';
 import { useState } from 'react';
@@ -279,163 +279,159 @@ const Pricing = () => {
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           {/* Section Header */}
           <div className="text-center mb-16">
+            <span className="px-4 py-2 rounded-full bg-fuchsia-500/10 border border-fuchsia-500/30 text-fuchsia-400 text-sm font-medium mb-6 inline-block">
+              <Gift className="w-4 h-4 inline mr-2" />
+              Everything Included
+            </span>
             <h2 className="text-3xl sm:text-4xl font-bold text-white mb-4">
               What's Waiting For You <span className="gradient-text">Inside?</span>
             </h2>
-            <p className="text-xl text-fuchsia-400 font-semibold mb-4">
-              Your Membership: Your All Access Pass to Spins, Strength and Serious Fun
-            </p>
-            <p className="text-gray-300 max-w-3xl mx-auto mb-4">
-              Here's everything included in our Memberships, with each inclusion designed to keep you moving, motivated, and making real progress towards your pole goals.
-            </p>
-            <p className="text-gray-400 max-w-2xl mx-auto italic">
-              This is not a "come when you feel like it" situation. It's consistent, supported training that builds real skill, real strength, and real confidence.
+            <p className="text-lg text-gray-300 max-w-3xl mx-auto">
+              Your membership is your all-access pass to spins, strength, and serious fun. 
+              Consistent, supported training that builds real skill and confidence.
             </p>
           </div>
 
           {/* Inclusion 1: Pole Foundations */}
-          <motion.div 
-            initial={{ opacity: 0, y: 30 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true }}
-            className="grid lg:grid-cols-2 gap-8 items-center mb-16"
-          >
-            <div className="order-2 lg:order-1">
-              <h3 className="text-2xl font-bold text-white mb-4">
-                Progressive Pole Training That Builds You Up Fast
+          <div className="grid lg:grid-cols-2 gap-12 items-center mb-20">
+            <motion.div
+              initial={{ opacity: 0, x: -30 }}
+              whileInView={{ opacity: 1, x: 0 }}
+              viewport={{ once: true }}
+              transition={{ duration: 0.6 }}
+            >
+              <span className="px-4 py-2 rounded-full bg-purple-500/10 border border-purple-500/30 text-purple-400 text-sm font-medium mb-4 inline-block">
+                <BookOpen className="w-4 h-4 inline mr-2" />
+                4-Week Structured Course
+              </span>
+              <h3 className="text-2xl sm:text-3xl font-bold text-white mb-4">
+                Progressive Training That <span className="gradient-text">Builds You Up</span>
               </h3>
-              <Badge className="bg-fuchsia-500/20 text-fuchsia-400 border-fuchsia-500/30 text-lg px-4 py-2 mb-4 inline-block">
-                1 x 4 Week Pole Foundations Course
-              </Badge>
-              <p className="text-gray-400 mb-2">Value: <span className="text-white font-semibold">$199</span></p>
+              <p className="text-lg text-gray-300 mb-6">
+                A structured pathway where each week builds on the last, so you're never stuck, always improving, and constantly surprised by what you can do.
+              </p>
               
-              <ul className="space-y-4 mt-6">
-                <li className="flex items-start gap-3">
-                  <span className="text-2xl">📈</span>
-                  <div>
-                    <span className="text-white font-semibold">Step by step progress:</span>
-                    <span className="text-gray-300"> a structured pathway where each week builds on the last, so you're never stuck, always improving.</span>
-                  </div>
+              <ul className="space-y-3 mb-6">
+                <li className="flex items-center gap-3 text-gray-300">
+                  <TrendingUp className="w-5 h-5 text-fuchsia-400 flex-shrink-0" />
+                  <span><strong className="text-white">Step by step progress</strong> with clear milestones each week</span>
                 </li>
-                <li className="flex items-start gap-3">
-                  <span className="text-2xl">💪</span>
-                  <div>
-                    <span className="text-white font-semibold">Stronger every session:</span>
-                    <span className="text-gray-300"> training that develops your strength, technique, and stamina in a way that actually sticks.</span>
-                  </div>
+                <li className="flex items-center gap-3 text-gray-300">
+                  <Zap className="w-5 h-5 text-fuchsia-400 flex-shrink-0" />
+                  <span><strong className="text-white">Stronger every session</strong> - technique and stamina that sticks</span>
                 </li>
-                <li className="flex items-start gap-3">
-                  <span className="text-2xl">✨</span>
-                  <div>
-                    <span className="text-white font-semibold">Confidence on repeat:</span>
-                    <span className="text-gray-300"> finish each session with new wins, new skills, and momentum for your next class.</span>
-                  </div>
+                <li className="flex items-center gap-3 text-gray-300">
+                  <Sparkles className="w-5 h-5 text-fuchsia-400 flex-shrink-0" />
+                  <span><strong className="text-white">Confidence on repeat</strong> - new wins with every class</span>
                 </li>
               </ul>
-            </div>
+            </motion.div>
             
-            <div className="order-1 lg:order-2">
-              <div className="aspect-square rounded-2xl overflow-hidden border-2 border-fuchsia-500/30">
+            <motion.div
+              initial={{ opacity: 0, x: 30 }}
+              whileInView={{ opacity: 1, x: 0 }}
+              viewport={{ once: true }}
+              transition={{ duration: 0.6 }}
+            >
+              <div className="aspect-square rounded-2xl overflow-hidden border-2 border-fuchsia-500/30 bg-gray-800">
                 <img src={coursesAsset} alt="Pole Foundations Course" className="w-full h-full object-cover" />
               </div>
-            </div>
-          </motion.div>
+            </motion.div>
+          </div>
 
-          {/* Inclusion 2: Flexi Pass */}
-          <motion.div 
-            initial={{ opacity: 0, y: 30 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true }}
-            className="grid lg:grid-cols-2 gap-8 items-center mb-16"
-          >
-            <div>
-              <div className="aspect-square rounded-2xl overflow-hidden border-2 border-fuchsia-500/30">
-                <img src={flexiPassAsset} alt="8 Session Flexi Pass" className="w-full h-full object-cover" />
+          {/* Inclusion 2: Session Flexi Pass (Image Left) */}
+          <div className="grid lg:grid-cols-2 gap-12 items-center mb-20">
+            <motion.div
+              initial={{ opacity: 0, x: -30 }}
+              whileInView={{ opacity: 1, x: 0 }}
+              viewport={{ once: true }}
+              transition={{ duration: 0.6 }}
+            >
+              <div className="aspect-square rounded-2xl overflow-hidden border-2 border-fuchsia-500/30 bg-gray-800">
+                <img src={flexiPassAsset} alt="Weekly Classes" className="w-full h-full object-cover" />
               </div>
-            </div>
+            </motion.div>
             
-            <div>
-              <h3 className="text-2xl font-bold text-white mb-4">
-                Sweat, Smile, Repeat: Weekly Classes Designed to Empower You
+            <motion.div
+              initial={{ opacity: 0, x: 30 }}
+              whileInView={{ opacity: 1, x: 0 }}
+              viewport={{ once: true }}
+              transition={{ duration: 0.6 }}
+            >
+              <span className="px-4 py-2 rounded-full bg-cyan-500/10 border border-cyan-500/30 text-cyan-400 text-sm font-medium mb-4 inline-block">
+                <Calendar className="w-4 h-4 inline mr-2" />
+                8 Sessions Per Month
+              </span>
+              <h3 className="text-2xl sm:text-3xl font-bold text-white mb-4">
+                Weekly Classes Designed to <span className="gradient-text">Empower You</span>
               </h3>
-              <Badge className="bg-fuchsia-500/20 text-fuchsia-400 border-fuchsia-500/30 text-lg px-4 py-2 mb-4 inline-block">
-                8 x Session Flexi Pass
-              </Badge>
-              <p className="text-gray-400 mb-2">Value: <span className="text-white font-semibold">$336</span></p>
+              <p className="text-lg text-gray-300 mb-6">
+                Dance, conditioning, and skill-based classes across the week to keep your training fresh, fun, and effective.
+              </p>
               
-              <ul className="space-y-4 mt-6">
-                <li className="flex items-start gap-3">
-                  <span className="text-2xl">💜</span>
-                  <div>
-                    <span className="text-white font-semibold">Choose your vibe every time:</span>
-                    <span className="text-gray-300"> with dance, conditioning, and skill based classes, your training stays fresh and fun.</span>
-                  </div>
+              <ul className="space-y-3 mb-6">
+                <li className="flex items-center gap-3 text-gray-300">
+                  <Heart className="w-5 h-5 text-fuchsia-400 flex-shrink-0" />
+                  <span><strong className="text-white">Choose your vibe</strong> - variety keeps every session fresh</span>
                 </li>
-                <li className="flex items-start gap-3">
-                  <span className="text-2xl">💪</span>
-                  <div>
-                    <span className="text-white font-semibold">Fun that works:</span>
-                    <span className="text-gray-300"> every session leaves you sweaty, smiling, and stronger - making showing up easier.</span>
-                  </div>
+                <li className="flex items-center gap-3 text-gray-300">
+                  <Zap className="w-5 h-5 text-fuchsia-400 flex-shrink-0" />
+                  <span><strong className="text-white">Fun that works</strong> - sweaty, smiling, and stronger</span>
                 </li>
-                <li className="flex items-start gap-3">
-                  <span className="text-2xl">✨</span>
-                  <div>
-                    <span className="text-white font-semibold">Grow on your terms:</span>
-                    <span className="text-gray-300"> explore different class styles, find what you love, and build confidence with every session.</span>
-                  </div>
+                <li className="flex items-center gap-3 text-gray-300">
+                  <Sparkles className="w-5 h-5 text-fuchsia-400 flex-shrink-0" />
+                  <span><strong className="text-white">Grow on your terms</strong> - explore and find what you love</span>
                 </li>
               </ul>
-            </div>
-          </motion.div>
+            </motion.div>
+          </div>
 
-          {/* Inclusion 3: Unlimited Practice */}
-          <motion.div 
-            initial={{ opacity: 0, y: 30 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true }}
-            className="grid lg:grid-cols-2 gap-8 items-center"
-          >
-            <div className="order-2 lg:order-1">
-              <h3 className="text-2xl font-bold text-white mb-4">
-                Unlimited Practice Time to Perfect Your Power Moves
+          {/* Inclusion 3: Unlimited Practice (Image Right) */}
+          <div className="grid lg:grid-cols-2 gap-12 items-center">
+            <motion.div
+              initial={{ opacity: 0, x: -30 }}
+              whileInView={{ opacity: 1, x: 0 }}
+              viewport={{ once: true }}
+              transition={{ duration: 0.6 }}
+            >
+              <span className="px-4 py-2 rounded-full bg-green-500/10 border border-green-500/30 text-green-400 text-sm font-medium mb-4 inline-block">
+                <RefreshCw className="w-4 h-4 inline mr-2" />
+                Unlimited Access
+              </span>
+              <h3 className="text-2xl sm:text-3xl font-bold text-white mb-4">
+                Practice Time to Perfect Your <span className="gradient-text">Power Moves</span>
               </h3>
-              <Badge className="bg-fuchsia-500/20 text-fuchsia-400 border-fuchsia-500/30 text-lg px-4 py-2 mb-4 inline-block">
-                Unlimited Practice Sessions
-              </Badge>
-              <p className="text-gray-400 mb-2">Value: <span className="text-white font-semibold">$180</span></p>
+              <p className="text-lg text-gray-300 mb-6">
+                Repeat moves until they click and feel natural in your body. The more you practice, the faster you progress.
+              </p>
               
-              <ul className="space-y-4 mt-6">
-                <li className="flex items-start gap-3">
-                  <span className="text-2xl">🔄</span>
-                  <div>
-                    <span className="text-white font-semibold">Progress at your own pace:</span>
-                    <span className="text-gray-300"> repeat moves until they click and feel natural in your body.</span>
-                  </div>
+              <ul className="space-y-3 mb-6">
+                <li className="flex items-center gap-3 text-gray-300">
+                  <Target className="w-5 h-5 text-fuchsia-400 flex-shrink-0" />
+                  <span><strong className="text-white">Progress at your pace</strong> - until moves feel natural</span>
                 </li>
-                <li className="flex items-start gap-3">
-                  <span className="text-2xl">💪</span>
-                  <div>
-                    <span className="text-white font-semibold">Lock in muscle memory faster:</span>
-                    <span className="text-gray-300"> extra practice helps you retain skills and improve quicker between classes.</span>
-                  </div>
+                <li className="flex items-center gap-3 text-gray-300">
+                  <Zap className="w-5 h-5 text-fuchsia-400 flex-shrink-0" />
+                  <span><strong className="text-white">Lock in muscle memory</strong> - retain skills faster</span>
                 </li>
-                <li className="flex items-start gap-3">
-                  <span className="text-2xl">✨</span>
-                  <div>
-                    <span className="text-white font-semibold">Turn consistency into confidence:</span>
-                    <span className="text-gray-300"> the more you show up, the stronger, smoother, and more fearless you become.</span>
-                  </div>
+                <li className="flex items-center gap-3 text-gray-300">
+                  <Sparkles className="w-5 h-5 text-fuchsia-400 flex-shrink-0" />
+                  <span><strong className="text-white">Consistency builds confidence</strong> - smoother and fearless</span>
                 </li>
               </ul>
-            </div>
+            </motion.div>
             
-            <div className="order-1 lg:order-2">
-              <div className="aspect-square rounded-2xl overflow-hidden border-2 border-fuchsia-500/30">
+            <motion.div
+              initial={{ opacity: 0, x: 30 }}
+              whileInView={{ opacity: 1, x: 0 }}
+              viewport={{ once: true }}
+              transition={{ duration: 0.6 }}
+            >
+              <div className="aspect-square rounded-2xl overflow-hidden border-2 border-fuchsia-500/30 bg-gray-800">
                 <img src={practiceAsset} alt="Unlimited Practice" className="w-full h-full object-cover" />
               </div>
-            </div>
-          </motion.div>
+            </motion.div>
+          </div>
         </div>
       </section>
 
