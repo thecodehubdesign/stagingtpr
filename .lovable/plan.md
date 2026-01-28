@@ -1,166 +1,135 @@
 
 
-## Add Sister Studio Relationships to Location Pages
+## Sister Studio Component Updates
 
 ### Overview
 
-Create a new component that displays sister studio training relationships directly under the timetable section on specific studio pages. This will only appear on Rowville, Narre Warren, Mitcham, and Kilsyth studio pages.
+Update the StudioSisterStudio component with distance badges, updated messaging, membership hyperlink, blue/cyan color scheme, and move it directly below the Mindbody widget inside the timetable section.
 
 ---
 
-### Files to Create/Modify
+### Files to Modify
 
-| File | Action | Description |
-|------|--------|-------------|
-| `src/components/studio/StudioSisterStudio.tsx` | CREATE | New component for sister studio relationship |
-| `src/pages/StudioDetail.tsx` | MODIFY | Add the new component after timetable |
-
----
-
-### Sister Studio Relationships
-
-| Studio | Sister Studio |
-|--------|---------------|
-| Rowville | Narre Warren |
-| Narre Warren | Rowville |
-| Mitcham | Kilsyth |
-| Kilsyth | Mitcham |
+| File | Changes |
+|------|---------|
+| `src/components/studio/StudioSisterStudio.tsx` | Add distances, update colors to blue/cyan, update text, add membership link, make inline-ready |
+| `src/components/studio/StudioClassList.tsx` | Import and embed StudioSisterStudio below Mindbody widget |
+| `src/pages/StudioDetail.tsx` | Remove standalone StudioSisterStudio import and usage |
 
 ---
 
-### New Component: StudioSisterStudio.tsx
+### 1. StudioSisterStudio.tsx Updates
+
+#### Add Distance Data
 
 ```text
-import { motion } from 'framer-motion';
-import { Link } from 'react-router-dom';
-import { Heart, MapPin, ArrowRight } from 'lucide-react';
-import { Studio, studios } from '@/data/studios';
-
-interface StudioSisterStudioProps {
-  studio: Studio;
-}
-
-// Define sister studio relationships
-const sisterRelationships: Record<string, string> = {
-  'rowville': 'narre-warren',
-  'narre-warren': 'rowville',
-  'mitcham': 'kilsyth',
-  'kilsyth': 'mitcham',
+const sisterDistances: Record<string, string> = {
+  'mitcham': '12km',
+  'kilsyth': '12km',
+  'rowville': '16.6km',
+  'narre-warren': '16.6km',
 };
-
-const StudioSisterStudio = ({ studio }: StudioSisterStudioProps) => {
-  const sisterStudioId = sisterRelationships[studio.id];
-  
-  // Only render if this studio has a sister relationship
-  if (!sisterStudioId) return null;
-  
-  const sisterStudio = studios.find(s => s.id === sisterStudioId);
-  if (!sisterStudio) return null;
-  
-  const currentLocation = studio.name.replace('The Pole Room ', '');
-  const sisterLocation = sisterStudio.name.replace('The Pole Room ', '');
-
-  return (
-    <section className="py-16 bg-gray-800">
-      <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
-        <motion.div
-          initial={{ opacity: 0, y: 20 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true }}
-          className="cyber-card p-6 sm:p-8 rounded-2xl"
-        >
-          <div className="flex items-center gap-3 mb-4">
-            <div className="w-10 h-10 rounded-full bg-purple-500/20 flex items-center justify-center">
-              <Heart className="w-5 h-5 text-purple-400" />
-            </div>
-            <span className="px-3 py-1 rounded-full bg-purple-500/10 border border-purple-500/30 text-purple-400 text-sm font-medium">
-              Sister Studio
-            </span>
-          </div>
-          
-          <h3 className="text-2xl font-bold text-white mb-3">
-            Train at <span className="gradient-text">{sisterLocation}</span> Too!
-          </h3>
-          
-          <p className="text-gray-300 mb-6">
-            Your {currentLocation} membership gives you access to train at our {sisterLocation} studio too! 
-            Enjoy the flexibility of training at either location with the same membership.
-          </p>
-          
-          <div className="flex flex-col sm:flex-row items-start sm:items-center gap-4">
-            <div className="flex items-center gap-2 text-gray-400">
-              <MapPin className="w-4 h-4 text-fuchsia-400" />
-              <span className="text-sm">{sisterStudio.address}</span>
-            </div>
-            
-            <Link 
-              to={`/studios/${sisterStudioId}`}
-              className="inline-flex items-center gap-2 px-4 py-2 rounded-lg bg-fuchsia-500/20 text-fuchsia-400 hover:bg-fuchsia-500/30 transition-colors text-sm font-medium"
-            >
-              View {sisterLocation} Studio
-              <ArrowRight className="w-4 h-4" />
-            </Link>
-          </div>
-        </motion.div>
-      </div>
-    </section>
-  );
-};
-
-export default StudioSisterStudio;
 ```
+
+#### Color Scheme Changes (Purple to Cyan/Blue)
+
+| Element | Old | New |
+|---------|-----|-----|
+| Icon circle | `bg-purple-500/20` | `bg-cyan-500/20` |
+| Heart icon | `text-purple-400` | `text-cyan-400` |
+| Badge bg | `bg-purple-500/10` | `bg-cyan-500/10` |
+| Badge border | `border-purple-500/30` | `border-cyan-500/30` |
+| Badge text | `text-purple-400` | `text-cyan-400` |
+| MapPin icon | `text-fuchsia-400` | `text-cyan-400` |
+| CTA button | `bg-fuchsia-500/20 text-fuchsia-400` | `bg-cyan-500/20 text-cyan-400` |
+| Card wrapper | `cyber-card` | `border border-cyan-500/30 bg-gray-800/50` |
+
+#### Updated Text Content
+
+**From:**
+```text
+Your {currentLocation} membership gives you access to train at our {sisterLocation} studio too! 
+Enjoy the flexibility of training at either location with the same membership.
+```
+
+**To:**
+```text
+Your {currentLocation} class passes can be used to book classes at our {sisterLocation} studio too! 
+Enjoy the flexibility of training at either location with the same <Link to="/memberships">membership</Link> or introductory package.
+```
+
+#### Add Distance Badge
+
+Display next to the "Sister Studio" badge:
+```text
+<span className="px-3 py-1 rounded-full bg-gray-700 text-gray-300 text-sm font-medium">
+  {distance} away
+</span>
+```
+
+#### Make Component Inline-Ready
+
+- Add `inline?: boolean` prop to interface
+- Remove `<section>` wrapper when inline
+- Use conditional styling for embedded vs standalone use
 
 ---
 
-### StudioDetail.tsx Updates
+### 2. StudioClassList.tsx Updates
 
-**Add import (after line 7):**
+#### Add Import
+
+```text
+import StudioSisterStudio from './StudioSisterStudio';
+```
+
+#### Embed Below Mindbody Widget
+
+After the cyber-card containing the Mindbody widget (line 62), add:
+
+```text
+{/* Sister Studio - appears directly below timetable for partnered studios */}
+<StudioSisterStudio studio={studio} inline />
+```
+
+This places the sister studio card inside the same `max-w-4xl mx-auto` container, directly under the schedule.
+
+---
+
+### 3. StudioDetail.tsx Updates
+
+#### Remove Import (Line 15)
+
+Delete:
 ```text
 import StudioSisterStudio from '@/components/studio/StudioSisterStudio';
 ```
 
-**Add section after timetable (after line 73):**
+#### Remove Standalone Usage (Lines 76-77)
+
+Delete:
 ```text
-      {/* Sister Studio Section - Only shows for partnered studios */}
-      <StudioSisterStudio studio={studio} />
+{/* Sister Studio Section - Only shows for partnered studios */}
+<StudioSisterStudio studio={studio} />
 ```
 
 ---
 
-### Component Behavior
+### Visual Result
 
-The component will:
-
-1. **Check if the current studio has a sister relationship** - Uses a lookup object to find the partner
-2. **Return null if no relationship exists** - CBD, Eltham, and Highett pages won't show anything
-3. **Only render on these 4 studios**: Rowville, Narre Warren, Mitcham, Kilsyth
-4. **Display dynamically** - Shows the correct sister studio name, address, and link
-
----
-
-### Visual Design
-
-The component will match the existing cyberpunk aesthetic with:
-
-| Element | Style |
-|---------|-------|
-| Container | `cyber-card` with `bg-gray-800` background |
-| Badge | Purple color scheme (`purple-500/10` border, `purple-400` text) |
-| Icon | Heart icon in a purple-tinted circle |
-| Title | Bold white with gradient text for sister location |
-| CTA Button | Fuchsia link button with arrow |
+The sister studio card will now:
+- Appear directly below the Mindbody booking widget (inside the timetable section)
+- Have a cyan/blue border matching the site's color scheme
+- Show distance badges: "12km away" for Mitcham/Kilsyth, "16.6km away" for Rowville/Narre Warren
+- Have "membership" hyperlinked to `/memberships`
+- Use updated messaging about "class passes" and "introductory package"
 
 ---
 
-### Summary
+### Distance Summary
 
-| Studio Page | Will Show Sister Studio Section? | Partner Displayed |
-|-------------|----------------------------------|-------------------|
-| `/studios/rowville` | Yes | Narre Warren |
-| `/studios/narre-warren` | Yes | Rowville |
-| `/studios/mitcham` | Yes | Kilsyth |
-| `/studios/kilsyth` | Yes | Mitcham |
-| `/studios/highett` | No | - |
-| `/studios/eltham` | No | - |
-| `/studios/cbd` | No | - |
+| Studio Pair | Distance |
+|-------------|----------|
+| Mitcham ↔ Kilsyth | 12km |
+| Rowville ↔ Narre Warren | 16.6km |
 
