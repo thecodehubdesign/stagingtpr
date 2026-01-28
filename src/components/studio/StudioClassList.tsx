@@ -1,5 +1,6 @@
 import { useEffect } from 'react';
 import { Studio } from '@/data/studios';
+import StudioSisterStudio from './StudioSisterStudio';
 
 interface StudioClassListProps {
   studio: Studio;
@@ -60,6 +61,9 @@ const StudioClassList = ({ studio }: StudioClassListProps) => {
               />
             </div>
           </div>
+
+          {/* Sister Studio - appears directly below timetable for partnered studios */}
+          <StudioSisterStudio studio={studio} inline />
         </div>
       </div>
     </section>
