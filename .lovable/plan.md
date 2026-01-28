@@ -33,7 +33,7 @@ Based on the Virtual Studio and Performance sections:
 
 #### Header (Simplified)
 
-```tsx
+```text
 <div className="text-center mb-16">
   <span className="px-4 py-2 rounded-full bg-fuchsia-500/10 border border-fuchsia-500/30 text-fuchsia-400 text-sm font-medium mb-6 inline-block">
     <Gift className="w-4 h-4 inline mr-2" />
@@ -53,7 +53,7 @@ Based on the Virtual Studio and Performance sections:
 
 #### Inclusion 1: Pole Foundations Course
 
-```tsx
+```text
 <motion.div className="grid lg:grid-cols-2 gap-12 items-center mb-20">
   <motion.div
     initial={{ opacity: 0, x: -30 }}
@@ -103,7 +103,7 @@ Based on the Virtual Studio and Performance sections:
 
 #### Inclusion 2: Session Flexi Pass (Image Left)
 
-```tsx
+```text
 <motion.div className="grid lg:grid-cols-2 gap-12 items-center mb-20">
   <motion.div
     initial={{ opacity: 0, x: -30 }}
@@ -153,7 +153,7 @@ Based on the Virtual Studio and Performance sections:
 
 #### Inclusion 3: Unlimited Practice (Image Right)
 
-```tsx
+```text
 <motion.div className="grid lg:grid-cols-2 gap-12 items-center">
   <motion.div
     initial={{ opacity: 0, x: -30 }}
@@ -203,7 +203,7 @@ Based on the Virtual Studio and Performance sections:
 
 ### Icon Imports to Add
 
-```tsx
+```text
 import { 
   // ... existing imports
   Gift, 
