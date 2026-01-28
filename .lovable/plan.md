@@ -1,222 +1,166 @@
 
 
-## Memberships Page URL & Content Updates
+## Add Sister Studio Relationships to Location Pages
 
 ### Overview
 
-This plan updates the Pricing page to use `/memberships` URL, adds a sister studios section, updates section badges, and removes several sections as requested.
+Create a new component that displays sister studio training relationships directly under the timetable section on specific studio pages. This will only appear on Rowville, Narre Warren, Mitcham, and Kilsyth studio pages.
 
 ---
 
-### Files to Modify
+### Files to Create/Modify
 
-| File | Changes |
-|------|---------|
-| `src/App.tsx` | Change route from `/pricing` to `/memberships` |
-| `src/components/Header.tsx` | Update navigation links (desktop + mobile) |
-| `src/components/Footer.tsx` | Update footer link |
-| `src/pages/Pricing.tsx` | Major content updates |
+| File | Action | Description |
+|------|--------|-------------|
+| `src/components/studio/StudioSisterStudio.tsx` | CREATE | New component for sister studio relationship |
+| `src/pages/StudioDetail.tsx` | MODIFY | Add the new component after timetable |
 
 ---
 
-### 1. Route Change (App.tsx)
+### Sister Studio Relationships
 
-**Line 79:** Change `/pricing` to `/memberships`
-
-```text
-<Route path="/memberships" element={<Pricing />} />
-```
-
----
-
-### 2. Header Navigation Updates (Header.tsx)
-
-**Line 96:** Update About menu link from `/pricing` to `/memberships`
-
-```text
-{ name: 'Memberships', href: '/memberships', description: 'Flexible packages' },
-```
-
-Also update the mobile menu section that references pricing (around line 390+).
+| Studio | Sister Studio |
+|--------|---------------|
+| Rowville | Narre Warren |
+| Narre Warren | Rowville |
+| Mitcham | Kilsyth |
+| Kilsyth | Mitcham |
 
 ---
 
-### 3. Footer Link Update (Footer.tsx)
-
-**Line 130:** Update company links array
+### New Component: StudioSisterStudio.tsx
 
 ```text
-{ name: 'Memberships', href: '/memberships' },
-```
+import { motion } from 'framer-motion';
+import { Link } from 'react-router-dom';
+import { Heart, MapPin, ArrowRight } from 'lucide-react';
+import { Studio, studios } from '@/data/studios';
 
----
+interface StudioSisterStudioProps {
+  studio: Studio;
+}
 
-### 4. Pricing.tsx Content Updates
+// Define sister studio relationships
+const sisterRelationships: Record<string, string> = {
+  'rowville': 'narre-warren',
+  'narre-warren': 'rowville',
+  'mitcham': 'kilsyth',
+  'kilsyth': 'mitcham',
+};
 
-#### 4.1 Update Section Navigation (Lines 18-25)
+const StudioSisterStudio = ({ studio }: StudioSisterStudioProps) => {
+  const sisterStudioId = sisterRelationships[studio.id];
+  
+  // Only render if this studio has a sister relationship
+  if (!sisterStudioId) return null;
+  
+  const sisterStudio = studios.find(s => s.id === sisterStudioId);
+  if (!sisterStudio) return null;
+  
+  const currentLocation = studio.name.replace('The Pole Room ', '');
+  const sisterLocation = sisterStudio.name.replace('The Pole Room ', '');
 
-Remove 'guarantee' from the sections array:
-
-```text
-const pricingSections = [
-  { id: 'membership', label: 'Membership' },
-  { id: 'whats-included', label: "What's Included" },
-  { id: 'virtual-studio', label: 'Virtual Studio' },
-  { id: 'performances', label: 'Performances' },
-  { id: 'sister-studios', label: 'Sister Studios' },
-  { id: 'faq', label: 'FAQ' },
-];
-```
-
-#### 4.2 Update Hero Section (Lines 99-124)
-
-- Remove the "Claim Your Free Class" button (lines 117-121)
-- Keep hero text as is
-
-#### 4.3 Update Main Header Text (Lines 261-272)
-
-Change the header badge and title:
-
-```text
-<span className="px-4 py-2 rounded-full bg-fuchsia-500/10 border border-fuchsia-500/30 text-fuchsia-400 text-sm font-medium mb-6 inline-block">
-  <Gift className="w-4 h-4 inline mr-2" />
-  Everything Included in Our Memberships
-</span>
-```
-
-#### 4.4 Update Section Badges
-
-Replace each section's badge text:
-
-| Section | Current Badge | New Badge |
-|---------|--------------|-----------|
-| Pole Foundations (line 284) | "4-Week Structured Course" | "Structured Course Lessons" |
-| Flexi Pass (line 367) | "8 Sessions Per Month" | "Casual Class Sessions" |
-| Practice (line 407) | "Unlimited Access" | "Unlimited Practice Time" |
-| Virtual Studio (line 467) | "Included with Membership" | "Virtual Studio Access" |
-| Performances (line 533) | None | Add: "TPR Stage Shows & Comp Eligibility" |
-
-#### 4.5 Remove 100% Satisfaction Guarantee Section (Lines 606-633)
-
-Delete entire section:
-```text
-{/* Money Back Guarantee */}
-<section id="guarantee" className="py-20 bg-gradient-to-r from-green-600 to-emerald-600">
-  ...
-</section>
-```
-
-#### 4.6 Add Sister Studios / Training Relationships Section
-
-Insert new section before FAQ (after performances section, around line 604):
-
-```text
-{/* Sister Studios / Training Relationships */}
-<section id="sister-studios" className="py-20 bg-gray-900">
-  <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-    <motion.div
-      initial={{ opacity: 0, y: 20 }}
-      whileInView={{ opacity: 1, y: 0 }}
-      viewport={{ once: true }}
-      className="text-center mb-12"
-    >
-      <span className="px-4 py-2 rounded-full bg-purple-500/10 border border-purple-500/30 text-purple-400 text-sm font-medium mb-6 inline-block">
-        <Heart className="w-4 h-4 inline mr-2" />
-        Training Relationships
-      </span>
-      <h2 className="text-3xl sm:text-4xl font-bold text-white mb-4">
-        Sister <span className="gradient-text">Studios</span>
-      </h2>
-      <p className="text-lg text-gray-300 max-w-3xl mx-auto">
-        Our studios share training partnerships, giving you more flexibility and options for your pole journey.
-      </p>
-    </motion.div>
-    
-    <div className="grid md:grid-cols-2 gap-8 max-w-4xl mx-auto">
-      {/* Partnership 1 */}
-      <motion.div
-        initial={{ opacity: 0, x: -20 }}
-        whileInView={{ opacity: 1, x: 0 }}
-        viewport={{ once: true }}
-        className="cyber-card p-6 rounded-xl"
-      >
-        <div className="flex items-center gap-4 mb-4">
-          <div className="w-12 h-12 rounded-full bg-fuchsia-500/20 flex items-center justify-center">
-            <MapPin className="w-6 h-6 text-fuchsia-400" />
+  return (
+    <section className="py-16 bg-gray-800">
+      <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
+        <motion.div
+          initial={{ opacity: 0, y: 20 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true }}
+          className="cyber-card p-6 sm:p-8 rounded-2xl"
+        >
+          <div className="flex items-center gap-3 mb-4">
+            <div className="w-10 h-10 rounded-full bg-purple-500/20 flex items-center justify-center">
+              <Heart className="w-5 h-5 text-purple-400" />
+            </div>
+            <span className="px-3 py-1 rounded-full bg-purple-500/10 border border-purple-500/30 text-purple-400 text-sm font-medium">
+              Sister Studio
+            </span>
           </div>
-          <h3 className="text-xl font-bold text-white">Rowville & Narre Warren</h3>
-        </div>
-        <p className="text-gray-300">
-          These sister studios share memberships - train at either location when holding a membership at one of these two studios.
-        </p>
-      </motion.div>
-      
-      {/* Partnership 2 */}
-      <motion.div
-        initial={{ opacity: 0, x: 20 }}
-        whileInView={{ opacity: 1, x: 0 }}
-        viewport={{ once: true }}
-        className="cyber-card p-6 rounded-xl"
-      >
-        <div className="flex items-center gap-4 mb-4">
-          <div className="w-12 h-12 rounded-full bg-cyan-500/20 flex items-center justify-center">
-            <MapPin className="w-6 h-6 text-cyan-400" />
+          
+          <h3 className="text-2xl font-bold text-white mb-3">
+            Train at <span className="gradient-text">{sisterLocation}</span> Too!
+          </h3>
+          
+          <p className="text-gray-300 mb-6">
+            Your {currentLocation} membership gives you access to train at our {sisterLocation} studio too! 
+            Enjoy the flexibility of training at either location with the same membership.
+          </p>
+          
+          <div className="flex flex-col sm:flex-row items-start sm:items-center gap-4">
+            <div className="flex items-center gap-2 text-gray-400">
+              <MapPin className="w-4 h-4 text-fuchsia-400" />
+              <span className="text-sm">{sisterStudio.address}</span>
+            </div>
+            
+            <Link 
+              to={`/studios/${sisterStudioId}`}
+              className="inline-flex items-center gap-2 px-4 py-2 rounded-lg bg-fuchsia-500/20 text-fuchsia-400 hover:bg-fuchsia-500/30 transition-colors text-sm font-medium"
+            >
+              View {sisterLocation} Studio
+              <ArrowRight className="w-4 h-4" />
+            </Link>
           </div>
-          <h3 className="text-xl font-bold text-white">Mitcham & Kilsyth</h3>
-        </div>
-        <p className="text-gray-300">
-          These sister studios share memberships - train at either location when holding a membership at one of these two studios.
-        </p>
-      </motion.div>
-    </div>
-  </div>
-</section>
+        </motion.div>
+      </div>
+    </section>
+  );
+};
+
+export default StudioSisterStudio;
 ```
 
-#### 4.7 Remove "Ready to Start Your Journey" Section (Lines 663-694)
+---
 
-Delete the entire Final CTA section:
+### StudioDetail.tsx Updates
+
+**Add import (after line 7):**
 ```text
-{/* Final CTA */}
-<section className="py-20 bg-gradient-to-br from-gray-900 via-purple-900 to-gray-900 cyber-grid">
-  ...
-</section>
+import StudioSisterStudio from '@/components/studio/StudioSisterStudio';
 ```
 
-#### 4.8 Add MapPin Icon Import (Line 8)
-
-Add `MapPin` to lucide-react imports for the sister studios section.
-
----
-
-### Summary of Removals
-
-| Section | Status |
-|---------|--------|
-| Hero "Claim Your Free Class" button | REMOVE |
-| 100% Satisfaction Guarantee section | REMOVE |
-| "Ready to Start Your Journey" final CTA | REMOVE |
-
-### Summary of Additions
-
-| Section | Status |
-|---------|--------|
-| Sister Studios section | ADD (before FAQ) |
-| Performance badge "TPR Stage Shows & Comp Eligibility" | ADD |
-
-### URL Changes
-
-| Location | Old | New |
-|----------|-----|-----|
-| Route (App.tsx) | `/pricing` | `/memberships` |
-| Header menu | `Pricing` → `/pricing` | `Memberships` → `/memberships` |
-| Footer link | `Pricing` → `/pricing` | `Memberships` → `/memberships` |
+**Add section after timetable (after line 73):**
+```text
+      {/* Sister Studio Section - Only shows for partnered studios */}
+      <StudioSisterStudio studio={studio} />
+```
 
 ---
 
-### Technical Notes
+### Component Behavior
 
-- The Rowville studio mentioned in the sister studios section needs to be added to the studios data if not already present
-- All internal links referencing `/pricing` should be updated to `/memberships`
-- The section navigation will automatically update scroll-spy behavior based on the new sections array
+The component will:
+
+1. **Check if the current studio has a sister relationship** - Uses a lookup object to find the partner
+2. **Return null if no relationship exists** - CBD, Eltham, and Highett pages won't show anything
+3. **Only render on these 4 studios**: Rowville, Narre Warren, Mitcham, Kilsyth
+4. **Display dynamically** - Shows the correct sister studio name, address, and link
+
+---
+
+### Visual Design
+
+The component will match the existing cyberpunk aesthetic with:
+
+| Element | Style |
+|---------|-------|
+| Container | `cyber-card` with `bg-gray-800` background |
+| Badge | Purple color scheme (`purple-500/10` border, `purple-400` text) |
+| Icon | Heart icon in a purple-tinted circle |
+| Title | Bold white with gradient text for sister location |
+| CTA Button | Fuchsia link button with arrow |
+
+---
+
+### Summary
+
+| Studio Page | Will Show Sister Studio Section? | Partner Displayed |
+|-------------|----------------------------------|-------------------|
+| `/studios/rowville` | Yes | Narre Warren |
+| `/studios/narre-warren` | Yes | Rowville |
+| `/studios/mitcham` | Yes | Kilsyth |
+| `/studios/kilsyth` | Yes | Mitcham |
+| `/studios/highett` | No | - |
+| `/studios/eltham` | No | - |
+| `/studios/cbd` | No | - |
 
