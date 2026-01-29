@@ -86,7 +86,7 @@ const StudioDetail = () => {
 
       {/* FAQ Section */}
       <div id="faq">
-        <StudioFAQ />
+        <StudioFAQ studio={studio} />
       </div>
 
       {/* Local Support Section */}

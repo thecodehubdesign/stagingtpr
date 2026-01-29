@@ -1,13 +1,15 @@
 import { useState } from "react";
-import { ChevronRight, X, Newspaper, Clock, User, Calendar } from "lucide-react";
+import { ChevronRight, X, Newspaper, Clock, User, Calendar, Info, ChevronDown } from "lucide-react";
 import { Link } from "react-router-dom";
 import { motion } from "framer-motion";
 import { Sheet, SheetContent, SheetHeader, SheetTitle, SheetClose } from "@/components/ui/sheet";
 import { ScrollArea } from "@/components/ui/scroll-area";
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
+import { Accordion, AccordionContent, AccordionItem, AccordionTrigger } from "@/components/ui/accordion";
 import { useIsMobile } from "@/hooks/use-mobile";
 import FreeTrialBookingForm from "../FreeTrialBookingForm";
+import { Studio } from "@/data/studios";
 
 // Blog posts data linked to FAQs
 const blogPostsData = [
@@ -78,51 +80,6 @@ const blogPostsData = [
     `
   },
   {
-    id: 5,
-    title: "Bringing Friends: The Power of Working Out Together",
-    excerpt: "Why bringing a friend to your first class can make all the difference in your fitness journey.",
-    image: "/lovable-uploads/3cc0b943-7d1c-4140-a59c-a60390d03154.jpg",
-    date: "December 20, 2023",
-    author: "Sarah Mitchell",
-    readTime: "4 min read",
-    content: `
-      <p>Everything is better with friends, and pole fitness is no exception. Here's why bringing a buddy to class can enhance your experience.</p>
-      
-      <h3>Shared Experience</h3>
-      <p>Learning something new together creates lasting memories. You can encourage each other, laugh together, and celebrate each other's wins.</p>
-      
-      <h3>Accountability Partner</h3>
-      <p>Having a friend to attend classes with increases your likelihood of showing up consistently. You'll motivate each other on those days when the couch seems more appealing.</p>
-      
-      <h3>Special Group Rates</h3>
-      <p>We offer special rates for groups booking together! Whether it's a girls' night out or a regular training duo, ask about our buddy discounts.</p>
-    `
-  },
-  {
-    id: 6,
-    title: "Understanding Our Cancellation Policy",
-    excerpt: "Life happens! Here's everything you need to know about our flexible cancellation policy.",
-    image: "/lovable-uploads/8a7c62c9-86e6-4d10-a555-f79e5ed95001.png",
-    date: "December 15, 2023",
-    author: "Admin Team",
-    readTime: "3 min read",
-    content: `
-      <p>We understand that life can be unpredictable. Our cancellation policy is designed to be fair while ensuring classes remain available for all students.</p>
-      
-      <h3>Cancellation Window</h3>
-      <p>Classes can be cancelled up to 12 hours before the scheduled start time without penalty. This allows other students on the waitlist to take your spot.</p>
-      
-      <h3>Late Cancellations</h3>
-      <p>Cancellations made less than 12 hours before class will be counted as a used class for casual passers or marked as attended for term students.</p>
-      
-      <h3>How to Cancel</h3>
-      <p>You can cancel through our booking system, app, or by contacting the studio directly. We make it easy to manage your bookings.</p>
-      
-      <h3>Freezing Memberships</h3>
-      <p>Going on holiday or dealing with an injury? We offer membership freezes for extended absences. Just chat with our team to arrange.</p>
-    `
-  },
-  {
     id: 7,
     title: "Is Pole Dancing Right for You? A Complete Guide for Beginners",
     excerpt: "Everything you need to know about starting your pole fitness journey, regardless of your background.",
@@ -139,44 +96,89 @@ const blogPostsData = [
       <h3>No Prior Experience Needed</h3>
       <p>You don't need dance experience, athletic ability, or a certain body type. Our classes accommodate all fitness levels and body types. Everyone progresses at their own pace.</p>
       
+      <h3>What Ages Are Appropriate?</h3>
+      <p>We offer classes for teens (13+) with parental consent, adults of all ages, and even specialized 40+ classes. Pole fitness is adaptable to different life stages and fitness levels. There's no upper age limit - we have students in their 60s who love it!</p>
+      
       <h3>What Makes It Special</h3>
       <p>Pole combines strength training, dance, and acrobatics into one workout. It's challenging but incredibly rewarding, and the supportive community makes every achievement feel celebrated.</p>
     `
   }
 ];
 
-// FAQ data with linked blog posts
-const faqs = [
-  {
-    question: "What should I wear to my first class?",
-    blogPostId: 2
-  },
-  {
-    question: "Do I need to be fit or flexible to start?",
-    blogPostId: 3
-  },
-  {
-    question: "Is pole dancing appropriate for beginners?",
-    blogPostId: 7
-  },
-  {
-    question: "What's included in my membership?",
-    blogPostId: 4
-  },
-  {
-    question: "Can I bring a friend to class?",
-    blogPostId: 5
-  },
-  {
-    question: "What if I need to cancel or reschedule?",
-    blogPostId: 6
-  }
-];
+interface FAQItem {
+  question: string;
+  type: 'faq' | 'blog';
+  blogPostId?: number;
+  answer?: string;
+}
 
-const StudioFAQ = () => {
+interface StudioFAQProps {
+  studio: Studio;
+}
+
+const getFAQsForStudio = (studio: Studio): FAQItem[] => {
+  const locationName = studio.name.replace('The Pole Room ', '');
+  
+  return [
+    {
+      question: `How do I get started with ${studio.name}?`,
+      type: 'faq',
+      answer: `Starting is easy! Book your first class through our online booking system or give us a call at ${studio.phone}. We recommend starting with a Beginner Pole Foundations class - no experience required. Our friendly team will guide you through everything.`
+    },
+    {
+      question: `Do I need any experience to start pole dancing classes at ${locationName}?`,
+      type: 'blog',
+      blogPostId: 2
+    },
+    {
+      question: "What should I wear to my first class?",
+      type: 'blog',
+      blogPostId: 2
+    },
+    {
+      question: `Is there parking available at the ${locationName} studio?`,
+      type: 'faq',
+      answer: studio.parkingInfo?.join(' ') || 'Please contact the studio for parking information.'
+    },
+    {
+      question: "What are the class sizes like?",
+      type: 'faq',
+      answer: "Our classes typically have 6-10 students maximum, ensuring you get personalized attention from your instructor. This intimate setting allows for proper supervision and hands-on corrections."
+    },
+    {
+      question: "How do I choose my first class?",
+      type: 'faq',
+      answer: "We recommend starting with 'Beginner Pole Foundations' - it's designed specifically for first-timers with no experience required. After completing the foundations, your instructor will help guide you to the right progression class."
+    },
+    {
+      question: "Do I need to be fit, flexible or strong to start?",
+      type: 'blog',
+      blogPostId: 3
+    },
+    {
+      question: "What ages is pole dancing appropriate for?",
+      type: 'blog',
+      blogPostId: 7
+    },
+    {
+      question: "What membership options do you offer?",
+      type: 'blog',
+      blogPostId: 4
+    },
+    {
+      question: "Can I visit the studio before signing up?",
+      type: 'faq',
+      answer: `Absolutely! We encourage studio visits before booking your first class. Drop in to ${studio.address} during our opening hours to meet the team, see the space, and ask any questions. No appointment needed!`
+    }
+  ];
+};
+
+const StudioFAQ = ({ studio }: StudioFAQProps) => {
   const [isOpen, setIsOpen] = useState(false);
   const [selectedPost, setSelectedPost] = useState<typeof blogPostsData[0] | null>(null);
   const isMobile = useIsMobile();
+  
+  const faqs = getFAQsForStudio(studio);
 
   const handleFaqClick = (blogPostId: number) => {
     const post = blogPostsData.find(p => p.id === blogPostId);
@@ -202,35 +204,67 @@ const StudioFAQ = () => {
             <span className="gradient-text">Questions</span>
           </h2>
           <p className="text-gray-400 max-w-2xl mx-auto">
-            Click on any question to read our detailed blog article with all the information you need.
+            Find answers to common questions about {studio.name}. Click on blog posts to read more.
           </p>
         </motion.div>
 
-        <div className="max-w-3xl mx-auto space-y-4">
-          {faqs.map((faq, index) => (
-            <motion.div
-              key={index}
-              initial={{ opacity: 0, y: 20 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.4, delay: index * 0.1 }}
-              viewport={{ once: true }}
-              onClick={() => handleFaqClick(faq.blogPostId)}
-              className="group cursor-pointer border border-primary/20 rounded-xl p-5 bg-gray-900/50 hover:border-fuchsia-500/50 hover:bg-gray-900/80 transition-all duration-300"
-            >
-              <div className="flex items-center justify-between gap-4">
-                <span className="font-medium text-white group-hover:text-fuchsia-400 transition-colors">
-                  {faq.question}
-                </span>
-                <div className="flex items-center gap-2 shrink-0">
-                  <Badge variant="outline" className="text-xs border-fuchsia-500/30 text-fuchsia-400 hidden sm:flex">
-                    <Newspaper className="w-3 h-3 mr-1" />
-                    Blog
-                  </Badge>
-                  <ChevronRight className="w-5 h-5 text-gray-500 group-hover:text-fuchsia-400 group-hover:translate-x-1 transition-all" />
-                </div>
-              </div>
-            </motion.div>
-          ))}
+        <div className="max-w-3xl mx-auto space-y-3">
+          <Accordion type="single" collapsible className="space-y-3">
+            {faqs.map((faq, index) => (
+              faq.type === 'faq' ? (
+                <motion.div
+                  key={index}
+                  initial={{ opacity: 0, y: 20 }}
+                  whileInView={{ opacity: 1, y: 0 }}
+                  transition={{ duration: 0.4, delay: index * 0.05 }}
+                  viewport={{ once: true }}
+                >
+                  <AccordionItem 
+                    value={`faq-${index}`} 
+                    className="border border-cyan-500/20 rounded-xl px-5 bg-gray-900/50 data-[state=open]:border-cyan-500/50 transition-colors"
+                  >
+                    <AccordionTrigger className="py-5 hover:no-underline group">
+                      <div className="flex items-center gap-4 flex-1">
+                        <span className="font-medium text-white text-left group-hover:text-cyan-400 transition-colors">
+                          {faq.question}
+                        </span>
+                      </div>
+                      <Badge variant="outline" className="text-xs border-cyan-500/30 text-cyan-400 shrink-0 mr-3">
+                        <Info className="w-3 h-3 mr-1" />
+                        FAQ
+                      </Badge>
+                    </AccordionTrigger>
+                    <AccordionContent className="text-gray-300 pb-5 leading-relaxed">
+                      {faq.answer}
+                    </AccordionContent>
+                  </AccordionItem>
+                </motion.div>
+              ) : (
+                <motion.div
+                  key={index}
+                  initial={{ opacity: 0, y: 20 }}
+                  whileInView={{ opacity: 1, y: 0 }}
+                  transition={{ duration: 0.4, delay: index * 0.05 }}
+                  viewport={{ once: true }}
+                  onClick={() => handleFaqClick(faq.blogPostId!)}
+                  className="group cursor-pointer border border-fuchsia-500/20 rounded-xl p-5 bg-gray-900/50 hover:border-fuchsia-500/50 hover:bg-gray-900/80 transition-all duration-300"
+                >
+                  <div className="flex items-center justify-between gap-4">
+                    <span className="font-medium text-white group-hover:text-fuchsia-400 transition-colors">
+                      {faq.question}
+                    </span>
+                    <div className="flex items-center gap-2 shrink-0">
+                      <Badge variant="outline" className="text-xs border-fuchsia-500/30 text-fuchsia-400">
+                        <Newspaper className="w-3 h-3 mr-1" />
+                        Blog
+                      </Badge>
+                      <ChevronRight className="w-5 h-5 text-gray-500 group-hover:text-fuchsia-400 group-hover:translate-x-1 transition-all" />
+                    </div>
+                  </div>
+                </motion.div>
+              )
+            ))}
+          </Accordion>
         </div>
 
         {/* Still have questions CTA */}
