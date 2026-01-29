@@ -47,13 +47,13 @@ const StudioClassList = ({ studio }: StudioClassListProps) => {
         </div>
 
         <div className="max-w-4xl mx-auto">
-          <div className="cyber-card rounded-2xl p-8">
-            <div className="flex items-center justify-center mb-6">
+          <div className="cyber-card rounded-2xl overflow-hidden">
+            <div className="flex items-center justify-center py-4 px-6 border-b border-primary/20">
               <div className="w-3 h-3 bg-emerald-500 rounded-full animate-pulse mr-3 shadow-lg shadow-emerald-500/50" />
               <h3 className="text-xl font-bold text-foreground">Live Class Schedule</h3>
             </div>
             
-            <div className="min-h-[500px]">
+            <div className="min-h-[500px] p-2">
               <div 
                 className="mindbody-widget" 
                 data-widget-type="Schedules" 
