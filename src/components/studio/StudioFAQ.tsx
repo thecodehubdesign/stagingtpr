@@ -178,6 +178,11 @@ const StudioFAQ = ({ studio }: StudioFAQProps) => {
   const [selectedPost, setSelectedPost] = useState<typeof blogPostsData[0] | null>(null);
   const isMobile = useIsMobile();
   
+  // Guard against undefined studio - must be after all hooks
+  if (!studio) {
+    return null;
+  }
+  
   const faqs = getFAQsForStudio(studio);
 
   const handleFaqClick = (blogPostId: number) => {
