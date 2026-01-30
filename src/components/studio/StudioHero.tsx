@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useState, useRef } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { MapPin, Star, Play, Instagram, ChevronLeft, ChevronRight } from 'lucide-react';
 import { Button } from '@/components/ui/button';
@@ -31,6 +31,19 @@ const StudioHero = ({ studio }: StudioHeroProps) => {
 
   const goToNext = () => {
     setCurrentIndex((prev) => (prev === allMedia.length - 1 ? 0 : prev + 1));
+  };
+
+  // Thumbnail carousel navigation
+  const thumbnailsRef = useRef<HTMLDivElement>(null);
+
+  const scrollThumbnails = (direction: 'left' | 'right') => {
+    if (thumbnailsRef.current) {
+      const scrollAmount = 200;
+      thumbnailsRef.current.scrollBy({
+        left: direction === 'left' ? -scrollAmount : scrollAmount,
+        behavior: 'smooth'
+      });
+    }
   };
 
 
@@ -217,38 +230,69 @@ const StudioHero = ({ studio }: StudioHeroProps) => {
               </div>
             </div>
 
-            {/* Thumbnail Strip - Static Grid */}
-            <div className="flex flex-wrap justify-center gap-2 sm:gap-3">
-              {allMedia.map((media, index) => (
-                <button
-                  key={index}
-                  onClick={() => setCurrentIndex(index)}
-                  className={`relative w-12 h-12 sm:w-16 sm:h-16 lg:w-[calc(10%-8px)] lg:h-auto lg:aspect-square rounded-lg overflow-hidden border-2 transition-all ${
-                    currentIndex === index
-                      ? 'border-fuchsia-500 ring-2 ring-fuchsia-500/50' 
-                      : 'border-gray-600 hover:border-fuchsia-400'
-                  }`}
-                >
-                  {media.type === 'video' ? (
-                    <>
+            {/* Thumbnail Strip - Horizontal Carousel */}
+            <div className="relative">
+              {/* Left Thumbnail Arrow */}
+              <button
+                onClick={() => scrollThumbnails('left')}
+                className="absolute left-0 top-1/2 -translate-y-1/2 -translate-x-2 z-10
+                           w-8 h-8 rounded-full bg-black/60 backdrop-blur-sm
+                           border border-white/20 hover:bg-fuchsia-500/30
+                           flex items-center justify-center transition-all"
+                aria-label="Scroll thumbnails left"
+              >
+                <ChevronLeft className="w-4 h-4 text-white" />
+              </button>
+
+              {/* Right Thumbnail Arrow */}
+              <button
+                onClick={() => scrollThumbnails('right')}
+                className="absolute right-0 top-1/2 -translate-y-1/2 translate-x-2 z-10
+                           w-8 h-8 rounded-full bg-black/60 backdrop-blur-sm
+                           border border-white/20 hover:bg-fuchsia-500/30
+                           flex items-center justify-center transition-all"
+                aria-label="Scroll thumbnails right"
+              >
+                <ChevronRight className="w-4 h-4 text-white" />
+              </button>
+
+              {/* Thumbnail Container */}
+              <div 
+                ref={thumbnailsRef}
+                className="flex gap-3 overflow-x-auto scrollbar-hide scroll-smooth px-6"
+                style={{ scrollbarWidth: 'none', msOverflowStyle: 'none' }}
+              >
+                {allMedia.map((media, index) => (
+                  <button
+                    key={index}
+                    onClick={() => setCurrentIndex(index)}
+                    className={`relative flex-shrink-0 w-24 h-24 sm:w-32 sm:h-32 rounded-lg overflow-hidden border-2 transition-all ${
+                      currentIndex === index
+                        ? 'border-fuchsia-500 ring-2 ring-fuchsia-500/50'
+                        : 'border-gray-600 hover:border-fuchsia-400'
+                    }`}
+                  >
+                    {media.type === 'video' ? (
+                      <>
+                        <img 
+                          src="/lovable-uploads/5b3dd8e8-6bc4-4f4a-af01-655d55902167.png"
+                          alt="Video thumbnail"
+                          className="w-full h-full object-cover"
+                        />
+                        <div className="absolute inset-0 bg-black/40 flex items-center justify-center">
+                          <Play className="w-5 h-5 sm:w-6 sm:h-6 text-white fill-white" />
+                        </div>
+                      </>
+                    ) : (
                       <img 
-                        src="/lovable-uploads/5b3dd8e8-6bc4-4f4a-af01-655d55902167.png"
-                        alt="Video thumbnail"
+                        src={media.src} 
+                        alt={media.label}
                         className="w-full h-full object-cover"
                       />
-                      <div className="absolute inset-0 bg-black/40 flex items-center justify-center">
-                        <Play className="w-4 h-4 sm:w-5 sm:h-5 text-white fill-white" />
-                      </div>
-                    </>
-                  ) : (
-                    <img 
-                      src={media.src} 
-                      alt={media.label}
-                      className="w-full h-full object-cover"
-                    />
-                  )}
-                </button>
-              ))}
+                    )}
+                  </button>
+                ))}
+              </div>
             </div>
           </motion.div>
         </div>
