@@ -1,5 +1,5 @@
 import { useState, useEffect, useRef } from 'react';
-import { motion } from 'framer-motion';
+import { motion, AnimatePresence } from 'framer-motion';
 import { Link } from 'react-router-dom';
 import Header from '@/components/Header';
 import Footer from '@/components/Footer';
@@ -19,7 +19,9 @@ import {
   Play,
   Sparkles,
   Clock,
-  X
+  X,
+  Heart,
+  GraduationCap
 } from 'lucide-react';
 import { studios } from '@/data/studios';
 
@@ -74,33 +76,31 @@ const eligibilityTable = [
 const firstVisitAccordion = [
   { 
     step: 1, 
-    title: "Arrive 10 minutes early", 
-    description: "Time to settle in and meet your instructor",
-    image: "/images/first-timers/gallery-2.avif"
+    title: "A welcoming front desk", 
+    description: "Friendly faces ready to greet you and answer any questions",
+    image: "/images/first-timers/gallery-2.avif",
+    icon: Heart
   },
   { 
     step: 2, 
-    title: "Check in at the desk", 
-    description: "Quick registration and waiver",
-    image: "/images/first-timers/gallery-3.avif"
+    title: "A vibrant community", 
+    description: "Join a supportive crew who celebrate every win together",
+    image: "/images/first-timers/gallery-3.avif",
+    icon: Users
   },
   { 
     step: 3, 
-    title: "Warm up together", 
-    description: "Group stretches and body prep",
-    image: "/images/first-timers/gallery-4.avif"
+    title: "Fun engaging classes", 
+    description: "Workouts that don't feel like workouts - you'll actually look forward to them",
+    image: "/images/first-timers/gallery-4.avif",
+    icon: Sparkles
   },
   { 
     step: 4, 
-    title: "Foundations moves", 
-    description: "Learn your first spins and poses",
-    image: "/images/first-timers/gallery-5.avif"
-  },
-  { 
-    step: 5, 
-    title: "Cool down & stretch", 
-    description: "Wind down and celebrate your first class",
-    image: "/images/first-timers/gallery-6.avif"
+    title: "Instructors who want you to succeed", 
+    description: "Passionate teachers dedicated to your progress and confidence",
+    image: "/images/first-timers/gallery-5.avif",
+    icon: GraduationCap
   },
 ];
 
@@ -187,6 +187,17 @@ const FirstTimers = () => {
   const [activeClassFilter, setActiveClassFilter] = useState('All');
   const [activeVisitStep, setActiveVisitStep] = useState<string | undefined>('visit-0');
   const classesScrollRef = useRef<HTMLDivElement>(null);
+  const [disciplineIndex, setDisciplineIndex] = useState(0);
+  const disciplines = ['Pole', 'Lyra', 'Silks', 'More'];
+
+  // Discipline word cycling effect
+  useEffect(() => {
+    const interval = setInterval(() => {
+      setDisciplineIndex((prev) => (prev + 1) % disciplines.length);
+    }, 2000);
+    
+    return () => clearInterval(interval);
+  }, []);
 
   useEffect(() => {
     // First intake date: February 9th, 2025
@@ -366,8 +377,11 @@ const FirstTimers = () => {
             className="text-center mb-12"
           >
             <h2 className="text-3xl sm:text-4xl font-bold text-white mb-4">
-              What to Expect in Your <span className="gradient-text">First Visit</span>
+              What to Expect at <span className="gradient-text">The Pole Room</span>
             </h2>
+            <p className="text-gray-300 max-w-xl mx-auto">
+              More than a studio - it's a community that celebrates you
+            </p>
           </motion.div>
           
           <div className="grid lg:grid-cols-2 gap-8 items-start">
@@ -388,7 +402,7 @@ const FirstTimers = () => {
                   <AccordionTrigger className="text-white hover:text-fuchsia-400 text-left py-4 hover:no-underline">
                     <div className="flex items-center gap-4">
                       <div className="w-10 h-10 rounded-full bg-gradient-to-br from-fuchsia-500 to-purple-600 flex items-center justify-center flex-shrink-0">
-                        <span className="text-white font-bold">{item.step}</span>
+                        <item.icon className="w-5 h-5 text-white" />
                       </div>
                       <div>
                         <h3 className="font-semibold text-lg">{item.title}</h3>
@@ -484,8 +498,19 @@ const FirstTimers = () => {
               viewport={{ once: true }}
             >
               <h2 className="text-3xl sm:text-4xl font-bold text-white mb-6">
-                Start with pole,{' '}
-                <span className="gradient-text">explore aerials</span>
+                Start with{' '}
+                <AnimatePresence mode="wait">
+                  <motion.span
+                    key={disciplineIndex}
+                    initial={{ opacity: 0, y: 20 }}
+                    animate={{ opacity: 1, y: 0 }}
+                    exit={{ opacity: 0, y: -20 }}
+                    transition={{ duration: 0.3 }}
+                    className="gradient-text inline-block"
+                  >
+                    {disciplines[disciplineIndex]}
+                  </motion.span>
+                </AnimatePresence>
               </h2>
               <p className="text-lg text-gray-300 mb-6">
                 Most of our students begin with pole dancing - it's the perfect foundation for building strength, confidence, and body awareness.
