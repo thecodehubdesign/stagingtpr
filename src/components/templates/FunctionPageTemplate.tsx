@@ -5,6 +5,7 @@ import { Badge } from '@/components/ui/badge';
 import { Input } from '@/components/ui/input';
 import { Textarea } from '@/components/ui/textarea';
 import { Checkbox } from '@/components/ui/checkbox';
+import { Accordion, AccordionContent, AccordionItem, AccordionTrigger } from '@/components/ui/accordion';
 import { ArrowRight, Sparkles, CheckCircle } from 'lucide-react';
 import { Link } from 'react-router-dom';
 import Header from '@/components/Header';
@@ -228,16 +229,18 @@ const FunctionPageTemplate = ({
             subtitle="Everything you need to know"
           />
           
-          <div className="space-y-6 mt-12">
+          <Accordion type="single" collapsible className="mt-12 space-y-4">
             {faqs.map((faq, index) => (
-              <Card key={index} className="cyber-card">
-                <CardContent className="p-6">
-                  <h3 className="text-xl font-bold mb-3">{faq.question}</h3>
-                  <p className="text-muted-foreground">{faq.answer}</p>
-                </CardContent>
-              </Card>
+              <AccordionItem key={index} value={`item-${index}`} className="cyber-faq-item">
+                <AccordionTrigger className="py-5 text-left font-medium text-white hover:text-fuchsia-400 hover:no-underline transition-colors">
+                  {faq.question}
+                </AccordionTrigger>
+                <AccordionContent className="text-gray-300 pb-5 leading-relaxed">
+                  {faq.answer}
+                </AccordionContent>
+              </AccordionItem>
             ))}
-          </div>
+          </Accordion>
         </div>
       </section>
 
