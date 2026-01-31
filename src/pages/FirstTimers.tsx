@@ -377,8 +377,9 @@ const FirstTimers = () => {
       </section>
 
       {/* Section 4: Next Intake Countdown */}
-      <section className="py-16 px-4 sm:px-6 lg:px-8 bg-gray-900/50">
-        <div className="max-w-6xl mx-auto">
+      <section className="py-16 px-4 sm:px-6 lg:px-8 bg-gray-900/50 relative overflow-hidden">
+        <div className="absolute inset-0 cyber-grid opacity-20" />
+        <div className="max-w-6xl mx-auto relative">
           <div className="grid md:grid-cols-2 gap-8 items-center">
             {/* Left: Intake Info */}
             <div>
