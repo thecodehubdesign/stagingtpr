@@ -5,9 +5,10 @@ import Footer from '@/components/Footer';
 import { Card } from '@/components/ui/card';
 import { Badge } from '@/components/ui/badge';
 import { Button } from '@/components/ui/button';
-import { Heart, Zap, Star, MapPin, ChevronDown } from 'lucide-react';
+import { Heart, Zap, Star, MapPin, ChevronDown, Sparkles } from 'lucide-react';
 import { instructors, Instructor } from '@/data/instructors';
 import { studios } from '@/data/studios';
+import teachersTeam from '@/assets/teachers-team.png';
 import {
   DropdownMenu,
   DropdownMenuContent,
@@ -18,6 +19,10 @@ import {
 const Instructors = () => {
   const navigate = useNavigate();
   const [selectedStudio, setSelectedStudio] = useState<string | null>(null);
+  const [selectedSpecialty, setSelectedSpecialty] = useState<string | null>(null);
+
+  // Extract all unique specialties from instructors
+  const allSpecialties = [...new Set(instructors.flatMap(i => i.specialties))].sort();
 
   // Get studio name by ID
   const getStudioName = (studioId?: string) => {
@@ -26,10 +31,12 @@ const Instructors = () => {
     return studio ? studio.name.replace('The Pole Room ', '') : null;
   };
 
-  // Filter instructors by selected studio
-  const filteredInstructors = selectedStudio
-    ? instructors.filter(i => i.studioId === selectedStudio)
-    : instructors;
+  // Filter instructors by selected studio and specialty
+  const filteredInstructors = instructors.filter(i => {
+    const matchesStudio = !selectedStudio || i.studioId === selectedStudio;
+    const matchesSpecialty = !selectedSpecialty || i.specialties.includes(selectedSpecialty);
+    return matchesStudio && matchesSpecialty;
+  });
 
   const getSpecialtyColor = (specialty: string) => {
     const colors: Record<string, string> = {
@@ -78,11 +85,47 @@ const Instructors = () => {
         </div>
       </section>
 
+      {/* Join Our Team Banner */}
+      <section className="bg-white py-6 sm:py-8">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+          <div className="flex flex-col md:flex-row items-center justify-between gap-6">
+            {/* Team Photo */}
+            <div className="w-full md:w-1/3 flex-shrink-0">
+              <img 
+                src={teachersTeam} 
+                alt="The Pole Room Team" 
+                className="w-full h-48 md:h-56 object-cover rounded-lg shadow-lg"
+              />
+            </div>
+            
+            {/* Text Content */}
+            <div className="flex-1 text-center md:text-left">
+              <p className="text-gray-600 italic text-lg sm:text-xl mb-1">Do you have what it takes to</p>
+              <h2 className="text-2xl sm:text-3xl md:text-4xl font-bold text-gray-900">
+                JOIN OUR TEAM?
+              </h2>
+            </div>
+            
+            {/* CTA Button */}
+            <div className="flex-shrink-0">
+              <Button 
+                className="bg-primary hover:bg-primary/90 text-white font-bold px-6 py-3 text-sm sm:text-base"
+                onClick={() => navigate('/contact')}
+              >
+                <Sparkles className="w-4 h-4 mr-2" />
+                APPLICATIONS OPEN
+              </Button>
+            </div>
+          </div>
+        </div>
+      </section>
+
       {/* Instructors Grid */}
       <section className="py-20 bg-gray-900">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          {/* Filter by Studio */}
-          <div className="flex justify-center mb-12">
+          {/* Filters - Studio and Specialty */}
+          <div className="flex flex-wrap justify-center gap-4 mb-12">
+            {/* Filter by Studio */}
             <DropdownMenu>
               <DropdownMenuTrigger asChild>
                 <Button 
@@ -106,6 +149,35 @@ const Instructors = () => {
                     onClick={() => setSelectedStudio(studio.id)}
                   >
                     {studio.name.replace('The Pole Room ', '')}
+                  </DropdownMenuItem>
+                ))}
+              </DropdownMenuContent>
+            </DropdownMenu>
+
+            {/* Filter by Specialty */}
+            <DropdownMenu>
+              <DropdownMenuTrigger asChild>
+                <Button 
+                  variant="outline" 
+                  className="border-primary/50 bg-background/50 hover:bg-primary/10 text-foreground min-w-[200px] justify-between"
+                >
+                  <div className="flex items-center gap-2">
+                    <Star className="w-4 h-4 text-primary" />
+                    {selectedSpecialty || 'All Specialties'}
+                  </div>
+                  <ChevronDown className="w-4 h-4 ml-2" />
+                </Button>
+              </DropdownMenuTrigger>
+              <DropdownMenuContent className="w-[200px] max-h-[300px] overflow-y-auto">
+                <DropdownMenuItem onClick={() => setSelectedSpecialty(null)}>
+                  All Specialties
+                </DropdownMenuItem>
+                {allSpecialties.map((specialty) => (
+                  <DropdownMenuItem 
+                    key={specialty} 
+                    onClick={() => setSelectedSpecialty(specialty)}
+                  >
+                    {specialty}
                   </DropdownMenuItem>
                 ))}
               </DropdownMenuContent>
@@ -179,7 +251,7 @@ const Instructors = () => {
           {filteredInstructors.length === 0 && (
             <div className="text-center py-12">
               <p className="text-muted-foreground text-lg">
-                No instructors found at this studio. Try selecting a different location.
+                No instructors found matching your filters. Try selecting different options.
               </p>
             </div>
           )}
@@ -215,22 +287,6 @@ const Instructors = () => {
               <p className="text-muted-foreground text-sm">All our instructors are highly trained and continuously learning</p>
             </div>
           </div>
-        </div>
-      </section>
-
-      {/* CTA Section */}
-      <section className="py-20 bg-gradient-to-r from-fuchsia-600 to-purple-600">
-        <div className="max-w-4xl mx-auto text-center px-4 sm:px-6 lg:px-8">
-          <h2 className="text-3xl sm:text-4xl font-bold text-white mb-6">
-            Ready to Meet Your Instructors?
-          </h2>
-          <p className="text-lg text-purple-100 mb-8 max-w-2xl mx-auto">
-            Book a free trial class and experience our unique teaching approach firsthand. 
-            Discover why our students say it's the community that changes everything.
-          </p>
-          <Button className="neon-button text-black font-bold text-lg px-8 py-3">
-            Book Free Trial Class
-          </Button>
         </div>
       </section>
 
