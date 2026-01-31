@@ -1,10 +1,10 @@
 
 
-## Instructors Page Redesign
+## Instructors Page Enhancement
 
 ### Overview
 
-Enhance the Instructors page by adding a "Join Our Team" recruitment banner at the top, a specialty filter, and removing the bottom CTA section.
+Restyle the application section to match the cyberpunk theme, add name search functionality, implement "Show More" pagination after 3 rows, and transform the Teaching Philosophy section into a standout grid design.
 
 ---
 
@@ -12,72 +12,147 @@ Enhance the Instructors page by adding a "Join Our Team" recruitment banner at t
 
 | File | Change |
 |------|--------|
-| `src/pages/Instructors.tsx` | Add banner, specialty filter, remove CTA section |
-| `src/assets/teachers-team.png` | Copy the uploaded team image |
+| `src/pages/Instructors.tsx` | All changes below |
 
 ---
 
-### Changes
+### 1. Restyle "Join Our Team" Application Section
 
-#### 1. Add Team Image Asset
+Transform the current white/light banner into a cyberpunk-styled recruitment section:
 
-Copy the uploaded team image to the project assets folder for use in the recruitment banner.
+**Current**: White background with simple layout
+**New**: Dark gradient background with neon accents, cyber-border, and dynamic styling
 
----
+| Element | Before | After |
+|---------|--------|-------|
+| Background | `bg-white` | Dark gradient with cyber-grid overlay |
+| Container | Simple flex | `cyber-card` with neon border |
+| Image | Basic rounded | Neon border glow effect |
+| Typography | Gray text | White/gradient text with neon effects |
+| Button | Pink solid | Animated neon-button with glow |
 
-#### 2. New "Join Our Team" Banner (After Hero Section)
-
-Add a horizontal banner section similar to the reference image:
-
+**New Layout**:
 ```text
-+---------------------------------------------------------------+
-|                                                               |
-|  [Team Photo]    Do you have what it takes to                |
-|                  JOIN OUR TEAM?         [APPLICATIONS OPEN]   |
-|                                                               |
-+---------------------------------------------------------------+
++----------------------------------------------------------+
+|  ▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓ CYBER CARD ▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓  |
+|                                                          |
+|  [Team Photo with      Do you have what it takes to      |
+|   neon border glow]    JOIN OUR TEAM?                    |
+|                        --------------------------------   |
+|                        Be part of Australia's leading    |
+|                        pole & aerial studio team...      |
+|                                                          |
+|                        [✨ APPLICATIONS OPEN - Neon CTA]  |
+|                                                          |
++----------------------------------------------------------+
 ```
 
-- Left side: Team image of instructors around the pole
-- Right side: Italic heading "Do you have what it takes to" + bold "JOIN OUR TEAM?"
-- Far right: Pink "APPLICATIONS OPEN" button
-- Light gray/white background to contrast with the dark theme
+Will use `teachersTeam` image already imported, styled with neon border effects.
 
 ---
 
-#### 3. Specialty Filter Addition
+### 2. Add Name Search Input
 
-Add a second filter dropdown next to the studio filter:
+Add a search input field alongside the existing filters:
 
-| Filter | Options |
-|--------|---------|
-| By Specialty | All Specialties, Pole, Aerial Silks, Aerial Hoop, Flexibility, Dance, Contortion, Strength Training, Tricks, Flow, Choreography, Exotic, Heels, Floor Work, Beginners, Fundamentals |
-
-The filtering logic will check if the instructor's `specialties` array includes the selected specialty.
-
----
-
-#### 4. Filter Section Layout
+**Location**: Before the dropdown filters
+**Styling**: Match existing filter buttons with cyber theme
 
 ```text
-            [Filter by Studio ▼]    [Filter by Specialty ▼]
+         [🔍 Search by name...          ]
+    
+    [Filter by Studio ▼]    [Filter by Specialty ▼]
 ```
 
-Both filters centered, side by side with a small gap.
+**Implementation**:
+- New state: `searchQuery: string`
+- Filter logic update: `instructor.name.toLowerCase().includes(searchQuery.toLowerCase())`
+- Input styled with `border-primary/50 bg-background/50` to match dropdowns
 
 ---
 
-#### 5. Remove CTA Section
+### 3. Add "Show More" After 3 Rows
 
-Remove lines 221-235 (the "Ready to Meet Your Instructors?" gradient section at the bottom).
+Implement pagination to show only 9 instructors initially (3 rows of 3 on desktop).
 
----
-
-### Technical Implementation
-
-#### New State Variable
+**New State**:
 ```typescript
-const [selectedSpecialty, setSelectedSpecialty] = useState<string | null>(null);
+const [showAll, setShowAll] = useState(false);
+const INITIAL_DISPLAY_COUNT = 9; // 3 rows of 3 cards
+```
+
+**Display Logic**:
+```typescript
+const displayedInstructors = showAll 
+  ? filteredInstructors 
+  : filteredInstructors.slice(0, INITIAL_DISPLAY_COUNT);
+```
+
+**Button Design**:
+```text
+      [    ↓ Show More (X more instructors)    ]
+      or
+      [    ↑ Show Less    ]
+```
+
+- Only visible if more than 9 filtered results
+- Centered below the grid with cyberpunk styling
+- Resets to collapsed when filters change
+
+---
+
+### 4. Transform Teaching Philosophy Section
+
+Replace the current simple gray section with a standout grid design similar to the GLOW page and Pricing page patterns.
+
+**Current**: Gray background, centered text, 3 simple icon blocks
+**New**: Gradient background with cyber-grid overlay, prominent grid cards with neon effects
+
+**New Layout**:
+```text
++----------------------------------------------------------+
+|  ▓▓▓▓▓▓▓ GRADIENT BG + CYBER-GRID OVERLAY ▓▓▓▓▓▓▓▓▓▓▓▓▓  |
+|                                                          |
+|            💜 OUR TEACHING PHILOSOPHY                    |
+|       "Transformation happens when you feel..."          |
+|                                                          |
+|  +------------------+  +------------------+               |
+|  | ⚡ EMPOWERING    |  | ❤️ SUPPORTIVE    |               |
+|  | We celebrate... |  | Judgment-free...|               |
+|  | [cyber-card]    |  | [cyber-card]    |               |
+|  +------------------+  +------------------+               |
+|                                                          |
+|  +------------------+  +------------------+               |
+|  | ⭐ EXPERT        |  | 🎯 PROGRESSIVE   |               |
+|  | Highly trained..|  | Building skills..|               |
+|  | [cyber-card]    |  | [cyber-card]    |               |
+|  +------------------+  +------------------+               |
+|                                                          |
++----------------------------------------------------------+
+```
+
+**Design Elements**:
+- Background: `bg-gradient-to-br from-gray-900 via-purple-900/50 to-gray-900`
+- Overlay: `cyber-grid` with opacity
+- Cards: `cyber-card` with hover effects and neon icon backgrounds
+- Add a 4th philosophy pillar for better grid balance: "Progressive"
+- Motion animations on scroll
+
+---
+
+### Technical Implementation Summary
+
+#### New Imports
+```typescript
+import { Search } from 'lucide-react';
+import { Input } from '@/components/ui/input';
+```
+
+#### New State Variables
+```typescript
+const [searchQuery, setSearchQuery] = useState('');
+const [showAll, setShowAll] = useState(false);
+const INITIAL_DISPLAY_COUNT = 9;
 ```
 
 #### Updated Filter Logic
@@ -85,13 +160,23 @@ const [selectedSpecialty, setSelectedSpecialty] = useState<string | null>(null);
 const filteredInstructors = instructors.filter(i => {
   const matchesStudio = !selectedStudio || i.studioId === selectedStudio;
   const matchesSpecialty = !selectedSpecialty || i.specialties.includes(selectedSpecialty);
-  return matchesStudio && matchesSpecialty;
+  const matchesSearch = !searchQuery || 
+    i.name.toLowerCase().includes(searchQuery.toLowerCase());
+  return matchesStudio && matchesSpecialty && matchesSearch;
 });
+
+// Reset showAll when filters change
+useEffect(() => {
+  setShowAll(false);
+}, [selectedStudio, selectedSpecialty, searchQuery]);
 ```
 
-#### Extract All Unique Specialties
+#### Displayed Instructors
 ```typescript
-const allSpecialties = [...new Set(instructors.flatMap(i => i.specialties))].sort();
+const displayedInstructors = showAll 
+  ? filteredInstructors 
+  : filteredInstructors.slice(0, INITIAL_DISPLAY_COUNT);
+const hasMoreToShow = filteredInstructors.length > INITIAL_DISPLAY_COUNT;
 ```
 
 ---
@@ -100,16 +185,8 @@ const allSpecialties = [...new Set(instructors.flatMap(i => i.specialties))].sor
 
 | Section | Before | After |
 |---------|--------|-------|
-| Hero | Title + description | Same (kept) |
-| Banner | None | "Join Our Team" recruitment banner |
-| Filters | Studio only | Studio + Specialty side by side |
-| Instructor Cards | Bio displayed | Bio displayed (already present) |
-| Teaching Philosophy | Present | Kept as-is |
-| Bottom CTA | "Ready to Meet..." section | Removed |
-
----
-
-### Image Asset
-
-The uploaded team photo will be saved to `src/assets/teachers-team.png` and imported in the component for the recruitment banner.
+| Join Our Team | White bg, simple layout | Cyber-card, gradient bg, neon effects |
+| Filters | 2 dropdowns | Search input + 2 dropdowns |
+| Instructor Grid | All visible | First 9, then "Show More" button |
+| Teaching Philosophy | Gray bg, centered, 3 items | Gradient + cyber-grid, 4 cyber-cards in grid |
 
