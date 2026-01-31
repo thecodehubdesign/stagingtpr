@@ -4,7 +4,7 @@ import Header from '@/components/Header';
 import Footer from '@/components/Footer';
 import { Button } from '@/components/ui/button';
 import { Accordion, AccordionContent, AccordionItem, AccordionTrigger } from '@/components/ui/accordion';
-import { Check, Star, MapPin, Shield, Dumbbell, Sparkles, Compass, Heart, Play, ChevronRight, Quote, X, Clock } from 'lucide-react';
+import { Check, Star, MapPin, Shield, Dumbbell, Sparkles, Compass, Heart, Play, ChevronRight, Quote, X, Clock, Flame, Activity, Waves, Bike } from 'lucide-react';
 import { Link } from 'react-router-dom';
 import jasmineSignature from '@/assets/jasmine-signature.png';
 import jasminePhoto from '@/assets/jasmine-verified.png';
@@ -147,6 +147,19 @@ const PoleVsGymPage = () => {
   const locations = [
     "Mitcham", "Eltham", "CBD", "Kilsyth", "Highett", "Narre Warren", "Rowville"
   ];
+
+  const caloriesData = [
+    { activity: "Walking - Moderate", calories: 195, isPole: false, icon: Activity },
+    { activity: "Yoga", calories: 236, isPole: false, icon: Heart },
+    { activity: "Pole - Beginner", calories: 400, isPole: true, icon: Flame },
+    { activity: "Zumba & Aerobics", calories: 464, isPole: false, icon: Activity },
+    { activity: "Cycling", calories: 483, isPole: false, icon: Bike },
+    { activity: "Running", calories: 557, isPole: false, icon: Activity },
+    { activity: "Pole - Advanced", calories: 700, isPole: true, icon: Flame },
+    { activity: "Swimming", calories: 784, isPole: false, icon: Waves },
+  ];
+
+  const maxCalories = Math.max(...caloriesData.map(d => d.calories));
 
   return (
     <div className="min-h-screen bg-background">
@@ -656,6 +669,113 @@ const PoleVsGymPage = () => {
               </div>
             </motion.div>
           </div>
+        </div>
+      </section>
+
+      {/* Calories Burnt Per Hour Comparison */}
+      <section className="py-20 relative overflow-hidden">
+        <div className="absolute inset-0 bg-gray-900/50" />
+        <div className="absolute inset-0 cyber-grid opacity-20" />
+        
+        <div className="relative max-w-5xl mx-auto px-4 sm:px-6 lg:px-8">
+          <motion.div
+            initial={{ opacity: 0, y: 30 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            className="text-center mb-12"
+          >
+            <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-fuchsia-500/10 border border-fuchsia-500/30 mb-6">
+              <Flame className="w-4 h-4 text-fuchsia-400" />
+              <span className="text-fuchsia-400 text-sm font-medium uppercase tracking-wider">The Facts</span>
+            </div>
+            <h2 className="text-3xl sm:text-4xl lg:text-5xl font-bold text-white mb-4">
+              Calories Burnt <span className="gradient-text">Per Hour</span>
+            </h2>
+            <p className="text-xl text-gray-300 max-w-2xl mx-auto">
+              See how pole fitness stacks up against other popular workouts
+            </p>
+          </motion.div>
+
+          <div className="space-y-4">
+            {caloriesData.map((item, index) => {
+              const barWidth = (item.calories / maxCalories) * 100;
+              const IconComponent = item.icon;
+              
+              return (
+                <motion.div
+                  key={item.activity}
+                  initial={{ opacity: 0, x: -50 }}
+                  whileInView={{ opacity: 1, x: 0 }}
+                  viewport={{ once: true }}
+                  transition={{ delay: index * 0.08, duration: 0.5 }}
+                  className={`flex items-center gap-4 p-3 rounded-xl transition-all ${
+                    item.isPole 
+                      ? 'bg-gradient-to-r from-fuchsia-500/10 to-purple-500/10 border border-fuchsia-500/30' 
+                      : 'bg-gray-800/30'
+                  }`}
+                >
+                  {/* Calorie Number */}
+                  <div className={`w-16 sm:w-20 text-right font-bold text-lg sm:text-xl flex-shrink-0 ${
+                    item.isPole ? 'text-fuchsia-400' : 'text-white'
+                  }`}>
+                    {item.calories}
+                  </div>
+                  
+                  {/* Icon */}
+                  <div className={`w-10 h-10 rounded-full flex items-center justify-center flex-shrink-0 ${
+                    item.isPole 
+                      ? 'bg-gradient-to-br from-fuchsia-500 to-purple-600' 
+                      : 'bg-gray-700'
+                  }`}>
+                    <IconComponent className={`w-5 h-5 ${item.isPole ? 'text-white' : 'text-gray-300'}`} />
+                  </div>
+                  
+                  {/* Bar Container */}
+                  <div className="flex-1 relative h-10 bg-gray-800/50 rounded-lg overflow-hidden">
+                    <motion.div
+                      initial={{ scaleX: 0 }}
+                      whileInView={{ scaleX: 1 }}
+                      viewport={{ once: true }}
+                      transition={{ delay: index * 0.08 + 0.3, duration: 0.8, ease: "easeOut" }}
+                      className={`absolute inset-y-0 left-0 rounded-lg origin-left ${
+                        item.isPole 
+                          ? 'bg-gradient-to-r from-fuchsia-500 via-purple-500 to-fuchsia-400' 
+                          : 'bg-gradient-to-r from-indigo-600 to-purple-600'
+                      }`}
+                      style={{ width: `${barWidth}%` }}
+                    />
+                    
+                    {/* Activity Name - Inside Bar */}
+                    <div className="absolute inset-0 flex items-center px-4">
+                      <span className={`text-sm sm:text-base font-medium z-10 ${
+                        barWidth > 30 ? 'text-white' : 'text-gray-300 ml-auto'
+                      }`}>
+                        {item.activity}
+                      </span>
+                    </div>
+                  </div>
+                  
+                  {/* Pole Highlight Badge */}
+                  {item.isPole && (
+                    <div className="hidden sm:flex items-center gap-1 px-3 py-1 rounded-full bg-fuchsia-500/20 border border-fuchsia-500/40 flex-shrink-0">
+                      <Sparkles className="w-3 h-3 text-fuchsia-400" />
+                      <span className="text-xs font-medium text-fuchsia-300">Pole</span>
+                    </div>
+                  )}
+                </motion.div>
+              );
+            })}
+          </div>
+          
+          <motion.p
+            initial={{ opacity: 0 }}
+            whileInView={{ opacity: 1 }}
+            viewport={{ once: true }}
+            transition={{ delay: 0.8 }}
+            className="text-center text-gray-500 text-sm mt-8"
+          >
+            *Calorie estimates based on average 150lb person. Individual results may vary.
+          </motion.p>
         </div>
       </section>
 
