@@ -7,6 +7,7 @@ export interface Instructor {
   bio: string;
   image: string;
   video?: string;
+  studioId?: string; // Links to studio from studios.ts
 }
 
 export const instructors: Instructor[] = [
@@ -18,7 +19,8 @@ export const instructors: Instructor[] = [
     experience: "8+ years",
     bio: "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Derryn brings passion and energy to every class, focusing on building strength and confidence in her students. Her teaching style emphasizes proper technique while making every session fun and engaging.",
     image: "/images/instructors/derryn.png",
-    video: "/videos/instructors/alison.mp4"
+    video: "/videos/instructors/alison.mp4",
+    studioId: "mitcham"
   },
   {
     id: 2,
@@ -28,7 +30,8 @@ export const instructors: Instructor[] = [
     experience: "6+ years",
     bio: "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Bianca specializes in aerial arts and brings a graceful, creative approach to her classes. She loves helping students discover new movements and push their boundaries safely.",
     image: "/images/instructors/bianca.png",
-    video: "/videos/instructors/derryn.mp4"
+    video: "/videos/instructors/derryn.mp4",
+    studioId: "eltham"
   },
   {
     id: 3,
@@ -38,7 +41,8 @@ export const instructors: Instructor[] = [
     experience: "10+ years",
     bio: "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Alison is dedicated to helping her students build incredible strength and master advanced pole tricks. Her systematic approach ensures safe progression for all levels.",
     image: "/images/instructors/alison.png",
-    video: "/videos/instructors/bianca.mp4"
+    video: "/videos/instructors/bianca.mp4",
+    studioId: "highett"
   },
   {
     id: 4,
@@ -47,7 +51,8 @@ export const instructors: Instructor[] = [
     specialties: ["Flow", "Choreography", "Dance"],
     experience: "5+ years",
     bio: "Lorem ipsum dolor sit amet, consectetur adipiscing elit. KP brings creativity and musicality to every class, specializing in fluid transitions and expressive choreography that helps students find their unique style.",
-    image: "/images/instructors/kp.png"
+    image: "/images/instructors/kp.png",
+    studioId: "kilsyth"
   },
   {
     id: 5,
@@ -56,7 +61,8 @@ export const instructors: Instructor[] = [
     specialties: ["Exotic", "Heels", "Floor Work"],
     experience: "7+ years",
     bio: "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Gillian empowers her students through sensual movement and confident expression. Her classes are designed to build body confidence and embrace femininity.",
-    image: "/images/instructors/gillian.png"
+    image: "/images/instructors/gillian.png",
+    studioId: "narre-warren"
   },
   {
     id: 6,
@@ -65,7 +71,8 @@ export const instructors: Instructor[] = [
     specialties: ["Pole", "Aerial Hoop", "Flexibility"],
     experience: "4+ years",
     bio: "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Courtney brings enthusiasm and a nurturing approach to her teaching, making every student feel welcome and supported on their fitness journey.",
-    image: "/images/instructors/courtney.png"
+    image: "/images/instructors/courtney.png",
+    studioId: "cbd"
   },
   {
     id: 7,
@@ -74,6 +81,7 @@ export const instructors: Instructor[] = [
     specialties: ["Pole", "Beginners", "Fundamentals"],
     experience: "5+ years",
     bio: "Sarah specializes in helping newcomers discover their love for pole. Her patient and encouraging teaching style makes every first-timer feel welcome and confident.",
-    image: "/images/instructors/courtney.png"
+    image: "/images/instructors/courtney.png",
+    studioId: "rowville"
   }
 ];
