@@ -11,7 +11,7 @@ import {
 } from '@/components/ui/dropdown-menu';
 import { 
   Clock, Users, Star, Calendar, Check, ChevronLeft, ChevronRight, 
-  ChevronDown, MapPin, Search 
+  ChevronDown, MapPin, Search, ClipboardCheck 
 } from 'lucide-react';
 import { Link } from 'react-router-dom';
 import { motion } from 'framer-motion';
@@ -59,6 +59,16 @@ interface ProgramPageProps {
   images?: string[];
   availableStudios?: string[];
 }
+
+// Static term schedule data
+const termSchedule = [
+  { name: 'Term 1 2025', startDate: 'Feb 10', endDate: 'Apr 4', status: 'In Progress' },
+  { name: 'Term 2 2025', startDate: 'Apr 28', endDate: 'Jun 20', status: 'Enrolling' },
+  { name: 'Term 3 2025', startDate: 'Jul 21', endDate: 'Sep 12', status: 'Coming Soon' },
+  { name: 'Term 4 2025', startDate: 'Oct 13', endDate: 'Dec 5', status: 'Coming Soon' },
+  { name: 'Term 1 2026', startDate: 'Feb 9', endDate: 'Apr 3', status: 'Coming Soon' },
+  { name: 'Term 2 2026', startDate: 'Apr 27', endDate: 'Jun 19', status: 'Coming Soon' },
+];
 
 const ProgramPageTemplate = ({
   badge,
@@ -142,7 +152,7 @@ const ProgramPageTemplate = ({
         </div>
       </section>
 
-      {/* Course Overview - Image Carousel + Highlights + Stats Bar */}
+      {/* Program Overview - Image Carousel (LEFT) + Highlights (RIGHT) + Stats Bar */}
       <section className="py-20 bg-gray-900/50">
         <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
           <motion.div
@@ -152,35 +162,18 @@ const ProgramPageTemplate = ({
             className="text-center mb-12"
           >
             <span className="text-fuchsia-400 font-medium text-sm uppercase tracking-wider">
-              Course Overview
+              Program Overview
             </span>
             <h2 className="text-3xl sm:text-4xl font-bold text-white mt-3 mb-4">
               What You'll <span className="gradient-text">Learn</span>
             </h2>
           </motion.div>
           
-          {/* Top Row: Highlights + Image Carousel */}
+          {/* Top Row: Image Carousel (LEFT) + Highlights (RIGHT) - SWAPPED */}
           <div className="grid lg:grid-cols-2 gap-12 items-start mb-12">
-            {/* Left: Highlights */}
-            <motion.div
-              initial={{ opacity: 0, x: -30 }}
-              whileInView={{ opacity: 1, x: 0 }}
-              viewport={{ once: true }}
-            >
-              <h3 className="text-2xl font-bold text-white mb-6">Course Highlights</h3>
-              <div className="space-y-4">
-                {highlights.map((highlight, index) => (
-                  <div key={index} className="flex items-start gap-3">
-                    <Check className="w-5 h-5 text-green-500 flex-shrink-0 mt-0.5" />
-                    <p className="text-gray-300">{highlight}</p>
-                  </div>
-                ))}
-              </div>
-            </motion.div>
-            
-            {/* Right: Image Carousel */}
+            {/* Left: Image Carousel */}
             <motion.div 
-              initial={{ opacity: 0, x: 30 }}
+              initial={{ opacity: 0, x: -30 }}
               whileInView={{ opacity: 1, x: 0 }}
               viewport={{ once: true }}
               className="relative"
@@ -188,7 +181,7 @@ const ProgramPageTemplate = ({
               <div className="aspect-[4/3] rounded-2xl overflow-hidden cyber-card">
                 <img 
                   src={carouselImages[currentImageIndex]}
-                  alt="Course preview"
+                  alt="Program preview"
                   className="w-full h-full object-cover transition-opacity duration-300"
                 />
               </div>
@@ -223,6 +216,23 @@ const ProgramPageTemplate = ({
                   </div>
                 </>
               )}
+            </motion.div>
+            
+            {/* Right: Program Highlights */}
+            <motion.div
+              initial={{ opacity: 0, x: 30 }}
+              whileInView={{ opacity: 1, x: 0 }}
+              viewport={{ once: true }}
+            >
+              <h3 className="text-2xl font-bold text-white mb-6">Program Highlights</h3>
+              <div className="space-y-4">
+                {highlights.map((highlight, index) => (
+                  <div key={index} className="flex items-start gap-3">
+                    <Check className="w-5 h-5 text-green-500 flex-shrink-0 mt-0.5" />
+                    <p className="text-gray-300">{highlight}</p>
+                  </div>
+                ))}
+              </div>
             </motion.div>
           </div>
           
@@ -331,51 +341,127 @@ const ProgramPageTemplate = ({
         </div>
       </section>
 
-      {/* What to Bring / Prerequisites - First Timers Style */}
+      {/* Upcoming Term Schedule - First Timers Table Style */}
       <section className="py-20 bg-gray-900/50">
         <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="grid md:grid-cols-2 gap-8">
+          <motion.div
+            initial={{ opacity: 0, y: 30 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            className="text-center mb-12"
+          >
+            <h2 className="text-3xl sm:text-4xl font-bold text-white mb-4">
+              Upcoming <span className="gradient-text">Term Dates</span>
+            </h2>
+            <p className="text-gray-300">8-week program blocks over the next 12 months</p>
+          </motion.div>
+          
+          <motion.div
+            initial={{ opacity: 0, y: 20 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            className="cyber-card rounded-2xl overflow-hidden"
+          >
+            <div className="p-6">
+              <div className="overflow-x-auto">
+                <table className="w-full">
+                  <thead>
+                    <tr className="border-b border-fuchsia-500/30">
+                      <th className="text-left py-3 px-4 text-fuchsia-400 font-semibold">Term</th>
+                      <th className="text-left py-3 px-4 text-fuchsia-400 font-semibold">Start Date</th>
+                      <th className="text-left py-3 px-4 text-fuchsia-400 font-semibold">End Date</th>
+                      <th className="text-left py-3 px-4 text-fuchsia-400 font-semibold">Status</th>
+                      <th className="text-right py-3 px-4"></th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    {termSchedule.map((term, index) => (
+                      <tr key={index} className="border-b border-gray-700/50 last:border-b-0">
+                        <td className="py-4 px-4 text-white font-medium">{term.name}</td>
+                        <td className="py-4 px-4 text-gray-300">{term.startDate}</td>
+                        <td className="py-4 px-4 text-gray-300">{term.endDate}</td>
+                        <td className="py-4 px-4">
+                          <span className={`px-2 py-1 rounded-full text-xs ${
+                            term.status === 'Enrolling' 
+                              ? 'bg-green-500/20 text-green-400 border border-green-500/30' 
+                              : term.status === 'In Progress'
+                              ? 'bg-yellow-500/20 text-yellow-400 border border-yellow-500/30'
+                              : 'bg-gray-500/20 text-gray-400 border border-gray-500/30'
+                          }`}>
+                            {term.status}
+                          </span>
+                        </td>
+                        <td className="py-4 px-4 text-right">
+                          {term.status === 'Enrolling' && (
+                            <Button size="sm" className="neon-button text-black text-xs" asChild>
+                              <Link to="/get-started">Enrol Now</Link>
+                            </Button>
+                          )}
+                        </td>
+                      </tr>
+                    ))}
+                  </tbody>
+                </table>
+              </div>
+            </div>
+          </motion.div>
+        </div>
+      </section>
+
+      {/* Prerequisites Section - What to Bring REMOVED */}
+      {prerequisites && prerequisites.length > 0 && (
+        <section className="py-20">
+          <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
             <motion.div
-              initial={{ opacity: 0, x: -30 }}
-              whileInView={{ opacity: 1, x: 0 }}
+              initial={{ opacity: 0, y: 30 }}
+              whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
               className="cyber-card rounded-xl p-8"
             >
-              <h3 className="text-2xl font-bold text-white mb-6">What to Bring</h3>
-              <ul className="space-y-3">
-                {whatToBring.map((item, index) => (
+              <h3 className="text-2xl font-bold text-white mb-6 text-center">Prerequisites</h3>
+              <ul className="space-y-3 max-w-xl mx-auto">
+                {prerequisites.map((item, index) => (
                   <li key={index} className="flex items-center gap-3">
-                    <Check className="w-5 h-5 text-green-500" />
+                    <Check className="w-5 h-5 text-cyan-400" />
                     <span className="text-gray-300">{item}</span>
                   </li>
                 ))}
               </ul>
             </motion.div>
-            
-            {prerequisites && prerequisites.length > 0 && (
-              <motion.div
-                initial={{ opacity: 0, x: 30 }}
-                whileInView={{ opacity: 1, x: 0 }}
-                viewport={{ once: true }}
-                className="cyber-card rounded-xl p-8"
-              >
-                <h3 className="text-2xl font-bold text-white mb-6">Prerequisites</h3>
-                <ul className="space-y-3">
-                  {prerequisites.map((item, index) => (
-                    <li key={index} className="flex items-center gap-3">
-                      <Check className="w-5 h-5 text-cyan-400" />
-                      <span className="text-gray-300">{item}</span>
-                    </li>
-                  ))}
-                </ul>
-              </motion.div>
-            )}
           </div>
+        </section>
+      )}
+
+      {/* Grading Assessment CTA */}
+      <section className="py-16">
+        <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
+          <motion.div
+            initial={{ opacity: 0, y: 30 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            className="cyber-card rounded-2xl p-8 text-center border-cyan-500/30"
+          >
+            <div className="w-16 h-16 rounded-full bg-gradient-to-br from-cyan-500 to-blue-600 flex items-center justify-center mx-auto mb-6">
+              <ClipboardCheck className="w-8 h-8 text-white" />
+            </div>
+            <h3 className="text-2xl font-bold text-white mb-4">
+              Returning or Coming From Another Studio?
+            </h3>
+            <p className="text-gray-300 mb-6 max-w-xl mx-auto">
+              Not sure which level is right for you? Take our quick grading assessment to find the perfect fit for your current skill level.
+            </p>
+            <Button className="neon-button text-black" asChild>
+              <Link to="/grading-assessment">
+                Take the Grading Assessment
+                <ChevronRight className="w-5 h-5 ml-2" />
+              </Link>
+            </Button>
+          </motion.div>
         </div>
       </section>
 
       {/* FAQ Section - First Timers Style */}
-      <section className="py-20">
+      <section className="py-20 bg-gray-900/50">
         <div className="max-w-3xl mx-auto px-4 sm:px-6 lg:px-8">
           <motion.div
             initial={{ opacity: 0, y: 30 }}
@@ -413,7 +499,7 @@ const ProgramPageTemplate = ({
 
       {/* Available Studios Section */}
       {availableStudios && availableStudios.length > 0 && (
-        <section className="py-20 bg-gray-900/50">
+        <section className="py-20">
           <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
             <motion.div
               initial={{ opacity: 0, y: 30 }}
