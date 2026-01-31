@@ -149,53 +149,83 @@ const ProgramPageTemplate = ({
           >
             {description}
           </motion.p>
-        </div>
-      </section>
-
-      {/* Level Progression Journey */}
-      <section className="py-16">
-        <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
-          <motion.div
-            initial={{ opacity: 0, y: 30 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true }}
-            className="text-center mb-12"
-          >
-            <h2 className="text-3xl sm:text-4xl font-bold text-white mb-4">
-              Your Path to <span className="gradient-text">Pole Mastery</span>
-            </h2>
-            <p className="text-gray-300">Progress through our structured level system</p>
-          </motion.div>
           
-          {/* Pathway Diagram */}
-          <div className="relative">
-            <div className="hidden md:block absolute top-8 left-[12.5%] right-[12.5%] h-1 bg-gradient-to-r from-green-500 via-blue-500 via-purple-500 to-yellow-500 rounded-full" />
-            <div className="grid grid-cols-1 md:grid-cols-4 gap-8">
-              {[
-                { name: 'Beginner', description: 'Build foundation & confidence', color: 'from-green-400 to-emerald-500', href: '/programs/pole/beginner' },
-                { name: 'Intermediate', description: 'Develop strength & flow', color: 'from-blue-400 to-cyan-500', href: '/programs/pole/intermediate' },
-                { name: 'Advanced', description: 'Master complex moves', color: 'from-purple-400 to-pink-500', href: '/programs/pole/advanced' },
-                { name: 'Elite', description: 'Performance ready', color: 'from-yellow-400 to-orange-500', href: '/programs/pole/elite' }
-              ].map((level, index) => (
-                <motion.div
-                  key={level.name}
-                  initial={{ opacity: 0, y: 30 }}
-                  whileInView={{ opacity: 1, y: 0 }}
-                  viewport={{ once: true }}
-                  transition={{ delay: index * 0.1 }}
-                  className="relative text-center"
-                >
-                  <Link to={level.href} className="group block">
-                    <div className={`w-16 h-16 rounded-full bg-gradient-to-br ${level.color} flex items-center justify-center mx-auto mb-4 relative z-10 border-4 border-background group-hover:scale-110 transition-transform`}>
-                      <span className="text-xl font-bold text-white">{index + 1}</span>
-                    </div>
-                    <h3 className="text-lg font-bold text-white mb-2 group-hover:text-fuchsia-400 transition-colors">{level.name}</h3>
-                    <p className="text-sm text-gray-400">{level.description}</p>
-                  </Link>
-                </motion.div>
-              ))}
-            </div>
-          </div>
+          {/* Level Progression - Integrated into Hero */}
+          {(() => {
+            const poleLevels = [
+              { abbr: 'Beg', fullName: 'Pole Beginner', href: '/programs/pole/beginner' },
+              { abbr: 'Int 1', fullName: 'Pole Intermediate', href: '/programs/pole/intermediate' },
+              { abbr: 'Int 2', fullName: 'Pole Intermediate 2', href: '/programs/pole/intermediate-2' },
+              { abbr: 'Adv 1', fullName: 'Pole Advanced', href: '/programs/pole/advanced' },
+              { abbr: 'Adv 2', fullName: 'Pole Advanced 2', href: '/programs/pole/advanced-2' },
+              { abbr: 'Elite', fullName: 'Pole Elite', href: '/programs/pole/elite' },
+            ];
+            
+            // Determine current level based on page title
+            const getCurrentLevelIndex = () => {
+              const titleLower = title.toLowerCase();
+              if (titleLower.includes('intermediate 2') || titleLower.includes('inter 2')) return 2;
+              if (titleLower.includes('advanced 2') || titleLower.includes('adv 2')) return 4;
+              if (titleLower.includes('beginner')) return 0;
+              if (titleLower.includes('intermediate')) return 1;
+              if (titleLower.includes('advanced')) return 3;
+              if (titleLower.includes('elite')) return 5;
+              return -1; // Not a pole level page
+            };
+            const currentLevelIndex = getCurrentLevelIndex();
+            
+            // Only show for pole programs
+            if (currentLevelIndex === -1) return null;
+            
+            return (
+              <motion.div
+                initial={{ opacity: 0, y: 20 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ delay: 0.3 }}
+                className="mt-10"
+              >
+                <div className="relative max-w-2xl mx-auto">
+                  {/* Connecting line */}
+                  <div className="hidden md:block absolute top-7 left-[8%] right-[8%] h-1 bg-gradient-to-r from-fuchsia-500 via-purple-500 to-fuchsia-500 rounded-full" />
+                  
+                  {/* Level circles - 6 columns on desktop, 3x2 on mobile */}
+                  <div className="grid grid-cols-3 md:grid-cols-6 gap-4 md:gap-2">
+                    {poleLevels.map((level, index) => {
+                      const isCurrentLevel = index === currentLevelIndex;
+                      
+                      return (
+                        <motion.div
+                          key={level.abbr}
+                          initial={{ opacity: 0, y: 20 }}
+                          animate={{ opacity: 1, y: 0 }}
+                          transition={{ delay: 0.3 + index * 0.05 }}
+                          className="relative"
+                        >
+                          <Link to={level.href} className="group block">
+                            <div className={`
+                              w-14 h-14 rounded-full 
+                              bg-gradient-to-br from-fuchsia-500 to-purple-600 
+                              flex items-center justify-center mx-auto 
+                              relative z-10 border-4 
+                              ${isCurrentLevel 
+                                ? 'border-cyan-400 shadow-[0_0_20px_rgba(0,255,255,0.5)] scale-110' 
+                                : 'border-background group-hover:scale-105'
+                              } 
+                              transition-all duration-300
+                            `}>
+                              <span className="text-xs font-bold text-white text-center leading-tight">
+                                {level.abbr}
+                              </span>
+                            </div>
+                          </Link>
+                        </motion.div>
+                      );
+                    })}
+                  </div>
+                </div>
+              </motion.div>
+            );
+          })()}
         </div>
       </section>
 
