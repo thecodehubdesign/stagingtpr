@@ -1,12 +1,23 @@
 import { useState, useRef } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
-import { MapPin, Star, Play, Instagram, ChevronLeft, ChevronRight } from 'lucide-react';
+import { MapPin, Star, Play, Instagram, ChevronLeft, ChevronRight, Circle, Disc, LayoutGrid } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 import { Studio } from '@/data/studios';
 
 interface StudioHeroProps {
   studio: Studio;
 }
+
+// Helper to get appropriate icon for studio spec
+const getSpecIcon = (spec: string) => {
+  const specLower = spec.toLowerCase();
+  if (specLower.includes('pole')) return Circle;
+  if (specLower.includes('hammock')) return Disc;
+  if (specLower.includes('hoop')) return Circle;
+  if (specLower.includes('silk')) return Disc;
+  if (specLower.includes('rig') || specLower.includes('truss')) return LayoutGrid;
+  return Circle;
+};
 
 const StudioHero = ({ studio }: StudioHeroProps) => {
   const allMedia = [
@@ -114,8 +125,18 @@ const StudioHero = ({ studio }: StudioHeroProps) => {
               
               {studio.studioSpecs && (
                 <div className="pt-3 sm:pt-4 border-t border-white/10">
-                  <p className="text-cyan-400 text-xs sm:text-sm font-medium mb-1 sm:mb-2">Studio Specs</p>
-                  <p className="text-gray-300 text-xs sm:text-sm">{studio.studioSpecs}</p>
+                  <div className="flex flex-wrap items-center gap-4 sm:gap-6">
+                    {studio.studioSpecs.split('•').map((spec, index) => {
+                      const specTrimmed = spec.trim();
+                      const IconComponent = getSpecIcon(specTrimmed);
+                      return (
+                        <div key={index} className="flex items-center gap-2">
+                          <IconComponent className="w-4 h-4 sm:w-5 sm:h-5 text-cyan-400 flex-shrink-0" />
+                          <span className="text-gray-300 text-xs sm:text-sm">{specTrimmed}</span>
+                        </div>
+                      );
+                    })}
+                  </div>
                 </div>
               )}
             </div>
