@@ -1,199 +1,195 @@
 
 
-## Rejig "What to Expect in Your First Visit" Section
+## Simplify Level Progression & Highlight Current Page
 
 ### Overview
 
-Transform the accordion section from step-by-step visit instructions into a studio vibe showcase featuring what makes The Pole Room special. Add an animated word cycling effect in the "Start with pole" section.
+This plan streamlines the Level Progression pathway by:
+1. Removing the headline and subheadline
+2. Using consistent fuchsia coloring for all level circles
+3. Replacing numbers with abbreviated level names (Beg, Int 1, Int 2, Adv 1, Adv 2, Elite)
+4. Removing labels and descriptions below circles
+5. Moving the progression into the Hero section
+6. Highlighting the current page's level with a glow effect
 
 ---
 
-### Change 1: Update `firstVisitAccordion` Data Array
+### Change 1: Move Level Progression Into Hero Section
 
-**Current (lines 74-105):**
-5 steps about arrival timing and class flow
+Move the pathway diagram directly into the Hero section (below the description), removing it as a separate section.
 
-**New:**
-4 items about studio vibe and culture
+**Before:** Separate section with its own heading
+**After:** Integrated into Hero, no heading/subheading
 
+---
+
+### Change 2: Update Level Data for Pole Programs
+
+**Current (4 levels):**
 ```tsx
-const firstVisitAccordion = [
-  { 
-    step: 1, 
-    title: "A welcoming front desk", 
-    description: "Friendly faces ready to greet you and answer any questions",
-    image: "/images/first-timers/gallery-2.avif"
-  },
-  { 
-    step: 2, 
-    title: "A vibrant community", 
-    description: "Join a supportive crew who celebrate every win together",
-    image: "/images/first-timers/gallery-3.avif"
-  },
-  { 
-    step: 3, 
-    title: "Fun engaging classes", 
-    description: "Workouts that don't feel like workouts - you'll actually look forward to them",
-    image: "/images/first-timers/gallery-4.avif"
-  },
-  { 
-    step: 4, 
-    title: "Instructors who want you to succeed", 
-    description: "Passionate teachers dedicated to your progress and confidence",
-    image: "/images/first-timers/gallery-5.avif"
-  },
+{ name: 'Beginner', ... },
+{ name: 'Intermediate', ... },
+{ name: 'Advanced', ... },
+{ name: 'Elite', ... }
+```
+
+**New (6 levels with abbreviations):**
+```tsx
+const poleLevels = [
+  { abbr: 'Beg', fullName: 'Pole Beginner', href: '/programs/pole/beginner' },
+  { abbr: 'Int 1', fullName: 'Pole Intermediate', href: '/programs/pole/intermediate' },
+  { abbr: 'Int 2', fullName: 'Pole Intermediate 2', href: '/programs/pole/intermediate-2' },
+  { abbr: 'Adv 1', fullName: 'Pole Advanced', href: '/programs/pole/advanced' },
+  { abbr: 'Adv 2', fullName: 'Pole Advanced 2', href: '/programs/pole/advanced-2' },
+  { abbr: 'Elite', fullName: 'Pole Elite', href: '/programs/pole/elite' },
 ];
 ```
 
 ---
 
-### Change 2: Update Section Header Title
+### Change 3: Highlight Current Level Based on Page Title
 
-**Current (lines 368-370):**
-```tsx
-<h2 className="text-3xl sm:text-4xl font-bold text-white mb-4">
-  What to Expect in Your <span className="gradient-text">First Visit</span>
-</h2>
-```
+Use the `title` prop to determine which level is currently active:
 
-**New:**
 ```tsx
-<h2 className="text-3xl sm:text-4xl font-bold text-white mb-4">
-  What to Expect at <span className="gradient-text">The Pole Room</span>
-</h2>
-<p className="text-gray-300 max-w-xl mx-auto">
-  More than a studio - it's a community that celebrates you
-</p>
+// Determine current level based on page title
+const getCurrentLevelIndex = () => {
+  const titleLower = title.toLowerCase();
+  if (titleLower.includes('beginner')) return 0;
+  if (titleLower.includes('intermediate 2') || titleLower.includes('inter 2')) return 2;
+  if (titleLower.includes('intermediate')) return 1;
+  if (titleLower.includes('advanced 2') || titleLower.includes('adv 2')) return 4;
+  if (titleLower.includes('advanced')) return 3;
+  if (titleLower.includes('elite')) return 5;
+  return -1; // Not a pole level page
+};
+const currentLevelIndex = getCurrentLevelIndex();
 ```
 
 ---
 
-### Change 3: Add Animated Word Cycling to "Start with pole" Section
+### Change 4: Unified Circle Styling with Current Page Highlight
 
-**Current (lines 486-489):**
+**All circles:** Same fuchsia gradient color
+**Current level:** Glowing ring effect and scale
+
 ```tsx
-<h2 className="text-3xl sm:text-4xl font-bold text-white mb-6">
-  Start with pole,{' '}
-  <span className="gradient-text">explore aerials</span>
-</h2>
-```
-
-**New - with cycling animation:**
-
-Add new state and effect at component level:
-```tsx
-const [disciplineIndex, setDisciplineIndex] = useState(0);
-const disciplines = ['Pole', 'Lyra', 'Silks', 'More'];
-
-useEffect(() => {
-  const interval = setInterval(() => {
-    setDisciplineIndex((prev) => (prev + 1) % disciplines.length);
-  }, 2000); // Change every 2 seconds
+{poleLevels.map((level, index) => {
+  const isCurrentLevel = index === currentLevelIndex;
   
-  return () => clearInterval(interval);
-}, []);
-```
-
-Update the heading:
-```tsx
-<h2 className="text-3xl sm:text-4xl font-bold text-white mb-6">
-  Start with{' '}
-  <motion.span
-    key={disciplineIndex}
-    initial={{ opacity: 0, y: 20 }}
-    animate={{ opacity: 1, y: 0 }}
-    exit={{ opacity: 0, y: -20 }}
-    className="gradient-text inline-block min-w-[120px]"
-  >
-    {disciplines[disciplineIndex]}
-  </motion.span>
-</h2>
-```
-
-And wrap with `AnimatePresence` for smooth transitions:
-```tsx
-import { motion, AnimatePresence } from 'framer-motion';
-
-<h2 className="text-3xl sm:text-4xl font-bold text-white mb-6">
-  Start with{' '}
-  <AnimatePresence mode="wait">
-    <motion.span
-      key={disciplineIndex}
+  return (
+    <motion.div
+      key={level.abbr}
       initial={{ opacity: 0, y: 20 }}
       animate={{ opacity: 1, y: 0 }}
-      exit={{ opacity: 0, y: -20 }}
-      transition={{ duration: 0.3 }}
-      className="gradient-text inline-block"
+      transition={{ delay: index * 0.1 }}
+      className="relative"
     >
-      {disciplines[disciplineIndex]}
-    </motion.span>
-  </AnimatePresence>
-</h2>
-```
-
----
-
-### Change 4: Optional - Update Accordion Step Icons
-
-Replace numbered circles with relevant icons to match the vibe theme:
-
-```tsx
-import { Heart, Users, Sparkles, GraduationCap } from 'lucide-react';
-
-const vibeIcons = [Heart, Users, Sparkles, GraduationCap];
-```
-
-In the accordion:
-```tsx
-{firstVisitAccordion.map((item, index) => {
-  const IconComponent = vibeIcons[index];
-  return (
-    <AccordionItem ...>
-      <AccordionTrigger ...>
-        <div className="flex items-center gap-4">
-          <div className="w-10 h-10 rounded-full bg-gradient-to-br from-fuchsia-500 to-purple-600 flex items-center justify-center flex-shrink-0">
-            <IconComponent className="w-5 h-5 text-white" />
-          </div>
-          ...
+      <Link to={level.href} className="group block">
+        <div className={`
+          w-14 h-14 rounded-full 
+          bg-gradient-to-br from-fuchsia-500 to-purple-600 
+          flex items-center justify-center mx-auto 
+          relative z-10 border-4 
+          ${isCurrentLevel 
+            ? 'border-cyan-400 shadow-[0_0_20px_rgba(0,255,255,0.5)] scale-110' 
+            : 'border-background group-hover:scale-105'
+          } 
+          transition-all duration-300
+        `}>
+          <span className="text-xs font-bold text-white text-center leading-tight">
+            {level.abbr}
+          </span>
         </div>
-      </AccordionTrigger>
-    </AccordionItem>
+        {/* No name or description labels below */}
+      </Link>
+    </motion.div>
   );
 })}
 ```
 
 ---
 
-### Updated Section Flow
+### Change 5: Update Connecting Line
+
+Single color gradient line connecting all 6 levels:
+
+```tsx
+<div className="hidden md:block absolute top-7 left-[8%] right-[8%] h-1 bg-gradient-to-r from-fuchsia-500 via-purple-500 to-fuchsia-500 rounded-full" />
+```
+
+---
+
+### Change 6: Updated Hero Section Layout
+
+```tsx
+{/* Hero Section */}
+<section className="relative pt-24 pb-16 overflow-hidden">
+  {/* ... background gradients ... */}
+  
+  <div className="relative max-w-4xl mx-auto px-4 text-center">
+    {/* Tagline badge */}
+    <motion.span className="...">
+      {subtitle}
+    </motion.span>
+    
+    {/* Page title */}
+    <motion.h1 className="...">
+      <span className="gradient-text">{title}</span>
+    </motion.h1>
+    
+    {/* Description */}
+    <motion.p className="...">
+      {description}
+    </motion.p>
+    
+    {/* Level Progression - Integrated here */}
+    <motion.div
+      initial={{ opacity: 0, y: 20 }}
+      animate={{ opacity: 1, y: 0 }}
+      transition={{ delay: 0.3 }}
+      className="mt-10"
+    >
+      <div className="relative max-w-2xl mx-auto">
+        {/* Connecting line */}
+        <div className="hidden md:block absolute top-7 left-[8%] right-[8%] h-1 bg-gradient-to-r from-fuchsia-500 via-purple-500 to-fuchsia-500 rounded-full" />
+        
+        {/* Level circles - 6 columns on desktop, 3x2 on mobile */}
+        <div className="grid grid-cols-3 md:grid-cols-6 gap-4 md:gap-2">
+          {poleLevels.map((level, index) => (
+            // ... circle rendering with highlight logic
+          ))}
+        </div>
+      </div>
+    </motion.div>
+  </div>
+</section>
+```
+
+---
+
+### Visual Diagram
 
 ```text
 Before:
-+------------------------------------------+
-| What to Expect in Your First Visit       |
-+------------------------------------------+
-| [1] Arrive 10 minutes early              |
-| [2] Check in at the desk                 |
-| [3] Warm up together                     |
-| [4] Foundations moves                    |
-| [5] Cool down & stretch                  |
-+------------------------------------------+
++-----------------------------------------------+
+|              Your Path to Pole Mastery        |
+|     Progress through our structured levels    |
++-----------------------------------------------+
+| [1]--------[2]--------[3]--------[4]          |
+| Beginner   Inter      Advanced   Elite        |
+| Build...   Develop... Master...  Perform...   |
++-----------------------------------------------+
 
-After:
-+------------------------------------------+
-| What to Expect at The Pole Room          |
-| More than a studio - it's a community    |
-+------------------------------------------+
-| [Heart] A welcoming front desk           |
-| [Users] A vibrant community              |
-| [Sparkles] Fun engaging classes          |
-| [Grad] Instructors who want you to succeed|
-+------------------------------------------+
-
-Word Cycling Section:
-+------------------------------------------+
-| Start with [Pole/Lyra/Silks/More]        |
-|          ↑ cycles every 2 seconds        |
-+------------------------------------------+
+After (in Hero section):
++-----------------------------------------------+
+|            [Beginner Course badge]            |
+|              Pole Beginner                    |
+|      Our beginner course is designed...       |
+|                                               |
+| [Beg]--[Int 1]--[Int 2]--[Adv 1]--[Adv 2]--[Elite] |
+|   ↑ highlighted with cyan glow if current     |
++-----------------------------------------------+
 ```
 
 ---
@@ -202,15 +198,14 @@ Word Cycling Section:
 
 | File | Changes |
 |------|---------|
-| `src/pages/FirstTimers.tsx` | Update accordion data, add word cycling state/effect, update section header |
+| `src/components/templates/ProgramPageTemplate.tsx` | Remove separate Level Progression section, integrate into Hero, update to 6 levels with abbreviations, add current page highlighting |
 
 ---
 
-### New Imports Required
+### Technical Details
 
-```tsx
-import { AnimatePresence } from 'framer-motion';
-import { Heart, GraduationCap } from 'lucide-react';
-// Users and Sparkles already imported
-```
+The current level detection uses the page `title` prop to match against level names. This approach:
+- Works with existing page data (no prop changes needed)
+- Handles the 6-level pole progression
+- Falls back gracefully for non-pole program pages (currentLevelIndex = -1)
 
