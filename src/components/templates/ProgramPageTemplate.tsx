@@ -72,36 +72,23 @@ const ProgramPageTemplate = ({
       <Header />
       
       {/* Hero Section */}
-      <section className="relative min-h-[70vh] flex items-center justify-center overflow-hidden">
-        <div 
-          className="absolute inset-0 bg-cover bg-center bg-no-repeat"
-          style={{
-            backgroundImage: `linear-gradient(rgba(0,0,0,0.6), rgba(0,0,0,0.7)), url('${heroImage}')`
-          }}
-        />
+      <section className="relative pt-24 pb-16 overflow-hidden">
+        <div className="absolute inset-0 bg-gradient-to-br from-gray-900 via-purple-900/30 to-gray-900" />
+        <div className="absolute top-1/4 right-1/4 w-96 h-96 bg-fuchsia-500/10 rounded-full blur-3xl" />
         
-        <div className="relative z-10 text-center text-white max-w-4xl mx-auto px-4 py-20">
-          <Badge className="mb-6 text-lg px-6 py-2 bg-primary/20 border-primary">
-            <Sparkles className="w-4 h-4 mr-2" />
+        <div className="relative max-w-4xl mx-auto px-4 text-center">
+          {/* Fuchsia Pill Badge */}
+          <span className="inline-block px-4 py-2 rounded-full bg-fuchsia-500/10 border border-fuchsia-500/30 text-fuchsia-400 text-sm font-medium mb-6">
             {badge}
-          </Badge>
+          </span>
           
-          <h1 className="text-5xl md:text-7xl font-bold mb-6 gradient-text">
+          <h1 className="text-4xl sm:text-5xl lg:text-6xl font-bold text-white leading-tight mb-6">
             {title}
           </h1>
           
-          <p className="text-xl md:text-2xl mb-8 text-gray-200">
+          <p className="text-xl text-gray-300 max-w-2xl mx-auto">
             {subtitle}
           </p>
-          
-          <div className="flex flex-col sm:flex-row gap-4 justify-center">
-            <Button size="lg" className="neon-button text-lg px-8" asChild>
-              <Link to="/get-started">
-                {ctaText}
-                <ArrowRight className="w-5 h-5 ml-2" />
-              </Link>
-            </Button>
-          </div>
         </div>
       </section>
 
