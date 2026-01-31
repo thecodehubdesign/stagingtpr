@@ -4,7 +4,8 @@ import Header from '@/components/Header';
 import Footer from '@/components/Footer';
 import { Button } from '@/components/ui/button';
 import { Accordion, AccordionContent, AccordionItem, AccordionTrigger } from '@/components/ui/accordion';
-import { Check, Star, MapPin, Shield, Dumbbell, Sparkles, Compass, Heart, Play, ChevronRight, Quote, X } from 'lucide-react';
+import { Check, Star, MapPin, Shield, Dumbbell, Sparkles, Compass, Heart, Play, ChevronRight, Quote, X, Clock } from 'lucide-react';
+import { Link } from 'react-router-dom';
 import jasmineSignature from '@/assets/jasmine-signature.png';
 import jasminePhoto from '@/assets/jasmine-verified.png';
 import AllStudiosMap from '@/components/AllStudiosMap';
@@ -861,9 +862,16 @@ const PoleVsGymPage = () => {
         </div>
       </section>
 
-      {/* Final CTA */}
+      {/* Final CTA - Next Beginner Induction */}
       <section className="py-20 relative overflow-hidden">
-        <div className="absolute inset-0 bg-gradient-to-br from-fuchsia-600 via-purple-600 to-cyan-600" />
+        <div className="absolute inset-0">
+          <img 
+            src="/images/first-timers/gallery-1.png" 
+            alt="Studio group photo" 
+            className="w-full h-full object-cover opacity-30"
+          />
+          <div className="absolute inset-0 bg-gradient-to-br from-fuchsia-600/80 via-purple-600/80 to-cyan-600/80" />
+        </div>
         <div className="absolute inset-0 cyber-grid opacity-20" />
         
         <div className="relative max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
@@ -872,19 +880,26 @@ const PoleVsGymPage = () => {
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
           >
-            <Sparkles className="w-16 h-16 text-white mx-auto mb-6" />
+            <Clock className="w-16 h-16 text-white mx-auto mb-6" />
             <h2 className="text-3xl sm:text-4xl lg:text-5xl font-bold text-white mb-6">
-              Ready to Transform Your Life?
+              Next Beginner Induction Starts Soon
             </h2>
             <p className="text-xl text-purple-100 mb-8 max-w-2xl mx-auto">
-              Join thousands of women who've discovered the joy of pole dancing. Your journey starts with just one class.
+              Don't wait for the "perfect time" - there isn't one. Start now and discover what you're capable of.
             </p>
-            <Button className="bg-white text-purple-900 hover:bg-gray-100 font-bold text-base sm:text-lg px-6 sm:px-8 py-3 sm:py-4 h-auto">
-              Yes, Claim My Beginner Spot
-              <ChevronRight className="w-5 h-5 ml-2" />
-            </Button>
+            <div className="flex flex-col sm:flex-row gap-4 justify-center">
+              <Button className="bg-white text-purple-900 hover:bg-gray-100 font-bold text-base sm:text-lg px-6 sm:px-8 py-3 sm:py-4 h-auto">
+                Join the Next Intake
+                <ChevronRight className="w-5 h-5 ml-2" />
+              </Button>
+              <Button variant="outline" className="border-white text-white hover:bg-white/10 font-bold text-base sm:text-lg px-6 sm:px-8 py-3 sm:py-4 h-auto" asChild>
+                <Link to="/studios">
+                  Choose My Studio
+                </Link>
+              </Button>
+            </div>
             <p className="text-purple-200 text-sm mt-6">
-              Limited spots available • No experience needed • All bodies welcome
+              No experience needed • All bodies welcome • 7 Melbourne locations
             </p>
           </motion.div>
         </div>
