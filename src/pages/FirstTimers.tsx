@@ -444,6 +444,7 @@ const FirstTimers = () => {
                     {disciplines[disciplineIndex]}
                   </motion.span>
                 </AnimatePresence>
+                , Explore More
               </h2>
               <p className="text-lg text-gray-300 mb-6">
                 Most of our students begin with pole dancing - it's the perfect foundation for building strength, confidence, and body awareness.
