@@ -247,41 +247,41 @@ const Contact = () => {
             </h2>
             
             <Accordion type="single" collapsible className="space-y-4">
-              <AccordionItem value="item-0" className="border border-primary/20 rounded-lg px-4">
-                <AccordionTrigger className="text-left font-medium hover:text-primary">
+              <AccordionItem value="item-0" className="cyber-faq-item">
+                <AccordionTrigger className="py-5 text-left font-medium text-white hover:text-fuchsia-400 hover:no-underline transition-colors">
                   How do I book my first class?
                 </AccordionTrigger>
-                <AccordionContent className="text-muted-foreground">
+                <AccordionContent className="text-gray-300 pb-5 leading-relaxed">
                   New students get their first class free! Simply choose your preferred studio 
                   and book online through our website or give us a call.
                 </AccordionContent>
               </AccordionItem>
 
-              <AccordionItem value="item-1" className="border border-primary/20 rounded-lg px-4">
-                <AccordionTrigger className="text-left font-medium hover:text-primary">
+              <AccordionItem value="item-1" className="cyber-faq-item">
+                <AccordionTrigger className="py-5 text-left font-medium text-white hover:text-fuchsia-400 hover:no-underline transition-colors">
                   What should I wear to class?
                 </AccordionTrigger>
-                <AccordionContent className="text-muted-foreground">
+                <AccordionContent className="text-gray-300 pb-5 leading-relaxed">
                   Wear shorts and a tank top or sports bra for better grip on the pole. 
                   Bring a water bottle and avoid lotions before class.
                 </AccordionContent>
               </AccordionItem>
 
-              <AccordionItem value="item-2" className="border border-primary/20 rounded-lg px-4">
-                <AccordionTrigger className="text-left font-medium hover:text-primary">
+              <AccordionItem value="item-2" className="cyber-faq-item">
+                <AccordionTrigger className="py-5 text-left font-medium text-white hover:text-fuchsia-400 hover:no-underline transition-colors">
                   Do you offer private lessons?
                 </AccordionTrigger>
-                <AccordionContent className="text-muted-foreground">
+                <AccordionContent className="text-gray-300 pb-5 leading-relaxed">
                   Yes! We offer one-on-one and small group private sessions. 
                   Contact us to discuss your goals and schedule.
                 </AccordionContent>
               </AccordionItem>
 
-              <AccordionItem value="item-3" className="border border-primary/20 rounded-lg px-4">
-                <AccordionTrigger className="text-left font-medium hover:text-primary">
+              <AccordionItem value="item-3" className="cyber-faq-item">
+                <AccordionTrigger className="py-5 text-left font-medium text-white hover:text-fuchsia-400 hover:no-underline transition-colors">
                   Can I try different studios?
                 </AccordionTrigger>
-                <AccordionContent className="text-muted-foreground">
+                <AccordionContent className="text-gray-300 pb-5 leading-relaxed">
                   Absolutely! Your membership gives you access to all our studio locations. 
                   Each studio has its own unique vibe and class offerings.
                 </AccordionContent>

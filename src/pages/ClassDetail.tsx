@@ -378,31 +378,31 @@ const ClassDetail = () => {
             </h2>
             
             <Accordion type="single" collapsible className="space-y-4">
-              <AccordionItem value="item-0" className="border border-primary/20 rounded-lg px-4">
-                <AccordionTrigger className="text-left font-medium hover:text-primary">
+              <AccordionItem value="item-0" className="cyber-faq-item">
+                <AccordionTrigger className="py-5 text-left font-medium text-white hover:text-fuchsia-400 hover:no-underline transition-colors">
                   What should I wear to class?
                 </AccordionTrigger>
-                <AccordionContent className="text-muted-foreground">
+                <AccordionContent className="text-gray-300 pb-5 leading-relaxed">
                   Wear shorts and a tank top or sports bra. Skin grip is essential for pole work. 
                   We recommend bringing a water bottle and small towel.
                 </AccordionContent>
               </AccordionItem>
               
-              <AccordionItem value="item-1" className="border border-primary/20 rounded-lg px-4">
-                <AccordionTrigger className="text-left font-medium hover:text-primary">
+              <AccordionItem value="item-1" className="cyber-faq-item">
+                <AccordionTrigger className="py-5 text-left font-medium text-white hover:text-fuchsia-400 hover:no-underline transition-colors">
                   Is the first class really free?
                 </AccordionTrigger>
-                <AccordionContent className="text-muted-foreground">
+                <AccordionContent className="text-gray-300 pb-5 leading-relaxed">
                   Yes! All new students get their first Beginner Pole Foundations class completely free. 
                   No strings attached - just bring yourself and get ready to have fun.
                 </AccordionContent>
               </AccordionItem>
               
-              <AccordionItem value="item-2" className="border border-primary/20 rounded-lg px-4">
-                <AccordionTrigger className="text-left font-medium hover:text-primary">
+              <AccordionItem value="item-2" className="cyber-faq-item">
+                <AccordionTrigger className="py-5 text-left font-medium text-white hover:text-fuchsia-400 hover:no-underline transition-colors">
                   What if I'm not flexible or strong?
                 </AccordionTrigger>
-                <AccordionContent className="text-muted-foreground">
+                <AccordionContent className="text-gray-300 pb-5 leading-relaxed">
                   Perfect! This class is designed for absolute beginners. You'll build strength and 
                   flexibility naturally as you progress. Everyone starts somewhere.
                 </AccordionContent>
