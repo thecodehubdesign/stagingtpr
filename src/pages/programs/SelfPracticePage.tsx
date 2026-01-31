@@ -4,7 +4,7 @@ const SelfPracticePage = () => {
   return (
     <ProgramPageTemplate
       badge="Self Practice"
-      title="Practice Makes Perfect"
+      title="Self Practice"
       subtitle="Studio time to hone your skills"
       heroImage="https://images.unsplash.com/photo-1571902943202-507ec2618e8f?ixlib=rb-4.0.3&auto=format&fit=crop&w=2070&q=80"
       description="Book studio time to practice what you've learned in class. Self practice sessions give you space to drill moves, work on routines, and build muscle memory."
@@ -32,6 +32,7 @@ const SelfPracticePage = () => {
         { question: "Is it supervised?", answer: "A staff member is always on site, but this is not an instructed session." },
         { question: "Can I practice with a friend?", answer: "Yes! Book together and split the cost." }
       ]}
+      availableStudios={['mitcham', 'eltham', 'cbd', 'kilsyth', 'highett', 'narre-warren', 'rowville']}
       price="$15/hour"
       ctaText="Book Practice Time"
     />

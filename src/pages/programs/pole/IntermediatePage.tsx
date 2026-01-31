@@ -4,7 +4,7 @@ const PoleIntermediatePage = () => {
   return (
     <ProgramPageTemplate
       badge="Intermediate Course"
-      title="Elevate Your Skills"
+      title="Pole Intermediate"
       subtitle="Take your pole journey to the next level"
       heroImage="https://images.unsplash.com/photo-1571019614242-c5c5dee9f50b?ixlib=rb-4.0.3&auto=format&fit=crop&w=2070&q=80"
       description="Ready to level up? Our intermediate course builds on your foundational skills with more challenging spins, inversions, and combinations. You'll develop the strength and technique needed for advanced moves while refining your personal style."
@@ -50,6 +50,7 @@ const PoleIntermediatePage = () => {
         { question: "Is there homework?", answer: "We provide conditioning exercises to practice at home, but in-class time is where the magic happens!" },
         { question: "Can I try spin pole?", answer: "Yes! You'll be introduced to spin pole techniques as part of the intermediate curriculum." }
       ]}
+      availableStudios={['mitcham', 'eltham', 'cbd', 'kilsyth', 'highett', 'narre-warren', 'rowville']}
       price="From $240/term"
       ctaText="Book Your Free Trial"
     />

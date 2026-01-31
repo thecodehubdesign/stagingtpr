@@ -4,7 +4,7 @@ const PoleElitePage = () => {
   return (
     <ProgramPageTemplate
       badge="Elite Program"
-      title="Join the Elite"
+      title="Pole Elite"
       subtitle="Competition-level training for serious athletes"
       heroImage="https://images.unsplash.com/photo-1549060279-7e168fcee0c2?ixlib=rb-4.0.3&auto=format&fit=crop&w=2070&q=80"
       description="Our elite program is designed for pole athletes pursuing competition, performance, or professional careers. Work with champion instructors, receive personalized coaching, and push the boundaries of what's possible on the pole."
@@ -51,6 +51,7 @@ const PoleElitePage = () => {
         { question: "What about injuries?", answer: "We work closely with sports physiotherapists and prioritize injury prevention. Recovery and conditioning are part of the program." },
         { question: "Can this become a career?", answer: "Many of our elite graduates have gone on to perform professionally, teach, and compete at the highest levels." }
       ]}
+      availableStudios={['mitcham', 'eltham', 'cbd']}
       price="Custom pricing"
       ctaText="Apply for Elite Program"
     />

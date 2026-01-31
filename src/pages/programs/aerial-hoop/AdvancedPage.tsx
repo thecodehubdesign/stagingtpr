@@ -4,7 +4,7 @@ const AerialHoopAdvancedPage = () => {
   return (
     <ProgramPageTemplate
       badge="Advanced Aerial Hoop"
-      title="Defy Gravity"
+      title="Aerial Hoop Advanced"
       subtitle="Master complex skills and performance artistry"
       heroImage="https://images.unsplash.com/photo-1544367567-0f2fcb009e0b?ixlib=rb-4.0.3&auto=format&fit=crop&w=2070&q=80"
       description="For experienced aerialists ready to master the most challenging skills. Learn complex drops, dynamic sequences, and performance-ready routines that will leave audiences breathless."
@@ -47,6 +47,7 @@ const AerialHoopAdvancedPage = () => {
         { question: "How often should I train?", answer: "We recommend 2-3 sessions per week for optimal progress at advanced level." },
         { question: "What makes advanced different from intermediate?", answer: "Advanced focuses on performance quality, complex combinations, and competition-level skills." }
       ]}
+      availableStudios={['mitcham', 'eltham']}
       price="From $270/term"
       ctaText="Apply for Advanced"
     />

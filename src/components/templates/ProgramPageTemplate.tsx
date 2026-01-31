@@ -1,11 +1,25 @@
+import { useState, useMemo } from 'react';
 import { Button } from '@/components/ui/button';
+import { Input } from '@/components/ui/input';
+import { Card } from '@/components/ui/card';
 import { Accordion, AccordionContent, AccordionItem, AccordionTrigger } from '@/components/ui/accordion';
-import { ArrowRight, Clock, Users, Star, Calendar, Sparkles, Check } from 'lucide-react';
+import { 
+  DropdownMenu, 
+  DropdownMenuContent, 
+  DropdownMenuItem, 
+  DropdownMenuTrigger 
+} from '@/components/ui/dropdown-menu';
+import { 
+  Clock, Users, Star, Calendar, Check, ChevronLeft, ChevronRight, 
+  ChevronDown, MapPin, Search 
+} from 'lucide-react';
 import { Link } from 'react-router-dom';
 import { motion } from 'framer-motion';
 import Header from '@/components/Header';
 import Footer from '@/components/Footer';
 import { useScrollToTop } from '@/hooks/useScrollToTop';
+import { studios } from '@/data/studios';
+import { programs } from '@/data/programs';
 
 interface CurriculumWeek {
   week: number;
@@ -42,6 +56,8 @@ interface ProgramPageProps {
   instructors?: Instructor[];
   price?: string;
   ctaText?: string;
+  images?: string[];
+  availableStudios?: string[];
 }
 
 const ProgramPageTemplate = ({
@@ -61,28 +77,51 @@ const ProgramPageTemplate = ({
   faqs,
   instructors,
   price,
-  ctaText = "Book Your Free Trial"
+  ctaText = "Book Your Free Trial",
+  images,
+  availableStudios
 }: ProgramPageProps) => {
   useScrollToTop();
+  
+  // Image carousel state
+  const [currentImageIndex, setCurrentImageIndex] = useState(0);
+  const carouselImages = images && images.length > 0 ? images : [heroImage];
+  
+  // Program search state
+  const [programSearch, setProgramSearch] = useState('');
+  const [selectedProgramStudio, setSelectedProgramStudio] = useState<string | null>(null);
+  const [selectedProgramCategory, setSelectedProgramCategory] = useState<string | null>(null);
+  
+  // Filter programs
+  const filteredPrograms = useMemo(() => {
+    return programs.filter(program => {
+      const matchesSearch = program.name.toLowerCase().includes(programSearch.toLowerCase()) ||
+                           program.description.toLowerCase().includes(programSearch.toLowerCase());
+      const matchesCategory = !selectedProgramCategory || program.category === selectedProgramCategory;
+      return matchesSearch && matchesCategory;
+    });
+  }, [programSearch, selectedProgramCategory]);
 
   return (
     <div className="min-h-screen bg-background">
       <Header />
       
-      {/* Hero Section - First Timers Style */}
+      {/* Hero Section - Clear Page Labeling */}
       <section className="relative pt-24 pb-16 overflow-hidden">
         <div className="absolute inset-0 bg-gradient-to-br from-gray-900 via-purple-900/30 to-gray-900" />
         <div className="absolute top-1/4 right-1/4 w-96 h-96 bg-fuchsia-500/10 rounded-full blur-3xl" />
         
         <div className="relative max-w-4xl mx-auto px-4 text-center">
+          {/* Tagline in bubble */}
           <motion.span 
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             className="inline-block px-4 py-2 rounded-full bg-fuchsia-500/10 border border-fuchsia-500/30 text-fuchsia-400 text-sm font-medium mb-6"
           >
-            {badge}
+            {subtitle}
           </motion.span>
           
+          {/* Page name as title */}
           <motion.h1 
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
@@ -98,12 +137,12 @@ const ProgramPageTemplate = ({
             transition={{ delay: 0.2 }}
             className="text-xl text-gray-300 max-w-2xl mx-auto"
           >
-            {subtitle}
+            {description}
           </motion.p>
         </div>
       </section>
 
-      {/* Course Overview - First Timers Style */}
+      {/* Course Overview - Image Carousel + Highlights + Stats Bar */}
       <section className="py-20 bg-gray-900/50">
         <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
           <motion.div
@@ -118,72 +157,13 @@ const ProgramPageTemplate = ({
             <h2 className="text-3xl sm:text-4xl font-bold text-white mt-3 mb-4">
               What You'll <span className="gradient-text">Learn</span>
             </h2>
-            <p className="text-gray-300 max-w-2xl mx-auto">{description}</p>
           </motion.div>
           
-          <div className="grid lg:grid-cols-2 gap-12 items-start">
-            {/* Stats Grid */}
-            <div className="grid grid-cols-2 gap-4">
-              <motion.div
-                initial={{ opacity: 0, y: 20 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                viewport={{ once: true }}
-                transition={{ delay: 0 }}
-                className="cyber-card rounded-xl p-4 flex items-center gap-3"
-              >
-                <Clock className="w-6 h-6 text-fuchsia-400" />
-                <div>
-                  <p className="text-sm text-gray-400">Duration</p>
-                  <p className="font-semibold text-white">{duration}</p>
-                </div>
-              </motion.div>
-              
-              <motion.div
-                initial={{ opacity: 0, y: 20 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                viewport={{ once: true }}
-                transition={{ delay: 0.1 }}
-                className="cyber-card rounded-xl p-4 flex items-center gap-3"
-              >
-                <Users className="w-6 h-6 text-fuchsia-400" />
-                <div>
-                  <p className="text-sm text-gray-400">Class Size</p>
-                  <p className="font-semibold text-white">{classSize}</p>
-                </div>
-              </motion.div>
-              
-              <motion.div
-                initial={{ opacity: 0, y: 20 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                viewport={{ once: true }}
-                transition={{ delay: 0.2 }}
-                className="cyber-card rounded-xl p-4 flex items-center gap-3"
-              >
-                <Calendar className="w-6 h-6 text-fuchsia-400" />
-                <div>
-                  <p className="text-sm text-gray-400">Frequency</p>
-                  <p className="font-semibold text-white">{frequency}</p>
-                </div>
-              </motion.div>
-              
-              <motion.div
-                initial={{ opacity: 0, y: 20 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                viewport={{ once: true }}
-                transition={{ delay: 0.3 }}
-                className="cyber-card rounded-xl p-4 flex items-center gap-3"
-              >
-                <Star className="w-6 h-6 text-fuchsia-400" />
-                <div>
-                  <p className="text-sm text-gray-400">Level</p>
-                  <p className="font-semibold text-white">{level}</p>
-                </div>
-              </motion.div>
-            </div>
-            
-            {/* Highlights */}
+          {/* Top Row: Highlights + Image Carousel */}
+          <div className="grid lg:grid-cols-2 gap-12 items-start mb-12">
+            {/* Left: Highlights */}
             <motion.div
-              initial={{ opacity: 0, x: 30 }}
+              initial={{ opacity: 0, x: -30 }}
               whileInView={{ opacity: 1, x: 0 }}
               viewport={{ once: true }}
             >
@@ -197,7 +177,91 @@ const ProgramPageTemplate = ({
                 ))}
               </div>
             </motion.div>
+            
+            {/* Right: Image Carousel */}
+            <motion.div 
+              initial={{ opacity: 0, x: 30 }}
+              whileInView={{ opacity: 1, x: 0 }}
+              viewport={{ once: true }}
+              className="relative"
+            >
+              <div className="aspect-[4/3] rounded-2xl overflow-hidden cyber-card">
+                <img 
+                  src={carouselImages[currentImageIndex]}
+                  alt="Course preview"
+                  className="w-full h-full object-cover transition-opacity duration-300"
+                />
+              </div>
+              
+              {/* Carousel Navigation - only show if multiple images */}
+              {carouselImages.length > 1 && (
+                <>
+                  <button 
+                    onClick={() => setCurrentImageIndex(prev => prev === 0 ? carouselImages.length - 1 : prev - 1)}
+                    className="absolute left-4 top-1/2 -translate-y-1/2 w-10 h-10 rounded-full bg-black/50 border border-fuchsia-500/30 flex items-center justify-center text-white hover:bg-fuchsia-500/20 transition-colors"
+                  >
+                    <ChevronLeft className="w-5 h-5" />
+                  </button>
+                  <button 
+                    onClick={() => setCurrentImageIndex(prev => prev === carouselImages.length - 1 ? 0 : prev + 1)}
+                    className="absolute right-4 top-1/2 -translate-y-1/2 w-10 h-10 rounded-full bg-black/50 border border-fuchsia-500/30 flex items-center justify-center text-white hover:bg-fuchsia-500/20 transition-colors"
+                  >
+                    <ChevronRight className="w-5 h-5" />
+                  </button>
+                  
+                  {/* Dots indicator */}
+                  <div className="absolute bottom-4 left-1/2 -translate-x-1/2 flex gap-2">
+                    {carouselImages.map((_, index) => (
+                      <button 
+                        key={index}
+                        onClick={() => setCurrentImageIndex(index)}
+                        className={`w-2 h-2 rounded-full transition-colors ${
+                          index === currentImageIndex ? 'bg-fuchsia-400' : 'bg-white/30'
+                        }`}
+                      />
+                    ))}
+                  </div>
+                </>
+              )}
+            </motion.div>
           </div>
+          
+          {/* Bottom Row: Horizontal Stats Bar */}
+          <motion.div 
+            initial={{ opacity: 0, y: 20 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            className="grid grid-cols-2 md:grid-cols-4 gap-4"
+          >
+            <div className="cyber-card rounded-xl p-4 flex items-center gap-3">
+              <Clock className="w-6 h-6 text-fuchsia-400" />
+              <div>
+                <p className="text-sm text-gray-400">Duration</p>
+                <p className="font-semibold text-white">{duration}</p>
+              </div>
+            </div>
+            <div className="cyber-card rounded-xl p-4 flex items-center gap-3">
+              <Users className="w-6 h-6 text-fuchsia-400" />
+              <div>
+                <p className="text-sm text-gray-400">Class Size</p>
+                <p className="font-semibold text-white">{classSize}</p>
+              </div>
+            </div>
+            <div className="cyber-card rounded-xl p-4 flex items-center gap-3">
+              <Calendar className="w-6 h-6 text-fuchsia-400" />
+              <div>
+                <p className="text-sm text-gray-400">Frequency</p>
+                <p className="font-semibold text-white">{frequency}</p>
+              </div>
+            </div>
+            <div className="cyber-card rounded-xl p-4 flex items-center gap-3">
+              <Star className="w-6 h-6 text-fuchsia-400" />
+              <div>
+                <p className="text-sm text-gray-400">Level</p>
+                <p className="font-semibold text-white">{level}</p>
+              </div>
+            </div>
+          </motion.div>
         </div>
       </section>
 
@@ -347,40 +411,165 @@ const ProgramPageTemplate = ({
         </div>
       </section>
 
-      {/* Final CTA - First Timers Style with Background Image */}
-      <section className="py-20 relative overflow-hidden">
-        <div className="absolute inset-0">
-          <img 
-            src={heroImage} 
-            alt="Studio atmosphere" 
-            className="w-full h-full object-cover opacity-30"
-          />
-          <div className="absolute inset-0 bg-gradient-to-br from-fuchsia-600/80 via-purple-600/80 to-cyan-600/80" />
-        </div>
-        <div className="absolute inset-0 cyber-grid opacity-20" />
-        
-        <div className="relative max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
+      {/* Available Studios Section */}
+      {availableStudios && availableStudios.length > 0 && (
+        <section className="py-20 bg-gray-900/50">
+          <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
+            <motion.div
+              initial={{ opacity: 0, y: 30 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true }}
+              className="text-center mb-12"
+            >
+              <h2 className="text-3xl sm:text-4xl font-bold text-white mb-4">
+                Available <span className="gradient-text">Locations</span>
+              </h2>
+              <p className="text-gray-300">This program is offered at these studios</p>
+            </motion.div>
+            
+            <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-6">
+              {availableStudios.map((studioId) => {
+                const studio = studios.find(s => s.id === studioId);
+                if (!studio) return null;
+                return (
+                  <motion.div
+                    key={studioId}
+                    initial={{ opacity: 0, y: 20 }}
+                    whileInView={{ opacity: 1, y: 0 }}
+                    viewport={{ once: true }}
+                  >
+                    <Link 
+                      to={`/studios/${studioId}`}
+                      className="block cyber-card rounded-xl p-6 hover:border-fuchsia-500/50 transition-colors"
+                    >
+                      <div className="flex items-center gap-4">
+                        <div className="w-12 h-12 rounded-full bg-gradient-to-br from-fuchsia-500 to-purple-600 flex items-center justify-center">
+                          <MapPin className="w-6 h-6 text-white" />
+                        </div>
+                        <div>
+                          <h3 className="text-lg font-semibold text-white">
+                            {studio.name.replace('The Pole Room ', '')}
+                          </h3>
+                          <p className="text-sm text-gray-400">{studio.address}</p>
+                        </div>
+                      </div>
+                    </Link>
+                  </motion.div>
+                );
+              })}
+            </div>
+          </div>
+        </section>
+      )}
+
+      {/* Explore Other Programs Section */}
+      <section className="py-20 bg-gray-900">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <motion.div
             initial={{ opacity: 0, y: 30 }}
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
+            className="text-center mb-12"
           >
-            <Sparkles className="w-16 h-16 text-white mx-auto mb-6" />
-            <h2 className="text-3xl sm:text-4xl lg:text-5xl font-bold text-white mb-6">
-              Ready to Start Your Journey?
+            <h2 className="text-3xl sm:text-4xl font-bold text-white mb-4">
+              Explore Our <span className="gradient-text">Programs</span>
             </h2>
-            <p className="text-xl text-purple-100 mb-8 max-w-2xl mx-auto">
-              Join hundreds of students who have transformed their lives through pole and aerial fitness.
-            </p>
-            <div className="flex flex-col sm:flex-row gap-4 justify-center">
-              <Button className="bg-white text-purple-900 hover:bg-gray-100 font-bold text-lg px-8 py-4 h-auto" asChild>
-                <Link to="/get-started">
-                  {ctaText}
-                  <ArrowRight className="w-5 h-5 ml-2" />
-                </Link>
-              </Button>
-            </div>
+            <p className="text-gray-300">Find other classes that match your interests</p>
           </motion.div>
+          
+          {/* Search and Filters */}
+          <div className="flex flex-col items-center gap-4 mb-12">
+            {/* Search Input */}
+            <div className="relative w-full max-w-md">
+              <Search className="absolute left-3 top-1/2 -translate-y-1/2 w-5 h-5 text-fuchsia-400" />
+              <Input
+                type="text"
+                placeholder="Search programs..."
+                value={programSearch}
+                onChange={(e) => setProgramSearch(e.target.value)}
+                className="pl-10 border-fuchsia-500/50 bg-background/50 focus:border-fuchsia-400"
+              />
+            </div>
+
+            {/* Dropdown Filters */}
+            <div className="flex flex-wrap justify-center gap-4">
+              {/* Filter by Studio */}
+              <DropdownMenu>
+                <DropdownMenuTrigger asChild>
+                  <Button variant="outline" className="border-fuchsia-500/50 bg-background/50 min-w-[200px] justify-between">
+                    <div className="flex items-center gap-2">
+                      <MapPin className="w-4 h-4 text-fuchsia-400" />
+                      {selectedProgramStudio || 'All Studios'}
+                    </div>
+                    <ChevronDown className="w-4 h-4 ml-2" />
+                  </Button>
+                </DropdownMenuTrigger>
+                <DropdownMenuContent className="bg-gray-900 border-fuchsia-500/30">
+                  <DropdownMenuItem onClick={() => setSelectedProgramStudio(null)}>
+                    All Studios
+                  </DropdownMenuItem>
+                  {studios.map((studio) => (
+                    <DropdownMenuItem key={studio.id} onClick={() => setSelectedProgramStudio(studio.name)}>
+                      {studio.name.replace('The Pole Room ', '')}
+                    </DropdownMenuItem>
+                  ))}
+                </DropdownMenuContent>
+              </DropdownMenu>
+
+              {/* Filter by Category */}
+              <DropdownMenu>
+                <DropdownMenuTrigger asChild>
+                  <Button variant="outline" className="border-fuchsia-500/50 bg-background/50 min-w-[200px] justify-between">
+                    <div className="flex items-center gap-2">
+                      <Star className="w-4 h-4 text-fuchsia-400" />
+                      {selectedProgramCategory || 'All Categories'}
+                    </div>
+                    <ChevronDown className="w-4 h-4 ml-2" />
+                  </Button>
+                </DropdownMenuTrigger>
+                <DropdownMenuContent className="bg-gray-900 border-fuchsia-500/30">
+                  <DropdownMenuItem onClick={() => setSelectedProgramCategory(null)}>All Categories</DropdownMenuItem>
+                  <DropdownMenuItem onClick={() => setSelectedProgramCategory('Pole')}>Pole</DropdownMenuItem>
+                  <DropdownMenuItem onClick={() => setSelectedProgramCategory('Aerial')}>Aerial</DropdownMenuItem>
+                  <DropdownMenuItem onClick={() => setSelectedProgramCategory('Dance')}>Dance</DropdownMenuItem>
+                  <DropdownMenuItem onClick={() => setSelectedProgramCategory('Flexibility')}>Flexibility</DropdownMenuItem>
+                </DropdownMenuContent>
+              </DropdownMenu>
+            </div>
+          </div>
+          
+          {/* Program Cards Grid */}
+          <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
+            {filteredPrograms.map((program, index) => (
+              <motion.div
+                key={program.name}
+                initial={{ opacity: 0, y: 20 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true }}
+                transition={{ delay: index * 0.05 }}
+              >
+                <Link to={program.href}>
+                  <Card className="cyber-card rounded-xl overflow-hidden hover:scale-105 transition-transform border-0">
+                    <div className="h-48 overflow-hidden">
+                      <img src={program.image} alt={program.name} className="w-full h-full object-cover" />
+                    </div>
+                    <div className="p-6">
+                      <div className="flex items-center gap-2 mb-2">
+                        <span className="px-2 py-1 text-xs rounded-full bg-fuchsia-500/10 text-fuchsia-400 border border-fuchsia-500/30">
+                          {program.category}
+                        </span>
+                        <span className="px-2 py-1 text-xs rounded-full bg-gray-500/10 text-gray-400 border border-gray-500/30">
+                          {program.level}
+                        </span>
+                      </div>
+                      <h3 className="text-lg font-bold text-white mb-2">{program.name}</h3>
+                      <p className="text-gray-400 text-sm line-clamp-2">{program.description}</p>
+                    </div>
+                  </Card>
+                </Link>
+              </motion.div>
+            ))}
+          </div>
         </div>
       </section>
 

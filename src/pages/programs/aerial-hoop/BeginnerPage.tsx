@@ -4,7 +4,7 @@ const AerialHoopBeginnerPage = () => {
   return (
     <ProgramPageTemplate
       badge="Beginner Aerial Hoop"
-      title="Discover Aerial Grace"
+      title="Aerial Hoop Beginner"
       subtitle="Float, spin, and soar in the lyra"
       heroImage="https://images.unsplash.com/photo-1518611012118-696072aa579a?ixlib=rb-4.0.3&auto=format&fit=crop&w=2070&q=80"
       description="Aerial hoop (also known as lyra) is a beautiful circus art that combines strength, grace, and artistry. Our beginner course teaches you how to mount, spin, and pose in the hoop while building the strength and technique for beautiful aerial movement."
@@ -44,6 +44,7 @@ const AerialHoopBeginnerPage = () => {
         { question: "How high is the hoop?", answer: "We adjust hoop height based on skill level. Beginners start with hoops low enough to mount from the ground." },
         { question: "Can I wear shorts?", answer: "For lyra, we recommend clothing that covers behind the knees and underarms to prevent discomfort from the apparatus." }
       ]}
+      availableStudios={['mitcham', 'eltham', 'cbd', 'kilsyth']}
       price="From $230/term"
       ctaText="Book Your Free Trial"
     />
