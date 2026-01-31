@@ -1,106 +1,62 @@
-
+import { useState } from 'react';
+import { useNavigate } from 'react-router-dom';
 import Header from '@/components/Header';
 import Footer from '@/components/Footer';
-import { Button } from '@/components/ui/button';
 import { Card } from '@/components/ui/card';
 import { Badge } from '@/components/ui/badge';
-import { Star, Award, Heart, Zap, Instagram, Facebook } from 'lucide-react';
+import { Button } from '@/components/ui/button';
+import { Heart, Zap, Star, MapPin, ChevronDown } from 'lucide-react';
+import { instructors, Instructor } from '@/data/instructors';
+import { studios } from '@/data/studios';
+import {
+  DropdownMenu,
+  DropdownMenuContent,
+  DropdownMenuItem,
+  DropdownMenuTrigger,
+} from "@/components/ui/dropdown-menu";
 
 const Instructors = () => {
-  const instructors = [
-    {
-      name: "Jasmine Zapka",
-      role: "Founder & Lead Instructor",
-      image: "https://images.unsplash.com/photo-1494790108755-2616b332c3ec?ixlib=rb-4.0.3&auto=format&fit=crop&w=500&q=80",
-      specialties: ["Pole Dancing", "Aerial Silks", "Flexibility Training"],
-      experience: "8+ Years",
-      certifications: ["XPERT Pole Instructor", "Aerial Yoga Certified"],
-      bio: "Jasmine founded The Pole Room with a vision to create a space where everyone can discover their power. Her teaching style focuses on building confidence alongside technical skills.",
-      social: {
-        instagram: "@jasmine_poleroom",
-        facebook: "jasmine.zapka"
-      }
-    },
-    {
-      name: "Sarah Mitchell",
-      role: "Senior Pole Instructor",
-      image: "https://images.unsplash.com/photo-1438761681033-6461ffad8d80?ixlib=rb-4.0.3&auto=format&fit=crop&w=500&q=80",
-      specialties: ["Beginner Pole", "Exotic Dance", "Floorwork"],
-      experience: "5+ Years",
-      certifications: ["XPERT Pole Instructor", "Contemporary Dance"],
-      bio: "Sarah specializes in helping beginners fall in love with pole dancing. Her patient, encouraging approach makes even the most nervous students feel at home.",
-      social: {
-        instagram: "@sarah_moves",
-        facebook: "sarah.mitchell"
-      }
-    },
-    {
-      name: "Emma Rodriguez",
-      role: "Aerial Arts Specialist",
-      image: "https://images.unsplash.com/photo-1489424731084-a5d8b219a5bb?ixlib=rb-4.0.3&auto=format&fit=crop&w=500&q=80",
-      specialties: ["Aerial Silks", "Lyra Hoop", "Flexibility"],
-      experience: "6+ Years",
-      certifications: ["Aerial Essentials Certified", "Circus Arts Diploma"],
-      bio: "Emma brings a background in circus arts to The Pole Room. She loves teaching students to find grace and strength in aerial movement.",
-      social: {
-        instagram: "@emma_aerial",
-        facebook: "emma.rodriguez"
-      }
-    },
-    {
-      name: "Dr. Amanda Chen",
-      role: "Flexibility & Conditioning Coach",
-      image: "https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?ixlib=rb-4.0.3&auto=format&fit=crop&w=500&q=80",
-      specialties: ["Flexibility Training", "Injury Prevention", "Conditioning"],
-      experience: "10+ Years",
-      certifications: ["Exercise Physiology PhD", "Flexibility Specialist"],
-      bio: "Dr. Chen combines scientific knowledge with practical application to help students achieve their flexibility goals safely and effectively.",
-      social: {
-        instagram: "@dr_chen_flex",
-        facebook: "amanda.chen"
-      }
-    },
-    {
-      name: "Marcus Thompson",
-      role: "Strength & Conditioning Coach",
-      image: "https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?ixlib=rb-4.0.3&auto=format&fit=crop&w=500&q=80",
-      specialties: ["Pole Conditioning", "Strength Training", "Male Pole Dancing"],
-      experience: "7+ Years",
-      certifications: ["Personal Training Cert", "Pole Sports Instructor"],
-      bio: "Marcus proves that pole dancing is for everyone. His strength-focused classes help students build the power needed for advanced moves.",
-      social: {
-        instagram: "@marcus_strong",
-        facebook: "marcus.thompson"
-      }
-    },
-    {
-      name: "Lisa Park",
-      role: "Dance & Movement Coach",
-      image: "https://images.unsplash.com/photo-1487412720507-e7ab37603c6f?ixlib=rb-4.0.3&auto=format&fit=crop&w=500&q=80",
-      specialties: ["Chair Dance", "Floorwork", "Choreography"],
-      experience: "4+ Years",
-      certifications: ["Jazz Dance Certified", "Commercial Dance"],
-      bio: "Lisa brings creativity and fun to every class. Her choreography classes help students develop their own unique style and artistic expression.",
-      social: {
-        instagram: "@lisa_dances",
-        facebook: "lisa.park"
-      }
-    }
-  ];
+  const navigate = useNavigate();
+  const [selectedStudio, setSelectedStudio] = useState<string | null>(null);
+
+  // Get studio name by ID
+  const getStudioName = (studioId?: string) => {
+    if (!studioId) return null;
+    const studio = studios.find(s => s.id === studioId);
+    return studio ? studio.name.replace('The Pole Room ', '') : null;
+  };
+
+  // Filter instructors by selected studio
+  const filteredInstructors = selectedStudio
+    ? instructors.filter(i => i.studioId === selectedStudio)
+    : instructors;
 
   const getSpecialtyColor = (specialty: string) => {
-    const colors = {
-      'Pole Dancing': 'bg-fuchsia-500/10 text-fuchsia-400 border-fuchsia-500/30',
+    const colors: Record<string, string> = {
+      'Pole': 'bg-fuchsia-500/10 text-fuchsia-400 border-fuchsia-500/30',
       'Aerial Silks': 'bg-purple-500/10 text-purple-400 border-purple-500/30',
-      'Flexibility Training': 'bg-green-500/10 text-green-400 border-green-500/30',
-      'Exotic Dance': 'bg-pink-500/10 text-pink-400 border-pink-500/30',
-      'Floorwork': 'bg-orange-500/10 text-orange-400 border-orange-500/30',
-      'Lyra Hoop': 'bg-blue-500/10 text-blue-400 border-blue-500/30',
-      'Conditioning': 'bg-red-500/10 text-red-400 border-red-500/30',
-      'Chair Dance': 'bg-yellow-500/10 text-yellow-400 border-yellow-500/30',
-      default: 'bg-cyan-500/10 text-cyan-400 border-cyan-500/30'
+      'Aerial Hoop': 'bg-blue-500/10 text-blue-400 border-blue-500/30',
+      'Flexibility': 'bg-green-500/10 text-green-400 border-green-500/30',
+      'Dance': 'bg-pink-500/10 text-pink-400 border-pink-500/30',
+      'Contortion': 'bg-orange-500/10 text-orange-400 border-orange-500/30',
+      'Strength Training': 'bg-red-500/10 text-red-400 border-red-500/30',
+      'Tricks': 'bg-cyan-500/10 text-cyan-400 border-cyan-500/30',
+      'Flow': 'bg-indigo-500/10 text-indigo-400 border-indigo-500/30',
+      'Choreography': 'bg-violet-500/10 text-violet-400 border-violet-500/30',
+      'Exotic': 'bg-rose-500/10 text-rose-400 border-rose-500/30',
+      'Heels': 'bg-amber-500/10 text-amber-400 border-amber-500/30',
+      'Floor Work': 'bg-teal-500/10 text-teal-400 border-teal-500/30',
+      'Beginners': 'bg-emerald-500/10 text-emerald-400 border-emerald-500/30',
+      'Fundamentals': 'bg-lime-500/10 text-lime-400 border-lime-500/30',
     };
-    return colors[specialty] || colors.default;
+    return colors[specialty] || 'bg-gray-500/10 text-gray-400 border-gray-500/30';
+  };
+
+  const handleInstructorClick = (instructor: Instructor) => {
+    // Navigate to studio page if instructor has a studio
+    if (instructor.studioId) {
+      navigate(`/studios/${instructor.studioId}`);
+    }
   };
 
   return (
@@ -125,12 +81,44 @@ const Instructors = () => {
       {/* Instructors Grid */}
       <section className="py-20 bg-gray-900">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+          {/* Filter by Studio */}
+          <div className="flex justify-center mb-12">
+            <DropdownMenu>
+              <DropdownMenuTrigger asChild>
+                <Button 
+                  variant="outline" 
+                  className="border-primary/50 bg-background/50 hover:bg-primary/10 text-foreground min-w-[200px] justify-between"
+                >
+                  <div className="flex items-center gap-2">
+                    <MapPin className="w-4 h-4 text-primary" />
+                    {selectedStudio ? getStudioName(selectedStudio) : 'All Studios'}
+                  </div>
+                  <ChevronDown className="w-4 h-4 ml-2" />
+                </Button>
+              </DropdownMenuTrigger>
+              <DropdownMenuContent className="w-[200px]">
+                <DropdownMenuItem onClick={() => setSelectedStudio(null)}>
+                  All Studios
+                </DropdownMenuItem>
+                {studios.map((studio) => (
+                  <DropdownMenuItem 
+                    key={studio.id} 
+                    onClick={() => setSelectedStudio(studio.id)}
+                  >
+                    {studio.name.replace('The Pole Room ', '')}
+                  </DropdownMenuItem>
+                ))}
+              </DropdownMenuContent>
+            </DropdownMenu>
+          </div>
+
           <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
-            {instructors.map((instructor, index) => (
+            {filteredInstructors.map((instructor, index) => (
               <Card 
-                key={index}
-                className="cyber-card overflow-hidden animate-fade-in hover:scale-105 transition-transform duration-300"
+                key={instructor.id}
+                className="cyber-card overflow-hidden animate-fade-in hover:scale-105 transition-transform duration-300 cursor-pointer"
                 style={{ animationDelay: `${index * 0.15}s` }}
+                onClick={() => handleInstructorClick(instructor)}
               >
                 {/* Instructor Photo */}
                 <div className="relative h-64 overflow-hidden">
@@ -140,31 +128,28 @@ const Instructors = () => {
                     className="w-full h-full object-cover"
                   />
                   <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-transparent to-transparent"></div>
-                  <div className="absolute bottom-4 left-4">
-                    <div className="flex items-center space-x-2 text-yellow-400">
-                      {[...Array(5)].map((_, i) => (
-                        <Star key={i} className="w-4 h-4 fill-current" />
-                      ))}
+                  
+                  {/* Studio Location Badge */}
+                  {instructor.studioId && (
+                    <div className="absolute bottom-4 left-4 flex items-center gap-1 bg-black/60 backdrop-blur-sm px-3 py-1.5 rounded-full">
+                      <MapPin className="w-3.5 h-3.5 text-primary" />
+                      <span className="text-white text-sm font-medium">
+                        {getStudioName(instructor.studioId)}
+                      </span>
                     </div>
-                  </div>
+                  )}
                 </div>
 
                 <div className="p-6">
                   {/* Header */}
                   <div className="mb-4">
                     <h3 className="text-xl font-bold text-white mb-1">{instructor.name}</h3>
-                    <p className="text-fuchsia-400 font-medium">{instructor.role}</p>
+                    <p className="text-primary font-medium">{instructor.specialty}</p>
                   </div>
 
-                  {/* Experience & Certifications */}
-                  <div className="flex items-center justify-between mb-4 text-sm">
-                    <div className="flex items-center text-gray-400">
-                      <Award className="w-4 h-4 mr-1" />
-                      {instructor.experience}
-                    </div>
-                    <div className="text-gray-400">
-                      {instructor.certifications.length} Certifications
-                    </div>
+                  {/* Experience */}
+                  <div className="mb-4 text-sm text-muted-foreground">
+                    {instructor.experience} Experience
                   </div>
 
                   {/* Specialties */}
@@ -182,58 +167,52 @@ const Instructors = () => {
                   </div>
 
                   {/* Bio */}
-                  <p className="text-gray-300 text-sm mb-6 leading-relaxed">
+                  <p className="text-muted-foreground text-sm leading-relaxed line-clamp-3">
                     {instructor.bio}
                   </p>
-
-                  {/* Actions */}
-                  <div className="flex gap-3 items-center">
-                    <Button className="flex-1 bg-gradient-to-r from-fuchsia-500 to-purple-600 hover:from-fuchsia-600 hover:to-purple-700">
-                      Book Class
-                    </Button>
-                    <div className="flex space-x-2">
-                      <Button variant="ghost" size="sm" className="text-pink-400 hover:text-pink-300">
-                        <Instagram className="w-4 h-4" />
-                      </Button>
-                      <Button variant="ghost" size="sm" className="text-blue-400 hover:text-blue-300">
-                        <Facebook className="w-4 h-4" />
-                      </Button>
-                    </div>
-                  </div>
                 </div>
               </Card>
             ))}
           </div>
+
+          {/* No results message */}
+          {filteredInstructors.length === 0 && (
+            <div className="text-center py-12">
+              <p className="text-muted-foreground text-lg">
+                No instructors found at this studio. Try selecting a different location.
+              </p>
+            </div>
+          )}
         </div>
       </section>
 
       {/* Instructor Philosophy */}
       <section className="py-20 bg-gray-800">
         <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
-          <Heart className="w-16 h-16 text-fuchsia-400 mx-auto mb-6 neon-glow" />
+          <Heart className="w-16 h-16 text-primary mx-auto mb-6 neon-glow" />
           <h2 className="text-3xl sm:text-4xl font-bold text-white mb-6">
             Our <span className="gradient-text">Teaching Philosophy</span>
           </h2>
-          <p className="text-lg text-gray-300 mb-8 leading-relaxed">
+          <p className="text-lg text-muted-foreground mb-8 leading-relaxed">
             Every instructor at The Pole Room shares our core belief: transformation happens 
             when you feel safe, supported, and celebrated. We're not just teaching moves - 
             we're guiding you to discover your power.
           </p>
           <div className="grid md:grid-cols-3 gap-8 mt-12">
             <div className="text-center">
-              <Zap className="w-12 h-12 text-fuchsia-400 mx-auto mb-4" />
+              <Zap className="w-12 h-12 text-primary mx-auto mb-4" />
               <h3 className="text-lg font-bold text-white mb-2">Empowering</h3>
-              <p className="text-gray-400 text-sm">We celebrate every achievement and push you to discover what's possible</p>
+              <p className="text-muted-foreground text-sm">We celebrate every achievement and push you to discover what's possible</p>
             </div>
             <div className="text-center">
-              <Heart className="w-12 h-12 text-fuchsia-400 mx-auto mb-4" />
+              <Heart className="w-12 h-12 text-primary mx-auto mb-4" />
               <h3 className="text-lg font-bold text-white mb-2">Supportive</h3>
-              <p className="text-gray-400 text-sm">Our classes are judgment-free zones where everyone belongs</p>
+              <p className="text-muted-foreground text-sm">Our classes are judgment-free zones where everyone belongs</p>
             </div>
             <div className="text-center">
-              <Star className="w-12 h-12 text-fuchsia-400 mx-auto mb-4" />
+              <Star className="w-12 h-12 text-primary mx-auto mb-4" />
               <h3 className="text-lg font-bold text-white mb-2">Expert</h3>
-              <p className="text-gray-400 text-sm">All our instructors are highly trained and continuously learning</p>
+              <p className="text-muted-foreground text-sm">All our instructors are highly trained and continuously learning</p>
             </div>
           </div>
         </div>
