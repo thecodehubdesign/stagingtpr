@@ -4,7 +4,7 @@ const Pole40PlusPage = () => {
   return (
     <ProgramPageTemplate
       badge="40+ & Fabulous"
-      title="It's Your Time to Shine"
+      title="40+ Pole"
       subtitle="Strength, confidence, and community for adults 40+"
       heroImage="https://images.unsplash.com/photo-1571019613454-1cb2f99b2d8b?ixlib=rb-4.0.3&auto=format&fit=crop&w=2070&q=80"
       description="You're never too old to start something new! Our 40+ program is designed specifically for adults who want to discover pole fitness in a welcoming, age-appropriate environment. Focus on building strength, improving mobility, and having fun with like-minded women."
@@ -45,6 +45,7 @@ const Pole40PlusPage = () => {
         { question: "Will I be with younger students?", answer: "No, this class is exclusively for adults 40+, so you'll be with peers who share your life stage." },
         { question: "What if I can't do everything?", answer: "Every exercise has modifications. Success looks different for everyone, and we celebrate all progress!" }
       ]}
+      availableStudios={['mitcham', 'eltham', 'highett', 'narre-warren']}
       price="From $200/term"
       ctaText="Join Our 40+ Community"
     />

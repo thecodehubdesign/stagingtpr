@@ -4,7 +4,7 @@ const HammockPage = () => {
   return (
     <ProgramPageTemplate
       badge="Aerial Hammock"
-      title="Float and Flow"
+      title="Aerial Hammock"
       subtitle="Where aerial yoga meets circus arts"
       heroImage="https://images.unsplash.com/photo-1518611012118-696072aa579a?ixlib=rb-4.0.3&auto=format&fit=crop&w=2070&q=80"
       description="Aerial hammock combines the flowing beauty of aerial silks with the supportive comfort of a fabric sling. Perfect for those who want aerial arts with a gentler learning curve, or as a complement to your yoga practice."
@@ -42,6 +42,7 @@ const HammockPage = () => {
         { question: "Is it relaxing or a workout?", answer: "Both! Hammock can be deeply restorative or intensely physical depending on what you're working on." },
         { question: "Do I need experience?", answer: "No! Hammock is perfect for complete beginners and experienced aerialists alike." }
       ]}
+      availableStudios={['mitcham', 'eltham', 'cbd', 'kilsyth', 'highett']}
       price="From $220/term"
       ctaText="Book Your Free Trial"
     />

@@ -4,7 +4,7 @@ const AerialSilksBeginnerPage = () => {
   return (
     <ProgramPageTemplate
       badge="Beginner Aerial Silks"
-      title="Embrace the Flow"
+      title="Aerial Silks Beginner"
       subtitle="Climb, wrap, and create beautiful shapes"
       heroImage="https://images.unsplash.com/photo-1518611012118-696072aa579a?ixlib=rb-4.0.3&auto=format&fit=crop&w=2070&q=80"
       description="Aerial silks is a stunning circus art where you climb, wrap, and perform acrobatic moves on flowing fabric. Our beginner course builds the strength and technique you need to create beautiful aerial artistry."
@@ -44,6 +44,7 @@ const AerialSilksBeginnerPage = () => {
         { question: "What's the difference between silks and hoop?", answer: "Silks involves wrapping and climbing fabric, while hoop focuses on poses within a metal ring. Both are beautiful!" },
         { question: "Will I get fabric burn?", answer: "Some friction is normal at first, but proper technique and clothing minimize this." }
       ]}
+      availableStudios={['mitcham', 'eltham', 'cbd']}
       price="From $230/term"
       ctaText="Book Your Free Trial"
     />

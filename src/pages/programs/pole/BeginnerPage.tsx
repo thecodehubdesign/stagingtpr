@@ -4,7 +4,7 @@ const PoleBeginnerPage = () => {
   return (
     <ProgramPageTemplate
       badge="Beginner Course"
-      title="Start Your Pole Journey"
+      title="Pole Beginner"
       subtitle="Build strength, confidence, and grace from day one"
       heroImage="https://images.unsplash.com/photo-1518611012118-696072aa579a?ixlib=rb-4.0.3&auto=format&fit=crop&w=2070&q=80"
       description="Our beginner pole course is designed for complete newcomers. No experience, strength, or flexibility required - just an open mind and willingness to try something new. You'll learn foundational spins, basic climbs, and elegant floor work in a supportive, judgment-free environment."
@@ -45,6 +45,7 @@ const PoleBeginnerPage = () => {
         { question: "Is pole dancing appropriate for all body types?", answer: "Absolutely! Pole is for EVERY body. Our instructors are trained to modify moves for different body types and abilities." },
         { question: "Can I join mid-term?", answer: "We recommend starting at the beginning of a term for the best experience, but reach out to us and we can discuss options." }
       ]}
+      availableStudios={['mitcham', 'eltham', 'cbd', 'kilsyth', 'highett', 'narre-warren', 'rowville']}
       price="From $220/term"
       ctaText="Book Your Free Trial"
     />

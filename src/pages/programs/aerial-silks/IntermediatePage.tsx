@@ -4,7 +4,7 @@ const AerialSilksIntermediatePage = () => {
   return (
     <ProgramPageTemplate
       badge="Intermediate Aerial Silks"
-      title="Weave Your Story"
+      title="Aerial Silks Intermediate"
       subtitle="Complex wraps, drops, and flowing sequences"
       heroImage="https://images.unsplash.com/photo-1571019614242-c5c5dee9f50b?ixlib=rb-4.0.3&auto=format&fit=crop&w=2070&q=80"
       description="Advance your silks journey with complex wraps, controlled drops, and flowing combinations. Learn to tell stories through movement and create sequences that showcase your growing skills."
@@ -47,6 +47,7 @@ const AerialSilksIntermediatePage = () => {
         { question: "How high will I be?", answer: "Intermediate students work at increased heights as skills develop." },
         { question: "Do I need to be flexible?", answer: "Flexibility enhances your work but isn't required. You'll improve as you progress." }
       ]}
+      availableStudios={['mitcham', 'eltham']}
       price="From $250/term"
       ctaText="Book Your Assessment"
     />

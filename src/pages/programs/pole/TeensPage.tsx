@@ -4,7 +4,7 @@ const PoleTeensPage = () => {
   return (
     <ProgramPageTemplate
       badge="Teen Pole (Ages 13-17)"
-      title="Empowering the Next Generation"
+      title="Teen Pole"
       subtitle="Build strength, confidence, and self-expression"
       heroImage="https://images.unsplash.com/photo-1571902943202-507ec2618e8f?ixlib=rb-4.0.3&auto=format&fit=crop&w=2070&q=80"
       description="Our teen pole program focuses on athleticism, strength, and self-confidence in a safe, supervised environment. Teens learn circus-style pole tricks, build incredible fitness, and develop body positivity - all while having fun with friends."
@@ -45,6 +45,7 @@ const PoleTeensPage = () => {
         { question: "Can boys join too?", answer: "Absolutely! Pole is for everyone, and we welcome teens of all genders." },
         { question: "Will this help with other sports?", answer: "Yes! Pole builds incredible strength, flexibility, and body awareness that transfers to gymnastics, dance, and other athletic pursuits." }
       ]}
+      availableStudios={['mitcham', 'eltham', 'kilsyth']}
       price="From $180/term"
       ctaText="Enroll Your Teen"
     />

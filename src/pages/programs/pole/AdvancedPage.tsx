@@ -4,7 +4,7 @@ const PoleAdvancedPage = () => {
   return (
     <ProgramPageTemplate
       badge="Advanced Course"
-      title="Master Your Art"
+      title="Pole Advanced"
       subtitle="Push your limits and perfect your craft"
       heroImage="https://images.unsplash.com/photo-1544367567-0f2fcb009e0b?ixlib=rb-4.0.3&auto=format&fit=crop&w=2070&q=80"
       description="For experienced pole dancers ready to tackle the most challenging moves. Master complex combinations, aerial tricks, and performance-ready routines. This course demands dedication and rewards you with extraordinary skills."
@@ -51,6 +51,7 @@ const PoleAdvancedPage = () => {
         { question: "What if I plateau?", answer: "Plateaus are normal! We provide personalized feedback and alternative progressions to help you break through barriers." },
         { question: "Is there a level beyond advanced?", answer: "Yes! Our Elite program is for those pursuing professional or competition-level pole." }
       ]}
+      availableStudios={['mitcham', 'eltham', 'cbd', 'kilsyth', 'highett']}
       price="From $260/term"
       ctaText="Book Your Assessment"
     />

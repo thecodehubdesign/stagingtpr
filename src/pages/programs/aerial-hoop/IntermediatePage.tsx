@@ -4,7 +4,7 @@ const AerialHoopIntermediatePage = () => {
   return (
     <ProgramPageTemplate
       badge="Intermediate Aerial Hoop"
-      title="Soar Higher"
+      title="Aerial Hoop Intermediate"
       subtitle="Advanced poses, spins, and dynamic movement"
       heroImage="https://images.unsplash.com/photo-1571019614242-c5c5dee9f50b?ixlib=rb-4.0.3&auto=format&fit=crop&w=2070&q=80"
       description="Take your aerial hoop skills to new heights! Learn advanced poses, dynamic spins, and flowing sequences. This course builds on your foundational skills to create truly impressive aerial artistry."
@@ -48,6 +48,7 @@ const AerialHoopIntermediatePage = () => {
         { question: "Is spinning hard?", answer: "Spinning takes practice! We teach you how to manage momentum and avoid dizziness." },
         { question: "Do I need to be flexible?", answer: "Flexibility helps but isn't required. You'll build flexibility as part of the program." }
       ]}
+      availableStudios={['mitcham', 'eltham', 'cbd']}
       price="From $250/term"
       ctaText="Book Your Assessment"
     />
