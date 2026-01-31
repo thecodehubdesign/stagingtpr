@@ -1,246 +1,113 @@
 
-
-## Standardize All FAQ Sections Site-Wide
+## Remove Hero Section from Pole Program Pages & Match First Timers Theme
 
 ### Overview
 
-Update all remaining FAQ sections to use the standard `cyber-faq-item` class for consistent styling across the entire website.
+Update the `ProgramPageTemplate` to remove the large background image hero section and replace it with a cleaner, more subtle header that matches the `/first-timers` page aesthetic.
 
 ---
 
-### Files Requiring Updates
+### Current State vs Target State
 
-| File | Current Styling | Status |
-|------|-----------------|--------|
-| `src/pages/FirstTimers.tsx` | `cyber-card rounded-xl border-fuchsia-500/30 px-6` | Needs update |
-| `src/pages/Franchise.tsx` | `border border-primary/20 rounded-lg px-4` | Needs update |
-| `src/pages/Events.tsx` | `border border-primary/20 rounded-lg px-4` | Needs update |
-| `src/components/templates/ProgramPageTemplate.tsx` | `cyber-card px-6` | Needs update |
-| `src/components/templates/FunctionPageTemplate.tsx` | Uses Card component (not Accordion) | Needs update |
-
----
-
-### Files Already Standardized (No Changes)
-
-These files already use `cyber-faq-item`:
-- `src/pages/Pricing.tsx`
-- `src/pages/Contact.tsx`
-- `src/pages/ClassDetail.tsx`
-- `src/components/get-started/FAQ.tsx`
-- `src/pages/events/PerformanceNightsPage.tsx`
+| Element | Current (ProgramPageTemplate) | Target (First Timers Style) |
+|---------|------------------------------|----------------------------|
+| Hero | 70vh background image with dark overlay | Subtle gradient background, no full-bleed image |
+| Badge | Sparkles icon + generic Badge component | Fuchsia pill badge (`bg-fuchsia-500/10 border-fuchsia-500/30`) |
+| Title | `gradient-text` class (existing) | Keep `gradient-text` styling |
+| Background | Image with linear gradient overlay | `bg-gradient-to-br from-gray-900 via-purple-900/30 to-gray-900` with blur orb |
+| CTA Button | Neon button in hero | Move CTA to later sections only |
 
 ---
 
-### Files Intentionally Different (Keep As-Is)
+### Changes to ProgramPageTemplate.tsx
 
-| File | Reason |
+**1. Remove the hero background image and full-height section**
+
+Replace the current hero (lines 74-106):
+```tsx
+{/* Hero Section */}
+<section className="relative min-h-[70vh] flex items-center justify-center overflow-hidden">
+  <div 
+    className="absolute inset-0 bg-cover bg-center bg-no-repeat"
+    style={{
+      backgroundImage: `linear-gradient(rgba(0,0,0,0.6), rgba(0,0,0,0.7)), url('${heroImage}')`
+    }}
+  />
+  ...
+</section>
+```
+
+With a First Timers-style header (matching cyberpunk theme):
+```tsx
+{/* Hero Section */}
+<section className="relative pt-24 pb-16 overflow-hidden">
+  <div className="absolute inset-0 bg-gradient-to-br from-gray-900 via-purple-900/30 to-gray-900" />
+  <div className="absolute top-1/4 right-1/4 w-96 h-96 bg-fuchsia-500/10 rounded-full blur-3xl" />
+  
+  <div className="relative max-w-4xl mx-auto px-4 text-center">
+    {/* Fuchsia Pill Badge */}
+    <span className="inline-block px-4 py-2 rounded-full bg-fuchsia-500/10 border border-fuchsia-500/30 text-fuchsia-400 text-sm font-medium mb-6">
+      {badge}
+    </span>
+    
+    <h1 className="text-4xl sm:text-5xl lg:text-6xl font-bold text-white leading-tight mb-6">
+      {title}
+    </h1>
+    
+    <p className="text-xl text-gray-300 max-w-2xl mx-auto">
+      {subtitle}
+    </p>
+  </div>
+</section>
+```
+
+**2. Remove the `heroImage` dependency from hero display**
+
+The `heroImage` prop will still exist for potential use elsewhere (like Course Overview section) but won't display as a full-bleed background.
+
+**3. Update imports**
+
+Remove the unused `Sparkles` icon from hero (can keep for Final CTA section).
+
+---
+
+### Files Affected
+
+| File | Change |
 |------|--------|
-| `src/components/studio/StudioFAQ.tsx` | Uses dual-style system (cyan for FAQs, fuchsia for blog links) with badges - this is a unique feature-specific design |
-| `src/components/LevelUpMethod.tsx` | Not a FAQ - this is a feature accordion with icons/stages |
+| `src/components/templates/ProgramPageTemplate.tsx` | Replace hero section with First Timers-style header |
+
+This single template change will automatically update all 6 pole program pages:
+- `/programs/pole/beginner`
+- `/programs/pole/intermediate`
+- `/programs/pole/advanced`
+- `/programs/pole/elite`
+- `/programs/pole/teens`
+- `/programs/pole/40-plus`
+
+Plus any other pages using this template (aerial hoop, aerial silks, self-practice, etc.).
 
 ---
 
-### Standard FAQ Pattern
+### Visual Comparison
 
-All FAQ sections will use this consistent pattern:
+**Before (Current Hero)**
+- Large 70vh section
+- Stock image background with dark gradient overlay
+- Badge with Sparkles icon
+- CTA button in hero
 
-```typescript
-<AccordionItem 
-  value={`item-${index}`} 
-  className="cyber-faq-item"
->
-  <AccordionTrigger className="py-5 text-left font-medium text-white hover:text-fuchsia-400 hover:no-underline transition-colors">
-    {question}
-  </AccordionTrigger>
-  <AccordionContent className="text-gray-300 pb-5 leading-relaxed">
-    {answer}
-  </AccordionContent>
-</AccordionItem>
-```
-
-The `cyber-faq-item` CSS class (already in `index.css`) provides:
-- `border border-fuchsia-500/20`
-- `rounded-xl`
-- `px-5`
-- `bg-gray-900/50`
-- Hover state: `border-fuchsia-500/40`
+**After (First Timers Style)**
+- Compact header section with `pt-24 pb-16`
+- Subtle purple gradient background with fuchsia blur orb
+- Fuchsia pill badge matching `/first-timers`
+- No CTA in header (moved to later sections)
+- Clean, consistent cyberpunk aesthetic
 
 ---
 
-### Changes by File
+### Implementation Notes
 
-**1. `src/pages/FirstTimers.tsx` (lines 934-946)**
-
-Change from:
-```typescript
-<AccordionItem 
-  key={index} 
-  value={`faq-${index}`}
-  className="cyber-card rounded-xl border-fuchsia-500/30 px-6"
->
-  <AccordionTrigger className="text-white hover:text-fuchsia-400 text-left">
-    {faq.question}
-  </AccordionTrigger>
-  <AccordionContent className="text-gray-300">
-    {faq.answer}
-  </AccordionContent>
-</AccordionItem>
-```
-
-To:
-```typescript
-<AccordionItem 
-  key={index} 
-  value={`faq-${index}`}
-  className="cyber-faq-item"
->
-  <AccordionTrigger className="py-5 text-left font-medium text-white hover:text-fuchsia-400 hover:no-underline transition-colors">
-    {faq.question}
-  </AccordionTrigger>
-  <AccordionContent className="text-gray-300 pb-5 leading-relaxed">
-    {faq.answer}
-  </AccordionContent>
-</AccordionItem>
-```
-
----
-
-**2. `src/pages/Franchise.tsx` (lines 690-698)**
-
-Change from:
-```typescript
-<AccordionItem 
-  key={index} 
-  value={`item-${index}`} 
-  className="border border-primary/20 rounded-lg px-4"
->
-  <AccordionTrigger className="text-left font-medium hover:text-primary">
-    {faq.question}
-  </AccordionTrigger>
-  <AccordionContent className="text-muted-foreground">
-    {faq.answer}
-  </AccordionContent>
-</AccordionItem>
-```
-
-To:
-```typescript
-<AccordionItem 
-  key={index} 
-  value={`item-${index}`} 
-  className="cyber-faq-item"
->
-  <AccordionTrigger className="py-5 text-left font-medium text-white hover:text-fuchsia-400 hover:no-underline transition-colors">
-    {faq.question}
-  </AccordionTrigger>
-  <AccordionContent className="text-gray-300 pb-5 leading-relaxed">
-    {faq.answer}
-  </AccordionContent>
-</AccordionItem>
-```
-
----
-
-**3. `src/pages/Events.tsx` (lines 395-403)**
-
-Same change as Franchise.tsx - update from `border border-primary/20 rounded-lg px-4` to `cyber-faq-item` with updated trigger/content styling.
-
----
-
-**4. `src/components/templates/ProgramPageTemplate.tsx` (lines 253-261)**
-
-Change from:
-```typescript
-<AccordionItem 
-  key={index} 
-  value={`item-${index}`} 
-  className="cyber-card px-6"
->
-  <AccordionTrigger className="text-left font-semibold">
-    {faq.question}
-  </AccordionTrigger>
-  <AccordionContent className="text-muted-foreground">
-    {faq.answer}
-  </AccordionContent>
-</AccordionItem>
-```
-
-To:
-```typescript
-<AccordionItem 
-  key={index} 
-  value={`item-${index}`} 
-  className="cyber-faq-item"
->
-  <AccordionTrigger className="py-5 text-left font-medium text-white hover:text-fuchsia-400 hover:no-underline transition-colors">
-    {faq.question}
-  </AccordionTrigger>
-  <AccordionContent className="text-gray-300 pb-5 leading-relaxed">
-    {faq.answer}
-  </AccordionContent>
-</AccordionItem>
-```
-
----
-
-**5. `src/components/templates/FunctionPageTemplate.tsx` (lines 231-239)**
-
-This file uses Card components instead of Accordion. Convert to standard Accordion pattern:
-
-Change from:
-```typescript
-<div className="space-y-6 mt-12">
-  {faqs.map((faq, index) => (
-    <Card key={index} className="cyber-card">
-      <CardContent className="p-6">
-        <h3 className="text-xl font-bold mb-3">{faq.question}</h3>
-        <p className="text-muted-foreground">{faq.answer}</p>
-      </CardContent>
-    </Card>
-  ))}
-</div>
-```
-
-To:
-```typescript
-<Accordion type="single" collapsible className="mt-12 space-y-4">
-  {faqs.map((faq, index) => (
-    <AccordionItem 
-      key={index} 
-      value={`item-${index}`} 
-      className="cyber-faq-item"
-    >
-      <AccordionTrigger className="py-5 text-left font-medium text-white hover:text-fuchsia-400 hover:no-underline transition-colors">
-        {faq.question}
-      </AccordionTrigger>
-      <AccordionContent className="text-gray-300 pb-5 leading-relaxed">
-        {faq.answer}
-      </AccordionContent>
-    </AccordionItem>
-  ))}
-</Accordion>
-```
-
-Also add the Accordion import at the top of the file.
-
----
-
-### Summary of Changes
-
-| File | Lines Changed | Change Type |
-|------|---------------|-------------|
-| `FirstTimers.tsx` | ~935-946 | Update AccordionItem styling |
-| `Franchise.tsx` | ~690-698 | Update AccordionItem styling |
-| `Events.tsx` | ~395-403 | Update AccordionItem styling |
-| `ProgramPageTemplate.tsx` | ~253-261 | Update AccordionItem styling |
-| `FunctionPageTemplate.tsx` | ~1-5, 231-239 | Add import + convert Cards to Accordion |
-
----
-
-### Benefits
-
-1. **Visual Consistency**: All FAQs look identical across the site
-2. **WordPress Ready**: Single `cyber-faq-item` class makes block conversion simple
-3. **Maintainability**: Update once in CSS, applies everywhere
-4. **Better UX**: Collapsible accordions take less space than static cards
-
+- The `heroImage` prop remains in the interface but is no longer displayed in the hero
+- All gradient text, neon buttons, and cyber-card styling remains unchanged in other sections
+- The change maintains the responsive design patterns from First Timers
