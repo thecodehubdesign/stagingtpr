@@ -152,6 +152,77 @@ const ProgramPageTemplate = ({
         </div>
       </section>
 
+      {/* Level Progression Journey */}
+      <section className="py-16">
+        <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
+          <motion.div
+            initial={{ opacity: 0, y: 30 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            className="text-center mb-12"
+          >
+            <h2 className="text-3xl sm:text-4xl font-bold text-white mb-4">
+              Your Path to <span className="gradient-text">Pole Mastery</span>
+            </h2>
+            <p className="text-gray-300">Progress through our structured level system</p>
+          </motion.div>
+          
+          {/* Pathway Diagram */}
+          <div className="relative">
+            <div className="hidden md:block absolute top-8 left-[12.5%] right-[12.5%] h-1 bg-gradient-to-r from-green-500 via-blue-500 via-purple-500 to-yellow-500 rounded-full" />
+            <div className="grid grid-cols-1 md:grid-cols-4 gap-8">
+              {[
+                { name: 'Beginner', description: 'Build foundation & confidence', color: 'from-green-400 to-emerald-500', href: '/programs/pole/beginner' },
+                { name: 'Intermediate', description: 'Develop strength & flow', color: 'from-blue-400 to-cyan-500', href: '/programs/pole/intermediate' },
+                { name: 'Advanced', description: 'Master complex moves', color: 'from-purple-400 to-pink-500', href: '/programs/pole/advanced' },
+                { name: 'Elite', description: 'Performance ready', color: 'from-yellow-400 to-orange-500', href: '/programs/pole/elite' }
+              ].map((level, index) => (
+                <motion.div
+                  key={level.name}
+                  initial={{ opacity: 0, y: 30 }}
+                  whileInView={{ opacity: 1, y: 0 }}
+                  viewport={{ once: true }}
+                  transition={{ delay: index * 0.1 }}
+                  className="relative text-center"
+                >
+                  <Link to={level.href} className="group block">
+                    <div className={`w-16 h-16 rounded-full bg-gradient-to-br ${level.color} flex items-center justify-center mx-auto mb-4 relative z-10 border-4 border-background group-hover:scale-110 transition-transform`}>
+                      <span className="text-xl font-bold text-white">{index + 1}</span>
+                    </div>
+                    <h3 className="text-lg font-bold text-white mb-2 group-hover:text-fuchsia-400 transition-colors">{level.name}</h3>
+                    <p className="text-sm text-gray-400">{level.description}</p>
+                  </Link>
+                </motion.div>
+              ))}
+            </div>
+          </div>
+        </div>
+      </section>
+
+      {/* Prerequisites Section - Moved here after Level Progression */}
+      {prerequisites && prerequisites.length > 0 && (
+        <section className="py-16 bg-gray-900/30">
+          <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
+            <motion.div
+              initial={{ opacity: 0, y: 30 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true }}
+              className="cyber-card rounded-xl p-8"
+            >
+              <h3 className="text-2xl font-bold text-white mb-6 text-center">Prerequisites</h3>
+              <ul className="space-y-3 max-w-xl mx-auto">
+                {prerequisites.map((item, index) => (
+                  <li key={index} className="flex items-center gap-3">
+                    <Check className="w-5 h-5 text-cyan-400" />
+                    <span className="text-gray-300">{item}</span>
+                  </li>
+                ))}
+              </ul>
+            </motion.div>
+          </div>
+        </section>
+      )}
+
       {/* Program Overview - Image Carousel (LEFT) + Highlights (RIGHT) + Stats Bar */}
       <section className="py-20 bg-gray-900/50">
         <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
@@ -405,32 +476,28 @@ const ProgramPageTemplate = ({
               </div>
             </div>
           </motion.div>
+          
+          {/* Midterm Enrollment Note */}
+          <motion.div
+            initial={{ opacity: 0, y: 20 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            className="mt-6 p-4 rounded-xl bg-cyan-500/10 border border-cyan-500/30"
+          >
+            <div className="flex items-start gap-3">
+              <Calendar className="w-5 h-5 text-cyan-400 flex-shrink-0 mt-0.5" />
+              <div>
+                <p className="text-cyan-400 font-medium mb-1">Midterm Enrollments Available</p>
+                <p className="text-gray-300 text-sm">
+                  We accept enrolments every 4 weeks (midterm - Week 5) as our Pole Foundations Beginner level allows for flexible start dates.
+                </p>
+              </div>
+            </div>
+          </motion.div>
         </div>
       </section>
 
-      {/* Prerequisites Section - What to Bring REMOVED */}
-      {prerequisites && prerequisites.length > 0 && (
-        <section className="py-20">
-          <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
-            <motion.div
-              initial={{ opacity: 0, y: 30 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true }}
-              className="cyber-card rounded-xl p-8"
-            >
-              <h3 className="text-2xl font-bold text-white mb-6 text-center">Prerequisites</h3>
-              <ul className="space-y-3 max-w-xl mx-auto">
-                {prerequisites.map((item, index) => (
-                  <li key={index} className="flex items-center gap-3">
-                    <Check className="w-5 h-5 text-cyan-400" />
-                    <span className="text-gray-300">{item}</span>
-                  </li>
-                ))}
-              </ul>
-            </motion.div>
-          </div>
-        </section>
-      )}
+      {/* Prerequisites Section moved above Program Overview */}
 
       {/* Grading Assessment CTA */}
       <section className="py-16">
