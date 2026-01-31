@@ -1,149 +1,115 @@
 
 
-## Thumbnail Strip Redesign - Horizontal Scrolling Carousel
+## Instructors Page Redesign
 
 ### Overview
 
-Redesign the thumbnail strip below the main media display to show larger thumbnails in a single horizontal row with arrow navigation. Additional thumbnails will be revealed by clicking left/right arrows rather than scrolling.
+Enhance the Instructors page by adding a "Join Our Team" recruitment banner at the top, a specialty filter, and removing the bottom CTA section.
 
 ---
 
-### File to Modify
+### Files to Modify
 
 | File | Change |
 |------|--------|
-| `src/components/studio/StudioHero.tsx` | Refactor thumbnail strip to horizontal carousel |
+| `src/pages/Instructors.tsx` | Add banner, specialty filter, remove CTA section |
+| `src/assets/teachers-team.png` | Copy the uploaded team image |
 
 ---
 
-### Current vs Proposed
+### Changes
 
-| Aspect | Current | Proposed |
-|--------|---------|----------|
-| Layout | Flex-wrap, multiple rows | Single row, overflow hidden |
-| Size (mobile) | 48x48px (w-12 h-12) | 96x96px (w-24 h-24) |
-| Size (desktop) | 64x64px (w-16 h-16) | 128x128px (w-32 h-32) |
-| Navigation | All visible, click to select | Arrow buttons reveal more |
-| Scrolling | None (all visible) | No visible scrollbar, arrow-controlled |
+#### 1. Add Team Image Asset
+
+Copy the uploaded team image to the project assets folder for use in the recruitment banner.
 
 ---
 
-### Implementation Details
+#### 2. New "Join Our Team" Banner (After Hero Section)
 
-#### 1. Add Thumbnail Navigation State
-
-Add a ref for the thumbnail container and scroll functions:
+Add a horizontal banner section similar to the reference image:
 
 ```text
-const thumbnailsRef = useRef<HTMLDivElement>(null);
-
-const scrollThumbnails = (direction: 'left' | 'right') => {
-  if (thumbnailsRef.current) {
-    const scrollAmount = 150; // pixels to scroll
-    thumbnailsRef.current.scrollBy({
-      left: direction === 'left' ? -scrollAmount : scrollAmount,
-      behavior: 'smooth'
-    });
-  }
-};
++---------------------------------------------------------------+
+|                                                               |
+|  [Team Photo]    Do you have what it takes to                |
+|                  JOIN OUR TEAM?         [APPLICATIONS OPEN]   |
+|                                                               |
++---------------------------------------------------------------+
 ```
 
-#### 2. New Thumbnail Strip Structure
+- Left side: Team image of instructors around the pole
+- Right side: Italic heading "Do you have what it takes to" + bold "JOIN OUR TEAM?"
+- Far right: Pink "APPLICATIONS OPEN" button
+- Light gray/white background to contrast with the dark theme
 
-Replace lines 220-252 with:
+---
+
+#### 3. Specialty Filter Addition
+
+Add a second filter dropdown next to the studio filter:
+
+| Filter | Options |
+|--------|---------|
+| By Specialty | All Specialties, Pole, Aerial Silks, Aerial Hoop, Flexibility, Dance, Contortion, Strength Training, Tricks, Flow, Choreography, Exotic, Heels, Floor Work, Beginners, Fundamentals |
+
+The filtering logic will check if the instructor's `specialties` array includes the selected specialty.
+
+---
+
+#### 4. Filter Section Layout
 
 ```text
-{/* Thumbnail Strip - Horizontal Carousel */}
-<div className="relative">
-  {/* Left Thumbnail Arrow */}
-  <button
-    onClick={() => scrollThumbnails('left')}
-    className="absolute left-0 top-1/2 -translate-y-1/2 -translate-x-2 z-10
-               w-8 h-8 rounded-full bg-black/60 backdrop-blur-sm
-               border border-white/20 hover:bg-fuchsia-500/30
-               flex items-center justify-center transition-all"
-    aria-label="Scroll thumbnails left"
-  >
-    <ChevronLeft className="w-4 h-4 text-white" />
-  </button>
+            [Filter by Studio ▼]    [Filter by Specialty ▼]
+```
 
-  {/* Right Thumbnail Arrow */}
-  <button
-    onClick={() => scrollThumbnails('right')}
-    className="absolute right-0 top-1/2 -translate-y-1/2 translate-x-2 z-10
-               w-8 h-8 rounded-full bg-black/60 backdrop-blur-sm
-               border border-white/20 hover:bg-fuchsia-500/30
-               flex items-center justify-center transition-all"
-    aria-label="Scroll thumbnails right"
-  >
-    <ChevronRight className="w-4 h-4 text-white" />
-  </button>
+Both filters centered, side by side with a small gap.
 
-  {/* Thumbnail Container */}
-  <div 
-    ref={thumbnailsRef}
-    className="flex gap-3 overflow-x-auto scrollbar-hide scroll-smooth px-4"
-    style={{ scrollbarWidth: 'none', msOverflowStyle: 'none' }}
-  >
-    {allMedia.map((media, index) => (
-      <button
-        key={index}
-        onClick={() => setCurrentIndex(index)}
-        className={`relative flex-shrink-0 w-24 h-24 sm:w-32 sm:h-32 rounded-lg overflow-hidden border-2 transition-all ${
-          currentIndex === index
-            ? 'border-fuchsia-500 ring-2 ring-fuchsia-500/50'
-            : 'border-gray-600 hover:border-fuchsia-400'
-        }`}
-      >
-        {/* thumbnail content */}
-      </button>
-    ))}
-  </div>
-</div>
+---
+
+#### 5. Remove CTA Section
+
+Remove lines 221-235 (the "Ready to Meet Your Instructors?" gradient section at the bottom).
+
+---
+
+### Technical Implementation
+
+#### New State Variable
+```typescript
+const [selectedSpecialty, setSelectedSpecialty] = useState<string | null>(null);
+```
+
+#### Updated Filter Logic
+```typescript
+const filteredInstructors = instructors.filter(i => {
+  const matchesStudio = !selectedStudio || i.studioId === selectedStudio;
+  const matchesSpecialty = !selectedSpecialty || i.specialties.includes(selectedSpecialty);
+  return matchesStudio && matchesSpecialty;
+});
+```
+
+#### Extract All Unique Specialties
+```typescript
+const allSpecialties = [...new Set(instructors.flatMap(i => i.specialties))].sort();
 ```
 
 ---
 
-### Size Comparison
+### Visual Summary
 
-| Breakpoint | Current | New | Increase |
-|------------|---------|-----|----------|
-| Mobile | 48x48px | 96x96px | 2x |
-| Desktop | 64x64px | 128x128px | 2x |
-
----
-
-### Key Features
-
-1. **Single Row**: `flex` with `overflow-x-auto` and `scrollbar-hide`
-2. **Double Size**: `w-24 h-24` mobile, `w-32 h-32` desktop (was w-12/w-16)
-3. **Arrow Navigation**: Smaller arrow buttons on left/right of thumbnail strip
-4. **No Visible Scrollbar**: Hidden with CSS but functional via arrows
-5. **Smooth Scrolling**: `scroll-smooth` and `scrollBy` with smooth behavior
-6. **Fixed Width Items**: `flex-shrink-0` prevents thumbnails from compressing
+| Section | Before | After |
+|---------|--------|-------|
+| Hero | Title + description | Same (kept) |
+| Banner | None | "Join Our Team" recruitment banner |
+| Filters | Studio only | Studio + Specialty side by side |
+| Instructor Cards | Bio displayed | Bio displayed (already present) |
+| Teaching Philosophy | Present | Kept as-is |
+| Bottom CTA | "Ready to Meet..." section | Removed |
 
 ---
 
-### Visual Result
+### Image Asset
 
-```text
-+------------------------------------------------+
-|              [Main Video/Image]                |
-+------------------------------------------------+
-
-     [<]  [img1] [img2] [img3] [img4] [img5]  [>]
-          ^-- visible thumbnails --^
-          
-     Clicking [>] reveals [img6] [img7] [img8] etc.
-```
-
----
-
-### Import Addition
-
-Add `useRef` to the React import:
-
-```text
-import { useState, useRef } from 'react';
-```
+The uploaded team photo will be saved to `src/assets/teachers-team.png` and imported in the component for the recruitment banner.
 
