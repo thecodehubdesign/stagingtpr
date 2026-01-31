@@ -1,192 +1,179 @@
 
 
-## Instructors Page Enhancement
+## Standardize Button & FAQ Styling Site-Wide
 
 ### Overview
 
-Restyle the application section to match the cyberpunk theme, add name search functionality, implement "Show More" pagination after 3 rows, and transform the Teaching Philosophy section into a standout grid design.
+Create consistent, reusable button and FAQ styles across the entire website. This ensures design coherence and makes future WordPress block conversion straightforward.
 
 ---
 
-### Files to Modify
+### Part 1: Button Standardization
 
-| File | Change |
-|------|--------|
-| `src/pages/Instructors.tsx` | All changes below |
+#### Current Issue
+Buttons are styled inconsistently across 41+ files with variations like:
+- `neon-button text-black`
+- `neon-button text-primary-foreground`
+- `bg-gradient-to-r from-fuchsia-500 to-purple-600`
+- `bg-gradient-to-r from-rose-500 to-purple-600`
+- Various dynamic color variants
 
----
+#### Standard Button Design (From Screenshot)
+The default primary button will use the **pink-to-cyan gradient** style shown in your screenshot:
 
-### 1. Restyle "Join Our Team" Application Section
+| Property | Value |
+|----------|-------|
+| Background | `linear-gradient(45deg, #ff00ff, #00ffff)` (fuchsia to cyan) |
+| Text | Black for contrast on gradient |
+| Border Radius | Rounded (`rounded-full` for CTA, `rounded-md` for standard) |
+| Shadow | Neon glow effect |
+| Hover | Intensified glow + slight lift |
 
-Transform the current white/light banner into a cyberpunk-styled recruitment section:
+#### Implementation Approach
 
-**Current**: White background with simple layout
-**New**: Dark gradient background with neon accents, cyber-border, and dynamic styling
+**Option A - Modify Button Component (Recommended)**
+Update the `button.tsx` component to include a new `neon` variant as the recommended primary style:
 
-| Element | Before | After |
-|---------|--------|-------|
-| Background | `bg-white` | Dark gradient with cyber-grid overlay |
-| Container | Simple flex | `cyber-card` with neon border |
-| Image | Basic rounded | Neon border glow effect |
-| Typography | Gray text | White/gradient text with neon effects |
-| Button | Pink solid | Animated neon-button with glow |
-
-**New Layout**:
-```text
-+----------------------------------------------------------+
-|  ▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓ CYBER CARD ▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓  |
-|                                                          |
-|  [Team Photo with      Do you have what it takes to      |
-|   neon border glow]    JOIN OUR TEAM?                    |
-|                        --------------------------------   |
-|                        Be part of Australia's leading    |
-|                        pole & aerial studio team...      |
-|                                                          |
-|                        [✨ APPLICATIONS OPEN - Neon CTA]  |
-|                                                          |
-+----------------------------------------------------------+
-```
-
-Will use `teachersTeam` image already imported, styled with neon border effects.
-
----
-
-### 2. Add Name Search Input
-
-Add a search input field alongside the existing filters:
-
-**Location**: Before the dropdown filters
-**Styling**: Match existing filter buttons with cyber theme
-
-```text
-         [🔍 Search by name...          ]
-    
-    [Filter by Studio ▼]    [Filter by Specialty ▼]
-```
-
-**Implementation**:
-- New state: `searchQuery: string`
-- Filter logic update: `instructor.name.toLowerCase().includes(searchQuery.toLowerCase())`
-- Input styled with `border-primary/50 bg-background/50` to match dropdowns
-
----
-
-### 3. Add "Show More" After 3 Rows
-
-Implement pagination to show only 9 instructors initially (3 rows of 3 on desktop).
-
-**New State**:
 ```typescript
-const [showAll, setShowAll] = useState(false);
-const INITIAL_DISPLAY_COUNT = 9; // 3 rows of 3 cards
+// In buttonVariants
+neon: "neon-button text-black font-semibold",
 ```
 
-**Display Logic**:
-```typescript
-const displayedInstructors = showAll 
-  ? filteredInstructors 
-  : filteredInstructors.slice(0, INITIAL_DISPLAY_COUNT);
+Then update `defaultVariants` to use `neon` as the new default, or keep `default` for generic usage and explicitly use `variant="neon"` for primary CTAs.
+
+**Option B - Enhanced CSS Class**
+Keep using `neon-button` but ensure the CSS definition in `index.css` includes consistent text color:
+
+```css
+.neon-button {
+  @apply relative overflow-hidden text-black font-semibold;
+  background: linear-gradient(45deg, #ff00ff, #00ffff);
+  box-shadow: 0 0 20px rgba(255, 0, 255, 0.3);
+}
 ```
 
-**Button Design**:
-```text
-      [    ↓ Show More (X more instructors)    ]
-      or
-      [    ↑ Show Less    ]
-```
+#### Files Requiring Button Updates
 
-- Only visible if more than 9 filtered results
-- Centered below the grid with cyberpunk styling
-- Resets to collapsed when filters change
+All 41 files using `neon-button` with inconsistent text colors will be standardized to `neon-button` without additional text color overrides (the class will handle it).
+
+Key files:
+- `src/index.css` - Update `.neon-button` to include `text-black` by default
+- `src/components/ui/button.tsx` - Optionally add `neon` variant
 
 ---
 
-### 4. Transform Teaching Philosophy Section
+### Part 2: FAQ Accordion Standardization
 
-Replace the current simple gray section with a standout grid design similar to the GLOW page and Pricing page patterns.
+#### Current Issue
+FAQ accordions have different styles:
+- **StudioFAQ**: Cyan/fuchsia cyber-styled borders with Blog badges
+- **Standard FAQs**: Simple `border border-primary/20 rounded-lg`
 
-**Current**: Gray background, centered text, 3 simple icon blocks
-**New**: Gradient background with cyber-grid overlay, prominent grid cards with neon effects
+#### Standard FAQ Design (From Screenshot)
+Based on your StudioFAQ screenshot, the standard FAQ item will feature:
 
-**New Layout**:
-```text
-+----------------------------------------------------------+
-|  ▓▓▓▓▓▓▓ GRADIENT BG + CYBER-GRID OVERLAY ▓▓▓▓▓▓▓▓▓▓▓▓▓  |
-|                                                          |
-|            💜 OUR TEACHING PHILOSOPHY                    |
-|       "Transformation happens when you feel..."          |
-|                                                          |
-|  +------------------+  +------------------+               |
-|  | ⚡ EMPOWERING    |  | ❤️ SUPPORTIVE    |               |
-|  | We celebrate... |  | Judgment-free...|               |
-|  | [cyber-card]    |  | [cyber-card]    |               |
-|  +------------------+  +------------------+               |
-|                                                          |
-|  +------------------+  +------------------+               |
-|  | ⭐ EXPERT        |  | 🎯 PROGRESSIVE   |               |
-|  | Highly trained..|  | Building skills..|               |
-|  | [cyber-card]    |  | [cyber-card]    |               |
-|  +------------------+  +------------------+               |
-|                                                          |
-+----------------------------------------------------------+
+| Element | Style |
+|---------|-------|
+| Container | Dark background (`bg-gray-900/50`) |
+| Border | Subtle fuchsia/cyan accent (`border-fuchsia-500/20` or `border-cyan-500/20`) |
+| Border Radius | Rounded corners (`rounded-xl`) |
+| Padding | Comfortable spacing (`px-5 py-5`) |
+| Hover State | Border brightens on hover |
+| Badge (if needed) | Pill badge indicating type (FAQ, Blog) |
+
+#### Create Reusable FAQ Component
+
+Create a new `StandardFAQItem` component or update the AccordionItem styling pattern:
+
+```typescript
+// Standard FAQ Item styling
+<AccordionItem 
+  value={`item-${index}`} 
+  className="border border-fuchsia-500/20 rounded-xl px-5 bg-gray-900/50 
+             hover:border-fuchsia-500/40 transition-colors"
+>
+  <AccordionTrigger className="py-5 hover:no-underline">
+    <span className="font-medium text-white text-left hover:text-fuchsia-400 transition-colors">
+      {question}
+    </span>
+  </AccordionTrigger>
+  <AccordionContent className="text-gray-300 pb-5 leading-relaxed">
+    {answer}
+  </AccordionContent>
+</AccordionItem>
 ```
 
-**Design Elements**:
-- Background: `bg-gradient-to-br from-gray-900 via-purple-900/50 to-gray-900`
-- Overlay: `cyber-grid` with opacity
-- Cards: `cyber-card` with hover effects and neon icon backgrounds
-- Add a 4th philosophy pillar for better grid balance: "Progressive"
-- Motion animations on scroll
+#### Files Requiring FAQ Updates
+
+| File | Current Style | Action |
+|------|---------------|--------|
+| `src/components/get-started/FAQ.tsx` | `border-primary/20` | Update to standard |
+| `src/pages/Pricing.tsx` | `border-primary/20` | Update to standard |
+| `src/pages/Contact.tsx` | `border-primary/20` | Update to standard |
+| `src/pages/ClassDetail.tsx` | `border-primary/20` | Update to standard |
+| `src/pages/events/PerformanceNightsPage.tsx` | `border-primary/20` | Update to standard |
+| `src/components/studio/StudioFAQ.tsx` | Already styled | Keep as reference |
 
 ---
 
-### Technical Implementation Summary
+### Implementation Summary
 
-#### New Imports
-```typescript
-import { Search } from 'lucide-react';
-import { Input } from '@/components/ui/input';
+#### Step 1: Update CSS in `index.css`
+Ensure `.neon-button` includes `text-black` so no override is needed:
+
+```css
+.neon-button {
+  @apply relative overflow-hidden text-black font-semibold;
+  background: linear-gradient(45deg, #ff00ff, #00ffff);
+  box-shadow: 0 0 20px rgba(255, 0, 255, 0.3);
+  transition: all 0.3s ease;
+}
 ```
 
-#### New State Variables
-```typescript
-const [searchQuery, setSearchQuery] = useState('');
-const [showAll, setShowAll] = useState(false);
-const INITIAL_DISPLAY_COUNT = 9;
-```
+#### Step 2: Create Standard FAQ Styling Pattern
+Define the standard accordion styling in either:
+- A new CSS class `.cyber-faq-item` in `index.css`, or
+- Document the consistent Tailwind classes to use
 
-#### Updated Filter Logic
-```typescript
-const filteredInstructors = instructors.filter(i => {
-  const matchesStudio = !selectedStudio || i.studioId === selectedStudio;
-  const matchesSpecialty = !selectedSpecialty || i.specialties.includes(selectedSpecialty);
-  const matchesSearch = !searchQuery || 
-    i.name.toLowerCase().includes(searchQuery.toLowerCase());
-  return matchesStudio && matchesSpecialty && matchesSearch;
-});
+#### Step 3: Update All FAQ Instances
+Apply the standard styling to all 6 FAQ locations.
 
-// Reset showAll when filters change
-useEffect(() => {
-  setShowAll(false);
-}, [selectedStudio, selectedSpecialty, searchQuery]);
-```
-
-#### Displayed Instructors
-```typescript
-const displayedInstructors = showAll 
-  ? filteredInstructors 
-  : filteredInstructors.slice(0, INITIAL_DISPLAY_COUNT);
-const hasMoreToShow = filteredInstructors.length > INITIAL_DISPLAY_COUNT;
-```
+#### Step 4: Audit Button Usages
+Remove redundant `text-black` or `text-primary-foreground` overrides from buttons using `neon-button` since the class will handle it.
 
 ---
 
-### Visual Summary
+### Technical Details
 
-| Section | Before | After |
-|---------|--------|-------|
-| Join Our Team | White bg, simple layout | Cyber-card, gradient bg, neon effects |
-| Filters | 2 dropdowns | Search input + 2 dropdowns |
-| Instructor Grid | All visible | First 9, then "Show More" button |
-| Teaching Philosophy | Gray bg, centered, 3 items | Gradient + cyber-grid, 4 cyber-cards in grid |
+#### New CSS Classes (in `index.css`)
+
+```css
+/* Standard FAQ Item */
+.cyber-faq-item {
+  @apply border border-fuchsia-500/20 rounded-xl px-5 bg-gray-900/50;
+  transition: border-color 0.3s ease;
+}
+
+.cyber-faq-item:hover {
+  @apply border-fuchsia-500/40;
+}
+```
+
+#### Button Variant Addition (Optional)
+
+```typescript
+// In src/components/ui/button.tsx
+neon: "neon-button",
+```
+
+This allows using `<Button variant="neon">` for explicit neon styling while keeping `default` for standard UI buttons.
+
+---
+
+### Benefits
+
+1. **Consistency**: Every CTA and FAQ looks the same across all pages
+2. **WordPress Ready**: Single class/pattern makes block creation straightforward
+3. **Maintainability**: Change once in CSS, applies everywhere
+4. **Reduced Code**: No need for inline style overrides on every button/FAQ
 
