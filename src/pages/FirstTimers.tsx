@@ -1,4 +1,4 @@
-import { useState, useEffect, useRef } from 'react';
+import { useState, useEffect } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { Link } from 'react-router-dom';
 import Header from '@/components/Header';
@@ -11,10 +11,7 @@ import {
   Users, 
   Calendar, 
   Award, 
-  Monitor, 
-  MapPin, 
   ChevronRight,
-  ChevronLeft,
   Star, 
   Play,
   Sparkles,
@@ -23,7 +20,6 @@ import {
   Heart,
   GraduationCap
 } from 'lucide-react';
-import { studios } from '@/data/studios';
 
 // Data Arrays
 const firstClassReviews = [
@@ -53,18 +49,6 @@ const disciplineGrid = [
   { name: "Dance & Floorwork", image: "/images/first-timers/gallery-4.avif", href: "/programs/pole/pure-pole-dance" },
 ];
 
-const curriculumSteps = [
-  { step: 1, title: "Choose Your Studio", description: "Find the location that works for you" },
-  { step: 2, title: "Beginner Induction", description: "Join at the start of a mini term" },
-  { step: 3, title: "Foundations Classes", description: "Progress through the mini term" },
-  { step: 4, title: "Progress Pathways", description: "Explore pole, aerials, dance & more" },
-];
-
-const miniTermSchedule = [
-  { week: "Week 1", event: "Induction", action: "Register & attend intro session", joinable: true },
-  { week: "Weeks 2-6", event: "Foundations Progression", action: "Weekly classes building skills", joinable: false },
-  { week: "End of Term", event: "Next Steps", action: "Level guidance & pathway selection", joinable: false },
-];
 
 const eligibilityTable = [
   { status: "Brand new to The Pole Room", eligible: true, note: "Intro offer available" },
@@ -143,50 +127,11 @@ const faqs = [
   },
 ];
 
-const beginnerClasses = [
-  {
-    name: 'Pole Foundations',
-    image: '/lovable-uploads/8b589fd4-a71e-43de-823f-c2af97fef88d.jpg',
-    level: 'Beginner Friendly',
-    description: 'Build your pole strength and technique with our conditioning classes.',
-    category: 'Pole'
-  },
-  {
-    name: 'Pole Courses',
-    image: '/lovable-uploads/c7f8bec0-23c5-44db-871b-dccfbacb26a5.jpg',
-    level: 'Beginner to Advanced',
-    description: 'Structured learning from beginner to advanced with our 8-week courses.',
-    category: 'Pole'
-  },
-  {
-    name: 'Aerial Silks',
-    image: '/lovable-uploads/4d4d16ef-17d9-47e3-a464-cfa3c9b9eef6.jpg',
-    level: 'All Levels',
-    description: 'Flow through the air with grace and strength on aerial silks.',
-    category: 'Aerial'
-  },
-  {
-    name: 'Aerial Hammock',
-    image: '/lovable-uploads/1d83d83b-0057-4bd1-8052-79584b039a97.jpg',
-    level: 'Beginner Friendly',
-    description: 'Experience the joy of aerial arts in our supportive hammock classes.',
-    category: 'Aerial'
-  },
-  {
-    name: 'Flexibility Training',
-    image: '/lovable-uploads/3cc0b943-7d1c-4140-a59c-a60390d03154.jpg',
-    level: 'All Levels',
-    description: 'Improve your flexibility and mobility with targeted stretching.',
-    category: 'Stretch'
-  }
-];
 
 const FirstTimers = () => {
   const [countdown, setCountdown] = useState({ days: 0, hours: 0 });
   const [nextIntakeDate, setNextIntakeDate] = useState('');
-  const [activeClassFilter, setActiveClassFilter] = useState('All');
   const [activeVisitStep, setActiveVisitStep] = useState<string | undefined>('visit-0');
-  const classesScrollRef = useRef<HTMLDivElement>(null);
   const [disciplineIndex, setDisciplineIndex] = useState(0);
   const disciplines = ['Pole', 'Lyra', 'Silks', 'More'];
 
@@ -243,19 +188,6 @@ const FirstTimers = () => {
     return () => clearInterval(timer);
   }, []);
 
-  const scrollClasses = (direction: 'left' | 'right') => {
-    if (classesScrollRef.current) {
-      const scrollAmount = 300;
-      classesScrollRef.current.scrollBy({
-        left: direction === 'left' ? -scrollAmount : scrollAmount,
-        behavior: 'smooth'
-      });
-    }
-  };
-
-  const filteredClasses = activeClassFilter === 'All' 
-    ? beginnerClasses 
-    : beginnerClasses.filter(c => c.category === activeClassFilter);
 
   return (
     <div className="min-h-screen bg-background">
@@ -552,233 +484,6 @@ const FirstTimers = () => {
         </div>
       </section>
 
-      {/* Section 4: First Timer Classes - Carousel */}
-      <section className="py-20 bg-gray-900">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          {/* Header */}
-          <motion.div
-            initial={{ opacity: 0, y: 20 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true }}
-            className="text-center mb-12"
-          >
-            <span className="text-fuchsia-400 font-medium text-sm uppercase tracking-wider">
-              What We Offer
-            </span>
-            <h2 className="text-3xl sm:text-4xl font-bold text-white mt-3 mb-4">
-              First Timer <span className="gradient-text">Classes</span>
-            </h2>
-            <p className="text-gray-400 max-w-2xl mx-auto">
-              Our First Timer classes are packed with beginners just like you. It's the best place to start your journey.
-            </p>
-          </motion.div>
-
-          {/* Filter Tabs */}
-          <div className="flex flex-wrap justify-center gap-3 mb-12">
-            {['All', 'Pole', 'Aerial', 'Dance', 'Stretch'].map((filter) => (
-              <button
-                key={filter}
-                onClick={() => setActiveClassFilter(filter)}
-                className={`px-6 py-2 rounded-full font-medium text-sm transition-all ${
-                  activeClassFilter === filter
-                    ? 'neon-button'
-                    : 'bg-gray-800 text-gray-300 hover:bg-gray-700 border border-gray-700'
-                }`}
-              >
-                {filter}
-              </button>
-            ))}
-          </div>
-
-          {/* Classes Carousel */}
-          <div className="relative">
-            <div 
-              ref={classesScrollRef} 
-              className="flex items-stretch gap-6 overflow-x-auto pb-4 scrollbar-none [&::-webkit-scrollbar]:hidden" 
-              style={{ scrollbarWidth: 'none' }}
-            >
-              {filteredClasses.map((classItem, index) => (
-                <motion.div
-                  key={classItem.name}
-                  initial={{ opacity: 0, y: 20 }}
-                  whileInView={{ opacity: 1, y: 0 }}
-                  viewport={{ once: true }}
-                  transition={{ delay: index * 0.1 }}
-                  className="flex-shrink-0 w-72 h-full"
-                >
-                  <div className="cyber-card overflow-hidden group cursor-pointer h-full flex flex-col rounded-2xl">
-                    <div className="relative aspect-[4/3] overflow-hidden rounded-t-2xl">
-                      <img 
-                        src={classItem.image} 
-                        alt={classItem.name}
-                        className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500"
-                      />
-                      <div className="absolute top-3 left-3">
-                        <span className="px-3 py-1 rounded-full text-xs font-medium bg-fuchsia-500/80 text-white backdrop-blur-sm">
-                          {classItem.level}
-                        </span>
-                      </div>
-                    </div>
-                    <div className="p-5 flex-1 flex flex-col">
-                      <h3 className="text-lg font-semibold text-white mb-2">{classItem.name}</h3>
-                      <p className="text-gray-400 text-sm mb-4">{classItem.description}</p>
-                      <Link 
-                        to="/studios" 
-                        className="text-fuchsia-400 hover:text-fuchsia-300 text-sm font-medium mt-auto"
-                      >
-                        View timetable →
-                      </Link>
-                    </div>
-                  </div>
-                </motion.div>
-              ))}
-            </div>
-
-            {/* Navigation Arrows */}
-            <button 
-              onClick={() => scrollClasses('left')}
-              className="absolute left-0 top-1/2 -translate-y-1/2 -translate-x-4 w-12 h-12 rounded-full bg-gray-800 border border-fuchsia-500/30 flex items-center justify-center hover:bg-fuchsia-500/20 transition-colors hidden lg:flex"
-            >
-              <ChevronLeft className="w-6 h-6 text-white" />
-            </button>
-            <button 
-              onClick={() => scrollClasses('right')}
-              className="absolute right-0 top-1/2 -translate-y-1/2 translate-x-4 w-12 h-12 rounded-full bg-gray-800 border border-fuchsia-500/30 flex items-center justify-center hover:bg-fuchsia-500/20 transition-colors hidden lg:flex"
-            >
-              <ChevronRight className="w-6 h-6 text-white" />
-            </button>
-          </div>
-        </div>
-      </section>
-
-      {/* Section 5: How Our Curriculum Works */}
-      <section className="py-20">
-        <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
-          <motion.div
-            initial={{ opacity: 0, y: 30 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true }}
-            className="text-center mb-16"
-          >
-            <h2 className="text-3xl sm:text-4xl font-bold text-white mb-4">
-              How Our <span className="gradient-text">Curriculum Works</span>
-            </h2>
-            <p className="text-xl text-gray-300">Terms & Inductions - Your pathway to progress</p>
-          </motion.div>
-          
-          {/* Curriculum Pathway Diagram */}
-          <div className="relative mb-16">
-            <div className="hidden md:block absolute top-1/2 left-0 right-0 h-1 bg-gradient-to-r from-fuchsia-500 via-purple-500 to-cyan-500 -translate-y-1/2 rounded-full" />
-            <div className="grid grid-cols-1 md:grid-cols-4 gap-8">
-              {curriculumSteps.map((step, index) => (
-                <motion.div
-                  key={step.step}
-                  initial={{ opacity: 0, y: 30 }}
-                  whileInView={{ opacity: 1, y: 0 }}
-                  viewport={{ once: true }}
-                  transition={{ delay: index * 0.1 }}
-                  className="relative text-center"
-                >
-                  <div className="w-16 h-16 rounded-full bg-gradient-to-br from-fuchsia-500 to-purple-600 flex items-center justify-center mx-auto mb-4 relative z-10 border-4 border-background">
-                    <span className="text-2xl font-bold text-white">{step.step}</span>
-                  </div>
-                  <h3 className="text-lg font-bold text-white mb-2">{step.title}</h3>
-                  <p className="text-sm text-gray-400">{step.description}</p>
-                </motion.div>
-              ))}
-            </div>
-          </div>
-          
-          {/* Mini Term Schedule Table */}
-          <div className="cyber-card rounded-2xl overflow-hidden">
-            <div className="aspect-[21/9] w-full overflow-hidden">
-              <img 
-                src="/images/first-timers/gallery-6.avif" 
-                alt="Studio atmosphere" 
-                className="w-full h-full object-cover"
-              />
-            </div>
-            <div className="p-6">
-              <h3 className="text-xl font-bold text-white mb-6">How Beginners Join</h3>
-              <div className="overflow-x-auto">
-                <table className="w-full">
-                  <thead>
-                    <tr className="border-b border-fuchsia-500/30">
-                      <th className="text-left py-3 px-4 text-fuchsia-400 font-semibold">Timing</th>
-                      <th className="text-left py-3 px-4 text-fuchsia-400 font-semibold">What Happens</th>
-                      <th className="text-left py-3 px-4 text-fuchsia-400 font-semibold">What You Do</th>
-                      <th className="text-right py-3 px-4"></th>
-                    </tr>
-                  </thead>
-                  <tbody>
-                    {miniTermSchedule.map((row, index) => (
-                      <tr key={index} className="border-b border-gray-700/50 last:border-b-0">
-                        <td className="py-4 px-4 text-white font-medium">{row.week}</td>
-                        <td className="py-4 px-4 text-gray-300">{row.event}</td>
-                        <td className="py-4 px-4 text-gray-400">{row.action}</td>
-                        <td className="py-4 px-4 text-right">
-                          {row.joinable && (
-                            <Button size="sm" className="neon-button text-black text-xs">
-                              Join This Intake
-                            </Button>
-                          )}
-                        </td>
-                      </tr>
-                    ))}
-                  </tbody>
-                </table>
-              </div>
-            </div>
-          </div>
-        </div>
-      </section>
-
-      {/* Section 6: Choose Your Studio */}
-      <section className="py-20 bg-gray-900/50 overflow-hidden">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <motion.div
-            initial={{ opacity: 0, y: 30 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true }}
-            className="text-center mb-12"
-          >
-            <h2 className="text-3xl sm:text-4xl font-bold text-white mb-4">
-              Choose Your <span className="gradient-text">Studio</span>
-            </h2>
-            <p className="text-xl text-gray-300">7 locations across Melbourne</p>
-          </motion.div>
-        </div>
-        
-        {/* Sliding Studios Carousel */}
-        <div className="relative">
-          <div className="flex animate-scroll-left">
-            {[...studios, ...studios].map((studio, index) => (
-              <Link 
-                key={`${studio.id}-${index}`}
-                to={`/studios/${studio.id}`}
-                className="flex-shrink-0 mx-3 w-[280px] cyber-card rounded-xl overflow-hidden hover:border-fuchsia-500/50 transition-all group"
-              >
-                <div className="aspect-video overflow-hidden">
-                  <img 
-                    src={studio.image} 
-                    alt={studio.name}
-                    className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
-                  />
-                </div>
-                <div className="p-4">
-                  <h3 className="text-lg font-bold text-white mb-1">
-                    {studio.name.replace('The Pole Room ', '')}
-                  </h3>
-                  <p className="text-sm text-gray-400 flex items-center gap-1">
-                    <MapPin className="w-3 h-3" />
-                    {studio.address.split(',')[0]}
-                  </p>
-                </div>
-              </Link>
-            ))}
-          </div>
-        </div>
-      </section>
 
       {/* Section 7: Intro Offers */}
       <section className="py-20">
