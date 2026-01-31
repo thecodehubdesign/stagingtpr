@@ -251,11 +251,11 @@ const ProgramPageTemplate = ({
           
           <Accordion type="single" collapsible className="mt-12 space-y-4">
             {faqs.map((faq, index) => (
-              <AccordionItem key={index} value={`item-${index}`} className="cyber-card px-6">
-                <AccordionTrigger className="text-left font-semibold">
+              <AccordionItem key={index} value={`item-${index}`} className="cyber-faq-item">
+                <AccordionTrigger className="py-5 text-left font-medium text-white hover:text-fuchsia-400 hover:no-underline transition-colors">
                   {faq.question}
                 </AccordionTrigger>
-                <AccordionContent className="text-muted-foreground">
+                <AccordionContent className="text-gray-300 pb-5 leading-relaxed">
                   {faq.answer}
                 </AccordionContent>
               </AccordionItem>

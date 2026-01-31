@@ -935,12 +935,12 @@ const FirstTimers = () => {
               <AccordionItem 
                 key={index} 
                 value={`faq-${index}`}
-                className="cyber-card rounded-xl border-fuchsia-500/30 px-6"
+                className="cyber-faq-item"
               >
-                <AccordionTrigger className="text-white hover:text-fuchsia-400 text-left">
+                <AccordionTrigger className="py-5 text-left font-medium text-white hover:text-fuchsia-400 hover:no-underline transition-colors">
                   {faq.question}
                 </AccordionTrigger>
-                <AccordionContent className="text-gray-300">
+                <AccordionContent className="text-gray-300 pb-5 leading-relaxed">
                   {faq.answer}
                 </AccordionContent>
               </AccordionItem>

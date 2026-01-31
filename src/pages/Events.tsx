@@ -393,11 +393,11 @@ const Events = () => {
             
             <Accordion type="single" collapsible className="space-y-4">
               {faqs.map((faq, index) => (
-                <AccordionItem key={index} value={`item-${index}`} className="border border-primary/20 rounded-lg px-4">
-                  <AccordionTrigger className="text-left font-medium hover:text-primary">
+                <AccordionItem key={index} value={`item-${index}`} className="cyber-faq-item">
+                  <AccordionTrigger className="py-5 text-left font-medium text-white hover:text-fuchsia-400 hover:no-underline transition-colors">
                     {faq.question}
                   </AccordionTrigger>
-                  <AccordionContent className="text-muted-foreground">
+                  <AccordionContent className="text-gray-300 pb-5 leading-relaxed">
                     {faq.answer}
                   </AccordionContent>
                 </AccordionItem>
