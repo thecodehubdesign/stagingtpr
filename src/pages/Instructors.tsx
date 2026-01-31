@@ -1,11 +1,13 @@
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
+import { motion } from 'framer-motion';
 import Header from '@/components/Header';
 import Footer from '@/components/Footer';
 import { Card } from '@/components/ui/card';
 import { Badge } from '@/components/ui/badge';
 import { Button } from '@/components/ui/button';
-import { Heart, Zap, Star, MapPin, ChevronDown, Sparkles } from 'lucide-react';
+import { Input } from '@/components/ui/input';
+import { Heart, Zap, Star, MapPin, ChevronDown, Sparkles, Search, ChevronUp, Target } from 'lucide-react';
 import { instructors, Instructor } from '@/data/instructors';
 import { studios } from '@/data/studios';
 import teachersTeam from '@/assets/teachers-team.png';
@@ -16,10 +18,14 @@ import {
   DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu";
 
+const INITIAL_DISPLAY_COUNT = 9;
+
 const Instructors = () => {
   const navigate = useNavigate();
   const [selectedStudio, setSelectedStudio] = useState<string | null>(null);
   const [selectedSpecialty, setSelectedSpecialty] = useState<string | null>(null);
+  const [searchQuery, setSearchQuery] = useState('');
+  const [showAll, setShowAll] = useState(false);
 
   // Extract all unique specialties from instructors
   const allSpecialties = [...new Set(instructors.flatMap(i => i.specialties))].sort();
@@ -31,12 +37,25 @@ const Instructors = () => {
     return studio ? studio.name.replace('The Pole Room ', '') : null;
   };
 
-  // Filter instructors by selected studio and specialty
+  // Filter instructors by selected studio, specialty, and search query
   const filteredInstructors = instructors.filter(i => {
     const matchesStudio = !selectedStudio || i.studioId === selectedStudio;
     const matchesSpecialty = !selectedSpecialty || i.specialties.includes(selectedSpecialty);
-    return matchesStudio && matchesSpecialty;
+    const matchesSearch = !searchQuery || i.name.toLowerCase().includes(searchQuery.toLowerCase());
+    return matchesStudio && matchesSpecialty && matchesSearch;
   });
+
+  // Reset showAll when filters change
+  useEffect(() => {
+    setShowAll(false);
+  }, [selectedStudio, selectedSpecialty, searchQuery]);
+
+  // Display limited or all instructors
+  const displayedInstructors = showAll 
+    ? filteredInstructors 
+    : filteredInstructors.slice(0, INITIAL_DISPLAY_COUNT);
+  const hasMoreToShow = filteredInstructors.length > INITIAL_DISPLAY_COUNT;
+  const remainingCount = filteredInstructors.length - INITIAL_DISPLAY_COUNT;
 
   const getSpecialtyColor = (specialty: string) => {
     const colors: Record<string, string> = {
@@ -66,6 +85,33 @@ const Instructors = () => {
     }
   };
 
+  const philosophyPillars = [
+    {
+      icon: Zap,
+      title: 'Empowering',
+      description: 'We celebrate every achievement and push you to discover what\'s possible',
+      color: 'from-fuchsia-500 to-purple-500'
+    },
+    {
+      icon: Heart,
+      title: 'Supportive',
+      description: 'Our classes are judgment-free zones where everyone belongs',
+      color: 'from-pink-500 to-rose-500'
+    },
+    {
+      icon: Star,
+      title: 'Expert',
+      description: 'All our instructors are highly trained and continuously learning',
+      color: 'from-amber-500 to-orange-500'
+    },
+    {
+      icon: Target,
+      title: 'Progressive',
+      description: 'Building skills methodically so you reach your goals safely and confidently',
+      color: 'from-cyan-500 to-blue-500'
+    }
+  ];
+
   return (
     <div className="min-h-screen">
       <Header />
@@ -85,107 +131,146 @@ const Instructors = () => {
         </div>
       </section>
 
-      {/* Join Our Team Banner */}
-      <section className="bg-white py-6 sm:py-8">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="flex flex-col md:flex-row items-center justify-between gap-6">
-            {/* Team Photo */}
-            <div className="w-full md:w-1/3 flex-shrink-0">
-              <img 
-                src={teachersTeam} 
-                alt="The Pole Room Team" 
-                className="w-full h-48 md:h-56 object-cover rounded-lg shadow-lg"
-              />
+      {/* Join Our Team Banner - Cyberpunk Style */}
+      <section className="relative py-12 sm:py-16 bg-gradient-to-r from-gray-900 via-purple-900/80 to-gray-900 overflow-hidden">
+        {/* Cyber grid overlay */}
+        <div className="absolute inset-0 cyber-grid opacity-30"></div>
+        
+        {/* Animated glow effects */}
+        <div className="absolute top-0 left-1/4 w-96 h-96 bg-fuchsia-500/20 rounded-full blur-3xl animate-pulse"></div>
+        <div className="absolute bottom-0 right-1/4 w-96 h-96 bg-purple-500/20 rounded-full blur-3xl animate-pulse" style={{ animationDelay: '1s' }}></div>
+        
+        <div className="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+          <motion.div 
+            initial={{ opacity: 0, y: 20 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            className="cyber-card p-6 sm:p-8 lg:p-10"
+          >
+            <div className="flex flex-col lg:flex-row items-center gap-8 lg:gap-12">
+              {/* Team Photo with neon border */}
+              <div className="w-full lg:w-2/5 flex-shrink-0">
+                <div className="relative group">
+                  {/* Neon glow effect */}
+                  <div className="absolute -inset-1 bg-gradient-to-r from-fuchsia-500 via-purple-500 to-pink-500 rounded-xl blur opacity-50 group-hover:opacity-75 transition duration-500"></div>
+                  <img 
+                    src={teachersTeam} 
+                    alt="The Pole Room Team" 
+                    className="relative w-full h-56 sm:h-64 lg:h-72 object-cover rounded-xl border-2 border-fuchsia-500/50"
+                  />
+                </div>
+              </div>
+              
+              {/* Text Content */}
+              <div className="flex-1 text-center lg:text-left">
+                <p className="text-gray-400 italic text-lg sm:text-xl mb-2">Do you have what it takes to</p>
+                <h2 className="text-3xl sm:text-4xl lg:text-5xl font-bold mb-4">
+                  <span className="gradient-text neon-glow">JOIN OUR TEAM?</span>
+                </h2>
+                <p className="text-gray-300 text-base sm:text-lg mb-6 max-w-xl">
+                  Be part of Australia's leading pole & aerial studio team. We're looking for passionate 
+                  instructors who want to inspire and empower others.
+                </p>
+                
+                {/* CTA Button with neon effect */}
+                <Button 
+                  className="relative group bg-gradient-to-r from-fuchsia-600 to-purple-600 hover:from-fuchsia-500 hover:to-purple-500 text-white font-bold px-8 py-4 text-base sm:text-lg rounded-lg transition-all duration-300 hover:scale-105"
+                  onClick={() => navigate('/contact')}
+                >
+                  <span className="absolute inset-0 bg-gradient-to-r from-fuchsia-400 to-purple-400 rounded-lg blur opacity-0 group-hover:opacity-50 transition duration-300"></span>
+                  <span className="relative flex items-center gap-2">
+                    <Sparkles className="w-5 h-5" />
+                    APPLICATIONS OPEN
+                  </span>
+                </Button>
+              </div>
             </div>
-            
-            {/* Text Content */}
-            <div className="flex-1 text-center md:text-left">
-              <p className="text-gray-600 italic text-lg sm:text-xl mb-1">Do you have what it takes to</p>
-              <h2 className="text-2xl sm:text-3xl md:text-4xl font-bold text-gray-900">
-                JOIN OUR TEAM?
-              </h2>
-            </div>
-            
-            {/* CTA Button */}
-            <div className="flex-shrink-0">
-              <Button 
-                className="bg-primary hover:bg-primary/90 text-white font-bold px-6 py-3 text-sm sm:text-base"
-                onClick={() => navigate('/contact')}
-              >
-                <Sparkles className="w-4 h-4 mr-2" />
-                APPLICATIONS OPEN
-              </Button>
-            </div>
-          </div>
+          </motion.div>
         </div>
       </section>
 
       {/* Instructors Grid */}
       <section className="py-20 bg-gray-900">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          {/* Filters - Studio and Specialty */}
-          <div className="flex flex-wrap justify-center gap-4 mb-12">
-            {/* Filter by Studio */}
-            <DropdownMenu>
-              <DropdownMenuTrigger asChild>
-                <Button 
-                  variant="outline" 
-                  className="border-primary/50 bg-background/50 hover:bg-primary/10 text-foreground min-w-[200px] justify-between"
-                >
-                  <div className="flex items-center gap-2">
-                    <MapPin className="w-4 h-4 text-primary" />
-                    {selectedStudio ? getStudioName(selectedStudio) : 'All Studios'}
-                  </div>
-                  <ChevronDown className="w-4 h-4 ml-2" />
-                </Button>
-              </DropdownMenuTrigger>
-              <DropdownMenuContent className="w-[200px]">
-                <DropdownMenuItem onClick={() => setSelectedStudio(null)}>
-                  All Studios
-                </DropdownMenuItem>
-                {studios.map((studio) => (
-                  <DropdownMenuItem 
-                    key={studio.id} 
-                    onClick={() => setSelectedStudio(studio.id)}
-                  >
-                    {studio.name.replace('The Pole Room ', '')}
-                  </DropdownMenuItem>
-                ))}
-              </DropdownMenuContent>
-            </DropdownMenu>
+          {/* Search and Filters */}
+          <div className="flex flex-col items-center gap-4 mb-12">
+            {/* Search Input */}
+            <div className="relative w-full max-w-md">
+              <Search className="absolute left-3 top-1/2 -translate-y-1/2 w-5 h-5 text-primary" />
+              <Input
+                type="text"
+                placeholder="Search by name..."
+                value={searchQuery}
+                onChange={(e) => setSearchQuery(e.target.value)}
+                className="pl-10 border-primary/50 bg-background/50 focus:border-primary text-foreground placeholder:text-muted-foreground"
+              />
+            </div>
 
-            {/* Filter by Specialty */}
-            <DropdownMenu>
-              <DropdownMenuTrigger asChild>
-                <Button 
-                  variant="outline" 
-                  className="border-primary/50 bg-background/50 hover:bg-primary/10 text-foreground min-w-[200px] justify-between"
-                >
-                  <div className="flex items-center gap-2">
-                    <Star className="w-4 h-4 text-primary" />
-                    {selectedSpecialty || 'All Specialties'}
-                  </div>
-                  <ChevronDown className="w-4 h-4 ml-2" />
-                </Button>
-              </DropdownMenuTrigger>
-              <DropdownMenuContent className="w-[200px] max-h-[300px] overflow-y-auto">
-                <DropdownMenuItem onClick={() => setSelectedSpecialty(null)}>
-                  All Specialties
-                </DropdownMenuItem>
-                {allSpecialties.map((specialty) => (
-                  <DropdownMenuItem 
-                    key={specialty} 
-                    onClick={() => setSelectedSpecialty(specialty)}
+            {/* Dropdown Filters */}
+            <div className="flex flex-wrap justify-center gap-4">
+              {/* Filter by Studio */}
+              <DropdownMenu>
+                <DropdownMenuTrigger asChild>
+                  <Button 
+                    variant="outline" 
+                    className="border-primary/50 bg-background/50 hover:bg-primary/10 text-foreground min-w-[200px] justify-between"
                   >
-                    {specialty}
+                    <div className="flex items-center gap-2">
+                      <MapPin className="w-4 h-4 text-primary" />
+                      {selectedStudio ? getStudioName(selectedStudio) : 'All Studios'}
+                    </div>
+                    <ChevronDown className="w-4 h-4 ml-2" />
+                  </Button>
+                </DropdownMenuTrigger>
+                <DropdownMenuContent className="w-[200px] bg-background border-border">
+                  <DropdownMenuItem onClick={() => setSelectedStudio(null)}>
+                    All Studios
                   </DropdownMenuItem>
-                ))}
-              </DropdownMenuContent>
-            </DropdownMenu>
+                  {studios.map((studio) => (
+                    <DropdownMenuItem 
+                      key={studio.id} 
+                      onClick={() => setSelectedStudio(studio.id)}
+                    >
+                      {studio.name.replace('The Pole Room ', '')}
+                    </DropdownMenuItem>
+                  ))}
+                </DropdownMenuContent>
+              </DropdownMenu>
+
+              {/* Filter by Specialty */}
+              <DropdownMenu>
+                <DropdownMenuTrigger asChild>
+                  <Button 
+                    variant="outline" 
+                    className="border-primary/50 bg-background/50 hover:bg-primary/10 text-foreground min-w-[200px] justify-between"
+                  >
+                    <div className="flex items-center gap-2">
+                      <Star className="w-4 h-4 text-primary" />
+                      {selectedSpecialty || 'All Specialties'}
+                    </div>
+                    <ChevronDown className="w-4 h-4 ml-2" />
+                  </Button>
+                </DropdownMenuTrigger>
+                <DropdownMenuContent className="w-[200px] max-h-[300px] overflow-y-auto bg-background border-border">
+                  <DropdownMenuItem onClick={() => setSelectedSpecialty(null)}>
+                    All Specialties
+                  </DropdownMenuItem>
+                  {allSpecialties.map((specialty) => (
+                    <DropdownMenuItem 
+                      key={specialty} 
+                      onClick={() => setSelectedSpecialty(specialty)}
+                    >
+                      {specialty}
+                    </DropdownMenuItem>
+                  ))}
+                </DropdownMenuContent>
+              </DropdownMenu>
+            </div>
           </div>
 
+          {/* Instructor Cards Grid */}
           <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
-            {filteredInstructors.map((instructor, index) => (
+            {displayedInstructors.map((instructor, index) => (
               <Card 
                 key={instructor.id}
                 className="cyber-card overflow-hidden animate-fade-in hover:scale-105 transition-transform duration-300 cursor-pointer"
@@ -247,6 +332,29 @@ const Instructors = () => {
             ))}
           </div>
 
+          {/* Show More / Show Less Button */}
+          {hasMoreToShow && (
+            <div className="flex justify-center mt-12">
+              <Button
+                variant="outline"
+                className="group border-primary/50 bg-background/50 hover:bg-primary/10 text-foreground px-8 py-3"
+                onClick={() => setShowAll(!showAll)}
+              >
+                {showAll ? (
+                  <>
+                    <ChevronUp className="w-5 h-5 mr-2 group-hover:-translate-y-1 transition-transform" />
+                    Show Less
+                  </>
+                ) : (
+                  <>
+                    <ChevronDown className="w-5 h-5 mr-2 group-hover:translate-y-1 transition-transform" />
+                    Show More ({remainingCount} more instructor{remainingCount !== 1 ? 's' : ''})
+                  </>
+                )}
+              </Button>
+            </div>
+          )}
+
           {/* No results message */}
           {filteredInstructors.length === 0 && (
             <div className="text-center py-12">
@@ -258,34 +366,59 @@ const Instructors = () => {
         </div>
       </section>
 
-      {/* Instructor Philosophy */}
-      <section className="py-20 bg-gray-800">
-        <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
-          <Heart className="w-16 h-16 text-primary mx-auto mb-6 neon-glow" />
-          <h2 className="text-3xl sm:text-4xl font-bold text-white mb-6">
-            Our <span className="gradient-text">Teaching Philosophy</span>
-          </h2>
-          <p className="text-lg text-muted-foreground mb-8 leading-relaxed">
-            Every instructor at The Pole Room shares our core belief: transformation happens 
-            when you feel safe, supported, and celebrated. We're not just teaching moves - 
-            we're guiding you to discover your power.
-          </p>
-          <div className="grid md:grid-cols-3 gap-8 mt-12">
-            <div className="text-center">
-              <Zap className="w-12 h-12 text-primary mx-auto mb-4" />
-              <h3 className="text-lg font-bold text-white mb-2">Empowering</h3>
-              <p className="text-muted-foreground text-sm">We celebrate every achievement and push you to discover what's possible</p>
+      {/* Teaching Philosophy - Standout Grid Design */}
+      <section className="relative py-20 bg-gradient-to-br from-gray-900 via-purple-900/50 to-gray-900 overflow-hidden">
+        {/* Cyber grid overlay */}
+        <div className="absolute inset-0 cyber-grid opacity-20"></div>
+        
+        {/* Ambient glow */}
+        <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[600px] h-[600px] bg-fuchsia-500/10 rounded-full blur-3xl"></div>
+        
+        <div className="relative max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
+          {/* Header */}
+          <motion.div 
+            initial={{ opacity: 0, y: 20 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            className="text-center mb-16"
+          >
+            <div className="inline-flex items-center justify-center w-20 h-20 rounded-full bg-gradient-to-br from-fuchsia-500 to-purple-600 mb-6">
+              <Heart className="w-10 h-10 text-white" />
             </div>
-            <div className="text-center">
-              <Heart className="w-12 h-12 text-primary mx-auto mb-4" />
-              <h3 className="text-lg font-bold text-white mb-2">Supportive</h3>
-              <p className="text-muted-foreground text-sm">Our classes are judgment-free zones where everyone belongs</p>
-            </div>
-            <div className="text-center">
-              <Star className="w-12 h-12 text-primary mx-auto mb-4" />
-              <h3 className="text-lg font-bold text-white mb-2">Expert</h3>
-              <p className="text-muted-foreground text-sm">All our instructors are highly trained and continuously learning</p>
-            </div>
+            <h2 className="text-3xl sm:text-4xl lg:text-5xl font-bold mb-6">
+              Our <span className="gradient-text neon-glow">Teaching Philosophy</span>
+            </h2>
+            <p className="text-lg text-gray-300 max-w-3xl mx-auto leading-relaxed">
+              Every instructor at The Pole Room shares our core belief: transformation happens 
+              when you feel safe, supported, and celebrated. We're not just teaching moves - 
+              we're guiding you to discover your power.
+            </p>
+          </motion.div>
+
+          {/* Philosophy Grid */}
+          <div className="grid sm:grid-cols-2 lg:grid-cols-4 gap-6">
+            {philosophyPillars.map((pillar, index) => (
+              <motion.div
+                key={pillar.title}
+                initial={{ opacity: 0, y: 30 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true }}
+                transition={{ delay: index * 0.1 }}
+                className="group"
+              >
+                <div className="cyber-card h-full p-6 hover:scale-105 transition-transform duration-300">
+                  {/* Icon with gradient background */}
+                  <div className={`inline-flex items-center justify-center w-14 h-14 rounded-xl bg-gradient-to-br ${pillar.color} mb-5`}>
+                    <pillar.icon className="w-7 h-7 text-white" />
+                  </div>
+                  
+                  <h3 className="text-xl font-bold text-white mb-3">{pillar.title}</h3>
+                  <p className="text-muted-foreground text-sm leading-relaxed">
+                    {pillar.description}
+                  </p>
+                </div>
+              </motion.div>
+            ))}
           </div>
         </div>
       </section>
